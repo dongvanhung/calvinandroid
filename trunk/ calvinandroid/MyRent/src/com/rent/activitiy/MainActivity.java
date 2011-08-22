@@ -1,14 +1,16 @@
 package com.rent.activitiy;
 
 import android.app.Activity;
+import android.app.ActivityGroup;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import com.rent.GroupHelper;
 import com.rent.GroupStub;
 import com.rent.GroupTabHost;
 import com.rent.R;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActivityGroup implements GroupHelper.TabListener {
 
 	protected void onCreate(Bundle paramBundle) {
 		super.onCreate(paramBundle);
@@ -36,8 +38,33 @@ public class MainActivity extends Activity {
 	    arrayOfGroupStub[3] = localGroupStub4;
 	    GroupTabHost localGroupTabHost = (GroupTabHost)findViewById(R.id.tab_host);
 	    //localGroupTabHost.setNewMessageIcon(2130837657);
-	    /*GroupHelper.init(this, localLinearLayout, localGroupTabHost, arrayOfGroupStub, this);
+	    GroupHelper groupHelper = new GroupHelper();
+	    groupHelper.init(this, localLinearLayout, localGroupTabHost, arrayOfGroupStub, this);
 	    localGroupTabHost.setActiveTab(0);
-	    localGroupTabHost.fireTabChanged();*/
+	    localGroupTabHost.fireTabChanged();
+	}
+
+	public void setCurrentTabId(int paramInt) {
+		PreferenceUtils.setRefreshStatus(this, 2);
+	    Activity localActivity;
+	    if (1 == paramInt)
+	    {
+	      MobclickAgent.onEvent(this, "main_clicksearchhistory");
+	      localActivity = GroupHelper.getActivityById(this, 1);
+	      if ((localActivity != null) && ((localActivity instanceof HistoryActivity)))
+	        ((HistoryActivity)localActivity).setMainContext(this);
+	    }
+	    while (true)
+	    {
+	      return;
+	      if (3 == paramInt)
+	      {
+	        localActivity = GroupHelper.getActivityById(this, 3);
+	        if ((localActivity == null) || (!(localActivity instanceof MoreActivity)))
+	          continue;
+	        ((MoreActivity)localActivity).setMainContext(this);
+	        continue;
+	      }
+	    }
 	}
 }
