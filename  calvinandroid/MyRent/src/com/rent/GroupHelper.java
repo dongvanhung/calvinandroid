@@ -20,11 +20,11 @@ public class GroupHelper {
 			int m = paramArrayOfGroupStub[i].getInactiveIconId();
 			GroupTab localGroupTab = new GroupTab(str, k, m);
 			paramGroupTabHost.addTab(localGroupTab);
-			paramGroupTabHost.setOnClickListener(new TabClickListener(i, paramActivityGroup, paramLinearLayout, paramArrayOfGroupStub[i]));
+			paramGroupTabHost.setListener(new TabClickListener(i, paramActivityGroup, paramLinearLayout, paramArrayOfGroupStub[i]));
 		}
 	}
 	
-	final class TabClickListener implements OnClickListener {
+	final class TabClickListener implements GroupListener {
 		private int paramInt;
 		private ActivityGroup paramActivityGroup;
 		private LinearLayout paramLinearLayout;
@@ -37,7 +37,7 @@ public class GroupHelper {
 			this.subGroupStub = subGroupStub;
 		}
 		
-		public void onClick(View v) {
+		public void sendVisableId(int paramInt) {
 			paramLinearLayout.removeAllViews();
 		    Class localClass = subGroupStub.getActivityClass();
 		    Intent localIntent1 = new Intent(paramActivityGroup, localClass);//131072
