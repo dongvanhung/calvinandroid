@@ -7,11 +7,9 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
@@ -29,8 +27,22 @@ public class GroupTabHost extends ImageView {
 		super(context, attrs);
 		mTabs = new ArrayList<GroupTab>();
 		mPaint = new Paint();
+		
 		mActiveTextPaint = new Paint();
+		Paint.Align localAlign1 = Paint.Align.CENTER;
+		float f1 = UIUtils.dip2Px(getContext(), 12.0F);
+		mActiveTextPaint.setTextAlign(localAlign1);
+		mActiveTextPaint.setTextSize(f1);
+		this.mActiveTextPaint.setColor(-1);
+		this.mActiveTextPaint.setAntiAlias(true);
+		
 		mInactiveTextPaint = new Paint();
+		Paint.Align localAlign2 = Paint.Align.CENTER;
+		float f2 = UIUtils.dip2Px(getContext(), 12.0F);
+		this.mInactiveTextPaint.setColor(-6710887);
+	    this.mInactiveTextPaint.setAntiAlias(true);
+	    this.mInactiveTextPaint.setTextSize(f2);
+	    this.mInactiveTextPaint.setTextAlign(localAlign2);
 	}
 
 	protected void onDraw(Canvas paramCanvas) {
@@ -39,8 +51,8 @@ public class GroupTabHost extends ImageView {
 		getDrawingRect(localRect);
 		int i = localRect.right;
 		int k = 0;
-		for (int j = this.mTabs.size(); j >= 0; j--) {
-			k = i / j;
+		k = i / this.mTabs.size();
+		for (int j = this.mTabs.size(); j >= 1; j--) {
 			Canvas localCanvas1 = paramCanvas;
 			localCanvas1.drawColor(-16777216);
 			this.mPaint.setColor(-12369085);
@@ -79,8 +91,7 @@ public class GroupTabHost extends ImageView {
 			int i10 = localBitmap1.getWidth();
 			int i11 = localBitmap1.getHeight();
 			Bitmap.Config localConfig1 = Bitmap.Config.ARGB_8888;
-			Bitmap.Config localConfig2 = localConfig1;
-			Bitmap localBitmap3 = Bitmap.createBitmap(i10, i11, localConfig2);
+			Bitmap localBitmap3 = Bitmap.createBitmap(i10, i11, localConfig1);
 			Paint localPaint3 = new Paint(1);
 			localPaint3.setAntiAlias(true);
 			Canvas localCanvas2 = new Canvas();
@@ -88,19 +99,30 @@ public class GroupTabHost extends ImageView {
 			String str1;
 			float f1;
 			float f24;
+			int i18 = k * j;
+			int i19 = k / 2;
+			int i20 = i10 / 2;
+			int i21 = i19 - i20;
+			i = i18 + i21;
+
+			float f20 = i;
+			float f21 = localRect.top + 5;
+			Paint localPaint10 = null;
+			
+			str1 = localGroupTab.getText();
+			int i30 = k * j;
+			int i31 = k / 2;
+			f1 = i30 + i31;
+			f24 = localRect.bottom - 2;
+			
 			if (j == this.mActiveTab) {
-				Shader.TileMode localTileMode1 = Shader.TileMode.CLAMP;
+				/*Shader.TileMode localTileMode1 = Shader.TileMode.CLAMP;
 				LinearGradient localLinearGradient1 = new LinearGradient(0.0F,
 						0.0F, i10, i11, -1, -11221023, localTileMode1);
 				Shader localShader1 = localPaint3
-						.setShader(localLinearGradient1);
-				Canvas localCanvas4 = localCanvas2;
-				localCanvas4.drawRect(0.0F, 0.0F, i10, i11, localPaint3);
-				int i18 = k * j;
-				int i19 = k / 2;
-				int i20 = i10 / 2;
-				int i21 = i19 - i20;
-				i = i18 + i21;
+						.setShader(localLinearGradient1);*/
+				localCanvas2.drawRect(0.0F, 0.0F, i10, i11, localPaint3);
+
 				this.mPaint.setARGB(37, 255, 255, 255);
 				this.mPaint.setAntiAlias(true);
 				int i24 = localRect.left;
@@ -112,40 +134,14 @@ public class GroupTabHost extends ImageView {
 				float f16 = i26 + i27 - 2;
 				float f17 = localRect.bottom - 2;
 				RectF localRectF1 = new RectF(f14, f15, f16, f17);
-				Paint localPaint8 = this.mPaint;
 				float f18 = 5.0F;
 				float f19 = 5.0F;
-				Paint localPaint9 = localPaint8;
-				paramCanvas.drawRoundRect(localRectF1, f18, f19, localPaint9);
-
-				float f20 = i;
-				float f21 = localRect.top + 5;
-				Paint localPaint10 = null;
+				paramCanvas.drawRoundRect(localRectF1, f18, f19, this.mPaint);
 				paramCanvas.drawBitmap(localBitmap1, f20, f21, localPaint10);
-				str1 = localGroupTab.getText();
-				int i30 = k * j;
-				int i31 = k / 2;
-				f1 = i30 + i31;
-				f24 = localRect.bottom - 2;
-
 				paramCanvas.drawText(str1, f1, f24, this.mActiveTextPaint);
-				/*
-				 * if (!StringUtils.isEmpty(localGroupTab.getMessage())) {
-				 * Resources localResources3 = getResources(); int i34 =
-				 * this.mNewMessageIcon; Bitmap localBitmap5 =
-				 * BitmapFactory.decodeResource(localResources3, i34); int i35 =
-				 * k * i3; int i36 = k * 5 / 8; float f27 = i35 + i36; float f28
-				 * = localRect1.bottom / 5; Canvas localCanvas8 = paramCanvas;
-				 * Bitmap localBitmap6 = localBitmap5; float f29 = f27; float
-				 * f30 = f28; Paint localPaint13 = null;
-				 * localCanvas8.drawBitmap(localBitmap6, f29, f30,
-				 * localPaint13); }
-				 */
-				Shader.TileMode localTileMode2 = Shader.TileMode.CLAMP;
-				LinearGradient localLinearGradient3 = new LinearGradient(0.0F,
-						0.0F, i10, i11, -6118750, -10526881, localTileMode2);
-				Shader localShader2 = localPaint3
-						.setShader(localLinearGradient3);
+			} else {
+				paramCanvas.drawBitmap(localBitmap2, f20, f21, localPaint10);
+				paramCanvas.drawText(str1, f1, f24, this.mInactiveTextPaint);
 			}
 		}
 	}
@@ -156,7 +152,7 @@ public class GroupTabHost extends ImageView {
 		int i = localRect.right;
 		if (this.mTabs.size() != 0)
 			;
-		for (int j = this.mTabs.size();; j = 1) {
+		for (int j = this.mTabs.size();;) {
 			float f1 = i / j;
 			float f2 = paramMotionEvent.getX() / f1;
 			float f3 = paramMotionEvent.getX() / f1 % 1.0F;
