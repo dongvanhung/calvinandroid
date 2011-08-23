@@ -1,12 +1,15 @@
 package com.rent.activitiy;
 
-import com.rent.R;
-
 import android.app.ActivityGroup;
+import android.app.LocalActivityManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.rent.R;
+import com.rent.Rent;
 
 public class SearchActivity extends ActivityGroup
 {
@@ -28,10 +31,10 @@ public class SearchActivity extends ActivityGroup
 
   private void initView()
   {
-   /* LinearLayout localLinearLayout1 = (LinearLayout)findViewById(2131493154);
+    LinearLayout localLinearLayout1 = (LinearLayout)findViewById(2131493154);
     this.mContainView = localLinearLayout1;
     int i = Rent.getCurrentNetwork(this);
-    if ((Rent.isAvailableGoogleMap()) && (i == 1))
+    /*if ((Rent.isAvailableGoogleMap()) && (i == 1))
     {
       LocalActivityManager localLocalActivityManager1 = getLocalActivityManager();
       String str1 = Rent.MAIN_VIEW_NAME[0];
@@ -44,7 +47,7 @@ public class SearchActivity extends ActivityGroup
       LinearLayout localLinearLayout2 = this.mContainView;
       View localView2 = this.mMapView;
       localLinearLayout2.addView(localView2);
-    }
+    }*/
       LocalActivityManager localLocalActivityManager3 = getLocalActivityManager();
       String str3 = Rent.MAIN_VIEW_NAME[1];
       Intent localIntent2 = new Intent(this, SearchInListActivity.class).addFlags(131072);
@@ -55,7 +58,7 @@ public class SearchActivity extends ActivityGroup
       ((SearchInListActivity)(SearchInListActivity)localLocalActivityManager4.getActivity(str4)).setSearchContext(this);
       LinearLayout localLinearLayout3 = this.mContainView;
       View localView4 = this.mListView;
-      localLinearLayout3.addView(localView4);*/
+      localLinearLayout3.addView(localView4);
   }
 
   public void changeActivtiy(int paramInt)
