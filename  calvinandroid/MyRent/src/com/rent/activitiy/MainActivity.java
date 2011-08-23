@@ -1,14 +1,16 @@
 package com.rent.activitiy;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.ActivityGroup;
-import android.content.Context;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.rent.GroupHelper;
 import com.rent.GroupStub;
 import com.rent.GroupTabHost;
+import com.rent.PreferenceUtils;
 import com.rent.R;
 
 public class MainActivity extends ActivityGroup implements
@@ -56,7 +58,7 @@ public class MainActivity extends ActivityGroup implements
 	}
 
 	public void setCurrentTabId(int paramInt) {
-		// PreferenceUtils.setRefreshStatus(this, 2);
+		PreferenceUtils.setRefreshStatus(this, 2);
 		Activity localActivity;
 		if (1 == paramInt) {
 			localActivity = GroupHelper.getActivityById(this, 1);
@@ -74,5 +76,14 @@ public class MainActivity extends ActivityGroup implements
 			 * ((MoreActivity)localActivity).setMainContext(this); continue;
 			 */
 		}
+	}
+
+	private void clearCache() {
+		/*GroupImageManager.clearCache();
+		DetailDBManager localDetailDBManager = new DetailDBManager(this);
+		List localList = localDetailDBManager.getCacheList();
+		localDetailDBManager.closeDb();
+		DetailImageManager.clearCache(localList);
+		GroupImageManager.clearCache();*/
 	}
 }
