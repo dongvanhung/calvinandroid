@@ -5,17 +5,21 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.rent.HouseFilter;
-import com.rent.MobclickAgent;
 import com.rent.PreferenceUtils;
+import com.rent.db.AddressChoiceDBManager;
 
 public class FilterActivity extends Activity{
 
@@ -53,9 +57,9 @@ public class FilterActivity extends Activity{
 	  private void changeWidgetStatus()
 	  {
 	    int i = this.mPriceSeekBar.getMax();
-	    Object localObject2 = null;
+	    String localObject2 = null;
 	    int j = this.mCurHightPirce;
-	    Object localObject1;
+	    String localObject1 = "";
 	    if (-1 == j)
 	    {
 	      int k = this.mCurLowPrice;
@@ -77,18 +81,17 @@ public class FilterActivity extends Activity{
 	        localTextView1.setText(str1);
 	        int n = this.mDistanceLength;
 	        if (-1 != n)
-	          break label622;
+	          break;
 	        this.mDistanceSeekBar.setProgress(0);
 	        TextView localTextView2 = this.mDistanceTextView;
 	        String str2 = this.mContext.getResources().getString(2131361853);
 	        localTextView2.setText(str2);
 	        if ((!this.mIsAgency) || (this.mIsPersonal))
-	          break label708;
+	          break;
 	        this.mAgencyRadio.setChecked(true);
 	        if ((!this.mIsRentAll) || (this.mIsRentPart))
-	          break label746;
+	          break;
 	        this.mRentAllRadio.setChecked(true);
-	        return;
 	        int i1 = this.mCurHightPirce;
 	        if (-1 == i1)
 	        {
@@ -97,33 +100,23 @@ public class FilterActivity extends Activity{
 	          {
 	            try
 	            {
-	              this.mPriceSeekBar.setProgress(localObject1);
+	              this.mPriceSeekBar.setProgress(this.mCurLowPrice);
 	              StringBuilder localStringBuilder1 = new StringBuilder();
 	              int i3 = this.mCurLowPrice;
 	              StringBuilder localStringBuilder2 = localStringBuilder1.append(i3);
 	              String str3 = this.mContext.getString(2131362015);
-	              str4 = str3;
-	              localObject1 = str4;
 	            }
 	            catch (Exception localException3)
 	            {
 	              localException3.printStackTrace();
-	              localObject1 = null;
 	            }
-	            continue;
 	          }
 	        }
 	      }
-	      label153: label176: label199: String str4;
+	      String str4;
 	      try
 	      {
-	        while (true)
-	        {
-	          while (true)
-	          {
-	            int i8;
-	            while (true)
-	            {
+	            int i8 = 0;
 	              StringBuilder localStringBuilder3 = new StringBuilder();
 	              int i4 = this.mCurLowPrice;
 	              StringBuilder localStringBuilder4 = localStringBuilder3.append(i4);
@@ -136,17 +129,15 @@ public class FilterActivity extends Activity{
 	              localObject1 = str4;
 	              try
 	              {
-	                localObject2 = getCurCityPriceArray();
 	                int i6 = getCurCityPriceArray().length;
 	                int i7 = 0;
-	                i8 = 0;
 	                while (true)
 	                {
-	                  int i9 = localObject2.length;
+	                  int i9 = getCurCityPriceArray().length;
 	                  if (i7 >= i9)
 	                    break;
 	                  int i10 = this.mCurLowPrice;
-	                  int i11 = localObject2[i7];
+	                  int i11 = getCurCityPriceArray()[i7];
 	                  if (i10 == i11)
 	                    i8 = i7;
 	                  i7 += 1;
@@ -157,24 +148,18 @@ public class FilterActivity extends Activity{
 	                int i12 = i6 + 1;
 	                localSeekBar1.setMax(i12);
 	                if (this.mCurLowPrice != 0)
-	                  break label512;
+	                  break;
 	                SeekBar localSeekBar2 = this.mPriceSeekBar;
 	                int i13 = i8 + 1;
 	                localSeekBar2.setProgress(i13);
 	              }
 	              catch (Exception localException2)
 	              {
-	                localObject2 = localObject1;
-	                localObject1 = localException2;
 	              }
-	            }
-	            label503: ((Exception)localObject1).printStackTrace();
 	            localObject1 = localObject2;
-	            break;
-	            label512: SeekBar localSeekBar3 = this.mPriceSeekBar;
+	            SeekBar localSeekBar3 = this.mPriceSeekBar;
 	            int i14 = i8 + 2;
 	            localSeekBar3.setProgress(i14);
-	            break;
 	            try
 	            {
 	              SeekBar localSeekBar4 = this.mCellSeekBar;
@@ -192,11 +177,9 @@ public class FilterActivity extends Activity{
 	            {
 	              localException4.printStackTrace();
 	            }
-	          }
-	          break label105;
 	          try
 	          {
-	            label622: SeekBar localSeekBar5 = this.mDistanceSeekBar;
+	            SeekBar localSeekBar5 = this.mDistanceSeekBar;
 	            int i17 = this.mDistanceLength - 1;
 	            localSeekBar5.setProgress(i17);
 	            String str9 = getResources().getString(2131362016);
@@ -210,32 +193,26 @@ public class FilterActivity extends Activity{
 	          {
 	            localException5.printStackTrace();
 	          }
-	        }
-	        break label153;
-	        label708: if ((!this.mIsAgency) && (this.mIsPersonal))
+	        if ((!this.mIsAgency) && (this.mIsPersonal))
 	        {
-	          this.mPersonalRadio.setChecked(1);
-	          break label176;
+	          this.mPersonalRadio.setChecked(true);
 	        }
-	        this.mAgencyNoneConditionRadio.setChecked(1);
-	        break label176;
-	        label746: if ((!this.mIsRentAll) && (this.mIsRentPart))
+	        this.mAgencyNoneConditionRadio.setChecked(true);
+	        if ((!this.mIsRentAll) && (this.mIsRentPart))
 	        {
-	          this.mRentPartRadio.setChecked(1);
-	          break label199;
+	          this.mRentPartRadio.setChecked(true);
 	        }
-	        this.mRentNoneConditionRadio.setChecked(1);
+	        this.mRentNoneConditionRadio.setChecked(true);
 	      }
 	      catch (Exception localException1)
 	      {
-	        break label503;
 	      }
 	    }
 	  }
 
 	  private int[] getCurCityPriceArray()
 	  {
-	    Object localObject = { 600, 1100, 1800, 2600, 3500, 5000, 9000 };
+	    int[] localObject = { 600, 1100, 1800, 2600, 3500, 5000, 9000 };
 	    try
 	    {
 	      String str1 = PreferenceUtils.getCurrentCityName(this);
@@ -261,10 +238,89 @@ public class FilterActivity extends Activity{
 	  private void setCityPriceSection()
 	  {
 	    SeekBar localSeekBar = this.mPriceSeekBar;
-	    FilterActivity.8 local8 = new FilterActivity.8(this);
+	    FilterActivity8 local8 = new FilterActivity8();
 	    localSeekBar.setOnSeekBarChangeListener(local8);
 	  }
+	  
+	  final class FilterActivity8 implements OnSeekBarChangeListener
+	{
+	  public void onProgressChanged(SeekBar paramSeekBar, int paramInt, boolean paramBoolean)
+	  {
+	    /*if (paramInt == 0);
+	    try
+	    {
+	      int i = FilterActivity.access$1102(this.this$0, -1);
+	      int j = FilterActivity.access$1202(this.this$0, -1);
+	      while (true)
+	      {
+	        FilterActivity.access$2100(this.this$0, paramInt);
+	        return;
+	        if (paramInt != 1)
+	          break;
+	        int k = FilterActivity.access$1102(this.this$0, 0);
+	        FilterActivity localFilterActivity1 = this.this$0;
+	        int[] arrayOfInt1 = FilterActivity.access$1700(this.this$0);
+	        int m = paramInt - 1;
+	        int n = arrayOfInt1[m];
+	        int i1 = FilterActivity.access$1202(localFilterActivity1, n);
+	      }
+	    }
+	    catch (Exception localException)
+	    {
+	      while (true)
+	      {
+	        continue;
+	        int i2 = FilterActivity.access$1900(this.this$0) + 1;
+	        if (paramInt == i2)
+	        {
+	          FilterActivity localFilterActivity2 = this.this$0;
+	          int[] arrayOfInt2 = FilterActivity.access$1700(this.this$0);
+	          int i3 = paramInt - 2;
+	          int i4 = arrayOfInt2[i3];
+	          int i5 = FilterActivity.access$1102(localFilterActivity2, i4);
+	          int i6 = FilterActivity.access$1202(this.this$0, -1);
+	          continue;
+	        }
+	        FilterActivity localFilterActivity3 = this.this$0;
+	        int[] arrayOfInt3 = FilterActivity.access$1700(this.this$0);
+	        int i7 = paramInt - 2;
+	        int i8 = arrayOfInt3[i7];
+	        int i9 = FilterActivity.access$1102(localFilterActivity3, i8);
+	        FilterActivity localFilterActivity4 = this.this$0;
+	        int[] arrayOfInt4 = FilterActivity.access$1700(this.this$0);
+	        int i10 = paramInt - 1;
+	        int i11 = arrayOfInt4[i10];
+	        int i12 = FilterActivity.access$1202(localFilterActivity4, i11);
+	      }
+	    }*/
+	  }
 
+	  public void onStartTrackingTouch(SeekBar paramSeekBar)
+	  {
+	    /*try
+	    {
+	      FilterActivity localFilterActivity1 = this.this$0;
+	      int[] arrayOfInt1 = FilterActivity.access$1800(this.this$0);
+	      int[] arrayOfInt2 = FilterActivity.access$1702(localFilterActivity1, arrayOfInt1);
+	      FilterActivity localFilterActivity2 = this.this$0;
+	      int i = FilterActivity.access$1700(this.this$0).length;
+	      int j = FilterActivity.access$1902(localFilterActivity2, i);
+	      SeekBar localSeekBar = FilterActivity.access$2000(this.this$0);
+	      int k = FilterActivity.access$1900(this.this$0) + 1;
+	      localSeekBar.setMax(k);
+	      label72: return;
+	    }
+	    catch (Exception localException)
+	    {
+	      break label72;
+	    }*/
+	  }
+
+	  public void onStopTrackingTouch(SeekBar paramSeekBar)
+	  {
+	  }
+	}
+	  
 	  private void setDistanceTextView(int paramInt)
 	  {
 	    String str1 = getResources().getString(2131362016);
@@ -277,14 +333,14 @@ public class FilterActivity extends Activity{
 	    localTextView.setText(str2);
 	    StringBuilder localStringBuilder2 = new StringBuilder().append("");
 	    int k = this.mDistanceLength;
-	    String str3 = k;
-	    MobclickAgent.onEvent(this, str3);
+//	    String str3 = k;
+	   // MobclickAgent.onEvent(this, str3);
 	  }
 
 	  private void setPriceTextView(int paramInt)
 	  {
 	    int i = this.mCurHightPirce;
-	    String str3;
+	    String str3 = "";
 	    if (-1 == i)
 	    {
 	      int j = this.mCurLowPrice;
@@ -297,12 +353,9 @@ public class FilterActivity extends Activity{
 	        StringBuilder localStringBuilder3 = localStringBuilder2.append(str1);
 	        String str2 = this.mContext.getString(2131362015);
 	        str3 = str2;
+	        this.mPriceSectionTextView.setText(str3);
 	      }
-	    }
-	    while (true)
-	    {
-	      this.mPriceSectionTextView.setText(str3);
-	      return;
+	    } else {
 	      int m = this.mCurHightPirce;
 	      if (-1 == m)
 	      {
@@ -310,7 +363,6 @@ public class FilterActivity extends Activity{
 	        if (-1 == n)
 	        {
 	          str3 = this.mContext.getString(2131361853);
-	          continue;
 	        }
 	      }
 	      StringBuilder localStringBuilder4 = new StringBuilder();
@@ -333,10 +385,7 @@ public class FilterActivity extends Activity{
 	      TextView localTextView1 = this.mCellTextView;
 	      String str1 = this.mContext.getString(2131361853);
 	      localTextView1.setText(str1);
-	    }
-	    while (true)
-	    {
-	      return;
+	    } else {
 	      this.mRoomNumber = paramInt;
 	      TextView localTextView2 = this.mCellTextView;
 	      StringBuilder localStringBuilder1 = new StringBuilder();
@@ -375,10 +424,7 @@ public class FilterActivity extends Activity{
 	  {
 	    if (paramString == null);
 	    int[] arrayOfInt;
-	    for (Object localObject = null; ; localObject = arrayOfInt)
-	    {
-	      return localObject;
-	      localObject = paramString.split(",");
+	      String[] localObject = paramString.split(",");
 	      int i = localObject.length;
 	      arrayOfInt = new int[i];
 	      int j = 0;
@@ -388,7 +434,7 @@ public class FilterActivity extends Activity{
 	        arrayOfInt[j] = k;
 	        j += 1;
 	      }
-	    }
+	      return arrayOfInt;
 	  }
 
 	  public HouseFilter getHouseFilter()
@@ -425,8 +471,33 @@ public class FilterActivity extends Activity{
 	    RadioButton localRadioButton3 = (RadioButton)findViewById(2131493063);
 	    this.mRentNoneConditionRadio = localRadioButton3;
 	    RadioGroup localRadioGroup2 = this.mRentRadioGroup;
-	    FilterActivity.1 local1 = new FilterActivity.1(this);
-	    localRadioGroup2.setOnCheckedChangeListener(local1);
+	    localRadioGroup2.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+	    	public void onCheckedChanged(RadioGroup paramRadioGroup, int paramInt)
+	    	  {
+	    	    /*int i = FilterActivity.access$000(this.this$0).getId();
+	    	    if (paramInt == i)
+	    	    {
+	    	      boolean bool1 = FilterActivity.access$102(this.this$0, 0);
+	    	      boolean bool2 = FilterActivity.access$202(this.this$0, 1);
+	    	    }
+	    	    while (true)
+	    	    {
+	    	      return;
+	    	      int j = FilterActivity.access$300(this.this$0).getId();
+	    	      if (paramInt == j)
+	    	      {
+	    	        boolean bool3 = FilterActivity.access$102(this.this$0, 1);
+	    	        boolean bool4 = FilterActivity.access$202(this.this$0, 0);
+	    	        continue;
+	    	      }
+	    	      int k = FilterActivity.access$400(this.this$0).getId();
+	    	      if (paramInt != k)
+	    	        continue;
+	    	      boolean bool5 = FilterActivity.access$102(this.this$0, 0);
+	    	      boolean bool6 = FilterActivity.access$202(this.this$0, 0);
+	    	    }*/
+	    	  }
+	    });
 	    RadioGroup localRadioGroup3 = (RadioGroup)findViewById(2131493058);
 	    this.mAgencyRadioGroup = localRadioGroup3;
 	    RadioButton localRadioButton4 = (RadioButton)findViewById(2131493060);
@@ -436,23 +507,109 @@ public class FilterActivity extends Activity{
 	    RadioButton localRadioButton6 = (RadioButton)findViewById(2131493059);
 	    this.mAgencyNoneConditionRadio = localRadioButton6;
 	    RadioGroup localRadioGroup4 = this.mAgencyRadioGroup;
-	    FilterActivity.2 local2 = new FilterActivity.2(this);
-	    localRadioGroup4.setOnCheckedChangeListener(local2);
+	    localRadioGroup4.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+	    	public void onCheckedChanged(RadioGroup paramRadioGroup, int paramInt)
+	    	  {
+	    	    /*int i = FilterActivity.access$500(this.this$0).getId();
+	    	    if (paramInt == i)
+	    	    {
+	    	      boolean bool1 = FilterActivity.access$602(this.this$0, 1);
+	    	      boolean bool2 = FilterActivity.access$702(this.this$0, 0);
+	    	    }
+	    	    while (true)
+	    	    {
+	    	      return;
+	    	      int j = FilterActivity.access$800(this.this$0).getId();
+	    	      if (paramInt == j)
+	    	      {
+	    	        boolean bool3 = FilterActivity.access$702(this.this$0, 1);
+	    	        boolean bool4 = FilterActivity.access$602(this.this$0, 0);
+	    	        continue;
+	    	      }
+	    	      int k = FilterActivity.access$900(this.this$0).getId();
+	    	      if (paramInt != k)
+	    	        continue;
+	    	      boolean bool5 = FilterActivity.access$702(this.this$0, 0);
+	    	      boolean bool6 = FilterActivity.access$602(this.this$0, 0);
+	    	    }*/
+	    	  }
+	    });
 	    ImageView localImageView1 = (ImageView)findViewById(2131493049);
 	    this.mGotoBackView = localImageView1;
 	    ImageView localImageView2 = this.mGotoBackView;
-	    FilterActivity.3 local3 = new FilterActivity.3(this);
-	    localImageView2.setOnClickListener(local3);
+	    localImageView2.setOnClickListener(new OnClickListener() {
+	    	public void onClick(View paramView)
+	    	  {
+	    	  /*  PreferenceUtils.setRefreshStatus(this.this$0, 2);
+	    	    finish();*/
+	    	  }
+		});
 	    Button localButton1 = (Button)findViewById(2131493053);
 	    this.mCustomButton = localButton1;
 	    Button localButton2 = this.mCustomButton;
-	    FilterActivity.4 local4 = new FilterActivity.4(this);
-	    localButton2.setOnClickListener(local4);
+	    localButton2.setOnClickListener(new OnClickListener() {
+	    	  public void onClick(View paramView)
+	    	  {
+	    	   /* FilterActivity localFilterActivity = this.this$0;
+	    	    Context localContext = FilterActivity.access$1000(this.this$0);
+	    	    new FilterActivity.CustomInputDialog(localFilterActivity, localContext).show();*/
+	    	  }
+		});
 	    Button localButton3 = (Button)findViewById(2131492879);
 	    this.mOkButton = localButton3;
 	    Button localButton4 = this.mOkButton;
-	    FilterActivity.5 local5 = new FilterActivity.5(this);
-	    localButton4.setOnClickListener(local5);
+	    localButton4.setOnClickListener(new OnClickListener() {
+	    	public void onClick(View paramView)
+	    	  {
+	    	   /* Context localContext1 = FilterActivity.access$1000(this.this$0);
+	    	    StringBuilder localStringBuilder1 = new StringBuilder();
+	    	    int i = FilterActivity.access$1100(this.this$0);
+	    	    StringBuilder localStringBuilder2 = localStringBuilder1.append(i).append("-");
+	    	    int j = FilterActivity.access$1200(this.this$0);
+	    	    String str1 = j;
+	    	    MobclickAgent.onEvent(localContext1, "priceselect", str1);
+	    	    Context localContext2 = FilterActivity.access$1000(this.this$0);
+	    	    int k = FilterActivity.access$1300(this.this$0);
+	    	    MobclickAgent.onEvent(localContext2, "roomtypeselect", k);
+	    	    int m = FilterActivity.access$1400(this.this$0);
+	    	    String str2;
+	    	    if (-1 == m)
+	    	    {
+	    	      str2 = "unlimited";
+	    	      MobclickAgent.onEvent(FilterActivity.access$1000(this.this$0), "distencefilter", str2);
+	    	      if ((!FilterActivity.access$600(this.this$0)) || (FilterActivity.access$700(this.this$0)))
+	    	        break label257;
+	    	      MobclickAgent.onEvent(FilterActivity.access$1000(this.this$0), "agencytype", "agency");
+	    	      label162: if ((!FilterActivity.access$100(this.this$0)) || (FilterActivity.access$200(this.this$0)))
+	    	        break label311;
+	    	      MobclickAgent.onEvent(FilterActivity.access$1000(this.this$0), "renttype", "all");
+	    	    }
+	    	    while (true)
+	    	    {
+	    	      this.this$0.saveSettingToSharePreference();
+	    	      PreferenceUtils.setRefreshStatus(this.this$0, 1);
+	    	      this.this$0.finish();
+	    	      return;
+	    	      StringBuilder localStringBuilder3 = new StringBuilder();
+	    	      int n = FilterActivity.access$1400(this.this$0);
+	    	      str2 = n + "";
+	    	      break;
+	    	      label257: if ((!FilterActivity.access$600(this.this$0)) && (FilterActivity.access$700(this.this$0)))
+	    	      {
+	    	        MobclickAgent.onEvent(FilterActivity.access$1000(this.this$0), "agencytype", "personal");
+	    	        break label162;
+	    	      }
+	    	      MobclickAgent.onEvent(FilterActivity.access$1000(this.this$0), "agencytype", "unlimit");
+	    	      break label162;
+	    	      label311: if ((!FilterActivity.access$100(this.this$0)) && (FilterActivity.access$200(this.this$0)))
+	    	      {
+	    	        MobclickAgent.onEvent(FilterActivity.access$1000(this.this$0), "renttype", "one");
+	    	        continue;
+	    	      }
+	    	      MobclickAgent.onEvent(FilterActivity.access$1000(this.this$0), "renttype", "unlimit");
+	    	    }*/
+	    	  }
+		});
 	    TextView localTextView1 = (TextView)findViewById(2131493051);
 	    this.mPriceSectionTextView = localTextView1;
 	    TextView localTextView2 = (TextView)findViewById(2131493054);
@@ -465,21 +622,45 @@ public class FilterActivity extends Activity{
 	    this.mCellSeekBar = localSeekBar2;
 	    this.mCellSeekBar.setMax(5);
 	    SeekBar localSeekBar3 = this.mCellSeekBar;
-	    FilterActivity.6 local6 = new FilterActivity.6(this);
-	    localSeekBar3.setOnSeekBarChangeListener(local6);
+	    localSeekBar3.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+	    	public void onProgressChanged(SeekBar paramSeekBar, int paramInt, boolean paramBoolean)
+	    	  {
+//	    	    FilterActivity.access$1500(this.this$0, paramInt);
+	    	  }
+
+	    	  public void onStartTrackingTouch(SeekBar paramSeekBar)
+	    	  {
+	    	  }
+
+	    	  public void onStopTrackingTouch(SeekBar paramSeekBar)
+	    	  {
+	    	  }
+	    });
 	    SeekBar localSeekBar4 = (SeekBar)findViewById(2131493057);
 	    this.mDistanceSeekBar = localSeekBar4;
 	    this.mDistanceSeekBar.setMax(4);
 	    SeekBar localSeekBar5 = this.mDistanceSeekBar;
-	    FilterActivity.7 local7 = new FilterActivity.7(this);
-	    localSeekBar5.setOnSeekBarChangeListener(local7);
+	    localSeekBar5.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+	    	public void onProgressChanged(SeekBar paramSeekBar, int paramInt, boolean paramBoolean)
+	    	  {
+//	    	    FilterActivity.access$1600(this.this$0, paramInt);
+	    	  }
+
+	    	  public void onStartTrackingTouch(SeekBar paramSeekBar)
+	    	  {
+	    	  }
+
+	    	  public void onStopTrackingTouch(SeekBar paramSeekBar)
+	    	  {
+	    	  }
+	    });
 	    setFileValues();
 	  }
 
 	  protected void onCreate(Bundle paramBundle)
 	  {
 	    super.onCreate(paramBundle);
-	    MobclickAgent.onError(this);
+//	    MobclickAgent.onError(this);
 	    boolean bool = requestWindowFeature(1);
 	    init();
 	  }
@@ -487,13 +668,13 @@ public class FilterActivity extends Activity{
 	  protected void onPause()
 	  {
 	    super.onPause();
-	    MobclickAgent.onPause(this);
+//	    MobclickAgent.onPause(this);
 	  }
 
 	  protected void onResume()
 	  {
 	    super.onResume();
-	    MobclickAgent.onResume(this);
+//	    MobclickAgent.onResume(this);
 	  }
 
 	  public void readSharePreference()
@@ -540,7 +721,7 @@ public class FilterActivity extends Activity{
 
 	    public CustomInputDialog(Context arg2)
 	    {
-	      super();
+	      super(arg2);
 	    }
 
 	    private void clearEditText()
@@ -567,11 +748,61 @@ public class FilterActivity extends Activity{
 	      Button localButton2 = (Button)findViewById(2131492971);
 	      this.canclebutton = localButton2;
 	      Button localButton3 = this.canclebutton;
-	      FilterActivity.CustomInputDialog.1 local1 = new FilterActivity.CustomInputDialog.1(this);
-	      localButton3.setOnClickListener(local1);
+	      localButton3.setOnClickListener(new View.OnClickListener() {
+	    	  public void onClick(View paramView)
+	    	  {
+//	    	    this.this$1.dismiss();
+	    	  }
+	      });
 	      Button localButton4 = this.okButton;
-	      FilterActivity.CustomInputDialog.2 local2 = new FilterActivity.CustomInputDialog.2(this);
-	      localButton4.setOnClickListener(local2);
+	      localButton4.setOnClickListener(new View.OnClickListener() {
+			
+	    	  public void onClick(View paramView)
+	    	  {
+	    	   /* String str1 = FilterActivity.CustomInputDialog.access$2200(this.this$1).getText().toString();
+	    	    String str2 = FilterActivity.CustomInputDialog.access$2300(this.this$1).getText().toString();
+	    	    if ((str1.length() == 0) && (str2.length() == 0))
+	    	    {
+	    	      Toast.makeText(FilterActivity.access$1000(this.this$1.this$0), 2131362018, 0).show();
+	    	      FilterActivity.CustomInputDialog.access$2400(this.this$1);
+	    	    }
+	    	    try
+	    	    {
+	    	      int i = Integer.valueOf(str1).intValue();
+	    	      int j = Integer.valueOf(str2).intValue();
+	    	      if (i >= j)
+	    	      {
+	    	        Toast.makeText(FilterActivity.access$1000(this.this$1.this$0), 2131362020, 0).show();
+	    	        FilterActivity.CustomInputDialog.access$2400(this.this$1);
+	    	      }
+	    	      while (true)
+	    	      {
+	    	        return;
+	    	        int k = FilterActivity.access$1102(this.this$1.this$0, i);
+	    	        int m = FilterActivity.access$1202(this.this$1.this$0, j);
+	    	        StringBuilder localStringBuilder1 = new StringBuilder();
+	    	        int n = FilterActivity.access$1100(this.this$1.this$0);
+	    	        StringBuilder localStringBuilder2 = localStringBuilder1.append(n);
+	    	        String str3 = FilterActivity.access$1000(this.this$1.this$0).getString(2131362014);
+	    	        StringBuilder localStringBuilder3 = localStringBuilder2.append(str3);
+	    	        int i1 = FilterActivity.access$1200(this.this$1.this$0);
+	    	        StringBuilder localStringBuilder4 = localStringBuilder3.append(i1);
+	    	        String str4 = FilterActivity.access$1000(this.this$1.this$0).getString(2131361843);
+	    	        String str5 = str4;
+	    	        FilterActivity.access$2500(this.this$1.this$0).setText(str5);
+	    	        this.this$1.dismiss();
+	    	      }
+	    	    }
+	    	    catch (Exception localException)
+	    	    {
+	    	      while (true)
+	    	      {
+	    	        Toast.makeText(FilterActivity.access$1000(this.this$1.this$0), 2131362019, 0).show();
+	    	        FilterActivity.CustomInputDialog.access$2400(this.this$1);
+	    	      }
+	    	    }*/
+	    	  }
+		});
 	    }
 	  }
 	  
