@@ -104,11 +104,11 @@ public class ResultAdapter extends BaseAdapter{
 	      TextView localTextView1 = (TextView)localView2.findViewById(2131492930);
 	      String str1 = this.mName;
 	      localTextView1.setText(str1);
-	      localObject2 = (TextView)localView2.findViewById(2131492931);
+	      TextView localObject2 = (TextView)localView2.findViewById(2131492931);
 	      if (this.mPrice == 0)
 	      {
 	        String str2 = this.mContext.getString(2131361825);
-	        ((TextView)localObject2).setText(str2);
+	        localObject2.setText(str2);
 	      }
 	      while (true)
 	      {
@@ -116,8 +116,8 @@ public class ResultAdapter extends BaseAdapter{
 	        this.mSourceNumberTextView = localTextView2;
 	        if (this.init)
 	        {
-	          showIsLoading(1);
-	          this.init = 0;
+	          showIsLoading(true);
+	          this.init = false;
 	        }
 	        if ((this.mSourceNumberTextView.getText() == null) || (this.mSourceNumberTextView.getText().toString().length() == 0))
 	        {
@@ -130,7 +130,7 @@ public class ResultAdapter extends BaseAdapter{
 	          localTextView3.setText(str4);
 	        }
 	        localObject2 = localView2;
-	        return localObject2;
+	        return localView2;
 	        String str5 = this.mContext.getString(2131361952);
 	        Object[] arrayOfObject2 = new Object[1];
 	        Integer localInteger2 = Integer.valueOf(this.mPrice);

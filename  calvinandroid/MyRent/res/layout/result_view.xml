@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/shape" android:layout_width="fill_parent" android:layout_height="45.0dip">
+        <ImageView android:id="@id/result_goto_back_imageview" android:background="@drawable/back_button" android:layout_marginLeft="8.0dip" android:src="@drawable/back_icon" android:scaleType="center" style="@style/title_label_leftbutton_linearlayout" />
+        <com.rent.view.AlwaysMarqueeTextView android:textSize="22.0dip" android:textColor="#fff0f0f0" android:ellipsize="marquee" android:gravity="center" android:id="@id/result_title" android:layout_width="fill_parent" android:layout_height="45.0dip" android:lines="1" android:singleLine="true" android:shadowColor="#ff333333" android:shadowDy="-1.1" android:shadowRadius="0.2" android:layout_weight="1.0" android:layout_centerInParent="true" android:marqueeRepeatLimit="marquee_forever" />
+        <Button android:textColor="@color/white" android:id="@id/result_sort" android:layout_marginRight="8.0dip" android:text="@string/price" style="@style/title_label_rightbutton_linearlayout" />
+    </LinearLayout>
+    <ImageView android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/line_bg" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.0" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/result_list_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" />
+        <RelativeLayout android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" android:layout_above="@id/result_list_layout">
+            <ListView android:id="@id/result_view_list" style="@style/inventory_view_list_style" />
+            <ProgressBar android:id="@id/result_view_progress" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" style="?android:progressBarStyleLarge" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.rent.thread;
+package com.rent.location;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,19 +21,23 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
-import com.rent.Rent;
 import com.rent.util.DefaultCookieStore;
 
 public abstract class AbstractThread extends Thread{
 
 	private final int TIMEOUT = 20000;
 	  protected final Handler handler;
-	  protected Context mContext = null;
+	  private String mAppName = null;
+	  private Context mContext = null;
+	  private String mVersionNmame = null;
 	  private String url = null;
 
-	  public AbstractThread(Handler paramHandler)
+	  public AbstractThread(Context paramContext, Handler paramHandler, String paramString1, String paramString2)
 	  {
 	    this.handler = paramHandler;
+	    this.mContext = paramContext;
+	    this.mVersionNmame = paramString1;
+	    this.mAppName = paramString2;
 	  }
 
 	  protected String executeGet()
@@ -49,8 +53,8 @@ public abstract class AbstractThread extends Thread{
 	      HttpConnectionParams.setConnectionTimeout(localBasicHttpParams, 20000);
 	      HttpClientParams.setRedirecting(localBasicHttpParams, false);
 	      DefaultHttpClient localDefaultHttpClient = new DefaultHttpClient(localBasicHttpParams);
-	      Context localContext = Rent.getAppContext();
-	      String str1 = Rent.getVersionName(Rent.getAppContext());
+	      Context localContext = this.mContext;
+	      String str1 = this.mVersionNmame;
 	      DefaultCookieStore localDefaultCookieStore = DefaultCookieStore.getSingleStore(localContext, str1, "rent");
 	      localDefaultHttpClient.setCookieStore(localDefaultCookieStore);
 	      String str2 = getUrl();
@@ -82,9 +86,10 @@ public abstract class AbstractThread extends Thread{
 	      HttpConnectionParams.setConnectionTimeout(localBasicHttpParams, 20000);
 	      HttpClientParams.setRedirecting(localBasicHttpParams, false);
 	      DefaultHttpClient localDefaultHttpClient = new DefaultHttpClient(localBasicHttpParams);
-	      Context localContext = Rent.getAppContext();
-	      String str2 = Rent.getVersionName(Rent.getAppContext());
-	      DefaultCookieStore localDefaultCookieStore = DefaultCookieStore.getSingleStore(localContext, str2, "rent");
+	      Context localContext = this.mContext;
+	      String str2 = this.mVersionNmame;
+	      String str3 = this.mAppName;
+	      DefaultCookieStore localDefaultCookieStore = DefaultCookieStore.getSingleStore(localContext, str2, str3);
 	      localDefaultHttpClient.setCookieStore(localDefaultCookieStore);
 	      localObject = localDefaultHttpClient.execute(localHttpPost);
 	      if (((HttpResponse)localObject).getStatusLine().getStatusCode() == 200)
@@ -110,4 +115,5 @@ public abstract class AbstractThread extends Thread{
 	  {
 	    this.url = paramString;
 	  }
+	  
 }
