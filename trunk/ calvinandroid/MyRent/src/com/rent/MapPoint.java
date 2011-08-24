@@ -2,6 +2,6 @@ package com.rent;
 
 public class MapPoint {
 
-	double lat;
-	double lon;
+	public double lat;
+	public double lon;
 }

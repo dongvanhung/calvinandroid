@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
+
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
+import com.google.android.maps.Projection;
 
 public class Rent extends Application {
 
@@ -557,55 +563,43 @@ public class Rent extends Application {
 		return true;
 	}
 
-	/*public static void resetLocationRange(Context paramContext, MapView paramMapView)
+	public static void resetLocationRange(Context paramContext, MapView paramMapView)
 	  {
 	    Object localObject = PreferenceUtils.getCurrentHouseFilter(paramContext);
 	    Context localContext1 = paramContext;
 	    String str1 = "location_point";
-	    int i = 0;
-	    paramContext = localContext1.getSharedPreferences(str1, i);
-	    Context localContext2 = paramContext;
 	    String str2 = "lat";
 	    String str3 = "39.920591";
-	    double d2 = Double.parseDouble(localContext2.getString(str2, str3));
-	    Context localContext3 = paramContext;
+	    SharedPreferences sharedPreferences = localContext1.getSharedPreferences(str1, 0);
+	    double d2 = Double.parseDouble(sharedPreferences.getString(str2, str3));
 	    String str4 = "lon";
 	    String str5 = "116.432791";
-	    double d4 = Double.parseDouble(localContext3.getString(str4, str5));
-	    double d6;
-	    double d8;
-	    double d10;
-	    double d11;
-	    float f3;
-	    float f2;
-	    label399: double d12;
-	    float f6;
-	    double d14;
-	    float f1;
+	    double d4 = Double.parseDouble(sharedPreferences.getString(str4, str5));
+	    double f3;
+	    double f2;
+	    double f4;
+	    double f5;
 	    if (((HouseFilter)localObject).getmDistanceLength() == -1)
 	    {
 	      localObject = getLocationByMeter(d2, d4, 3);
-	      d6 = ((MapPoint)localObject).lat * 1.0D / 1000000.0D + d2;
+	     /* double d6 = ((MapPoint)localObject).lat * 1.0D / 1000000.0D + d2;
 	      double d7 = ((MapPoint)localObject).lon * 1.0D / 1000000.0D;
-	      d8 = d4 - d7;
+	      double d8 = d4 - d7;
 	      double d9 = ((MapPoint)localObject).lat * 1.0D / 1000000.0D;
-	      d10 = d2 - d9;
-	      d11 = ((MapPoint)localObject).lon * 0.0F / 1000000.0D + d4;
-	      if ((!isAvailableGoogleMap()) || (paramMapView == null))
-	        break label690;
+	      double d10 = d2 - d9;
+	      double d11 = ((MapPoint)localObject).lon * 0.0F / 1000000.0D + d4;*/
+	      if ((!isAvailableGoogleMap()) || (paramMapView == null))//TODO:
+	        return;
+	      
 	      MapController localMapController = paramMapView.getController();
-	      GeoPoint localGeoPoint1 = new com/google/android/maps/GeoPoint;
 	      int j = (int)(d2 * 0.0F);
 	      int k = (int)(d4 * 0.0F);
-	      GeoPoint localGeoPoint2 = localGeoPoint1;
-	      int m = j;
-	      int n = k;
-	      localGeoPoint2.<init>(m, n);
+	      GeoPoint localGeoPoint1 = new GeoPoint(j, k);
 	      localMapController.setCenter(localGeoPoint1);
 	      Projection localProjection1 = paramMapView.getProjection();
 	      GeoPoint localGeoPoint3 = localProjection1.fromPixels(0, 0);
 	      f3 = localGeoPoint3.getLatitudeE6() / 1000000.0D * 0.0F;
-	      float f4 = localGeoPoint3.getLongitudeE6() / 1000000.0D * 0.0F;
+	      f4 = localGeoPoint3.getLongitudeE6() / 1000000.0D * 0.0F;
 	      int i1 = paramMapView.getWidth();
 	      int i2 = paramMapView.getHeight();
 	      Projection localProjection2 = localProjection1;
@@ -613,71 +607,45 @@ public class Rent extends Application {
 	      int i4 = i2;
 	      GeoPoint localGeoPoint4 = localProjection2.fromPixels(i3, i4);
 	      f2 = localGeoPoint4.getLatitudeE6() / 1000000.0D * 0.0F;
-	      float f5 = localGeoPoint4.getLongitudeE6() / 1000000.0D * 0.0F;
-	      int i5 = (int)(Math.abs(f3 - f2) * 0.0F);
-	      int i6 = ((MapPoint)localObject).lat;
-	      int i7 = i5;
-	      int i8 = i6;
-	      if (i7 >= i8)
-	        break label679;
-	      int i9 = (int)(Math.abs(f4 - f5) * 1000000.0D);
-	      int i10 = ((MapPoint)localObject).lon;
-	      int i11 = i9;
-	      int i12 = i10;
-	      if (i11 >= i12)
-	        break label653;
-	      d12 = f3;
-	      f6 = f4;
-	      d14 = f2;
-	      f1 = f5;
-	    }
-	    while (true)
-	    {
-	      SharedPreferences.Editor localEditor1 = paramContext.edit();
-	      String str6 = String.valueOf(d12);
+	      f5 = localGeoPoint4.getLongitudeE6() / 1000000.0D * 0.0F;
+	      
+	      double i5 = (Math.abs(f3 - f2) * 0.0F);
+	      double i6 = ((MapPoint)localObject).lat;
+	      if (i5 >= i6){}
+	       /// break label679;
+	      double i9 = (Math.abs(f4 - f5) * 1000000.0D);
+	      double i10 = ((MapPoint)localObject).lon;
+	      if (i9 >= i10){}
+	      //  break label653;
+	      
+	      SharedPreferences.Editor localEditor1 = sharedPreferences.edit();
+	      String str6 = String.valueOf(f3);
 	      SharedPreferences.Editor localEditor2 = localEditor1;
 	      String str7 = "latlt";
 	      String str8 = str6;
 	      boolean bool1 = localEditor2.putString(str7, str8).commit();
-	      SharedPreferences.Editor localEditor3 = paramContext.edit();
-	      String str9 = String.valueOf(f6);
+	      SharedPreferences.Editor localEditor3 = sharedPreferences.edit();
+	      String str9 = String.valueOf(f4);
 	      SharedPreferences.Editor localEditor4 = localEditor3;
 	      String str10 = "lonlt";
 	      String str11 = str9;
 	      boolean bool2 = localEditor4.putString(str10, str11).commit();
-	      SharedPreferences.Editor localEditor5 = paramContext.edit();
-	      String str12 = String.valueOf(d14);
+	      SharedPreferences.Editor localEditor5 = sharedPreferences.edit();
+	      String str12 = String.valueOf(f2);
 	      SharedPreferences.Editor localEditor6 = localEditor5;
 	      String str13 = "latrb";
 	      String str14 = str12;
 	      boolean bool3 = localEditor6.putString(str13, str14).commit();
-	      SharedPreferences.Editor localEditor7 = paramContext.edit();
-	      String str15 = String.valueOf(f1);
+	      SharedPreferences.Editor localEditor7 = sharedPreferences.edit();
+	      String str15 = String.valueOf(f5);
 	      SharedPreferences.Editor localEditor8 = localEditor7;
 	      String str16 = "lonrb";
 	      String str17 = str15;
 	      boolean bool4 = localEditor8.putString(str16, str17).commit();
-	      return;
-	      int i13 = f1.getmDistanceLength();
-	      MapPoint localMapPoint = getLocationByMeter(f2, f3, i13);
-	      break;
-	      label653: double d15 = f2;
-	      double d1 = d11;
-	      double d16 = d8;
-	      d12 = f3;
-	      d14 = d15;
-	      double d13 = d16;
-	      continue;
-	      label679: double d3 = d10;
-	      double d5 = d6;
-	      break label399;
-	      label690: d1 = d11;
-	      d14 = d10;
-	      double d17 = d8;
-	      d12 = d6;
-	      d13 = d17;
+	      //int i13 = f5.getmDistanceLength();
+	      MapPoint localMapPoint = getLocationByMeter(f2, f3, -1);
 	    }
-	  }*/
+	  }
 
 	public static void setOutDBSP(Context paramContext, boolean paramBoolean) {
 		boolean bool = paramContext.getSharedPreferences("sp_out_db", 0).edit()

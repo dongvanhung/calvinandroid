@@ -3,6 +3,8 @@ package com.rent;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.rent.db.AddressChoiceDBManager;
+
 public class PreferenceUtils {
 	public static final String CLEAR_PIC_SETTING = "clear_pic_setting";
 	  private static final String HISTORY_KEYWORD = "keyword";
@@ -28,7 +30,73 @@ public class PreferenceUtils {
 	  public static final String VALUE_CURRENT_DISTRICT_ID = "current_district_id";
 	  public static final String VALUE_CURRENT_TEMP_WORD = "current_temp_word";
 	  public static final String VALUE_KEY_WORD = "current_key_word";
-
+	  
+	  public static HouseFilter getCurrentHouseFilter(Context paramContext)
+	  {
+	    SharedPreferences localSharedPreferences = paramContext.getSharedPreferences("filterSearchView", 0);
+	    HouseFilter localHouseFilter = new HouseFilter();
+	    int i = localSharedPreferences.getInt("price_upper", -1);
+	    localHouseFilter.setmPriceHight(i);
+	    int j = localSharedPreferences.getInt("price_low", -1);
+	    localHouseFilter.setmPriceLow(j);
+	    int k = localSharedPreferences.getInt("room_number", -1);
+	    localHouseFilter.setmRoomNumber(k);
+	    int m = localSharedPreferences.getInt("distance_length", -1);
+	    localHouseFilter.setmDistanceLength(m);
+	    boolean bool1 = localSharedPreferences.getBoolean("is_agency", false);
+	    localHouseFilter.setmIsAgency(bool1);
+	    boolean bool2 = localSharedPreferences.getBoolean("is_personal", false);
+	    localHouseFilter.setmIsPersonal(bool2);
+	    boolean bool3 = localSharedPreferences.getBoolean("rent_all", false);
+	    localHouseFilter.setmIsRentAll(bool3);
+	    boolean bool4 = localSharedPreferences.getBoolean("rent_part", false);
+	    localHouseFilter.setmIsRentPart(bool4);
+	    return localHouseFilter;
+	  }
+	  
+	  public static void saveCityName(Context paramContext, String paramString)
+	  {
+	    SharedPreferences localSharedPreferences = paramContext.getSharedPreferences("location_point", 0);
+	    String str1 = paramContext.getString(2131361852);
+	    String str2 = localSharedPreferences.getString("current_city", str1);
+	    SharedPreferences.Editor localEditor1 = localSharedPreferences.edit();
+	    SharedPreferences.Editor localEditor2 = localEditor1.putString("current_city", paramString);
+	    boolean bool = localEditor1.commit();
+	    if ((!str2.equals(paramString)) || (getCurrentDistrictName(paramContext) == null) || (getCurrentDistrictId(paramContext) == -1))
+	    {
+	      AddressChoiceDBManager localAddressChoiceDBManager = new AddressChoiceDBManager(paramContext);
+	      localAddressChoiceDBManager.openDatabase();
+	      String str3 = getCurrentCityName(paramContext);
+	      String str4 = localAddressChoiceDBManager.getCityFirstDistrictName(str3);
+	      int i = localAddressChoiceDBManager.getCityFirstDistrictId(str3, str4);
+	      localAddressChoiceDBManager.closeDatabase();
+	      saveDistrictName(paramContext, str4, i);
+	    }
+	  }
+	  
+	  public static int getCurrentDistrictId(Context paramContext)
+	  {
+	    SharedPreferences localSharedPreferences = paramContext.getSharedPreferences("location_point", 0);
+	    AddressChoiceDBManager localAddressChoiceDBManager = new AddressChoiceDBManager(paramContext);
+	    localAddressChoiceDBManager.openDatabase();
+	    String str1 = getCurrentCityName(paramContext);
+	    String str2 = localAddressChoiceDBManager.getCityFirstDistrictName(str1);
+	    int i = localAddressChoiceDBManager.getCityFirstDistrictId(str1, str2);
+	    localAddressChoiceDBManager.closeDatabase();
+	    return localSharedPreferences.getInt("current_district_id", i);
+	  }
+	  
+	  public static String getCurrentDistrictName(Context paramContext)
+	  {
+	    SharedPreferences localSharedPreferences = paramContext.getSharedPreferences("location_point", 0);
+	    AddressChoiceDBManager localAddressChoiceDBManager = new AddressChoiceDBManager(paramContext);
+	    localAddressChoiceDBManager.openDatabase();
+	    String str1 = getCurrentCityName(paramContext);
+	    String str2 = localAddressChoiceDBManager.getCityFirstDistrictName(str1);
+	    localAddressChoiceDBManager.closeDatabase();
+	    return localSharedPreferences.getString("current_district", str2);
+	  }
+	  
 	  public static boolean getClearPicStatus(Context paramContext)
 	  {
 	    return paramContext.getSharedPreferences("rent_sp_setting", 0).getBoolean("clear_pic_setting", false);
