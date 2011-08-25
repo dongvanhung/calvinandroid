@@ -31,7 +31,7 @@ public class SearchActivity extends ActivityGroup
 
   private void initView()
   {
-    LinearLayout localLinearLayout1 = (LinearLayout)findViewById(2131493154);
+    LinearLayout localLinearLayout1 = (LinearLayout)findViewById(R.id.search_view);
     this.mContainView = localLinearLayout1;
     int i = Rent.getCurrentNetwork(this);
     /*if ((Rent.isAvailableGoogleMap()) && (i == 1))
@@ -63,7 +63,7 @@ public class SearchActivity extends ActivityGroup
 
   public void changeActivtiy(int paramInt)
   {
-    /*this.mContainView.removeAllViews();
+    this.mContainView.removeAllViews();
     switch (paramInt)
     {
     default:
@@ -71,7 +71,7 @@ public class SearchActivity extends ActivityGroup
     case 1:
     case 2:
     }
-      if (Rent.isAvailableGoogleMap())
+      /*if (Rent.isAvailableGoogleMap())
       {
         LocalActivityManager localLocalActivityManager1 = getLocalActivityManager();
         String str1 = MAIN_VIEW_NAME[0];
@@ -81,7 +81,7 @@ public class SearchActivity extends ActivityGroup
         LocalActivityManager localLocalActivityManager2 = getLocalActivityManager();
         String str2 = MAIN_VIEW_NAME[0];
         ((SearchOnMapActivity)(SearchOnMapActivity)localLocalActivityManager2.getActivity(str2)).setSearchContext(this);
-      }
+      }*/
         LinearLayout localLinearLayout1 = this.mContainView;
         View localView2 = this.mView;
         localLinearLayout1.addView(localView2);
@@ -111,7 +111,7 @@ public class SearchActivity extends ActivityGroup
       this.mView = localView6;
       LinearLayout localLinearLayout3 = this.mContainView;
       View localView7 = this.mView;
-      localLinearLayout3.addView(localView7);*/
+      localLinearLayout3.addView(localView7);
   }
 
   protected void onCreate(Bundle paramBundle)

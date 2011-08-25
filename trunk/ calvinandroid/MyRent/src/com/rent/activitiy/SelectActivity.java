@@ -303,7 +303,7 @@ public class SelectActivity extends Activity implements AutoCompleteQueryListene
 	    AutoCompleteQueryHandler localAutoCompleteQueryHandler = new AutoCompleteQueryHandler(this, this);
 	    this.mQueryHandler = localAutoCompleteQueryHandler;
 	    boolean bool = requestWindowFeature(1);
-	    setContentView(2130903041);
+	    setContentView(R.layout.address_activity);
 	    this.mContext = this;
 	    clearTempKeyWorld();
 	    init();
