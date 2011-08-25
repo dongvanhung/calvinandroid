@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/shape" android:layout_width="fill_parent" android:layout_height="45.0dip">
+        <ImageView android:id="@id/back" android:background="@drawable/back_button" android:layout_marginLeft="8.0dip" android:src="@drawable/back_icon" android:scaleType="center" style="@style/title_label_leftbutton_linearlayout" />
+        <FrameLayout android:layout_width="fill_parent" android:layout_height="30.0dip" android:layout_marginLeft="4.0dip" android:layout_marginRight="4.0dip" android:layout_weight="1.0">
+            <AutoCompleteTextView android:textSize="17.0dip" android:textColor="@color/black" android:id="@id/search_edittext" android:background="@drawable/field" android:paddingLeft="30.0dip" android:paddingRight="10.0dip" android:layout_width="fill_parent" android:layout_height="30.0dip" android:hint="@string/info_input_location" android:singleLine="true" android:completionThreshold="1" android:dropDownWidth="fill_parent" android:dropDownHeight="fill_parent" android:dropDownVerticalOffset="15.0dip" />
+            <ImageView android:layout_gravity="right|center" android:id="@id/clear_txt_iv" android:paddingRight="7.0dip" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/clear_txt" />
+        </FrameLayout>
+        <Button android:textColor="@color/white" android:id="@id/ok_button" android:layout_marginRight="8.0dip" android:text="@string/confirm" style="@style/title_label_rightbutton_linearlayout" />
+    </LinearLayout>
+    <ImageView android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/line_bg" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:background="@drawable/round_listview_bg" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <TextView android:id="@id/search_history" android:text="@string/info_choice_district" style="@style/address_select_prompt" />
+            <LinearLayout android:id="@id/city_choice_ll" android:background="@drawable/head_linearlayout_background" style="@style/bussiness_linearLayout">
+                <TextView android:text="@string/choice_city" style="@style/bussiness_text_left" />
+                <TextView android:id="@id/bussiness_cur_city" style="@style/bussiness_text_right" />
+                <ImageView style="@style/bussiness_right_side_image" />
+            </LinearLayout>
+            <LinearLayout android:id="@id/area_choice_ll" android:background="@drawable/center_linearlayout_background" style="@style/bussiness_linearLayout">
+                <TextView android:text="@string/choice_area" style="@style/bussiness_text_left" />
+                <TextView android:id="@id/area_choice_textview" style="@style/bussiness_text_right" />
+                <ImageView style="@style/bussiness_right_side_image" />
+            </LinearLayout>
+            <LinearLayout android:id="@id/area_bussiness_district_linearlayout" android:background="@drawable/end_linearlayout_background" style="@style/bussiness_linearLayout">
+                <TextView android:text="@string/choice_bussiness" style="@style/bussiness_text_left" />
+                <TextView android:id="@id/bussiness_choice_textview" style="@style/bussiness_text_right" />
+                <ImageView style="@style/bussiness_right_side_image" />
+            </LinearLayout>
+            <TextView android:id="@id/search_history" android:text="@string/record_location" style="@style/address_select_prompt" />
+            <LinearLayout android:orientation="vertical" android:id="@id/history_record_ll" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

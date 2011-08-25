@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText android:id="@id/low_input_edittext" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <EditText android:id="@id/hight_input_edittext" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:id="@id/custom_dialog_ok" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ok" android:layout_weight="1.0" />
+        <Button android:id="@id/custom_dialog_cancle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="cancle" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>
