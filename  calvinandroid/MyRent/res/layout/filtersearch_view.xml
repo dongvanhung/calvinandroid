@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/main_search"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout style="@style/title_label_relativeLayout">
+        <ImageView android:id="@id/siftsearch_goto_back_imageview" android:background="@drawable/back_button" android:src="@drawable/back_icon" android:scaleType="center" style="@style/title_label_left_imageview" />
+        <TextView android:id="@id/search_view_title" android:text="@string/sift_search_title" style="@style/title_label_textview" />
+        <Button android:id="@id/ok_button" android:text="@string/confirm" style="@style/title_label_rightbutton" />
+    </RelativeLayout>
+    <ImageView android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/line_bg" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <RelativeLayout style="@style/main_search_row">
+                <TextView android:text="@string/price_range" style="@style/main_search_row_left_text" />
+                <TextView android:id="@id/price_range" android:text="@string/please_select" style="@style/main_search_row_right_text" />
+            </RelativeLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <SeekBar android:id="@id/price_type_bar" style="@style/main_search_seekbarRow" />
+                <Button android:id="@id/price_custom_but" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="custom" />
+            </LinearLayout>
+            <RelativeLayout style="@style/main_search_row">
+                <TextView android:text="@string/room_type" style="@style/main_search_row_left_text" />
+                <TextView android:id="@id/room_type_text" android:text="@string/please_select" style="@style/main_search_row_right_text" />
+            </RelativeLayout>
+            <SeekBar android:id="@id/room_type_bar" style="@style/main_search_seekbarRow" />
+            <RelativeLayout style="@style/main_search_row">
+                <TextView android:text="@string/distance" style="@style/main_search_row_left_text" />
+                <TextView android:id="@id/distance_text" android:text="@string/please_select" style="@style/main_search_row_right_text" />
+            </RelativeLayout>
+            <SeekBar android:id="@id/distance_bar" style="@style/main_search_seekbarRow" />
+            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip">
+                <RadioGroup android:orientation="horizontal" android:id="@id/agency_type_group" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <RadioButton android:textColor="@color/black" android:id="@id/agency_none_condition" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="@string/none_condition" />
+                    <RadioButton android:textColor="@color/black" android:id="@id/agency" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="@string/rent_favourite_source_property_medium" />
+                    <RadioButton android:textColor="@color/black" android:id="@id/personal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="@string/rent_favourite_source_property_oneself" />
+                </RadioGroup>
+                <RadioGroup android:orientation="horizontal" android:id="@id/rent_type_group" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <RadioButton android:textColor="@color/black" android:id="@id/rent_none_condition" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="@string/none_condition" />
+                    <RadioButton android:textColor="@color/black" android:id="@id/rent_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="@string/rent_favourite_rent_type_lease_all" />
+                    <RadioButton android:textColor="@color/black" android:id="@id/rent_part" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="@string/rent_favourite_rent_type_lease_part" />
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:orientation="vertical" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/line_bg" />
+        <Button android:textSize="17.0dip" android:textColor="@color/black" android:gravity="center" android:id="@id/sift_search_button" android:background="@drawable/filter_certain_button" android:layout_width="fill_parent" android:layout_height="45.0dip" android:text="@string/button_confirm_search" android:layout_centerInParent="true" />
+    </LinearLayout>
+</LinearLayout>
