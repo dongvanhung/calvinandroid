@@ -15,6 +15,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.rent.adapter.AdvertiserAdapter;
+import com.rent.exchange.AdvertiserList;
+import com.rent.exchange.EasingType;
+import com.rent.exchange.ElasticInterpolator;
+import com.rent.exchange.ExchangeDataService;
+import com.rent.exchange.GetDataThread;
+import com.rent.exchange.ReportThread;
 import com.rent.exchange.common.DeviceManager;
 import com.rent.exchange.common.ExchangeConstants;
 import com.rent.listener.ExchangeDataRequestListener;
@@ -39,7 +45,7 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 		this.mContext = paramContext;
 		this.mFatherLayout = paramViewGroup;
 		this.mType = paramInt;
-		int i;
+		int i = 0;
 		if (DeviceManager.isScreenPortrait(this.mContext))
 			i = ExchangeConstants.DRAWER_LIST_COUNT_VERTICAL;
 		int j;
@@ -96,14 +102,10 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 		switch (this.mType) {
 		default:
 		case 4:
-		case 5:
-		}
-		while (true) {
-			return;
 			this.mPosition = 1;
 			int i = LayoutMapper.exchange_small_handler_bottom_list();
 			this.mContentId = i;
-			continue;
+		case 5:
 			this.mPosition = 0;
 			int j = LayoutMapper.exchange_small_handler_top_list();
 			this.mContentId = j;
@@ -116,13 +118,10 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 			ElasticInterpolator localElasticInterpolator = new ElasticInterpolator(
 					localType1, 1.0F, 1.0F);
 			paramBasePanel.setInterpolator(localElasticInterpolator);
-		}
-		while (true) {
+		} else {
 			paramBasePanel.mHandle.setVisibility(0);
-			return;
 			EasingType.Type localType2 = EasingType.Type.OUT;
-			BounceInterpolator localBounceInterpolator = new BounceInterpolator(
-					localType2);
+			BounceInterpolator localBounceInterpolator = new BounceInterpolator();
 			paramBasePanel.setInterpolator(localBounceInterpolator);
 		}
 	}
@@ -130,11 +129,9 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 	public void onPanelOpened(BasePanel paramBasePanel, View paramView) {
 		if (paramBasePanel.getId() == 0) {
 			EasingType.Type localType1 = EasingType.Type.OUT;
-			BounceInterpolator localBounceInterpolator = new BounceInterpolator(
-					localType1);
+			BounceInterpolator localBounceInterpolator = new BounceInterpolator();
 			paramBasePanel.setInterpolator(localBounceInterpolator);
-		}
-		while (true) {
+		} else {
 			paramBasePanel.mHandle.setVisibility(0);
 			paramBasePanel.showBlur();
 			Context localContext = this.mContext;
@@ -144,7 +141,6 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 			int j = this.mType;
 			int k = 0;
 			new ReportThread(0, localContext, localList2, j, 2, k).start();
-			return;
 			EasingType.Type localType2 = EasingType.Type.OUT;
 			ElasticInterpolator localElasticInterpolator = new ElasticInterpolator(
 					localType2, 1.0F, 1.0F);
@@ -155,21 +151,18 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 	void setInteraction(ViewGroup paramViewGroup, int paramInt1, int paramInt2)
 	  {
 	    int i;
-	    RelativeLayout.LayoutParams localLayoutParams1;
-	    Button localButton1;
+	    RelativeLayout.LayoutParams localLayoutParams1 = null;
+	    Button localButton1 = null;
 	    int n;
-	    label184: RelativeLayout.LayoutParams localLayoutParams3;
-	    RelativeLayout.LayoutParams localLayoutParams4;
+	    RelativeLayout.LayoutParams localLayoutParams3 = null;
+	    RelativeLayout.LayoutParams localLayoutParams4 = null;
 	    if (paramInt2 == 0)
 	    {
 	      i = 10;
-	      BasePanel localBasePanel1 = new com/exchange/View/BasePanel;
+	      BasePanel localBasePanel1 = new BasePanel(this.mContext,paramInt2, false);
 	      Context localContext1 = this.mContext;
 	      BasePanel localBasePanel2 = localBasePanel1;
 	      Context localContext2 = localContext1;
-	      int j = paramInt2;
-	      int k = 0;
-	      localBasePanel2.<init>(localContext2, j, k);
 	      BasePanel localBasePanel3 = localBasePanel1;
 	      this.panel = localBasePanel3;
 	      this.panel.setId(0);
@@ -184,14 +177,10 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 	      EasingType.Type localType = EasingType.Type.OUT;
 	      ElasticInterpolator localElasticInterpolator = new ElasticInterpolator(localType, 1.0F, 1.0F);
 	      localBasePanel5.setInterpolator(localElasticInterpolator);
-	      localButton1 = new android/widget/Button;
-	      Context localContext3 = this.mContext;
+	      localButton1 = new Button(this.mContext);
 	      Button localButton2 = localButton1;
-	      Context localContext4 = localContext3;
-	      localButton2.<init>(localContext4);
 	      Resources localResources = this.mContext.getResources();
-	      if (paramInt2 != 0)
-	        break label754;
+	      if (paramInt2 != 0){}
 	      n = DrawableMapper.exchange_top_switcher_collapsed_background();
 	      Drawable localDrawable1 = localResources.getDrawable(n);
 	      Button localButton3 = localButton1;
@@ -220,7 +209,7 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 	      int i5 = LayoutMapper.exchange_normal_banner();
 	      int i6 = this.mItemCount;
 	      int i7 = this.mType;
-	      AdvertiserList localAdvertiserList = new AdvertiserList(localListView2, localContext7, i5, 0, i6, i7);
+	      AdvertiserList localAdvertiserList = new AdvertiserList(localListView2, localContext7, i5, false, i6, i7);
 	      this.mBottomContent.setVisibility(8);
 	      BasePanel localBasePanel7 = this.panel;
 	      View localView3 = this.mBottomContent;
@@ -230,8 +219,7 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 	      RelativeLayout.LayoutParams localLayoutParams5 = localLayoutParams4;
 	      int i9 = i;
 	      localLayoutParams5.addRule(i9);
-	      if (paramInt2 != 0)
-	        break label762;
+	      if (paramInt2 != 0){}
 	      BasePanel localBasePanel8 = this.panel;
 	      View localView4 = this.mBottomContent;
 	      localBasePanel8.addView(localView4, localLayoutParams4);
@@ -243,11 +231,7 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 	    while (true)
 	    {
 	      this.panel.setListener();
-	      RelativeLayout localRelativeLayout1 = new android/widget/RelativeLayout;
-	      Context localContext8 = this.mContext;
-	      RelativeLayout localRelativeLayout2 = localRelativeLayout1;
-	      Context localContext9 = localContext8;
-	      localRelativeLayout2.<init>(localContext9);
+	      RelativeLayout localRelativeLayout1 = new RelativeLayout(this.mContext);
 	      RelativeLayout.LayoutParams localLayoutParams7 = new RelativeLayout.LayoutParams(-1, -1);
 	      RelativeLayout localRelativeLayout3 = localRelativeLayout1;
 	      RelativeLayout.LayoutParams localLayoutParams8 = localLayoutParams7;
@@ -274,27 +258,47 @@ public class ListDrawer implements BasePanel.OnPanelListener,
 	      View localView5 = this.mBottomContent;
 	      int i12 = IdMapper.back();
 	      Button localButton7 = (Button)localView5.findViewById(i12);
-	      ListDrawer.1 local11 = new com/exchange/View/ListDrawer$1;
-	      ListDrawer.1 local12 = local11;
-	      ListDrawer localListDrawer3 = this;
-	      local12.<init>(localListDrawer3);
-	      localButton7.setOnClickListener(local11);
+	      localButton7.setOnClickListener(new View.OnClickListener() {
+	    	  public void onClick(View paramView)
+	    	  {
+	    	   /* BasePanel localBasePanel;
+	    	    if (!this.this$0.panel.mAnimating)
+	    	    {
+	    	      localBasePanel = this.this$0.panel;
+	    	      if (!this.this$0.panel.isOpen())
+	    	        break label45;
+	    	    }
+	    	    int j;
+	    	      localBasePanel.setOpen(false, true);
+	    	      return;*/
+	    	  }
+			
+		});
 	      View localView6 = this.mBottomContent;
 	      int i13 = IdMapper.more();
 	      Button localButton8 = (Button)localView6.findViewById(i13);
-	      ListDrawer.2 local21 = new com/exchange/View/ListDrawer$2;
-	      ListDrawer.2 local22 = local21;
-	      ListDrawer localListDrawer4 = this;
-	      local22.<init>(localListDrawer4);
 	      Button localButton9 = localButton8;
-	      ListDrawer.2 local23 = local21;
-	      localButton9.setOnClickListener(local23);
-	      return;
+	      localButton9.setOnClickListener(new View.OnClickListener() {
+	    	  public void onClick(View paramView)
+	    	  {
+	    	   /* try
+	    	    {
+	    	      Context localContext = this.this$0.mContext;
+	    	      Class localClass = Class.forName("com.exchange.View.ListCurtainActivity");
+	    	      Intent localIntent = new Intent(localContext, localClass);
+	    	      this.this$0.mContext.startActivity(localIntent);
+	    	      return;
+	    	    }
+	    	    catch (ClassNotFoundException localClassNotFoundException)
+	    	    {
+	    	      while (true)
+	    	        localClassNotFoundException.printStackTrace();
+	    	    }*/
+	    	  }
+		});
 	      i = 12;
-	      break;
-	      label754: n = DrawableMapper.exchange_bottom_switcher_collapsed_background();
-	      break label184;
-	      label762: BasePanel localBasePanel12 = this.panel;
+	      n = DrawableMapper.exchange_bottom_switcher_collapsed_background();
+	      BasePanel localBasePanel12 = this.panel;
 	      Button localButton10 = localButton1;
 	      RelativeLayout.LayoutParams localLayoutParams10 = localLayoutParams3;
 	      localBasePanel12.addView(localButton10, localLayoutParams10);

@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
 
 import org.json.JSONArray;
@@ -28,7 +27,9 @@ import android.view.WindowManager;
 
 import com.rent.exchange.common.DeviceManager;
 import com.rent.exchange.common.ExchangeConstants;
+import com.rent.exchange.common.LocationAgent;
 import com.rent.exchange.common.Network;
+import com.rent.exchange.common.UmengHelper;
 import com.rent.exchange.model.AdvertiserConfig;
 import com.rent.listener.ExchangeDataRequestListener;
 
@@ -193,7 +194,9 @@ public class ExchangeDataService {
 
 	static AdvertiserConfig getAdvertiserFromJson(JSONObject jsonobject)
 	    {
-	        AdvertiserConfig advertiserconfig = new AdvertiserConfig();
+		AdvertiserConfig advertiserconfig = new AdvertiserConfig();
+		return advertiserconfig;
+	        /*AdvertiserConfig advertiserconfig = new AdvertiserConfig();
 	        if(jsonobject.has("title"))
 	        {
 	            String s = jsonobject.getString("title");
@@ -265,7 +268,7 @@ public class ExchangeDataService {
 	        s6 = s13;
 	          goto _L5
 	        printStackTrace();
-	          goto _L6
+	          goto _L6*/
 	    }
 
 	public static AdvertiserConfig getCurAd() {
@@ -289,7 +292,9 @@ public class ExchangeDataService {
 
 	public static List getExampleAds(int i)
 	    {
-	        ArrayList arraylist = new ArrayList();
+		ArrayList arraylist = new ArrayList();
+		return arraylist;
+	       /* ArrayList arraylist = new ArrayList();
 	        i;
 	        JVM INSTR tableswitch 0 7: default 56
 	    //                   0 62
@@ -353,7 +358,7 @@ public class ExchangeDataService {
 	        int i2 = ExchangeConstants.appIcon[7];
 	        AdvertiserConfig advertiserconfig7 = new AdvertiserConfig(s21, s22, s23, 0x27100L, "1.1", i2);
 	        boolean flag7 = arraylist.add(advertiserconfig7);
-	        continue; /* Loop/switch isn't completed */
+	        continue;  Loop/switch isn't completed 
 	_L3:
 	        String s24 = ExchangeConstants.title[1];
 	        String s25 = ExchangeConstants.des[1];
@@ -403,7 +408,7 @@ public class ExchangeDataService {
 	        int i4 = ExchangeConstants.appIcon[3];
 	        AdvertiserConfig advertiserconfig15 = new AdvertiserConfig(s45, s46, s47, 0x27100L, "1.1", i4);
 	        boolean flag15 = arraylist.add(advertiserconfig15);
-	        continue; /* Loop/switch isn't completed */
+	        continue;  Loop/switch isn't completed 
 	_L4:
 	        String s48 = ExchangeConstants.title[2];
 	        String s49 = ExchangeConstants.des[2];
@@ -453,7 +458,7 @@ public class ExchangeDataService {
 	        int i6 = ExchangeConstants.appIcon[0];
 	        AdvertiserConfig advertiserconfig23 = new AdvertiserConfig(s69, s70, s71, 0x27100L, "1.1", i6);
 	        boolean flag23 = arraylist.add(advertiserconfig23);
-	        continue; /* Loop/switch isn't completed */
+	        continue;  Loop/switch isn't completed 
 	_L5:
 	        String s72 = ExchangeConstants.title[3];
 	        String s73 = ExchangeConstants.des[3];
@@ -503,7 +508,7 @@ public class ExchangeDataService {
 	        int i8 = ExchangeConstants.appIcon[7];
 	        AdvertiserConfig advertiserconfig31 = new AdvertiserConfig(s93, s94, s95, 0x27100L, "1.1", i8);
 	        boolean flag31 = arraylist.add(advertiserconfig31);
-	        continue; /* Loop/switch isn't completed */
+	        continue;  Loop/switch isn't completed 
 	_L6:
 	        String s96 = ExchangeConstants.title[4];
 	        String s97 = ExchangeConstants.des[4];
@@ -553,7 +558,7 @@ public class ExchangeDataService {
 	        int i10 = ExchangeConstants.appIcon[6];
 	        AdvertiserConfig advertiserconfig39 = new AdvertiserConfig(s117, s118, s119, 0x27100L, "1.1", i10);
 	        boolean flag39 = arraylist.add(advertiserconfig39);
-	        continue; /* Loop/switch isn't completed */
+	        continue;  Loop/switch isn't completed 
 	_L7:
 	        String s120 = ExchangeConstants.title[5];
 	        String s121 = ExchangeConstants.des[5];
@@ -603,7 +608,7 @@ public class ExchangeDataService {
 	        int i12 = ExchangeConstants.appIcon[4];
 	        AdvertiserConfig advertiserconfig47 = new AdvertiserConfig(s141, s142, s143, 0x27100L, "1.1", i12);
 	        boolean flag47 = arraylist.add(advertiserconfig47);
-	        continue; /* Loop/switch isn't completed */
+	        continue;  Loop/switch isn't completed 
 	_L8:
 	        String s144 = ExchangeConstants.title[6];
 	        String s145 = ExchangeConstants.des[6];
@@ -653,7 +658,7 @@ public class ExchangeDataService {
 	        int i14 = ExchangeConstants.appIcon[5];
 	        AdvertiserConfig advertiserconfig55 = new AdvertiserConfig(s165, s166, s167, 0x27100L, "1.1", i14);
 	        boolean flag55 = arraylist.add(advertiserconfig55);
-	        continue; /* Loop/switch isn't completed */
+	        continue;  Loop/switch isn't completed 
 	_L9:
 	        String s168 = ExchangeConstants.title[7];
 	        String s169 = ExchangeConstants.des[7];
@@ -704,7 +709,7 @@ public class ExchangeDataService {
 	        AdvertiserConfig advertiserconfig63 = new AdvertiserConfig(s189, s190, s191, 0x27100L, "1.1", i16);
 	        boolean flag63 = arraylist.add(advertiserconfig63);
 	        if(true) goto _L1; else goto _L10
-	_L10:
+	_L10:*/
 	    }
 
 	private static Location getLocationOnce(Context context1) {
@@ -713,7 +718,9 @@ public class ExchangeDataService {
 
 	private static JSONObject getReportInput(int i, int j, int k, List list)
 	    {
-	        JSONObject jsonobject = new JSONObject();
+		JSONObject jsonobject = new JSONObject();
+		return jsonobject;
+	        /*JSONObject jsonobject = new JSONObject();
 	        JSONObject jsonobject1 = jsonobject.put("page_level", j);
 	        JSONObject jsonobject2 = jsonobject.put("promotion_type", k);
 	        j = (TelephonyManager)context.getSystemService("phone");
@@ -782,12 +789,14 @@ public class ExchangeDataService {
 	            jsonobject16 = jsonobject11.put("action_index", i);
 	        jsonarray1 = jsonarray.put(jsonobject11);
 	        k++;
-	          goto _L8
+	          goto _L8*/
 	    }
 
 	private static JSONObject getRequestInput()
 	    {
-	        JSONObject jsonobject = new JSONObject();
+		JSONObject jsonobject = new JSONObject();
+		return jsonobject;
+	        /*JSONObject jsonobject = new JSONObject();
 	        TelephonyManager telephonymanager;
 	        String s = ExchangeConstants.keywords;
 	        JSONObject jsonobject1 = jsonobject.put("keywords", s);
@@ -929,7 +938,7 @@ public class ExchangeDataService {
 	          goto _L12
 	        JSONObject jsonobject27 = jsonobject.put("lat", 0D);
 	        JSONObject jsonobject28 = jsonobject.put("lng", 0D);
-	          goto _L13
+	          goto _L13*/
 	    }
 
 	public static boolean hasData() {
@@ -943,7 +952,8 @@ public class ExchangeDataService {
 
 	static int localLenth(String s)
 	    {
-	        int i;
+		return 0;
+	        /*int i;
 	        int j;
 	        i = 0;
 	        j = s.length() - 1;
@@ -953,7 +963,7 @@ public class ExchangeDataService {
 	            return i / 2;
 	        c = s.charAt(j);
 	        if((c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z'))
-	            break; /* Loop/switch isn't completed */
+	            break;  Loop/switch isn't completed 
 	        i++;
 	_L3:
 	        j--;
@@ -965,12 +975,13 @@ public class ExchangeDataService {
 	            i++;
 	          goto _L3
 	        if(true) goto _L2; else goto _L4
-	_L4:
+	_L4:*/
 	    }
 
 	public static int report(int i, int j, int k, List list)
 	    {
-	        String s1;
+		return 0;
+	        /*String s1;
 	        JSONObject jsonobject = getReportInput(i, j, k, list);
 	        String s = ExchangeConstants.REPORT_URL;
 	        s1 = Network.sendMessage(jsonobject, s);
@@ -989,16 +1000,16 @@ public class ExchangeDataService {
 	            byte0 = 1;
 	        else
 	            byte0 = 0;
-	        continue; /* Loop/switch isn't completed */
+	        continue;  Loop/switch isn't completed 
 	        printStackTrace();
 	        byte0 = -1;
 	        if(true) goto _L4; else goto _L3
-	_L3:
+	_L3:*/
 	    }
 
 	public static void request()
 	    {
-	        String s1;
+	        /*String s1;
 	        JSONObject jsonobject1;
 	        JSONObject jsonobject = getRequestInput();
 	        String s = ExchangeConstants.REQUEST_URL;
@@ -1015,7 +1026,7 @@ public class ExchangeDataService {
 	        return;
 	        printStackTrace();
 	        if(true) goto _L2; else goto _L1
-	_L1:
+	_L1:*/
 	    }
 
 	public static void requestDataAsyn(Context context1,
@@ -1032,7 +1043,8 @@ public class ExchangeDataService {
 
 	public static boolean rotate()
 	    {
-	        int k;
+		return true;
+	        /*int k;
 	        if(!hasData())
 	            break MISSING_BLOCK_LABEL_97;
 	        int i = curIndex + 1;
@@ -1062,7 +1074,7 @@ public class ExchangeDataService {
 	        k = j1 % k1;
 	          goto _L3
 	        flag = false;
-	          goto _L4
+	          goto _L4*/
 	    }
 
 	public static void setKeywords(String s) {
