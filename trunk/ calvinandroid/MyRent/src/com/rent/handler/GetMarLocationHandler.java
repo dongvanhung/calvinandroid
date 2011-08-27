@@ -23,9 +23,7 @@ public class GetMarLocationHandler extends Handler{
 	      GetMarsLocationListener localGetMarsLocationListener1 = this.mListener;
 	      double d1 = 0.0D;
 	      localGetMarsLocationListener1.marsLocationObtained(0.0D, d1, false);
-	    }
-	    while (true)
-	    {
+	    } else {
 	      try
 	      {
 	        String str = paramMessage.getData().getString("data");

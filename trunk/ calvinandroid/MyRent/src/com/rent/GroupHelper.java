@@ -1,5 +1,7 @@
 package com.rent;
 
+import com.rent.activitiy.MainActivity;
+
 import android.app.Activity;
 import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
@@ -29,29 +31,26 @@ public class GroupHelper {
 			int m = paramArrayOfGroupStub[i].getInactiveIconId();
 			GroupTab localGroupTab = new GroupTab(str, k, m);
 			paramGroupTabHost.addTab(localGroupTab);
-			paramGroupTabHost.setListener(new TabClickListener(i,
-					paramActivityGroup, paramLinearLayout,
-					paramArrayOfGroupStub[i]));
 		}
+		paramGroupTabHost.setListener(new TabClickListener(paramActivityGroup, paramLinearLayout,
+				paramArrayOfGroupStub));
 	}
 
 	final class TabClickListener implements GroupListener {
-		private int paramInt;
 		private ActivityGroup paramActivityGroup;
 		private LinearLayout paramLinearLayout;
-		private GroupStub subGroupStub;
+		private GroupStub[] subGroupStub;
 
-		public TabClickListener(int paramInt, ActivityGroup paramActivityGroup,
-				LinearLayout paramLinearLayout, GroupStub subGroupStub) {
-			this.paramInt = paramInt;
+		public TabClickListener(ActivityGroup paramActivityGroup,
+				LinearLayout paramLinearLayout, GroupStub[] paramArrayOfGroupStub) {
 			this.paramActivityGroup = paramActivityGroup;
 			this.paramLinearLayout = paramLinearLayout;
-			this.subGroupStub = subGroupStub;
+			this.subGroupStub = paramArrayOfGroupStub;
 		}
 
 		public void sendVisableId(int paramInt) {
 			paramLinearLayout.removeAllViews();
-			Class localClass = subGroupStub.getActivityClass();
+			Class localClass = subGroupStub[paramInt].getActivityClass();
 			Intent localIntent1 = new Intent(paramActivityGroup, localClass);// 131072
 			Intent localIntent2 = localIntent1
 					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -62,7 +61,7 @@ public class GroupHelper {
 					localIntent1);
 			View localView = localWindow.getDecorView();
 			paramLinearLayout.addView(localView, -1, -1);
-			// this.val$listener.setCurrentTabId(paramInt);
+			((MainActivity)paramActivityGroup).setCurrentTabId(paramInt);
 		}
 	}
 

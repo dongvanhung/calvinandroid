@@ -1,12 +1,15 @@
 package com.rent.adapter;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,18 +39,18 @@ public class ListSearchAdapter extends BaseAdapter {
 		GroupImageManager localGroupImageManager = new GroupImageManager();
 		this.mGroupSDCardManager = localGroupImageManager;
 		this.mContext = paramContext;
-		String str1 = this.mContext.getString(2131361823);
+		String str1 = this.mContext.getString(R.string.yuan_two_unit);
 		this.mPriceUnitSrt = str1;
-		String str2 = this.mContext.getString(2131361825);
+		String str2 = this.mContext.getString(R.string.unavailable2);
 		this.mNoPricePrompt = str2;
 		this.activity = activity;
 	}
 
 	public int getCount() {
-		if (this.mIsEnd)
-			;
-		for (int i = this.mCount;; i = this.mCount + 1)
-			return i;
+		if (this.mIsEnd) {
+			return this.mCount;
+		}
+		return 0;
 	}
 
 	public Object getItem(int paramInt) {
@@ -64,43 +67,49 @@ public class ListSearchAdapter extends BaseAdapter {
 		View localObject1 = localView.findViewById(R.id.list_layout);
 		View localObject2 = localView.findViewById(R.id.result_load_more_text);
 		long l = 0;
-		if (this.mCount > paramInt) {
-			localObject1.setVisibility(0);
-			localObject2.setVisibility(8);
-			l = ((Community) this.mCommList.get(paramInt)).mGroupId;
-			localObject1 = (ImageView) localView
-					.findViewById(R.id.search_list_image);
-			new ListSearchAdapterThread(
-					this, paramInt, (ImageView) localObject1).start();
-		}
 		try {
-			GroupImageManager localGroupImageManager1 = this.mGroupSDCardManager;
-			String str1 = l + ".png";
-			if (localGroupImageManager1.getBitmap(str1) == null)
-				return null;
-			GroupImageManager localGroupImageManager2 = this.mGroupSDCardManager;
-			String str2 = l + ".png";
-			Bitmap localBitmap = localGroupImageManager2.getBitmap(str2);
-			((ImageView) localObject1).setImageBitmap(localBitmap);
-			TextView localTextView1 = (TextView) localView
-					.findViewById(R.id.cell_title);
-			String str3 = ((Community) this.mCommList.get(paramInt)).mName;
-			localTextView1.setText(str3);
-			TextView localTextView2 = (TextView) localView
-					.findViewById(R.id.cell_sourcecount);
-			StringBuilder localStringBuilder1 = new StringBuilder().append("(");
-			int i = ((Community) this.mCommList.get(paramInt)).mSourceCount;
-			String str4 = i + ")";
-			localTextView2.setText(str4);
-			localObject1 = (TextView) localView.findViewById(R.id.cell_price);
-			/*if (((Community) this.mCommList.get(paramInt)).mPrice > 0) //TODO:
-				return null;*/
-			String str5 = this.mNoPricePrompt;
-			((TextView) localObject1).setText(str5);
-			TextView localTextView3 = (TextView) localView
-					.findViewById(R.id.cell_address);
-			String str6 = ((Community) this.mCommList.get(paramInt)).mAddress;
-			localTextView3.setText(str6);
+			if (this.mCount > paramInt) {
+				localObject1.setVisibility(0);
+				localObject2.setVisibility(8);
+				l = ((Community) this.mCommList.get(paramInt)).mGroupId;
+				localObject1 = (ImageView) localView
+						.findViewById(R.id.search_list_image);
+				ListSearchAdapterThread adapterThread = new ListSearchAdapterThread(
+						this, paramInt, (ImageView) localObject1);
+				FutureTask<String> task = new FutureTask<String>(adapterThread);
+				new Thread(task).start();
+				
+				if(task.get().equals("success")) {
+					GroupImageManager localGroupImageManager1 = this.mGroupSDCardManager;
+					String str1 = l + ".png";
+					if (localGroupImageManager1.getBitmap(str1) == null){}
+					GroupImageManager localGroupImageManager2 = this.mGroupSDCardManager;
+					String str2 = l + ".png";
+					Bitmap localBitmap = localGroupImageManager2.getBitmap(str2);
+					((ImageView) localObject1).setImageBitmap(localBitmap);
+					TextView localTextView1 = (TextView) localView
+							.findViewById(R.id.cell_title);
+					String str3 = ((Community) this.mCommList.get(paramInt)).mName;
+					localTextView1.setText(str3);
+					TextView localTextView2 = (TextView) localView
+							.findViewById(R.id.cell_sourcecount);
+					StringBuilder localStringBuilder1 = new StringBuilder().append("(");
+					int i = ((Community) this.mCommList.get(paramInt)).mSourceCount;
+					String str4 = i + ")";
+					localTextView2.setText(str4);
+					localObject1 = (TextView) localView.findViewById(R.id.cell_price);
+					/*
+					 * if (((Community) this.mCommList.get(paramInt)).mPrice > 0)
+					 * //TODO: return null;
+					 */
+					String str5 = this.mNoPricePrompt;
+					((TextView) localObject1).setText(str5);
+					TextView localTextView3 = (TextView) localView
+							.findViewById(R.id.cell_address);
+					String str6 = ((Community) this.mCommList.get(paramInt)).mAddress;
+					localTextView3.setText(str6);
+				}
+			}
 		} catch (Exception localException) {
 			StringBuilder localStringBuilder2 = new StringBuilder();
 			int j = ((Community) this.mCommList.get(paramInt)).mPrice;
@@ -117,15 +126,8 @@ public class ListSearchAdapter extends BaseAdapter {
 		int i = paramArrayList.size();
 		this.mCount = i;
 		this.mCommList.clear();
-		int j = 0;
-		while (true) {
-			int k = this.mCount;
-			if (j >= k)
-				break;
-			ArrayList localArrayList = this.mCommList;
-			Object localObject = paramArrayList.get(j);
-			boolean bool = localArrayList.add(localObject);
-			j += 1;
+		for (int k = 0; k < paramArrayList.size(); k++) {
+			this.mCommList.add(paramArrayList.get(k));
 		}
 	}
 
@@ -133,7 +135,7 @@ public class ListSearchAdapter extends BaseAdapter {
 		this.mIsEnd = paramBoolean;
 	}
 
-	final class ListSearchAdapterThread extends Thread {
+	final class ListSearchAdapterThread implements Callable<String> {
 		private int paramInt;
 		private ImageView imageView;
 		private ListSearchAdapter adapter;
@@ -146,36 +148,45 @@ public class ListSearchAdapter extends BaseAdapter {
 			this.imageView = imageView;
 		}
 
-		public void run() {
+		public String call() throws Exception {
 			Looper.prepare();// TODO
 			try {
 				ArrayList localArrayList1 = adapter.mCommList;
-				for (int i = 0; i < localArrayList1.size(); i++) {
-					byte[] arrayOfByte = Rent
-							.downLoadImage(((Community) localArrayList1.get(i)).mImage);
-					Bitmap localBitmap1 = BitmapFactory.decodeByteArray(
-							arrayOfByte, 0, arrayOfByte.length);
+				/*for (int i = 0; i < localArrayList1.size(); i++) {
+					if (((Community) localArrayList1.get(i)).mImage
+							.indexOf("http") == -1)
+						continue;*/
+
+					Bitmap localBitmap1 = Rent
+							.downLoadImage(((Community) localArrayList1.get(paramInt)).mImage, mGroupSDCardManager, ((Community) localArrayList1.get(paramInt)).mGroupId);
 					int k = imageView.getWidth();
-					int m = imageView.getHeight();
-					localBitmap2 = Bitmap.createScaledBitmap(localBitmap1, k,
-							m, true);
-					activity.runOnUiThread(new Runnable() {
-						public void run() {
-							ImageView localImageView = imageView;
-							localImageView.setImageBitmap(localBitmap2);
-						}
-					});
-					StringBuilder localStringBuilder = new StringBuilder();
-					long l = ((Community) localArrayList1.get(i)).mGroupId;
-					String str = l + ".png";
-					boolean bool = mGroupSDCardManager.saveBitmap(localBitmap1,
-							str);
-				}
+					int m = imageView.getHeight(); // TODO: here can not get the
+													// width and height
+					if(localBitmap1 != null) {
+						int k1 = localBitmap1.getWidth();
+						int m1 = localBitmap1.getHeight();
+						localBitmap2 = Bitmap.createScaledBitmap(localBitmap1, k1,
+								m1, true);
+						activity.runOnUiThread(new Runnable() {
+							public void run() {
+								ImageView localImageView = imageView;
+								localImageView.setImageBitmap(localBitmap2);
+							}
+						});
+						StringBuilder localStringBuilder = new StringBuilder();
+						long l = ((Community) localArrayList1.get(paramInt)).mGroupId;
+						String str = l + ".png";
+						boolean bool = mGroupSDCardManager.saveBitmap(localBitmap1,
+								str);
+					}
+//				}
 			} catch (Exception localException) {
-				localException.printStackTrace();
+				Log.e("error", localException.getCause().getMessage());
+				return "fail";
 			} finally {
 				Looper.myLooper().quit();
 			}
+			return "success";
 		}
 	}
 

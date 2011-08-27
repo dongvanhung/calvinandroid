@@ -22,7 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rent.HouseFilter;
-import com.rent.MobclickAgent;
 import com.rent.PreferenceUtils;
 import com.rent.R;
 import com.rent.Rent;
@@ -43,7 +42,8 @@ import com.rent.thread.AddressToLocationThread;
 import com.rent.thread.GetMarsLocationThread;
 import com.rent.thread.SearchThread;
 
-public class SearchInListActivity extends Activity implements SearchHandlerListener, MyLocationListener{
+public class SearchInListActivity extends Activity implements
+		SearchHandlerListener, MyLocationListener {
 
 	protected String mAddressName;
 	protected ArrayList<Community> mCommList;
@@ -124,11 +124,11 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 		public void addressObtained(String paramString) {
 			mAddressName = paramString;
 			updateUI(1);
-			/*
-			 * SearchInListActivity.access$1000(this.this$0);
-			 * SearchInListActivity.access$1100(this.this$0).setSelection(0);
-			 * SearchInListActivity.access$400(this.this$0);
-			 */
+			
+//			 SearchInListActivity.access$1000(this.this$0);
+			 SearchInListActivity.this.mListView.setSelection(0);
+//			 * SearchInListActivity.access$400(this.this$0);
+			 
 		}
 	}
 
@@ -157,182 +157,185 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 				localHouseFilter, 65535L, null, false, str2).start();
 	}
 
-	public void init()
-	  {
-	    setContentView(R.layout.listsearch_view);
-	    Context localContext = this.mContext;
-	    ListSearchAdapter localListSearchAdapter1 = new ListSearchAdapter(localContext, this);
-	    this.mSearchAdapter = localListSearchAdapter1;
-	    ListView localListView1 = (ListView)findViewById(R.id.listsearch_list);
-	    this.mListView = localListView1;
-	    ListView localListView2 = this.mListView;
-	    ListSearchAdapter localListSearchAdapter2 = this.mSearchAdapter;
-	    localListView2.setAdapter(localListSearchAdapter2);
-	    ListView localListView3 = this.mListView;
-	    localListView3.setOnItemClickListener(new OnItemClickListener() {
-	    	public void onItemClick(AdapterView<?> paramAdapterView, View paramView, int paramInt, long paramLong)
-	    	  {
-	    	      if(mCommList != null && mCommList.size() > paramInt)
-	    	      {
-	    	        Intent localIntent1 = new Intent(mContext, ResultActivity.class);
-	    	        Bundle localBundle = new Bundle();
-	    	        localBundle.putInt("searchformat", 0);
-	    	        String str1 = ((Community)mCommList.get(paramInt)).mName;
-	    	        localBundle.putString("keyword", str1);
-	    	        long l = ((Community)mCommList.get(paramInt)).mGroupId;
-	    	        localBundle.putLong("group_id", l);
-	    	        String str2 = ((Community)mCommList.get(paramInt)).mCity;
-	    	        localBundle.putString("city", str2);
-	    	        int j = ((Community)mCommList.get(paramInt)).mPrice;
-	    	        localBundle.putInt("price", j);
-	    	        int k = ((Community)mCommList.get(paramInt)).mSourceCount;
-	    	        localBundle.putInt("sourcecoount", k);
-	    	        double d1 = ((Community)mCommList.get(paramInt)).mLat;
-	    	        localBundle.putDouble("latitude", d1);
-	    	        double d2 = ((Community)mCommList.get(paramInt)).mLon;
-	    	        localBundle.putDouble("longitude", d2);
-	    	        Intent localIntent2 = localIntent1.putExtras(localBundle);
-	    	        mContext.startActivity(localIntent1);
-	    	      }
-	    	  }
-	    });
-	    ListView localListView4 = this.mListView;
-	    localListView4.setOnScrollListener(new OnScrollListener(){
-	    	public void onScroll(AbsListView paramAbsListView, int paramInt1, int paramInt2, int paramInt3)
-	    	  {
-	    	    /*if (!SearchInListActivity.access$100(this.this$0))
-	    	      boolean bool1 = SearchInListActivity.access$202(this.this$0, 0);
-	    	    if ((!SearchInListActivity.access$300(this.this$0)) && (paramInt3 > 0) && (!SearchInListActivity.access$200(this.this$0)))
-	    	    {
-	    	      int i = paramInt1 + paramInt2;
-	    	      if (paramInt3 == i)
-	    	      {
-	    	        mTopNotifyBar.setText(2131361848);
-	    	        SearchInListActivity.access$400(this.this$0);
-	    	      }
-	    	    } else {
-	    	      boolean bool2 = SearchInListActivity.access$102(this.this$0, 1);
-	    	    }*/
-	    	  }
+	public void init() {
+		setContentView(R.layout.listsearch_view);
+		Context localContext = this.mContext;
+		ListSearchAdapter localListSearchAdapter1 = new ListSearchAdapter(
+				localContext, this);
+		this.mSearchAdapter = localListSearchAdapter1;
+		ListView localListView1 = (ListView) findViewById(R.id.listsearch_list);
+		this.mListView = localListView1;
+		ListView localListView2 = this.mListView;
+		ListSearchAdapter localListSearchAdapter2 = this.mSearchAdapter;
+		localListView2.setAdapter(localListSearchAdapter2);
+		ListView localListView3 = this.mListView;
+		localListView3.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> paramAdapterView,
+					View paramView, int paramInt, long paramLong) {
+				if (mCommList != null && mCommList.size() > paramInt) {
+					Intent localIntent1 = new Intent(mContext,
+							ResultActivity.class);
+					Bundle localBundle = new Bundle();
+					localBundle.putInt("searchformat", 0);
+					String str1 = ((Community) mCommList.get(paramInt)).mName;
+					localBundle.putString("keyword", str1);
+					long l = ((Community) mCommList.get(paramInt)).mGroupId;
+					localBundle.putLong("group_id", l);
+					String str2 = ((Community) mCommList.get(paramInt)).mCity;
+					localBundle.putString("city", str2);
+					int j = ((Community) mCommList.get(paramInt)).mPrice;
+					localBundle.putInt("price", j);
+					int k = ((Community) mCommList.get(paramInt)).mSourceCount;
+					localBundle.putInt("sourcecoount", k);
+					double d1 = ((Community) mCommList.get(paramInt)).mLat;
+					localBundle.putDouble("latitude", d1);
+					double d2 = ((Community) mCommList.get(paramInt)).mLon;
+					localBundle.putDouble("longitude", d2);
+					Intent localIntent2 = localIntent1.putExtras(localBundle);
+					mContext.startActivity(localIntent1);
+				}
+			}
+		});
+		ListView localListView4 = this.mListView;
+		localListView4.setOnScrollListener(new OnScrollListener() {
+			public void onScroll(AbsListView paramAbsListView, int paramInt1,
+					int paramInt2, int paramInt3) {
+				/*if (!SearchInListActivity.access$100(this.this$0))
+				      boolean bool1 = SearchInListActivity.access$202(this.this$0, 0);
+				    if ((!SearchInListActivity.access$300(this.this$0)) && (paramInt3 > 0) && (!SearchInListActivity.access$200(this.this$0)))
+				    {*/
+				if(paramInt3 > 0) {
+				      int i = paramInt1 + paramInt2;
+				      if (paramInt3 == i)
+				      {
+				        SearchInListActivity.this.mTopNotifyBar.setText(R.string.is_loading);
+//				        SearchInListActivity.access$400(this.this$0);
+				      }
+				    }/* else {
+				      boolean bool2 = SearchInListActivity.access$102(this.this$0, 1);
+				    }*/
+			}
 
-	    	  public void onScrollStateChanged(AbsListView paramAbsListView, int paramInt)
-	    	  {
-	    	  }
-	    });
-	    //SearchHandlerListener
-	    SearchHandler localSearchHandler = new SearchHandler(this);
-	    this.mListSearchHandler = localSearchHandler;
-	    TextView localTextView1 = (TextView)findViewById(R.id.recent_view_topnotifybar);
-	    this.mTopNotifyBar = localTextView1;
-	    this.mTopNotifyBar.setVisibility(8);
-	    TextView localTextView2 = this.mTopNotifyBar;
-	    localTextView2.setOnClickListener(new OnClickListener() {
-	    	public void onClick(View paramView)
-	    	  {
-	    	    /*if (SearchInListActivity.access$500(this.this$0))
-	    	    {*/
-	    	      TextView localTextView = mTopNotifyBar;
-	    	      String str = mContext.getString(R.string.info_is_gethouse);
-	    	      localTextView.setText(str);
-	    	      //SearchInListActivity.access$400(this.this$0);
-	    	     // boolean bool = SearchInListActivity.access$502(this.this$0, 0);
-	    	   // }
-	    	  }
+			public void onScrollStateChanged(AbsListView paramAbsListView,
+					int paramInt) {
+			}
 		});
-	    TextView localTextView3 = (TextView)findViewById(R.id.fiter_show);
-	    this.mFiterShow = localTextView3;
-	    this.mFiterShow.setTextSize(15.0F);
-	    ImageView localImageView1 = (ImageView)findViewById(R.id.locate_my);
-	    this.mLocate = localImageView1;
-	    ImageView localImageView2 = this.mLocate;
-	    localImageView2.setOnClickListener(new OnClickListener() {
-	    	public void onClick(View paramView)
-	    	  {
-	    	    mInputLocation.setText("");
-	    	    mQ = null;
-	    	    //boolean bool = SearchInListActivity.access$602(this.this$0, 1);
-	    	    //refreshByLocation(1);
-	    	    //MobclickAgent.onEvent(this.this$0, "locateself");
-	    	  }
+		// SearchHandlerListener
+		SearchHandler localSearchHandler = new SearchHandler(this);
+		this.mListSearchHandler = localSearchHandler;
+		TextView localTextView1 = (TextView) findViewById(R.id.recent_view_topnotifybar);
+		this.mTopNotifyBar = localTextView1;
+		this.mTopNotifyBar.setVisibility(8);
+		TextView localTextView2 = this.mTopNotifyBar;
+		localTextView2.setOnClickListener(new OnClickListener() {
+			public void onClick(View paramView) {
+				/*
+				 * if (SearchInListActivity.access$500(this.this$0)) {
+				 */
+				TextView localTextView = mTopNotifyBar;
+				String str = mContext.getString(R.string.info_is_gethouse);
+				localTextView.setText(str);
+				// SearchInListActivity.access$400(this.this$0);
+				// boolean bool = SearchInListActivity.access$502(this.this$0,
+				// 0);
+				// }
+			}
 		});
-	    ImageView localImageView3 = (ImageView)findViewById(R.id.record_cordition);
-	    this.mRecordCondition = localImageView3;
-	    ImageView localImageView4 = this.mRecordCondition;
-	    localImageView4.setOnClickListener(new OnClickListener() {
-	    	public void onClick(View paramView)
-	    	  {
-	    	   // MobclickAgent.onEvent(this.this$0, "addsearchhistory");
-	    	    SharedPreferences localSharedPreferences = mContext.getSharedPreferences("rent_setting", 0);
-	    	    int i = localSharedPreferences.getInt("zoom_value", 16);
-	    	    String str = mInputLocation.getText().toString();
-	    	    Rent.addSearchHistory(mContext, i, str);
-	    	  }
+		TextView localTextView3 = (TextView) findViewById(R.id.fiter_show);
+		this.mFiterShow = localTextView3;
+		this.mFiterShow.setTextSize(15.0F);
+		ImageView localImageView1 = (ImageView) findViewById(R.id.locate_my);
+		this.mLocate = localImageView1;
+		ImageView localImageView2 = this.mLocate;
+		localImageView2.setOnClickListener(new OnClickListener() {
+			public void onClick(View paramView) {
+				mInputLocation.setText("");
+				mQ = null;
+				// boolean bool = SearchInListActivity.access$602(this.this$0,
+				// 1);
+				refreshByLocation(true);
+				// MobclickAgent.onEvent(this.this$0, "locateself");
+			}
 		});
-	    RelativeLayout localRelativeLayout1 = (RelativeLayout)findViewById(R.id.go_filter);
-	    this.mGoFilter = localRelativeLayout1;
-	    RelativeLayout localRelativeLayout2 = this.mGoFilter;
-	    localRelativeLayout2.setOnClickListener(new OnClickListener() {
-	    	public void onClick(View paramView)
-	    	  {
-	    	  //  MobclickAgent.onEvent(this.this$0.mContext, "filterclick");
-	    	    Intent localIntent = new Intent(mContext, FilterActivity.class);
-	    	    startActivity(localIntent);
-	    	  }
+		ImageView localImageView3 = (ImageView) findViewById(R.id.record_cordition);
+		this.mRecordCondition = localImageView3;
+		ImageView localImageView4 = this.mRecordCondition;
+		localImageView4.setOnClickListener(new OnClickListener() {
+			public void onClick(View paramView) {
+				// MobclickAgent.onEvent(this.this$0, "addsearchhistory");
+				SharedPreferences localSharedPreferences = mContext
+						.getSharedPreferences("rent_setting", 0);
+				int i = localSharedPreferences.getInt("zoom_value", 16);
+				String str = mInputLocation.getText().toString();
+				Rent.addSearchHistory(mContext, i, str);
+			}
 		});
-	    ImageView localImageView5 = (ImageView)findViewById(R.id.goto_other_imageview);
-	    this.mGotoOtherView = localImageView5;
-	    if (Rent.isAvailableGoogleMap())
-	    {
-	      this.mGotoOtherView.setImageResource(R.drawable.map_icon);
-	      ImageView localImageView6 = this.mGotoOtherView;
-	      localImageView6.setOnClickListener(new OnClickListener() {
-	    	  public void onClick(View paramView)
-	    	  {
-	    	    if (mContext != null) {
-	    	      PreferenceUtils.setRefreshStatus(mContext, 0);
-	    	    } else {
-	    	      //boolean bool1 = SearchInListActivity.access$602(this.this$0, 0);
-	    	      //boolean bool2 = SearchInListActivity.access$702(this.this$0, 1);
-	    	      //MobclickAgent.onEvent(this.this$0, "viewtype", "map");
-	    	      ((SearchActivity)mSearchContext).changeActivtiy(0);
-	    	      /*if ((!SearchInListActivity.access$800(this.this$0)) && (SearchInListActivity.access$600(this.this$0)))
-	    	      {
-	    	        PreferenceUtils.setRefreshStatus(this.this$0, 4);
-	    	        continue;
-	    	      }
-	    	      if ((SearchInListActivity.access$800(this.this$0)) && (SearchInListActivity.access$600(this.this$0)))
-	    	      {
-	    	        PreferenceUtils.setRefreshStatus(this.this$0, 5);
-	    	        continue;
-	    	      }*/
-	    	      PreferenceUtils.setRefreshStatus(mContext, 2);
-	    	  }
-	    	  }
+		RelativeLayout localRelativeLayout1 = (RelativeLayout) findViewById(R.id.go_filter);
+		this.mGoFilter = localRelativeLayout1;
+		RelativeLayout localRelativeLayout2 = this.mGoFilter;
+		localRelativeLayout2.setOnClickListener(new OnClickListener() {
+			public void onClick(View paramView) {
+				// MobclickAgent.onEvent(this.this$0.mContext, "filterclick");
+				Intent localIntent = new Intent(mContext, FilterActivity.class);
+				startActivity(localIntent);
+			}
 		});
-	      EditText localEditText1 = (EditText)findViewById(R.id.search_edittext);
-	      this.mInputLocation = localEditText1;
-	      this.mInputLocation.setCursorVisible(false);
-	      this.mInputLocation.setInputType(0);
-	      EditText localEditText2 = this.mInputLocation;
-	      localEditText2.setOnClickListener(new OnClickListener() {
-	    	  public void onClick(View paramView)
-	    	  {
-	    	    Intent localIntent = new Intent(mContext, SelectActivity.class);
-	    	    startActivity(localIntent);
-	    	  }
-		});
-	      if (Rent.isAvailableNetwork(this))
-	      updateUI(5);
-	    }
-	    while (true)
-	    {
-	      this.mGotoOtherView.setImageResource(R.drawable.go_list);
-	      updateUI(1);
-	      String str = getSharedPreferences("location_point", 0).getString("name", "");
-	      this.mAddressName = str;
-	      startSearchThread();
-	    }
-	  }
+		ImageView localImageView5 = (ImageView) findViewById(R.id.goto_other_imageview);
+		this.mGotoOtherView = localImageView5;
+		if (Rent.isAvailableGoogleMap()) {
+			this.mGotoOtherView.setImageResource(R.drawable.map_icon);
+			ImageView localImageView6 = this.mGotoOtherView;
+			localImageView6.setOnClickListener(new OnClickListener() {
+				public void onClick(View paramView) {
+					if (mContext != null) {
+						PreferenceUtils.setRefreshStatus(mContext, 0);
+						((SearchActivity) mSearchContext).changeActivtiy(0);
+					} else {
+						// boolean bool1 =
+						// SearchInListActivity.access$602(this.this$0, 0);
+						// boolean bool2 =
+						// SearchInListActivity.access$702(this.this$0, 1);
+						// MobclickAgent.onEvent(this.this$0, "viewtype",
+						// "map");
+						
+						
+//						 if ((!SearchInListActivity.access$800(this.this$0))
+//						 && (SearchInListActivity.access$600(this.this$0))) {
+//						 PreferenceUtils.setRefreshStatus(SearchInListActivity.this, 4);
+//						 * continue; } if
+//						 * ((SearchInListActivity.access$800(this.this$0)) &&
+//						 * (SearchInListActivity.access$600(this.this$0))) {
+//						 PreferenceUtils.setRefreshStatus(SearchInListActivity.this, 5);
+//						 * continue; }
+						 
+						//TODO: IF Elseif ELSE
+						PreferenceUtils.setRefreshStatus(mContext, 2);
+					}
+				}
+			});
+			EditText localEditText1 = (EditText) findViewById(R.id.search_edittext);
+			this.mInputLocation = localEditText1;
+			this.mInputLocation.setCursorVisible(false);
+			this.mInputLocation.setInputType(0);
+			EditText localEditText2 = this.mInputLocation;
+			localEditText2.setOnClickListener(new OnClickListener() {
+				public void onClick(View paramView) {
+					Intent localIntent = new Intent(mContext,
+							SelectActivity.class);
+					startActivity(localIntent);
+				}
+			});
+			if (Rent.isAvailableNetwork(this))
+				updateUI(5);
+		} else {
+			this.mGotoOtherView.setImageResource(R.drawable.go_list);
+		}
+		updateUI(1);
+		String str = getSharedPreferences("location_point", 0).getString(
+				"name", "");
+		this.mAddressName = str;
+		startSearchThread();
+	}
 
 	protected void onCreate(Bundle paramBundle) {
 		super.onCreate(paramBundle);
@@ -344,58 +347,51 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 		return false;
 	}
 
-	public void onLocationChanged(double paramDouble1, double paramDouble2, boolean paramBoolean)
-	  {
-	    if (!this.mHasLocated)
-	    {
-	      this.mHasLocated = true;
-	      this.mIsMyLocation = true;
-	      this.mInputLocation.setText("");
-	      this.mQ = null;
-	      Context localContext = getApplicationContext();
-	      SearchInListActivity11 local11 = new SearchInListActivity11(this);
-	      GetMarLocationHandler localGetMarLocationHandler = new GetMarLocationHandler(local11);
-	      String str = Rent.getVersionName(getApplicationContext());
-	      double d1 = paramDouble1;
-	      double d2 = paramDouble2;
-	      new GetMarsLocationThread(localContext, localGetMarLocationHandler, d1, d2, str, "rent").start();
-	    }
-	  }
-
-	final class SearchInListActivity11 implements GetMarsLocationListener
-	{
-		private SearchInListActivity activity;
-		public SearchInListActivity11(SearchInListActivity activity) {
-			this.activity = activity;
+	public void onLocationChanged(double paramDouble1, double paramDouble2,
+			boolean paramBoolean) {
+		if (!this.mHasLocated) {
+			this.mHasLocated = true;
+			this.mIsMyLocation = true;
+			this.mInputLocation.setText("");
+			this.mQ = null;
+			Context localContext = getApplicationContext();
+			SearchInListActivity11 local11 = new SearchInListActivity11();
+			GetMarLocationHandler localGetMarLocationHandler = new GetMarLocationHandler(
+					local11);
+			String str = Rent.getVersionName(getApplicationContext());
+			double d1 = paramDouble1;
+			double d2 = paramDouble2;
+			new GetMarsLocationThread(localContext, localGetMarLocationHandler,
+					d1, d2, str, "rent").start();
 		}
-	  public void marsLocationObtained(double paramDouble1, double paramDouble2, boolean paramBoolean)
-	  {
-	    if (paramBoolean != false)
-	    {
-	      double d1 = paramDouble1;
-	      double d2 = paramDouble2;
-	      activity.runOnUiThread(new Runnable(){
-	    	  public void run()
-	    	  {
-	    	    /*double d1 = this.val$fLat;
-	    	    double d2 = this.val$fLon;
-	    	    SearchInListActivity.access$900(localSearchInListActivity, d1, d2);*/
-	    	  }
-	      });
-	    }
-	  }
 	}
-	
+
+	final class SearchInListActivity11 implements GetMarsLocationListener {
+		public void marsLocationObtained(double paramDouble1,
+				double paramDouble2, boolean paramBoolean) {
+			if (paramBoolean != false) {
+				final double d1 = paramDouble1;
+				final double d2 = paramDouble2;
+				SearchInListActivity.this.runOnUiThread(new Runnable() {
+					public void run() {
+						SearchInListActivity.this.refreshByLocation(d1, d2);
+					}
+				});
+			}
+		}
+	}
+
 	protected void onPause() {
 		super.onPause();
 		MyLocationManager.getInstance(getApplicationContext())
 				.stopLocationManager();
-		//MobclickAgent.onPause(this);
+		// MobclickAgent.onPause(this);
 	}
 
 	protected void onResume() {
+		super.onResume();
 		int i;
-		if (!this.mIsInit)
+		if (!this.mIsInit) {
 			if (PreferenceUtils.getShowKeyword(this)) {
 				EditText localEditText1 = this.mInputLocation;
 				String str1 = PreferenceUtils.getCurrentKeyWord(this);
@@ -417,41 +413,40 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 					case 5:
 					}
 				}
+			} else {
+				this.mIsInit = false;
+				super.onResume();
+				// MobclickAgent.onResume(this);
+				this.mInputLocation.setText("");
+				this.mQ = null;
+				this.mInputLocation.setText("");
+				this.mQ = null;
+				refreshByLocation(true);
+				this.mNeedRefreshOtherView = true;
+				if (!this.mHasLocated) {
+					PreferenceUtils.setInit(this);
+					this.mHasLocated = true;
+					this.mIsMyLocation = false;
+					MyLocationManager.getInstance(getApplicationContext())
+							.stopLocation();
+				}
+				String str3 = PreferenceUtils.getCurrentKeyWord(this);
+				this.mQ = str3;
+				EditText localEditText2 = this.mInputLocation;
+				String str4 = PreferenceUtils.getCurrentKeyWord(this);
+				localEditText2.setText(str4);
+				StringBuilder localStringBuilder1 = new StringBuilder();
+				String str5 = PreferenceUtils.getCurrentCityName(this);
+				StringBuilder localStringBuilder2 = localStringBuilder1
+						.append(str5);
+				String str6 = PreferenceUtils.getCurrentKeyWord(this);
+				String str7 = str6;
+				refreshByAddress(str7);
+				this.mNeedRefreshOtherView = true;
+				refreshByLocation(false);
+				this.mIsMyLocation = true;
+				refreshByLocation(false);
 			}
-		while (true) {
-			this.mIsInit = false;
-			super.onResume();
-			//MobclickAgent.onResume(this);
-			this.mInputLocation.setText("");
-			this.mQ = null;
-			this.mInputLocation.setText("");
-			this.mQ = null;
-			refreshByLocation(true);
-			refreshByLocation(false);
-			this.mNeedRefreshOtherView = true;
-			if (!this.mHasLocated) {
-				PreferenceUtils.setInit(this);
-				this.mHasLocated = true;
-				this.mIsMyLocation = false;
-				MyLocationManager.getInstance(getApplicationContext())
-						.stopLocation();
-			}
-			String str3 = PreferenceUtils.getCurrentKeyWord(this);
-			this.mQ = str3;
-			EditText localEditText2 = this.mInputLocation;
-			String str4 = PreferenceUtils.getCurrentKeyWord(this);
-			localEditText2.setText(str4);
-			StringBuilder localStringBuilder1 = new StringBuilder();
-			String str5 = PreferenceUtils.getCurrentCityName(this);
-			StringBuilder localStringBuilder2 = localStringBuilder1
-					.append(str5);
-			String str6 = PreferenceUtils.getCurrentKeyWord(this);
-			String str7 = str6;
-			refreshByAddress(str7);
-			this.mNeedRefreshOtherView = true;
-			refreshByLocation(false);
-			this.mIsMyLocation = true;
-			refreshByLocation(false);
 		}
 	}
 
@@ -460,14 +455,15 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 		if (true == paramBoolean) {
 			int i = this.mListSearchHandler.mTotalNumber;
 			this.mCommunityNumber = i;
-			int j = this.mOffset;
+			int j = paramSearchHandler.mOffset;
 			int k = this.mListSearchHandler.getCommList().size();
-			if (j == k) {
+//			if (j == k) {
 				this.mSearchAdapter.setIsEnd(true);
 				this.mIsEnd = true;
 				this.mIsLoading = false;
 				TextView localTextView = this.mTopNotifyBar;
-				String str1 = this.mContext.getString(R.string.topnotifybar_info_search_view2);
+				String str1 = this.mContext
+						.getString(R.string.topnotifybar_info_search_view2);
 				Object[] arrayOfObject = new Object[2];
 				String str2 = this.mAddressName;
 				arrayOfObject[0] = str2;
@@ -475,13 +471,12 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 				arrayOfObject[1] = localInteger;
 				String str3 = String.format(str1, arrayOfObject);
 				localTextView.setText(str3);
-			}
-		}
-		while (true) {
-			ListSearchAdapter localListSearchAdapter = this.mSearchAdapter;
-			ArrayList localArrayList = this.mListSearchHandler.getCommList();
-			localListSearchAdapter.refresh(localArrayList);
-			this.mSearchAdapter.notifyDataSetChanged();
+				ListSearchAdapter localListSearchAdapter = this.mSearchAdapter;
+				ArrayList localArrayList = this.mListSearchHandler.getCommList();
+				localListSearchAdapter.refresh(localArrayList);
+				this.mSearchAdapter.notifyDataSetChanged();
+//			}
+		} else {
 			int m = this.mListSearchHandler.getCommList().size();
 			this.mOffset = m;
 			this.mSearchAdapter.setIsEnd(false);
@@ -493,44 +488,44 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 		}
 	}
 
-	public void refreshByLocation(boolean paramBoolean)
-	  {
-	    if (!Rent.isAvailableNetwork(this)) {
-	      updateUI(5);
-	    } else {
-	    	
-	        try
-	        {
-	          this.mIsMyLocation = false;
-	          if (!paramBoolean)
-	            return;
-	          Rent.checkNetProvider(getParent());
-	          updateUI(0);
-	          MyLocationManager.getInstance(getApplicationContext()).registerListener(this);
-	          this.mHasLocated = false;
-	          clearList();
-	        }
-	        catch (Exception localException)
-	        {
-	          String str2 = localException.toString();
-	          int k = Log.e("MainActivity.getCurrentGeoPoint()", str2);
-	        }
-	        String str1 = PreferenceUtils.getCurrentCityName(this);
-	        if ((str1 == null) || (str1.length() == 0))
-	        {
-	        	
-	        } else {
-		        updateUI(1);
-		        int j = 0;
-	        }
-	      }
-	      label117: updateUI(1);
-	      String str3 = getSharedPreferences("location_point", 0).getString("name", "");
-	      this.mAddressName = str3;
-	      clearList();
-	      this.mListView.setSelection(0);
-	      startSearchThread();
-	  }
+	public void refreshByLocation(boolean paramBoolean) {
+		if (!Rent.isAvailableNetwork(this)) {
+			updateUI(5);
+		} else {
+			try {
+				if (!paramBoolean) {
+					String str1 = PreferenceUtils.getCurrentCityName(this);
+					if ((str1 == null) || (str1.length() == 0)) {
+						
+					} else {
+						updateUI(1);
+						int j = 0;
+					}
+				} else {
+					if(!this.mIsMyLocation) {
+						updateUI(1);
+						String str3 = getSharedPreferences("location_point", 0).getString(
+								"name", "");
+						this.mAddressName = str3;
+						clearList();
+					} else {
+						Rent.checkNetProvider(getParent());
+						updateUI(0);
+						MyLocationManager.getInstance(getApplicationContext())
+								.registerListener(this);
+						this.mHasLocated = false;
+						clearList();
+					}
+					
+				}
+			} catch (Exception localException) {
+				String str2 = localException.toString();
+				int k = Log.e("MainActivity.getCurrentGeoPoint()", str2);
+			}
+			this.mListView.setSelection(0);
+			startSearchThread();
+		}
+	}
 
 	public void setSearchContext(Context paramContext) {
 		this.mSearchContext = paramContext;
@@ -554,31 +549,31 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 		case 2:
 		default:
 		case 0:
+			TextView localTextView = this.mTopNotifyBar;
+			String str = this.mContext.getString(R.string.info_is_location);
+			localTextView.setText(str);
 		case 1:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		}
-		while (true) {
-			TextView localTextView1 = this.mTopNotifyBar;
-			String str1 = this.mContext.getString(R.string.info_is_location);
-			localTextView1.setText(str1);
 			TextView localTextView2 = this.mTopNotifyBar;
 			String str2 = this.mContext.getString(R.string.info_is_gethouse);
 			localTextView2.setText(str2);
+		case 3:
 			TextView localTextView3 = this.mTopNotifyBar;
-			String str3 = this.mContext.getString(R.string.no_cell_in_the_location);
+			String str3 = this.mContext
+					.getString(R.string.no_cell_in_the_location);
 			localTextView3.setText(str3);
 			this.mIsCanRefresh = true;
+		case 4:
 			TextView localTextView4 = this.mTopNotifyBar;
 			String str4 = this.mContext.getString(R.string.cannot_get_location);
 			localTextView4.setText(str4);
+		case 5:
 			TextView localTextView5 = this.mTopNotifyBar;
 			String str5 = this.mContext.getString(R.string.unvaliable_network);
 			localTextView5.setText(str5);
+		case 6:
 			TextView localTextView6 = this.mTopNotifyBar;
-			String str6 = this.mContext.getString(R.string.error_can_not_find_location);
+			String str6 = this.mContext
+					.getString(R.string.error_can_not_find_location);
 			localTextView6.setText(str6);
 		}
 	}
@@ -587,10 +582,7 @@ public class SearchInListActivity extends Activity implements SearchHandlerListe
 		public void locationObtained(double paramDouble1, double paramDouble2,
 				boolean paramBoolean) {
 			if (paramBoolean != false) {
-				/*
-				 * SearchInListActivity.access$900(this.this$0, paramDouble1,
-				 * paramDouble2);
-				 */
+				SearchInListActivity.this.refreshByLocation(paramDouble1, paramDouble2);
 			}
 		}
 	}
