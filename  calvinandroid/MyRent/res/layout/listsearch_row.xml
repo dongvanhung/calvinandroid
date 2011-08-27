@@ -14,7 +14,7 @@
                 <TextView android:textSize="15.0dip" android:textColor="#ff999999" android:ellipsize="end" android:id="@id/cell_address" android:layout_width="wrap_content" android:layout_height="wrap_content" android:lines="1" android:singleLine="true" android:layout_alignParentLeft="true" />
             </RelativeLayout>
         </LinearLayout>
-        <ImageView android:id="@id/search_list_image" android:layout_width="60.0dip" android:layout_height="50.0dip" android:layout_marginRight="5.0dip" android:src="@drawable/defaut_cell_pic" android:layout_weight="0.0" />
+        <ImageView android:id="@id/search_list_image" android:layout_width="60.0dip" android:layout_height="50.0dip" android:layout_marginRight="5.0dip" android:src="@drawable/defaut_cell_pic" />
         <ImageView android:id="@id/search_list_image" android:layout_width="10.0dip" android:layout_height="wrap_content" android:src="@drawable/arrow" android:layout_weight="0.0" />
     </LinearLayout>
     <TextView android:gravity="center" android:id="@id/result_load_more_text" android:layout_width="fill_parent" android:layout_height="30.0dip" android:text="@string/list_load_more" />
