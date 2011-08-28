@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/shape" android:layout_width="fill_parent" android:layout_height="45.0dip" android:layout_weight="0.0">
+        <ImageView android:id="@id/goto_other_imageview" android:layout_marginLeft="8.0dip" android:layout_marginRight="0.0dip" android:src="@drawable/go_list" android:scaleType="center" style="@style/title_label_leftbutton_linearlayout" />
+        <EditText android:textSize="17.0dip" android:id="@id/search_edittext" android:layout_marginLeft="8.0dip" android:layout_marginRight="8.0dip" android:layout_weight="1.0" style="@style/input_location_edit" />
+        <ImageView android:id="@id/locate_my" android:layout_marginLeft="0.0dip" android:layout_marginRight="1.0dip" android:src="@drawable/locate" style="@style/title_label_rightbutton_linearlayout" />
+        <ImageView android:id="@id/record_cordition" android:layout_marginLeft="0.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/bookmark_icon" android:scaleType="center" style="@style/title_label_rightbutton_linearlayout" />
+    </LinearLayout>
+    <ImageView android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/line_bg" android:layout_weight="0.0" />
+    <RelativeLayout android:id="@id/map_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <LinearLayout android:id="@id/map_view_activity" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.rent.view.RentMapView android:id="@id/recent_map" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:apiKey="@string/map_api_key" />
+        </LinearLayout>
+        <TextView android:textSize="15.0dip" android:textColor="@color/white" android:id="@id/recent_view_topnotifybar" android:background="#a0000000" android:paddingLeft="5.0dip" style="@style/notify_bar" />
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/bottom_notify_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.0" android:layout_alignParentBottom="true">
+        <RelativeLayout android:id="@id/go_filter" android:background="@drawable/icon_bg" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:id="@id/go_filter2" android:paddingLeft="6.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/filter_icon" android:scaleType="center" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <TextView android:textSize="18.0dip" android:textColor="@color/white" android:gravity="center" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/filter" android:layout_toRightOf="@id/go_filter2" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <TextView android:textSize="14.0sp" android:textColor="@color/white" android:id="@id/fiter_show" android:background="@drawable/bg02" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_alignParentBottom="true" style="@style/notify_bar" />
+    </LinearLayout>
+</LinearLayout>

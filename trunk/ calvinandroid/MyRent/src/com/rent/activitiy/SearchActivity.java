@@ -36,17 +36,17 @@ public class SearchActivity extends ActivityGroup
     int i = Rent.getCurrentNetwork(this);
     if ((Rent.isAvailableGoogleMap()) && (i == 1))
     {
-      /*LocalActivityManager localLocalActivityManager1 = getLocalActivityManager();
+      LocalActivityManager localLocalActivityManager1 = getLocalActivityManager();
       String str1 = Rent.MAIN_VIEW_NAME[0];
-      //Intent localIntent1 = new Intent(this, SearchOnMapActivity.class).addFlags(131072);
+      Intent localIntent1 = new Intent(this, SearchOnMapActivity.class).addFlags(131072);
       View localView1 = localLocalActivityManager1.startActivity(str1, localIntent1).getDecorView();
       this.mMapView = localView1;
       LocalActivityManager localLocalActivityManager2 = getLocalActivityManager();
       String str2 = Rent.MAIN_VIEW_NAME[0];
-     // ((SearchOnMapActivity)(SearchOnMapActivity)localLocalActivityManager2.getActivity(str2)).setSearchContext(this);
+      ((SearchOnMapActivity)(SearchOnMapActivity)localLocalActivityManager2.getActivity(str2)).setSearchContext(this);
       LinearLayout localLinearLayout2 = this.mContainView;
       View localView2 = this.mMapView;
-      localLinearLayout2.addView(localView2);*/
+      localLinearLayout2.addView(localView2);
     } else {
       LocalActivityManager localLocalActivityManager3 = getLocalActivityManager();
       String str3 = Rent.MAIN_VIEW_NAME[1];
@@ -71,14 +71,14 @@ public class SearchActivity extends ActivityGroup
     case 0:
     	if (Rent.isAvailableGoogleMap())
         {
-          /*LocalActivityManager localLocalActivityManager1 = getLocalActivityManager();
+          LocalActivityManager localLocalActivityManager1 = getLocalActivityManager();
           String str1 = MAIN_VIEW_NAME[0];
           Intent localIntent1 = new Intent(this, SearchOnMapActivity.class).addFlags(131072);
           View localView1 = localLocalActivityManager1.startActivity(str1, localIntent1).getDecorView();
           this.mView = localView1;
           LocalActivityManager localLocalActivityManager2 = getLocalActivityManager();
           String str2 = MAIN_VIEW_NAME[0];
-          ((SearchOnMapActivity)(SearchOnMapActivity)localLocalActivityManager2.getActivity(str2)).setSearchContext(this);*/
+          ((SearchOnMapActivity)(SearchOnMapActivity)localLocalActivityManager2.getActivity(str2)).setSearchContext(this);
         } else {
           LocalActivityManager localLocalActivityManager3 = getLocalActivityManager();
           String str3 = MAIN_VIEW_NAME[0];
@@ -105,14 +105,14 @@ public class SearchActivity extends ActivityGroup
          View localView5 = this.mView;
          localLinearLayout2.addView(localView5);
     case 2:
-    	 LocalActivityManager localLocalActivityManager7 = getLocalActivityManager();
+    	 /*LocalActivityManager localLocalActivityManager7 = getLocalActivityManager();
          String str7 = MAIN_VIEW_NAME[2];
          Intent localIntent4 = new Intent(this, FilterActivity.class).addFlags(131072);
          View localView6 = localLocalActivityManager7.startActivity(str7, localIntent4).getDecorView();
          this.mView = localView6;
          LinearLayout localLinearLayout3 = this.mContainView;
          View localView7 = this.mView;
-         localLinearLayout3.addView(localView7);
+         localLinearLayout3.addView(localView7);*/
     }
   }
 

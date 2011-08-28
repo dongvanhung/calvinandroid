@@ -290,6 +290,9 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 
 	public void stopLocation() {
 		try {
+			if(this.mLocationManager == null) {
+				this.mLocationManager = (LocationManager) mContext.getSystemService("location");
+			}
 			this.mLocationManager.removeUpdates(this);
 			if (this.mTimer != null) {
 				this.mTimer.interrupt();
