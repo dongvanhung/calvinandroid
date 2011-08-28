@@ -176,24 +176,22 @@ public class SearchOnMapActivity extends MapActivity implements
 		List localList = this.mMapView.getOverlays();
 		MarsLocationOverlay localMarsLocationOverlay = this.mMyLocation;
 		boolean bool1 = localList.add(localMarsLocationOverlay);
-		Drawable localDrawable = getResources().getDrawable(2130837662);
+		Drawable localDrawable = getResources().getDrawable(R.drawable.pin_icon);
 		Context localContext = this.mContext;
 		View localView = this.mOverlay;
 		RentMapView localRentMapView = this.mMapView;
 		RentMapOverlayItem localRentMapOverlayItem = new RentMapOverlayItem(
 				localDrawable, localContext, localView, localRentMapView);
-		int j = 0;
-		while (j < i) {
-			int k = (int) (((Community) this.mCommList.get(j)).mLat * 1000000.0D);
-			int m = (int) (((Community) this.mCommList.get(j)).mLon * 1000000.0D);
+		for (int j2 = 0; j2 < this.mCommList.size(); j2++) {
+			int k = (int) (((Community) this.mCommList.get(j2)).mLat * 1000000.0D);
+			int m = (int) (((Community) this.mCommList.get(j2)).mLon * 1000000.0D);
 			GeoPoint localGeoPoint = new GeoPoint(k, m);
 			OverlayItem localOverlayItem = new OverlayItem(localGeoPoint, null,
 					null);
-			((Community) this.mCommList.get(j)).mFlag = 0;
-			Community localCommunity = (Community) this.mCommList.get(j);
+			((Community) this.mCommList.get(j2)).mFlag = 0;
+			Community localCommunity = (Community) this.mCommList.get(j2);
 			localRentMapOverlayItem.addItem(localOverlayItem, localCommunity,
 					true, 0);
-			j += 1;
 		}
 		if ((this.mQ != null) && (i > 0)) {
 			String str1 = this.mQ;
@@ -252,7 +250,7 @@ public class SearchOnMapActivity extends MapActivity implements
 				// {
 				TextView localTextView = SearchOnMapActivity.this.mTopNotifyBar;
 				String str = SearchOnMapActivity.this.mContext
-						.getString(2131361906);
+						.getString(R.string.info_is_gethouse);
 				localTextView.setText(str);
 				startSearchThread(65535L);
 				// boolean bool =
