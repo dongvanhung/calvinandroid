@@ -195,4 +195,17 @@ public class MainActivity extends ActivityGroup implements
 		 * GroupImageManager.clearCache();
 		 */
 	}
+	
+	 protected void onPause()
+	  {
+	    super.onPause();
+//	    MobclickAgent.onPause(this);
+	  }
+
+	  protected void onResume()
+	  {
+	    super.onResume();
+//	    MobclickAgent.onResume(this);
+	  }
+
 }

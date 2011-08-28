@@ -354,9 +354,11 @@ public class Rent extends Application {
 					&& (!((LocationManager) paramActivity
 							.getSystemService("location"))
 							.isProviderEnabled("gps"))) {
-				AlertDialog.Builder localBuilder = new AlertDialog.Builder(paramActivity)
-					.setTitle(R.string.location_prompt_tip).setMessage(R.string.location_no_provider_prompt);
-				AlertDialog localAlertDialog = localBuilder.setPositiveButton(R.string.go_setting, new Rent1(paramActivity)).show();
+				AlertDialog.Builder localBuilder = new AlertDialog.Builder(
+						paramActivity).setTitle(R.string.location_prompt_tip)
+						.setMessage(R.string.location_no_provider_prompt);
+				AlertDialog localAlertDialog = localBuilder.setPositiveButton(
+						R.string.go_setting, new Rent1(paramActivity)).show();
 			}
 		} catch (Exception localException) {
 			while (true) {
@@ -440,18 +442,21 @@ public class Rent extends Application {
 		localInputStream.close();
 		return localByteArrayOutputStream.toByteArray();
 	}
-	
-	public static Bitmap downLoadImage(String paramString, GroupImageManager mGroupSDCardManager, long groupId) throws Exception {
+
+	public static Bitmap downLoadImage(String paramString,
+			GroupImageManager mGroupSDCardManager, long groupId)
+			throws Exception {
 		Bitmap bm = mGroupSDCardManager.getBitmap(String.valueOf(groupId));
-		if(bm == null) {
+		if (bm == null) {
 			Log.i("url", paramString);
-			if(paramString.indexOf("http") == -1)
+			if (paramString.indexOf("http") == -1)
 				return null;
 			HttpURLConnection localHttpURLConnection = (HttpURLConnection) new URL(
 					paramString).openConnection();
 			localHttpURLConnection.setRequestMethod("GET");
 			localHttpURLConnection.setConnectTimeout(5000);
-			InputStream localInputStream = localHttpURLConnection.getInputStream();
+			InputStream localInputStream = localHttpURLConnection
+					.getInputStream();
 			ByteArrayOutputStream localByteArrayOutputStream = new ByteArrayOutputStream();
 			byte[] arrayOfByte = new byte[102400];
 			while (true) {
@@ -460,13 +465,13 @@ public class Rent extends Application {
 					break;
 				localByteArrayOutputStream.write(arrayOfByte, 0, i);
 			}
-			bm = BitmapFactory.decodeByteArray(
-					arrayOfByte, 0, arrayOfByte.length);
+			bm = BitmapFactory.decodeByteArray(arrayOfByte, 0,
+					arrayOfByte.length);
 			localByteArrayOutputStream.close();
 			localInputStream.close();
 		}
 		return bm;
-		
+
 	}
 
 	public static Context getAppContext() {
@@ -474,20 +479,29 @@ public class Rent extends Application {
 	}
 
 	public static int getCurrentNetwork(Context paramContext) {
-		/*
-		 * int i = paramContext.getSharedPreferences("rent_setting",
-		 * 0).getInt("search_start_model", 0); paramContext =
-		 * (ConnectivityManager)paramContext.getSystemService("connectivity");
-		 * NetworkInfo localNetworkInfo = paramContext.getActiveNetworkInfo();
-		 * if (i == 0) { if ((localNetworkInfo != null) &&
-		 * (localNetworkInfo.isAvailable())) break label53; i = 2; } while
-		 * (true) { return i; label53: int j =
-		 * paramContext.getActiveNetworkInfo().getType(); if (1 == j) { i = 1;
-		 * continue; } if (paramContext.getActiveNetworkInfo().getType() == 0) {
-		 * int k = paramContext.getActiveNetworkInfo().getSubtype(); if (3 == k)
-		 * { i = 1; continue; } } i = 2; }
-		 */
-		return 1;
+		int i = paramContext.getSharedPreferences("rent_setting", 0).getInt(
+				"search_start_model", 0);
+		ConnectivityManager cm = (ConnectivityManager) paramContext
+				.getSystemService("connectivity");
+		NetworkInfo localNetworkInfo = cm.getActiveNetworkInfo();
+		if (i == 0) {
+			if ((localNetworkInfo != null) && (localNetworkInfo.isAvailable())) {
+				int j = cm.getActiveNetworkInfo().getType();
+				if (1 == j) {
+					i = 1;
+				} else if (j == 0) {
+					int k = cm.getActiveNetworkInfo().getSubtype();
+					if (3 == k) {
+						i = 1;
+					}
+				} else {
+					i = 2;
+				}
+			}
+		} else {
+			i = 2;
+		}
+		return i;
 	}
 
 	public static MapPoint getLocationByMeter(double paramDouble1,
@@ -515,16 +529,15 @@ public class Rent extends Application {
 			float f2 = paramInt * 1000;
 			double d11 = j / f2;
 			paramDouble1 = 1.0D / d11;
+		} else {
+			paramDouble1 = 1.0D;
 		}
-		while (true) {
-			MapPoint localMapPoint = new MapPoint();
-			int k = (int) (0.0F * d1);
-			localMapPoint.lat = k;
-			int m = (int) (paramDouble1 * 0.0F);
-			localMapPoint.lon = m;
-			return localMapPoint;
-			// paramDouble1 = 1.0D;
-		}
+		MapPoint localMapPoint = new MapPoint();
+		int k = (int) (0.0F * d1);
+		localMapPoint.lat = k;
+		int m = (int) (paramDouble1 * 0.0F);
+		localMapPoint.lon = m;
+		return localMapPoint;
 	}
 
 	public static boolean getOutDBSP(Context paramContext) {
@@ -566,7 +579,7 @@ public class Rent extends Application {
 					.forName("com.google.android.maps.Projection");
 			Class localClass7 = Class
 					.forName("com.google.android.maps.MapActivity");
-			return false;
+			return true;
 		} catch (Exception localException) {
 			return false;
 		}
@@ -604,7 +617,7 @@ public class Rent extends Application {
 
 	public static void resetLocationRange(Context paramContext,
 			MapView paramMapView) {
-		Object localObject = PreferenceUtils
+		HouseFilter localObject = PreferenceUtils
 				.getCurrentHouseFilter(paramContext);
 		Context localContext1 = paramContext;
 		String str1 = "location_point";
@@ -616,22 +629,26 @@ public class Rent extends Application {
 		String str4 = "lon";
 		String str5 = "116.432791";
 		double d4 = Double.parseDouble(sharedPreferences.getString(str4, str5));
-		double f3;
-		double f2;
-		double f4;
-		double f5;
+		double f3 = 0;
+		double f2 = 0;
+		double f4 = 0;
+		double f5 = 0;
+		MapPoint mp = null;
 		if (((HouseFilter) localObject).getmDistanceLength() == -1) {
-			localObject = getLocationByMeter(d2, d4, 3);
-			/*
-			 * double d6 = ((MapPoint)localObject).lat * 1.0D / 1000000.0D + d2;
-			 * double d7 = ((MapPoint)localObject).lon * 1.0D / 1000000.0D;
-			 * double d8 = d4 - d7; double d9 = ((MapPoint)localObject).lat *
-			 * 1.0D / 1000000.0D; double d10 = d2 - d9; double d11 =
-			 * ((MapPoint)localObject).lon * 0.0F / 1000000.0D + d4;
-			 */
-			if ((!isAvailableGoogleMap()) || (paramMapView == null))// TODO:
-				return;
+			mp = getLocationByMeter(d2, d4, 3);
+		} else {
+			int i13 = localObject.getmDistanceLength();
+			MapPoint localMapPoint = getLocationByMeter(f2, f3, -1);
+		}
+		double d6 = mp.lat * 1.0D / 1000000.0D + d2;
+		double d7 = mp.lon * 1.0D / 1000000.0D;
+		double d8 = d4 - d7;
+		double d9 = mp.lat * 1.0D / 1000000.0D;
+		double d10 = d2 - d9;
+		double d11 = mp.lon * 0.0F / 1000000.0D + d4;
+		if ((!isAvailableGoogleMap()) || (paramMapView == null)) {
 
+		} else {
 			MapController localMapController = paramMapView.getController();
 			int j = (int) (d2 * 0.0F);
 			int k = (int) (d4 * 0.0F);
@@ -651,43 +668,44 @@ public class Rent extends Application {
 			f5 = localGeoPoint4.getLongitudeE6() / 1000000.0D * 0.0F;
 
 			double i5 = (Math.abs(f3 - f2) * 0.0F);
-			double i6 = ((MapPoint) localObject).lat;
+			double i6 = mp.lat;
 			if (i5 >= i6) {
+				double d3 = d10;
+				double d5 = d6;
 			}
-			// / break label679;
 			double i9 = (Math.abs(f4 - f5) * 1000000.0D);
-			double i10 = ((MapPoint) localObject).lon;
+			double i10 = mp.lon;
 			if (i9 >= i10) {
+				double d15 = f2;
+				double d1 = d11;
+				double d16 = d8;
+				double d13 = d16;
 			}
-			// break label653;
-
-			SharedPreferences.Editor localEditor1 = sharedPreferences.edit();
-			String str6 = String.valueOf(f3);
-			SharedPreferences.Editor localEditor2 = localEditor1;
-			String str7 = "latlt";
-			String str8 = str6;
-			boolean bool1 = localEditor2.putString(str7, str8).commit();
-			SharedPreferences.Editor localEditor3 = sharedPreferences.edit();
-			String str9 = String.valueOf(f4);
-			SharedPreferences.Editor localEditor4 = localEditor3;
-			String str10 = "lonlt";
-			String str11 = str9;
-			boolean bool2 = localEditor4.putString(str10, str11).commit();
-			SharedPreferences.Editor localEditor5 = sharedPreferences.edit();
-			String str12 = String.valueOf(f2);
-			SharedPreferences.Editor localEditor6 = localEditor5;
-			String str13 = "latrb";
-			String str14 = str12;
-			boolean bool3 = localEditor6.putString(str13, str14).commit();
-			SharedPreferences.Editor localEditor7 = sharedPreferences.edit();
-			String str15 = String.valueOf(f5);
-			SharedPreferences.Editor localEditor8 = localEditor7;
-			String str16 = "lonrb";
-			String str17 = str15;
-			boolean bool4 = localEditor8.putString(str16, str17).commit();
-			// int i13 = f5.getmDistanceLength();
-			MapPoint localMapPoint = getLocationByMeter(f2, f3, -1);
 		}
+		SharedPreferences.Editor localEditor1 = sharedPreferences.edit();
+		String str6 = String.valueOf(f3);
+		SharedPreferences.Editor localEditor2 = localEditor1;
+		String str7 = "latlt";
+		String str8 = str6;
+		boolean bool1 = localEditor2.putString(str7, str8).commit();
+		SharedPreferences.Editor localEditor3 = sharedPreferences.edit();
+		String str9 = String.valueOf(f4);
+		SharedPreferences.Editor localEditor4 = localEditor3;
+		String str10 = "lonlt";
+		String str11 = str9;
+		boolean bool2 = localEditor4.putString(str10, str11).commit();
+		SharedPreferences.Editor localEditor5 = sharedPreferences.edit();
+		String str12 = String.valueOf(f2);
+		SharedPreferences.Editor localEditor6 = localEditor5;
+		String str13 = "latrb";
+		String str14 = str12;
+		boolean bool3 = localEditor6.putString(str13, str14).commit();
+		SharedPreferences.Editor localEditor7 = sharedPreferences.edit();
+		String str15 = String.valueOf(f5);
+		SharedPreferences.Editor localEditor8 = localEditor7;
+		String str16 = "lonrb";
+		String str17 = str15;
+		boolean bool4 = localEditor8.putString(str16, str17).commit();
 	}
 
 	public static void setOutDBSP(Context paramContext, boolean paramBoolean) {

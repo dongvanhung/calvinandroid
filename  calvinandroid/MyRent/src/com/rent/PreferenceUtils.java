@@ -3,6 +3,7 @@ package com.rent;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.rent.data.DoublePoint;
 import com.rent.db.AddressChoiceDBManager;
 
 public class PreferenceUtils {
@@ -72,6 +73,17 @@ public class PreferenceUtils {
 	      localAddressChoiceDBManager.closeDatabase();
 	      saveDistrictName(paramContext, str4, i);
 	    }
+	  }
+	  
+	  public static DoublePoint getMarsLocation(Context paramContext)
+	  {
+	    DoublePoint localDoublePoint = new DoublePoint();
+	    SharedPreferences localSharedPreferences = paramContext.getSharedPreferences("location_point", 0);
+	    double d1 = Double.parseDouble(localSharedPreferences.getString("mars_location_lat", "39.920591"));
+	    double d2 = Double.parseDouble(localSharedPreferences.getString("mars_location_lon", "116.432791"));
+	    localDoublePoint.mLat = d1;
+	    localDoublePoint.mLon = d2;
+	    return localDoublePoint;
 	  }
 	  
 	  public static int getCurrentDistrictId(Context paramContext)

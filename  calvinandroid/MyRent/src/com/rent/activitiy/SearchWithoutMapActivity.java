@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.rent.HouseFilter;
 import com.rent.PreferenceUtils;
+import com.rent.R;
 
 public class SearchWithoutMapActivity extends Activity {
 
@@ -25,13 +26,13 @@ public class SearchWithoutMapActivity extends Activity {
 
 	  private void initView()
 	  {
-	    TextView localTextView1 = (TextView)findViewById(2131493096);
+	    TextView localTextView1 = (TextView)findViewById(R.id.recent_view_topnotifybar);
 	    this.mTopNotifyBar = localTextView1;
 	    this.mTopNotifyBar.setVisibility(8);
-	    TextView localTextView2 = (TextView)findViewById(2131493102);
+	    TextView localTextView2 = (TextView)findViewById(R.id.fiter_show);
 	    this.mFiterShow = localTextView2;
 	    updateFilterBar();
-	    ImageView localImageView1 = (ImageView)findViewById(2131493093);
+	    ImageView localImageView1 = (ImageView)findViewById(R.id.goto_other_imageview);
 	    this.mGotoOtherView = localImageView1;
 	    ImageView localImageView2 = this.mGotoOtherView;
 	    localImageView2.setOnClickListener(new OnClickListener() {
@@ -41,7 +42,7 @@ public class SearchWithoutMapActivity extends Activity {
 //	    	    ((SearchActivity)SearchWithoutMapActivity.access$000(this.this$0)).changeActivtiy(1);
 	    	  }
 		});
-	    RelativeLayout localRelativeLayout1 = (RelativeLayout)findViewById(2131493100);
+	    RelativeLayout localRelativeLayout1 = (RelativeLayout)findViewById(R.id.go_filter);
 	    this.mGotoSiftView = localRelativeLayout1;
 	    RelativeLayout localRelativeLayout2 = this.mGotoSiftView;
 	    localRelativeLayout2.setOnClickListener(new OnClickListener() {
@@ -71,7 +72,7 @@ public class SearchWithoutMapActivity extends Activity {
 	    super.onCreate(paramBundle);
 //	    MobclickAgent.onError(this);
 	    boolean bool = requestWindowFeature(1);
-	    setContentView(2130903097);
+	    setContentView(R.layout.no_mapsearch_view);
 	    initView();
 	  }
 

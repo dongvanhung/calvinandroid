@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/address_choice_layout" android:visibility="gone" style="@style/title_label_relativeLayout">
+        <TextView android:id="@id/recent_view_title" android:visibility="gone" android:text="@string/address_search_title" style="@style/title_label_textview" />
+    </RelativeLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/shape" android:layout_width="fill_parent" android:layout_height="45.0dip" android:layout_weight="0.0">
+        <ImageView android:id="@id/goto_back" android:background="@drawable/back_button" android:visibility="gone" android:layout_marginLeft="5.0dip" android:src="@drawable/back_icon" android:scaleType="center" style="@style/title_label_leftbutton" />
+        <ImageView android:id="@id/goto_other_imageview" android:layout_marginLeft="8.0dip" android:layout_marginRight="0.0dip" android:src="@drawable/go_list" android:scaleType="center" style="@style/title_label_leftbutton_linearlayout" />
+        <EditText android:textSize="17.0dip" android:id="@id/search_edittext" android:layout_marginLeft="8.0dip" android:layout_marginRight="8.0dip" android:layout_weight="1.0" style="@style/input_location_edit" />
+        <ImageView android:id="@id/locate_my" android:layout_marginLeft="0.0dip" android:layout_marginRight="1.0dip" android:src="@drawable/locate" style="@style/title_label_rightbutton_linearlayout" />
+        <ImageView android:id="@id/record_cordition" android:layout_marginLeft="0.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/bookmark_icon" android:scaleType="center" style="@style/title_label_rightbutton_linearlayout" />
+        <Button android:id="@id/confirm_search" android:visibility="gone" android:layout_marginRight="10.0dip" android:text="@string/confirm" style="@style/title_label_rightbutton" />
+    </LinearLayout>
+    <ImageView android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/line_bg" android:layout_weight="0.0" />
+    <RelativeLayout android:id="@id/map_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <TextView android:textSize="17.0dip" android:textColor="#ff999999" android:gravity="center" android:id="@id/no_map_tip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/not_have_google_map" />
+        <ImageView android:id="@id/current_location" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="10.0dip" android:src="@drawable/location_black_button" />
+        <TextView android:textSize="15.0dip" android:textColor="@color/white" android:id="@id/recent_view_topnotifybar" android:background="#a0000000" android:paddingLeft="5.0dip" style="@style/notify_bar" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/address_part_layout" android:background="#ffffffff" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="17.0dip" android:textColor="@color/black" android:id="@id/address_notify" android:background="#70000000" android:paddingLeft="5.0dip" style="@style/notify_bar" />
+            <LinearLayout android:orientation="vertical" android:background="@drawable/round_listview_bg" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:id="@id/city_choice_ll" android:background="@drawable/head_linearlayout_background" style="@style/bussiness_linearLayout">
+                    <TextView android:text="@string/choice_city" style="@style/bussiness_text_left" />
+                    <TextView android:id="@id/bussiness_cur_city" style="@style/bussiness_text_right" />
+                    <ImageView style="@style/bussiness_right_side_image" />
+                </LinearLayout>
+                <LinearLayout android:id="@id/area_choice_ll" android:background="@drawable/center_linearlayout_background" style="@style/bussiness_linearLayout">
+                    <TextView android:text="@string/choice_area" style="@style/bussiness_text_left" />
+                    <TextView android:id="@id/area_choice_textview" style="@style/bussiness_text_right" />
+                    <ImageView style="@style/bussiness_right_side_image" />
+                </LinearLayout>
+                <LinearLayout android:id="@id/area_bussiness_district_linearlayout" android:background="@drawable/end_linearlayout_background" style="@style/bussiness_linearLayout">
+                    <TextView android:text="@string/choice_bussiness" style="@style/bussiness_text_left" />
+                    <TextView android:id="@id/bussiness_choice_textview" style="@style/bussiness_text_right" />
+                    <ImageView style="@style/bussiness_right_side_image" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/bottom_notify_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.0" android:layout_alignParentBottom="true">
+        <RelativeLayout android:id="@id/go_filter" android:background="@drawable/icon_bg" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:id="@id/go_filter2" android:paddingLeft="6.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/filter_icon" android:scaleType="center" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <TextView android:textSize="18.0dip" android:textColor="@color/white" android:gravity="center" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/filter" android:layout_toRightOf="@id/go_filter2" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <TextView android:textSize="14.0sp" android:textColor="@color/white" android:id="@id/fiter_show" android:background="@drawable/bg02" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_alignParentBottom="true" style="@style/notify_bar" />
+    </LinearLayout>
+</LinearLayout>
