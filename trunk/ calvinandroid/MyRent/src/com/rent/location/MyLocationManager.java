@@ -277,13 +277,13 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 		if (localList != null) {
 			for (int j = 0; j < localList.size(); j++) {
 				Object localObject = localList.get(j);
-				if (!"network".equals(localObject))
-					break;
-				LocationManager localLocationManager2 = this.mLocationManager;
-				String str1 = (String) localList.get(j);
-				MyLocationManager localMyLocationManager1 = this;
-				localLocationManager2.requestLocationUpdates(str1, 1L, 1.0F,
-						localMyLocationManager1);
+				if ("network".equals(localObject)) {
+					LocationManager localLocationManager2 = this.mLocationManager;
+					String str1 = (String) localList.get(j);
+					MyLocationManager localMyLocationManager1 = this;
+					localLocationManager2.requestLocationUpdates(str1, 1L, 1.0F,
+							localMyLocationManager1);
+				}
 			}
 		}
 	}

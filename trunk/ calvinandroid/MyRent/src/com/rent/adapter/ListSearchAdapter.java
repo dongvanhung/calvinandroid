@@ -111,11 +111,11 @@ public class ListSearchAdapter extends BaseAdapter {
 				}
 			}
 		} catch (Exception localException) {
-			StringBuilder localStringBuilder2 = new StringBuilder();
+			/*StringBuilder localStringBuilder2 = new StringBuilder();
 			int j = ((Community) this.mCommList.get(paramInt)).mPrice;
 			StringBuilder localStringBuilder3 = localStringBuilder2.append(j);
 			String str7 = this.mPriceUnitSrt;
-			((TextView) localObject1).setText(str7);
+			((TextView) localObject1).setText(str7);*/
 		}
 		((View) localObject1).setVisibility(8);
 		((View) localObject2).setVisibility(0);
