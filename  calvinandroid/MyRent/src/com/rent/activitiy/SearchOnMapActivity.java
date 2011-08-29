@@ -183,8 +183,8 @@ public class SearchOnMapActivity extends MapActivity implements
 		RentMapOverlayItem localRentMapOverlayItem = new RentMapOverlayItem(
 				localDrawable, localContext, localView, localRentMapView);
 		for (int j2 = 0; j2 < this.mCommList.size(); j2++) {
-			int k = (int) (((Community) this.mCommList.get(j2)).mLat * 1000000.0D);
-			int m = (int) (((Community) this.mCommList.get(j2)).mLon * 1000000.0D);
+			int k = (int) (((Community) this.mCommList.get(j2)).mLat * 1E6);
+			int m = (int) (((Community) this.mCommList.get(j2)).mLon * 1E6);
 			GeoPoint localGeoPoint = new GeoPoint(k, m);
 			OverlayItem localOverlayItem = new OverlayItem(localGeoPoint, null,
 					null);

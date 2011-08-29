@@ -120,9 +120,7 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 			boolean paramBoolean) {
 		int i = 0;
 		try {
-			int j = size();
-			int k = 0;
-			if (k < j) {
+			for (int k = 0; k < mItemList.size(); k++) {
 				Projection localProjection = paramMapView.getProjection();
 				Point localPoint1 = new Point();
 				int m = ((OverlayItem) this.mItemList.get(k)).getPoint()
@@ -150,13 +148,10 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 					RectF localRectF = new RectF(f1, f2, f3, f4);
 					paramCanvas.drawBitmap(localBitmap, localRect, localRectF,
 							localPaint);
-					k += 1;
 				} catch (Exception localException1) {
 					while (true)
 						localException1.printStackTrace();
 				}
-			} else {
-				super.draw(paramCanvas, paramMapView, paramBoolean);
 			}
 		} catch (Exception localException2) {
 		}
