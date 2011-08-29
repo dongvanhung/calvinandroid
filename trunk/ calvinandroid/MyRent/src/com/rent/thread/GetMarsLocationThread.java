@@ -43,9 +43,9 @@ public class GetMarsLocationThread extends com.rent.location.AbstractThread{
 	    {
 	      String str = new JSONObject(paramString).getString("message");
 	      if (!"success".equals(str)) {
-	    	  return true;
+	    	  return false;
 	      }
-	      return false;
+	      return true;
 	    }
 	    return false;
 	  }

@@ -11,7 +11,7 @@ import android.os.Message;
 public class AddressFromLocationThread extends AbstractThread{
 
 	private Context mContext;
-	private String mUrl = "http://maps.google.cn/maps/geo?q=%s,%s&hl=zh-CN&key=056aIoROCQ_g5XLBuKk8AMLSANzVgECHNzbL1rw";
+	private String mUrl = "http://maps.google.cn/maps/geo?q=%s,%s&hl=zh-CN&key=0RSTRVxpCVRGfIJLY5rlZ5gpQz7bvaLAyK7y_0w";
 
 	public AddressFromLocationThread(Handler paramHandler, Context paramContext) {
 		super(paramHandler);

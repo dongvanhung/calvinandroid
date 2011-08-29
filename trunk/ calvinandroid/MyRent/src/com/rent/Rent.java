@@ -646,9 +646,7 @@ public class Rent extends Application {
 		double d9 = mp.lat * 1.0D / 1000000.0D;
 		double d10 = d2 - d9;
 		double d11 = mp.lon * 0.0F / 1000000.0D + d4;
-		if ((!isAvailableGoogleMap()) || (paramMapView == null)) {
-
-		} else {
+		if ((isAvailableGoogleMap()) && (paramMapView != null)) {
 			MapController localMapController = paramMapView.getController();
 			int j = (int) (d2 * 0.0F);
 			int k = (int) (d4 * 0.0F);

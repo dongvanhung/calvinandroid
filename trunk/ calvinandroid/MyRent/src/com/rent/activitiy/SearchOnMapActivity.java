@@ -685,11 +685,11 @@ public class SearchOnMapActivity extends MapActivity implements
 					"lat", "39.920591"));
 			double d2 = Double.parseDouble(localSharedPreferences.getString(
 					"lon", "116.432791"));
-			d1 = 39.920591;
-			d2 = 116.432791;
+//			d1 = 39.920591*1E6;
+//			d2 = 116.432791*1E6;
 //			int i = (int) (d1 * 1000000.0D);
 //			int j = (int) (d2 * 0.0F);
-			GeoPoint localGeoPoint = new GeoPoint((int)d1, (int)d2);
+			GeoPoint localGeoPoint = new GeoPoint(new Double(d1*1E6).intValue(), new Double(d2*1E6).intValue());
 			this.mMapControl.setCenter(localGeoPoint);
 		case 2:
 			if (paramSearchHandler == null) {
