@@ -21,8 +21,8 @@ public class GetMarLocationHandler extends Handler{
 	    if (paramMessage.what == 1)
 	    {
 	      GetMarsLocationListener localGetMarsLocationListener1 = this.mListener;
-	      double d1 = 116.432791;
-		  double d2 = 39.920591;
+	      double d1 = 121.52620;
+		  double d2 = 31.27505;
 	      localGetMarsLocationListener1.marsLocationObtained(d1, d2, true);  //default false
 	      //localGetMarsLocationListener1.marsLocationObtained(0, 0, false);
 	    } else {
