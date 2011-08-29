@@ -16,7 +16,7 @@ public class AddressToLocationThread extends Thread{
 
 	 private final int TIMEOUT = 6000;
 	  private Handler mHandler;
-	  private String mUrl = "http://maps.google.cn/maps/geo?q=%s&key=056aIoROCQ_g5XLBuKk8AMLSANzVgECHNzbL1rw";
+	  private String mUrl = "http://maps.google.cn/maps/geo?q=%s&key=0RSTRVxpCVRGfIJLY5rlZ5gpQz7bvaLAyK7y_0w";
 
 	  public AddressToLocationThread(Handler paramHandler, String paramString)
 	  {

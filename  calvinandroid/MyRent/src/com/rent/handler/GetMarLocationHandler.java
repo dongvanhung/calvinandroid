@@ -21,10 +21,10 @@ public class GetMarLocationHandler extends Handler{
 	    if (paramMessage.what == 1)
 	    {
 	      GetMarsLocationListener localGetMarsLocationListener1 = this.mListener;
-	      double d1 = 0.0D;
-	      d1 = 39.920591;
-	      double d2 = 116.432791;
-	      localGetMarsLocationListener1.marsLocationObtained(d1, d2, false);
+	      double d1 = 116.432791;
+		  double d2 = 39.920591;
+	      localGetMarsLocationListener1.marsLocationObtained(d1, d2, true);  //default false
+	      //localGetMarsLocationListener1.marsLocationObtained(0, 0, false);
 	    } else {
 	      try
 	      {
@@ -36,8 +36,8 @@ public class GetMarLocationHandler extends Handler{
 	        /*double d2 = l1 / 100000.0D;
 	        double d3 = l2 / 100000.0D;*/
 	        
-	        double d1 = 39.920591;
-		    double d2 = 116.432791;
+	        double d1 = 116.432791;
+		    double d2 = 39.920591;
 	        localGetMarsLocationListener2.marsLocationObtained(d1, d2, true);
 	      }
 	      catch (Exception localException)

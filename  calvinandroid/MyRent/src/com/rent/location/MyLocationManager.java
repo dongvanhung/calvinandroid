@@ -31,7 +31,8 @@ import com.rent.listener.TimerListener;
 import com.rent.thread.GoogleJSonLocationThread;
 import com.rent.thread.TimerThread;
 
-public class MyLocationManager implements GoogleJSonLocationListener, LocationListener {
+public class MyLocationManager implements GoogleJSonLocationListener,
+		LocationListener {
 
 	private static final int OVERTIME = 120;
 	private static String TAG = "MyLocationManager2";
@@ -62,7 +63,7 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 					paramJSONArray);
 			return localJSONObject1;
 		} catch (JSONException localJSONException) {
-				Log.e(TAG, "call JSONObject's put failed", localJSONException);
+			Log.e(TAG, "call JSONObject's put failed", localJSONException);
 		}
 		return null;
 	}
@@ -74,41 +75,41 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 		int k = 0;
 		int j = 0;
 		JSONArray localJSONArray1 = new JSONArray();
-		TelephonyManager tm = (TelephonyManager) mContext.getSystemService("phone");
+		TelephonyManager tm = (TelephonyManager) mContext
+				.getSystemService("phone");
 		try {
 			int i = tm.getNetworkType();
 			if ((i == 4) || (i == 7)) {
-				if ((CdmaCellLocation) tm.getCellLocation() == null){
+				if ((CdmaCellLocation) tm.getCellLocation() == null) {
 					return null;
-				}	
-					String str1 = tm.getSimOperator().substring(0, 3);
-					if (!"460".equals(str1))
-						return null;
+				}
+				String str1 = tm.getSimOperator().substring(0, 3);
+				if (!"460".equals(str1))
+					return null;
 			}
 			String str2 = tm.getNetworkOperator();
 			str3 = str2.substring(0, 3);
 			str4 = str2.substring(3);
-			GsmCellLocation localGsmCellLocation = (GsmCellLocation) tm.getCellLocation();
+			GsmCellLocation localGsmCellLocation = (GsmCellLocation) tm
+					.getCellLocation();
 			k = localGsmCellLocation.getCid();
 			j = localGsmCellLocation.getLac();
-		
-					JSONObject localJSONObject2 = localJSONObject1.put(
-							"cell_id", k);
-					JSONObject localJSONObject3 = localJSONObject1.put(
-							"location_area_code", j);
-					JSONObject localJSONObject4 = localJSONObject1.put(
-							"mobile_country_code", str3);
-					JSONObject localJSONObject5 = localJSONObject1.put(
-							"mobile_network_code", str4);
-					localJSONArray1.put(localJSONObject1);
-					Iterator localIterator = tm.getNeighboringCellInfo()
-							.iterator();
-					NeighboringCellInfo nc = (NeighboringCellInfo) localIterator.next();
+
+			JSONObject localJSONObject2 = localJSONObject1.put("cell_id", k);
+			JSONObject localJSONObject3 = localJSONObject1.put(
+					"location_area_code", j);
+			JSONObject localJSONObject4 = localJSONObject1.put(
+					"mobile_country_code", str3);
+			JSONObject localJSONObject5 = localJSONObject1.put(
+					"mobile_network_code", str4);
+			localJSONArray1.put(localJSONObject1);
+			Iterator localIterator = tm.getNeighboringCellInfo().iterator();
+			NeighboringCellInfo nc = (NeighboringCellInfo) localIterator.next();
 		} catch (JSONException localObject2) {
-				
-			}
-		return localJSONArray1;
+
 		}
+		return localJSONArray1;
+	}
 
 	public static MyLocationManager getInstance(Context paramContext) {
 		if (instance == null)
@@ -120,7 +121,7 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 	private JSONArray getWIFIJSon() {
 		JSONArray localJSONArray1 = new JSONArray();
 		try {
-			
+
 			WifiManager wm = (WifiManager) mContext.getSystemService("wifi");
 			if (!wm.isWifiEnabled()) {
 				localJSONArray1 = null;
@@ -137,7 +138,7 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 						.put(localJSONObject1);
 			}
 		} catch (JSONException localJSONException) {
-				localJSONException.printStackTrace();
+			localJSONException.printStackTrace();
 		}
 		return localJSONArray1;
 	}
@@ -155,31 +156,31 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 		}
 	}
 
-	public void locationObtained(double paramDouble1, double paramDouble2, double paramDouble3, boolean paramBoolean, int paramInt)
-	  {
-	    if (paramInt == 0)
-	      if (!this.mProviderLocated)
-	    	return;
-	    	
-	      if ((paramBoolean) && (paramDouble3 < 1000.0D))
-	      {
-	        MyLocationManager localMyLocationManager1 = this;
-	        double d1 = paramDouble1;
-	        double d2 = paramDouble2;
-	        boolean bool1 = paramBoolean;
-	        localMyLocationManager1.fireListeners(d1, d2, bool1);
-	        if ((paramInt != 4.9E-324D) && (paramInt != -1))
-	        if (paramBoolean)
-	        {
-	          MyLocationManager localMyLocationManager2 = this;
-	          double d3 = paramDouble1;
-	          double d4 = paramDouble2;
-	          boolean bool2 = paramBoolean;
-	          localMyLocationManager2.fireListeners(d3, d4, bool2);
-	        }
-	        stopLocation();
-	      }
-	  }
+	public void locationObtained(double paramDouble1, double paramDouble2,
+			double paramDouble3, boolean paramBoolean, int paramInt) {
+		if (paramInt == 0)
+			if (!this.mProviderLocated)
+				return;
+
+		if ((paramBoolean) && (paramDouble3 < 1000.0D)) {
+			MyLocationManager localMyLocationManager1 = this;
+			double d1 = paramDouble1;
+			double d2 = paramDouble2;
+			boolean bool1 = paramBoolean;
+			localMyLocationManager1.fireListeners(d1, d2, bool1);
+		} else {
+			if ((paramInt == 4.9E-324D) || (paramInt == 0)) { //TODO: paramInt == -1 is not sure 
+				if (paramBoolean) {
+					MyLocationManager localMyLocationManager2 = this;
+					double d3 = paramDouble1;
+					double d4 = paramDouble2;
+					boolean bool2 = paramBoolean;
+					localMyLocationManager2.fireListeners(d3, d4, bool2);
+				}
+				stopLocation();
+			}
+		}
+	}
 
 	public void onLocationChanged(Location paramLocation) {
 		double d1 = paramLocation.getLatitude();
@@ -199,45 +200,44 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 			Bundle paramBundle) {
 	}
 
-	public void registerListener(MyLocationListener paramMyLocationListener)
-	  {
-	    if (this.mListeners.contains(paramMyLocationListener)) {
-	    	return;
-	    } else {
-	      if ((this.mProviderLocated) && (this.mCellLocated))
-	      {
-	        boolean bool = this.mListeners.add(paramMyLocationListener);
-	        startCellLocation();
-	        startProviderLocation();
-	        MyLocationManager1 local1 = new MyLocationManager1();
-	        TimerHandler localTimerHandler = new TimerHandler(local1);
-	        TimerThread localTimerThread = new TimerThread(120, localTimerHandler);
-	        this.mTimer = localTimerThread;
-	        this.mTimer.start();
-	      }
-	    }
-	  }
-
-	final class MyLocationManager1 implements TimerListener
-	{
-	  public void timeOut()
-	  {
-	    MapPoint localMapPoint = new MapPoint();
-	    double d1 = Double.parseDouble("39.920591");
-	    localMapPoint.lat = d1;
-	    double d2 = Double.parseDouble("116.432791");
-	    localMapPoint.lon = d2;
-	   /* if ((!MyLocationManager.access$000(this.this$0)) && (!MyLocationManager.access$100(this.this$0))) //TODO::
-	    {*/
-	      double d3 = localMapPoint.lat;
-	      double d4 = localMapPoint.lon;
-	      locationObtained(d3, d4, 0.0D, true, -1);
-	      return;
-	    //}
-	    // stopLocation();
-	  }
+	public void registerListener(MyLocationListener paramMyLocationListener) {
+		if (this.mListeners.contains(paramMyLocationListener)) {
+			return;
+		} else {
+			if ((this.mProviderLocated) && (this.mCellLocated)) {
+				boolean bool = this.mListeners.add(paramMyLocationListener);
+				startCellLocation();
+				startProviderLocation();
+				MyLocationManager1 local1 = new MyLocationManager1();
+				TimerHandler localTimerHandler = new TimerHandler(local1);
+				TimerThread localTimerThread = new TimerThread(120,
+						localTimerHandler);
+				this.mTimer = localTimerThread;
+				this.mTimer.start();
+			}
+		}
 	}
-	
+
+	final class MyLocationManager1 implements TimerListener {
+		public void timeOut() {
+			MapPoint localMapPoint = new MapPoint();
+			double d1 = Double.parseDouble("39.920591");
+			localMapPoint.lat = d1;
+			double d2 = Double.parseDouble("116.432791");
+			localMapPoint.lon = d2;
+			/*
+			 * if ((!MyLocationManager.access$000(this.this$0)) &&
+			 * (!MyLocationManager.access$100(this.this$0))) //TODO:: {
+			 */
+			double d3 = localMapPoint.lat;
+			double d4 = localMapPoint.lon;
+			locationObtained(d3, d4, 0.0D, true, -1);
+			return;
+			// }
+			// stopLocation();
+		}
+	}
+
 	void startCellLocation() {
 		JSONArray localJSONArray = null;
 		this.mCellLocated = false;
@@ -262,7 +262,7 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 				new GoogleJSonLocationThread(localGoogleJsonLocationHandler,
 						(JSONObject) localObject).start();
 			} catch (JSONException localJSONException) {
-					localJSONException.printStackTrace();
+				localJSONException.printStackTrace();
 			}
 		}
 	}
@@ -280,8 +280,8 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 					LocationManager localLocationManager2 = this.mLocationManager;
 					String str1 = (String) localList.get(j);
 					MyLocationManager localMyLocationManager1 = this;
-					localLocationManager2.requestLocationUpdates(str1, 1L, 1.0F,
-							localMyLocationManager1);
+					localLocationManager2.requestLocationUpdates(str1, 1L,
+							1.0F, localMyLocationManager1);
 				}
 			}
 		}
@@ -289,8 +289,9 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 
 	public void stopLocation() {
 		try {
-			if(this.mLocationManager == null) {
-				this.mLocationManager = (LocationManager) mContext.getSystemService("location");
+			if (this.mLocationManager == null) {
+				this.mLocationManager = (LocationManager) mContext
+						.getSystemService("location");
 			}
 			this.mLocationManager.removeUpdates(this);
 			if (this.mTimer != null) {
