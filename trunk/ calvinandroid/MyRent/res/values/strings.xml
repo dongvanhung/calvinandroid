@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-	<string name="map_api_key">0RSTRVxpCVRGfIJLY5rlZ5gpQz7bvaLAyK7y_0w</string>
+	<!-- string name="map_api_key">0RSTRVxpCVREWO2dfqH3RS5giA-UNkfZkCcHTfA</string-->
+	<string name="map_api_key">0RSTRVxpCVREN4d_y0fFhxawRSQNcsKmSu7yLsQ</string>
 	<string name="app_name">掌上租房</string>
 	<string name="hello">掌上租房</string>
 	<string name="search_view_tab">租房搜索</string>

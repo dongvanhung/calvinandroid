@@ -23,11 +23,9 @@ public class TimerThread extends Thread{
 	      TimerHandler localTimerHandler = this.mHandler;
 	      Message localMessage = new Message();
 	      boolean bool = localTimerHandler.sendMessage(localMessage);
-	      return;
 	    }
 	    catch (InterruptedException localInterruptedException)
 	    {
-	      while (true)
 	        localInterruptedException.printStackTrace();
 	    }
 	  }

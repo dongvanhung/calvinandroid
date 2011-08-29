@@ -43,10 +43,10 @@ public abstract class AbstractThread extends Thread{
 	  protected String executeGet()
 	    throws ClientProtocolException, IOException
 	  {
-	    Object localObject;
+	    String localObject;
 	    if (StringUtils.isEmpty(getUrl()))
 	      localObject = null;
-	    while (true)
+	    else
 	    {
 	      BasicHttpParams localBasicHttpParams = new BasicHttpParams();
 	      HttpConnectionParams.setSoTimeout(localBasicHttpParams, 20000);
@@ -59,14 +59,15 @@ public abstract class AbstractThread extends Thread{
 	      localDefaultHttpClient.setCookieStore(localDefaultCookieStore);
 	      String str2 = getUrl();
 	      HttpGet localHttpGet = new HttpGet(str2);
-	      localObject = localDefaultHttpClient.execute(localHttpGet);
-	      if (((HttpResponse)localObject).getStatusLine().getStatusCode() == 200)
+	      HttpResponse hr = localDefaultHttpClient.execute(localHttpGet);
+	      if (hr.getStatusLine().getStatusCode() == 200)
 	      {
-	        localObject = EntityUtils.toString(((HttpResponse)localObject).getEntity(), "UTF-8");
-	        continue;
+	        localObject = EntityUtils.toString(hr.getEntity(), "UTF-8");
+	      } else {
+	    	  localObject = null;
 	      }
-	      localObject = null;
 	    }
+	    return localObject;
 	  }
 
 	  protected String executePost(List<BasicNameValuePair> paramList)

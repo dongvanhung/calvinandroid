@@ -129,12 +129,11 @@ public class SelectActivity extends Activity implements AutoCompleteQueryListene
 	    localButton2.setOnClickListener(new OnClickListener() {
 	    	public void onClick(View paramView)
 	    	  {
-	    	    /*if ((SelectActivity.access$200(this.this$0).getText().toString() != null) && (SelectActivity.access$200(this.this$0).getText().toString().length() > 0))
-	    	    {
-	    	      String str = SelectActivity.access$200(this.this$0).getText().toString().trim();
-	    	      SelectActivity.access$300(this.this$0, str);
-	    	      this.this$0.finish();
-	    	    }*/
+	    	      String str = SelectActivity.this.mCityShow.getText().toString().trim();
+	    	      if(str != null && str.length() > 0) {
+	    	    	  SelectActivity.this.autoCompleteQueryObtained(str);
+	    	      }
+	    	      finish();
 	    	  }
 		});
 	    TextView localTextView1 = (TextView)findViewById(R.id.bussiness_cur_city);
@@ -261,32 +260,27 @@ public class SelectActivity extends Activity implements AutoCompleteQueryListene
 	      arrayOfString = new String[localList.size()];
 	      i = 0;
 	      Iterator localIterator = localList.iterator();
-	      if (localIterator.hasNext())
+	      while (localIterator.hasNext())
 	      {
 	        AutoCompleteItemData localAutoCompleteItemData = (AutoCompleteItemData)localIterator.next();
-	        if (localAutoCompleteItemData == null)
-	          return;
-	        StringBuilder localStringBuilder1 = new StringBuilder();
-	        String str1 = localAutoCompleteItemData.suggestion;
-	        StringBuilder localStringBuilder2 = localStringBuilder1.append(str1).append("(");
-	        int k = localAutoCompleteItemData.number;
-	        String str2 = k + ")";
-	        arrayOfString[i] = str2;
+	        if (localAutoCompleteItemData != null) {
+		        StringBuilder localStringBuilder1 = new StringBuilder();
+		        String str1 = localAutoCompleteItemData.suggestion;
+		        StringBuilder localStringBuilder2 = localStringBuilder1.append(str1).append("(");
+		        int k = localAutoCompleteItemData.number;
+		        String str2 = k + ")";
+		        arrayOfString[i] = str2;
+	        }
 	      }
-	    }
-	    /*label194: for (int j = i + 1; ; j = i)
-	    {
-	      i = j;
-	      break;
-	      ArrayAdapter localArrayAdapter1 = new ArrayAdapter(this, 2130903044, arrayOfString);
+	      
+	      ArrayAdapter localArrayAdapter1 = new ArrayAdapter(this, R.layout.auto_complete_item, arrayOfString);
 	      this.mAdapter = localArrayAdapter1;
 	      AutoCompleteTextView localAutoCompleteTextView = this.mEditText;
 	      ArrayAdapter localArrayAdapter2 = this.mAdapter;
 	      localAutoCompleteTextView.setAdapter(localArrayAdapter2);
 	      this.mAdapter.notifyDataSetChanged();
 	      this.mEditText.showDropDown();
-	      return;
-	    }*/
+	    }
 	  }
 
 	  protected void onActivityResult(int paramInt1, int paramInt2, Intent paramIntent)
