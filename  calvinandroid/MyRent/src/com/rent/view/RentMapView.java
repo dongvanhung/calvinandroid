@@ -32,12 +32,9 @@ public class RentMapView extends MapView {
 	public void draw(Canvas paramCanvas) {
 		try {
 			super.draw(paramCanvas);
-			return;
 		} catch (Exception localException) {
-			while (true) {
 				String str = localException.toString();
 				int i = Log.e("RentMapView", str);
-			}
 		}
 	}
 

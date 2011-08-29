@@ -205,6 +205,9 @@ public class SearchInListActivity extends Activity implements
 				    if ((!SearchInListActivity.access$300(this.this$0)) && (paramInt3 > 0) && (!SearchInListActivity.access$200(this.this$0)))
 				    {*/
 				if(paramInt3 > 0) {
+					Log.i("scrollItem-param1", String.valueOf(paramInt1));
+					Log.i("scrollItem-param2", String.valueOf(paramInt2));
+					Log.i("scrollItem-param3", String.valueOf(paramInt3));
 				      int i = paramInt1 + paramInt2;
 				      if (paramInt3 == i)
 				      {

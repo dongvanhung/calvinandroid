@@ -24,15 +24,13 @@ public class MarsLocationOverlay extends MyLocationOverlay {
 	    DoublePoint localDoublePoint = PreferenceUtils.getMarsLocation(this.mContext);
 	    double d1 = localDoublePoint.mLat;
 	    double d2 = localDoublePoint.mLon;
-	    int i = (int)(d1 * 0.0F);
-	    int j = (int)(d2 * 0.0F);
-	    GeoPoint localGeoPoint = new GeoPoint(i, j);
+	    GeoPoint localGeoPoint = new GeoPoint((int)d1, (int)d2);
 	    MarsLocationOverlay localMarsLocationOverlay = this;
 	    Canvas localCanvas = paramCanvas;
 	    MapView localMapView = paramMapView;
 	    Location localLocation = paramLocation;
 	    long l = paramLong;
-	    localMarsLocationOverlay.drawMyLocation(localCanvas, localMapView, localLocation, localGeoPoint, l);
+	    super.drawMyLocation(localCanvas, localMapView, localLocation, localGeoPoint, l);
 	  }
 
 }

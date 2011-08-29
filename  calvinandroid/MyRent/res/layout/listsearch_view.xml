@@ -3,7 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/shape" android:layout_width="fill_parent" android:layout_height="45.0dip">
         <ImageView android:id="@id/goto_other_imageview" android:layout_marginLeft="8.0dip" android:layout_marginRight="0.0dip" android:src="@drawable/map_icon" android:scaleType="center" style="@style/title_label_leftbutton_linearlayout" />
-        <EditText android:textSize="17.0dip" android:id="@id/search_edittext" android:layout_marginLeft="8.0dip" android:layout_marginRight="8.0dip" android:layout_weight="1.0" style="@style/input_location_edit" />
+        <EditText android:textSize="17.0dip" android:id="@id/search_edittext" android:layout_marginLeft="8.0dip" android:layout_marginRight="8.0dip" android:layout_weight="2.0" style="@style/input_location_edit" />
         <ImageView android:id="@id/locate_my" android:layout_marginLeft="0.0dip" android:layout_marginRight="1.0dip" android:src="@drawable/locate" style="@style/title_label_rightbutton_linearlayout" />
         <ImageView android:id="@id/record_cordition" android:layout_marginLeft="0.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/bookmark_icon" android:scaleType="center" style="@style/title_label_rightbutton_linearlayout" />
     </LinearLayout>

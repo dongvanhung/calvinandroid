@@ -465,10 +465,10 @@ public class Rent extends Application {
 					break;
 				localByteArrayOutputStream.write(arrayOfByte, 0, i);
 			}
-			bm = BitmapFactory.decodeByteArray(arrayOfByte, 0,
-					arrayOfByte.length);
 			localByteArrayOutputStream.close();
 			localInputStream.close();
+			byte[] rlt = localByteArrayOutputStream.toByteArray();
+			bm = BitmapFactory.decodeByteArray(rlt, 0, rlt.length);
 		}
 		return bm;
 

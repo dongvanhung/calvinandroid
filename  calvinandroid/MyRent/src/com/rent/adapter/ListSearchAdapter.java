@@ -72,10 +72,10 @@ public class ListSearchAdapter extends BaseAdapter {
 				localObject1.setVisibility(0);
 				localObject2.setVisibility(8);
 				l = ((Community) this.mCommList.get(paramInt)).mGroupId;
-				localObject1 = (ImageView) localView
+				ImageView img = (ImageView) localView
 						.findViewById(R.id.search_list_image);
 				ListSearchAdapterThread adapterThread = new ListSearchAdapterThread(
-						this, paramInt, (ImageView) localObject1);
+						this, paramInt, img);
 				FutureTask<String> task = new FutureTask<String>(adapterThread);
 				new Thread(task).start();
 				
@@ -86,7 +86,7 @@ public class ListSearchAdapter extends BaseAdapter {
 					GroupImageManager localGroupImageManager2 = this.mGroupSDCardManager;
 					String str2 = l + ".png";
 					Bitmap localBitmap = localGroupImageManager2.getBitmap(str2);
-					((ImageView) localObject1).setImageBitmap(localBitmap);
+					img.setImageBitmap(localBitmap);
 					TextView localTextView1 = (TextView) localView
 							.findViewById(R.id.cell_title);
 					String str3 = ((Community) this.mCommList.get(paramInt)).mName;
@@ -95,20 +95,21 @@ public class ListSearchAdapter extends BaseAdapter {
 							.findViewById(R.id.cell_sourcecount);
 					StringBuilder localStringBuilder1 = new StringBuilder().append("(");
 					int i = ((Community) this.mCommList.get(paramInt)).mSourceCount;
-					String str4 = i + ")";
-					localTextView2.setText(str4);
-					localObject1 = (TextView) localView.findViewById(R.id.cell_price);
+					localTextView2.setText(localStringBuilder1.append(i + ")"));
+					TextView text = (TextView) localView.findViewById(R.id.cell_price);
 					/*
 					 * if (((Community) this.mCommList.get(paramInt)).mPrice > 0)
 					 * //TODO: return null;
 					 */
-					String str5 = this.mNoPricePrompt;
-					((TextView) localObject1).setText(str5);
+					text.setText(this.mNoPricePrompt);
 					TextView localTextView3 = (TextView) localView
 							.findViewById(R.id.cell_address);
 					String str6 = ((Community) this.mCommList.get(paramInt)).mAddress;
 					localTextView3.setText(str6);
 				}
+			} else {
+				((View) localObject1).setVisibility(8);
+				((View) localObject2).setVisibility(0);
 			}
 		} catch (Exception localException) {
 			/*StringBuilder localStringBuilder2 = new StringBuilder();
@@ -117,8 +118,6 @@ public class ListSearchAdapter extends BaseAdapter {
 			String str7 = this.mPriceUnitSrt;
 			((TextView) localObject1).setText(str7);*/
 		}
-		((View) localObject1).setVisibility(8);
-		((View) localObject2).setVisibility(0);
 		return localView;
 	}
 

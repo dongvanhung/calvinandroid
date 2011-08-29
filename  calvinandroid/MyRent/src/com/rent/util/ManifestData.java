@@ -34,9 +34,10 @@ public class ManifestData {
 	      String str = paramContext.getPackageName();
 	      localObject1 = localPackageManager.getApplicationInfo(str, 128).metaData.get(paramString);
 	    }
-	    catch (PackageManager.NameNotFoundException e)
+	    catch (Exception e)
 	    {
 	    	e.printStackTrace();
+	    	localObject1 = "";
 	    }
 	    return localObject1;
 	  }

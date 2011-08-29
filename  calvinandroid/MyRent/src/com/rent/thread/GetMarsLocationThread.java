@@ -67,6 +67,7 @@ public class GetMarsLocationThread extends com.rent.location.AbstractThread{
 	      }
 	    }
 	    catch (Exception localException){
+	    	localException.printStackTrace();
 	       this.handler.sendEmptyMessage(1);
 	    }
 	  }

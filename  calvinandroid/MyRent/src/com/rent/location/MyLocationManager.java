@@ -62,9 +62,9 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 					paramJSONArray);
 			return localJSONObject1;
 		} catch (JSONException localJSONException) {
-			while (true)
 				Log.e(TAG, "call JSONObject's put failed", localJSONException);
 		}
+		return null;
 	}
 
 	private JSONArray getCellJSon() {
@@ -262,7 +262,6 @@ public class MyLocationManager implements GoogleJSonLocationListener, LocationLi
 				new GoogleJSonLocationThread(localGoogleJsonLocationHandler,
 						(JSONObject) localObject).start();
 			} catch (JSONException localJSONException) {
-				while (true)
 					localJSONException.printStackTrace();
 			}
 		}

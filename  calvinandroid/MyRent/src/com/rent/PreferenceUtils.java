@@ -58,7 +58,7 @@ public class PreferenceUtils {
 	  public static void saveCityName(Context paramContext, String paramString)
 	  {
 	    SharedPreferences localSharedPreferences = paramContext.getSharedPreferences("location_point", 0);
-	    String str1 = paramContext.getString(2131361852);
+	    String str1 = paramContext.getString(R.string.defalut_city);
 	    String str2 = localSharedPreferences.getString("current_city", str1);
 	    SharedPreferences.Editor localEditor1 = localSharedPreferences.edit();
 	    SharedPreferences.Editor localEditor2 = localEditor1.putString("current_city", paramString);

@@ -21,6 +21,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 import com.google.android.maps.Projection;
@@ -174,8 +175,7 @@ public class SearchOnMapActivity extends MapActivity implements
 		this.mOverlayList.clear();
 		this.mOverlay.setVisibility(8);
 		List localList = this.mMapView.getOverlays();
-		MarsLocationOverlay localMarsLocationOverlay = this.mMyLocation;
-		boolean bool1 = localList.add(localMarsLocationOverlay);
+		boolean bool1 = localList.add(this.mMyLocation);
 		Drawable localDrawable = getResources().getDrawable(R.drawable.pin_icon);
 		Context localContext = this.mContext;
 		View localView = this.mOverlay;
@@ -365,6 +365,7 @@ public class SearchOnMapActivity extends MapActivity implements
 		RentMapView localRentMapView3 = this.mMapView;
 		MarsLocationOverlay localMarsLocationOverlay = new MarsLocationOverlay(
 				this, localRentMapView3);
+//		this.mMyLocation = new MyLocationOverlay(this, localRentMapView3);
 		this.mMyLocation = localMarsLocationOverlay;
 		boolean bool = this.mMyLocation.enableMyLocation();
 		SearchHandler localSearchHandler = new SearchHandler(this);
@@ -684,9 +685,11 @@ public class SearchOnMapActivity extends MapActivity implements
 					"lat", "39.920591"));
 			double d2 = Double.parseDouble(localSharedPreferences.getString(
 					"lon", "116.432791"));
-			int i = (int) (d1 * 1000000.0D);
-			int j = (int) (d2 * 0.0F);
-			GeoPoint localGeoPoint = new GeoPoint(i, j);
+			d1 = 39.920591;
+			d2 = 116.432791;
+//			int i = (int) (d1 * 1000000.0D);
+//			int j = (int) (d2 * 0.0F);
+			GeoPoint localGeoPoint = new GeoPoint((int)d1, (int)d2);
 			this.mMapControl.setCenter(localGeoPoint);
 		case 2:
 			if (paramSearchHandler == null) {
