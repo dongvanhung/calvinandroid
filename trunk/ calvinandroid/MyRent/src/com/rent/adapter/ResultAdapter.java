@@ -3,6 +3,8 @@ package com.rent.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rent.R;
+import com.rent.Rent;
+import com.rent.activitiy.ResultActivity;
 import com.rent.data.HouseSource;
 
 public class ResultAdapter extends BaseAdapter {
@@ -93,20 +98,20 @@ public class ResultAdapter extends BaseAdapter {
 		StringBuffer localStringBuffer1 = null;
 		if (paramInt == 0) {
 			View localView2 = LayoutInflater.from(this.mContext).inflate(
-					2130903107, null);
+					com.rent.R.layout.result_row_community, null);
 			TextView localTextView1 = (TextView) localView2
-					.findViewById(2131492930);
+					.findViewById(com.rent.R.id.name);
 			String str1 = this.mName;
 			localTextView1.setText(str1);
 			TextView localObject2 = (TextView) localView2
-					.findViewById(2131492931);
+					.findViewById(R.id.price);
 			if (this.mPrice == 0) {
-				String str2 = this.mContext.getString(2131361825);
+				String str2 = this.mContext.getString(R.string.unavailable2);
 				localObject2.setText(str2);
 			}
-			while (true) {
+			else {
 				TextView localTextView2 = (TextView) localView2
-						.findViewById(2131493145);
+						.findViewById(R.id.sourcecount);
 				this.mSourceNumberTextView = localTextView2;
 				if (this.init) {
 					showIsLoading(true);
@@ -116,14 +121,14 @@ public class ResultAdapter extends BaseAdapter {
 						|| (this.mSourceNumberTextView.getText().toString()
 								.length() == 0)) {
 					TextView localTextView3 = this.mSourceNumberTextView;
-					String str3 = this.mContext.getString(2131361946);
+					String str3 = this.mContext.getString(R.string.community_detail_sourcecount);
 					Object[] arrayOfObject1 = new Object[1];
 					Integer localInteger1 = Integer.valueOf(this.mSourceCount);
 					arrayOfObject1[0] = localInteger1;
 					String str4 = String.format(str3, arrayOfObject1);
 					localTextView3.setText(str4);
 				}
-				String str5 = this.mContext.getString(2131361952);
+				String str5 = this.mContext.getString(R.string.rent_average_price_mount);
 				Object[] arrayOfObject2 = new Object[1];
 				Integer localInteger2 = Integer.valueOf(this.mPrice);
 				arrayOfObject2[0] = localInteger2;
@@ -141,41 +146,41 @@ public class ResultAdapter extends BaseAdapter {
 				int k = this.mCategoryIndice[i];
 				if (paramInt == k) {
 					View localView3 = LayoutInflater.from(this.mContext).inflate(
-							2130903106, null);
+							R.layout.result_row_category, null);
 					TextView localObject2 = (TextView) localView3
-							.findViewById(2131493144);
+							.findViewById(R.id.category);
 					switch (i) {
 					default:
 					case 0:
-						String str7 = this.mContext.getString(2131362046);
+						String str7 = this.mContext.getString(R.string.housesource_category_0);
 						((TextView) localObject2).setText(str7);
 					case 1:
-						String str8 = this.mContext.getString(2131362047);
+						String str8 = this.mContext.getString(R.string.housesource_category_1);
 						((TextView) localObject2).setText(str8);
 					case 2:
-						String str9 = this.mContext.getString(2131362048);
+						String str9 = this.mContext.getString(R.string.housesource_category_2);
 						((TextView) localObject2).setText(str9);
 					}
 					i += 1;
 				}
 				localView1 = LayoutInflater.from(this.mContext).inflate(
-						2130903105, null);
-				Object localObject1 = localView1.findViewById(2131493136);
+						R.layout.result_row, null);
+				Object localObject1 = localView1.findViewById(R.id.result_layout_view);
 				Object localObject2 = (TextView) localView1
-						.findViewById(2131493092);
+						.findViewById(R.id.result_load_more_text);
 				int[] arrayOfInt = this.mCategoryIndice;
 				int m = getVirtualViewItemIndex(paramInt, 1, arrayOfInt);
 				int n = this.mItemCount;
 				if (m < n) {
 					((View) localObject1).setVisibility(0);
 					((TextView) localObject2).setVisibility(8);
-					localObject2 = (TextView) localView1.findViewById(2131493140);
+					localObject2 = (TextView) localView1.findViewById(R.id.result_list_title);
 					String str10 = ((HouseSource) this.mHouseList.get(m)).mTitle;
 					((TextView) localObject2).setText(str10);
-					localObject1 = (TextView) localView1.findViewById(2131493141);
+					localObject1 = (TextView) localView1.findViewById(R.id.result_detail_left);
 					localStringBuffer1 = new StringBuffer();
 					if (((HouseSource) this.mHouseList.get(m)).mRentType == 0) {
-						String str11 = this.mContext.getString(2131361936);
+						String str11 = this.mContext.getString(R.string.rent_favourite_rent_type_lease_all);
 						StringBuffer localStringBuffer2 = localStringBuffer1
 								.append(str11);
 						StringBuffer localStringBuffer3 = localStringBuffer1
@@ -190,11 +195,11 @@ public class ResultAdapter extends BaseAdapter {
 						String str13 = localStringBuffer1.toString();
 						StringBuilder localStringBuilder2 = localStringBuilder1
 								.append(str13);
-						String str14 = this.mContext.getString(2131361865);
+						String str14 = this.mContext.getString(R.string.sq_meter);
 						String str15 = str14;
 						((TextView) localObject1).setText(str15);
 						TextView localTextView4 = (TextView) localView1
-								.findViewById(2131493137);
+								.findViewById(R.id.result_detail_right);
 						StringBuilder localStringBuilder3 = new StringBuilder();
 						int i2 = ((HouseSource) this.mHouseList.get(m)).mPrice;
 						String str16 = i2 + "";
@@ -203,12 +208,12 @@ public class ResultAdapter extends BaseAdapter {
 								&& (((HouseSource) this.mHouseList.get(m)).mAgency
 										.length() > 0)) {
 							TextView localTextView5 = (TextView) localView1
-									.findViewById(2131493139);
+									.findViewById(R.id.agency_status);
 							String str17 = ((HouseSource) this.mHouseList.get(m)).mAgency;
 							localTextView5.setText(str17);
 						}
 						localObject1 = (ImageView) localView1
-								.findViewById(2131493142);
+								.findViewById(R.id.result_pic);
 						if ((((HouseSource) this.mHouseList.get(m)).mImage != null)
 								&& (((HouseSource) this.mHouseList.get(m)).mImage
 										.length() != 0)) {
@@ -219,7 +224,7 @@ public class ResultAdapter extends BaseAdapter {
 				}
 				while (true) {
 					localObject2 = localView1;
-					String str18 = this.mContext.getString(2131361937);
+					String str18 = this.mContext.getString(R.string.rent_favourite_rent_type_lease_part);
 					StringBuffer localStringBuffer6 = localStringBuffer1
 							.append(str18);
 					((ImageView) localObject1).setVisibility(0);
@@ -246,27 +251,41 @@ public class ResultAdapter extends BaseAdapter {
 		public void run() {
 			Looper.prepare();
 			try {
-				/*
-				 * ArrayList localArrayList =
-				 * ResultAdapter.access$000(this.this$0); int i =
-				 * this.val$index; byte[] arrayOfByte =
-				 * Rent.downLoadImage(((HouseSource
-				 * )localArrayList.get(i)).mImage); int j = arrayOfByte.length;
-				 * Bitmap localBitmap1 =
-				 * BitmapFactory.decodeByteArray(arrayOfByte, 0, j); int k =
-				 * this.val$pic.getWidth(); int m = this.val$pic.getHeight();
-				 * Bitmap localBitmap2 = Bitmap.createScaledBitmap(localBitmap1,
-				 * k, m, 1); ResultActivity localResultActivity =
-				 * (ResultActivity)ResultAdapter.access$100(this.this$0);
-				 * ResultAdapter.1.1 local1 = new ResultAdapter.1.1(this,
-				 * localBitmap2); localResultActivity.runOnUiThread(local1);
-				 */
+				
+				 ArrayList localArrayList = ResultAdapter.this.mHouseList;
+				 byte[] arrayOfByte = Rent.downLoadImage(((HouseSource)localArrayList.get(m)).mImage); 
+				 int j = arrayOfByte.length;
+				 Bitmap localBitmap1 = BitmapFactory.decodeByteArray(arrayOfByte, 0, j); 
+				 int k = imageView.getWidth(); 
+				 int m = imageView.getHeight();
+				 Bitmap localBitmap2 = Bitmap.createScaledBitmap(localBitmap1, k, m, true); 
+				 ResultAdapter11 adapter11 = new ResultAdapter11(localBitmap2, imageView);
+				 ((ResultActivity)adapter.mContext).runOnUiThread(adapter11);
+				 
 			} catch (Exception localException) {
 				localException.printStackTrace();
 			} finally {
 				Looper.myLooper().quit();
 			}
 		}
+	}
+	
+	final class ResultAdapter11 implements Runnable
+	{
+		private Bitmap bm;
+		private ImageView imageView;
+		public ResultAdapter11(Bitmap bm,
+				ImageView imageView) {
+			this.bm = bm;
+			this.imageView = imageView;
+		}
+		
+	  public void run()
+	  {
+	    ImageView localImageView = imageView;
+	    Bitmap localBitmap = bm;
+	    localImageView.setImageBitmap(localBitmap);
+	  }
 	}
 
 	public void setHouseList(ArrayList<HouseSource> paramArrayList) {
@@ -317,11 +336,11 @@ public class ResultAdapter extends BaseAdapter {
 		} else {
 			if (paramBoolean) {
 				TextView localTextView1 = this.mSourceNumberTextView;
-				String str1 = this.mContext.getString(2131361897);
+				String str1 = this.mContext.getString(R.string.on_loading);
 				localTextView1.setText(str1);
 			} else {
 				TextView localTextView2 = this.mSourceNumberTextView;
-				String str2 = this.mContext.getString(2131361946);
+				String str2 = this.mContext.getString(R.string.community_detail_sourcecount);
 				Object[] arrayOfObject = new Object[1];
 				Integer localInteger = Integer.valueOf(this.mSourceCount);
 				arrayOfObject[0] = localInteger;

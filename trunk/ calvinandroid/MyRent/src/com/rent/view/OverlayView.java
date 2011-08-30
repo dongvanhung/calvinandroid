@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -69,23 +70,23 @@ public class OverlayView extends LinearLayout {
 			this.mArrowLength = j;
 			ImageView localImageView8 = this.mArrowLeft;
 			LinearLayout.LayoutParams localLayoutParams1 = new LinearLayout.LayoutParams(
-					-1, -1, 0.0F);
+					ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F);
 			addView(localImageView8, localLayoutParams1);
 			ImageView localImageView9 = this.mLeftView;
 			LinearLayout.LayoutParams localLayoutParams2 = new LinearLayout.LayoutParams(
-					-1, -1, 0.0F);
+					ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F);
 			addView(localImageView9, localLayoutParams2);
 			ImageView localImageView10 = this.mArrowView;
 			LinearLayout.LayoutParams localLayoutParams3 = new LinearLayout.LayoutParams(
-					-1, -1, 0.0F);
+					ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F);
 			addView(localImageView10, localLayoutParams3);
 			ImageView localImageView11 = this.mRightView;
 			LinearLayout.LayoutParams localLayoutParams4 = new LinearLayout.LayoutParams(
-					-1, -1, 0.0F);
+					ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F);
 			addView(localImageView11, localLayoutParams4);
 			ImageView localImageView12 = this.mArrowRight;
 			LinearLayout.LayoutParams localLayoutParams5 = new LinearLayout.LayoutParams(
-					-1, -1, 0.0F);
+					ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F);
 			addView(localImageView12, localLayoutParams5);
 		} catch (Exception localException) {
 			Log.e("error", localException.getCause().getMessage());
@@ -147,11 +148,11 @@ public class OverlayView extends LinearLayout {
 			k5 = 0;
 		if (l1 <= 0)
 			l1 = 0;
-		/*imageview = mLeftView;
-		layoutparams = new android.widget.LinearLayout.LayoutParams(k5, -1, 0F);
-		imageview.setLayoutParams(layoutparams);*/
-		/*imageview1 = mRightView;
-		layoutparams1 = new android.widget.LinearLayout.LayoutParams(l1, -1, 0F);
-		imageview1.setLayoutParams(layoutparams1);*/
+		imageview = mLeftView;
+		layoutparams = new android.widget.LinearLayout.LayoutParams(k5, ViewGroup.LayoutParams.WRAP_CONTENT, 0F);
+		imageview.setLayoutParams(layoutparams);
+		imageview1 = mRightView;
+		layoutparams1 = new android.widget.LinearLayout.LayoutParams(l1, ViewGroup.LayoutParams.WRAP_CONTENT, 0F);
+		imageview1.setLayoutParams(layoutparams1);
 	}
 }
