@@ -220,11 +220,11 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 		try {
 			if ((size() > paramInt)
 					&& (((Community) this.mCellList.get(paramInt)).mFlag == 0)) {
-				/*RentMapOverlayItem2 local2 = new RentMapOverlayItem2(paramInt);
+				RentMapOverlayItem2 local2 = new RentMapOverlayItem2(paramInt);
 				FutureTask<String> task = new FutureTask<String>(local2);
 				new Thread(task).start();
 
-				if (task.get().equals("success")) {*/
+				if (task.get().equals("success")) {
 
 					GroupImageManager localGroupImageManager1 = this.mGroupPicSDCardManager;
 					StringBuilder localStringBuilder1 = new StringBuilder();
@@ -247,22 +247,29 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 					String str3 = ((Community) this.mCellList.get(paramInt)).mName;
 					localTextView1.setText(str3);
 					int j = this.mFlag;
-					/*
-					 * if (2 != j) { TextView localObject1 = (TextView)
-					 * this.mOverlayView .findViewById(R.id.overlay_price);
-					 * StringBuffer localObject2 = new StringBuffer();
-					 * StringBuffer localStringBuffer1 = ((StringBuffer)
-					 * localObject2) .append("<font color=\"#65de53\">"); if
-					 * (((Community) this.mCellList.get(paramInt)).mPrice > 0){}
-					 * //TODO: String str4 =
-					 * this.mContext.getString(R.string.unavailable2);
-					 * StringBuffer localStringBuffer2 = ((StringBuffer)
-					 * localObject2) .append(str4); StringBuffer
-					 * localStringBuffer3 = ((StringBuffer) localObject2)
-					 * .append("<font>"); Spanned localSpanned1 = Html
-					 * .fromHtml(((StringBuffer) localObject2) .toString());
-					 * ((TextView) localObject1).setText(localSpanned1); }
-					 */
+					
+					 if (2 != j) { 
+						TextView localObject1 = (TextView) this.mOverlayView
+								.findViewById(R.id.overlay_price);
+						StringBuffer localObject2 = new StringBuffer();
+						StringBuffer localStringBuffer1 = ((StringBuffer) localObject2)
+								.append("<font color=\"#65de53\">");
+						String str4 = "";
+						if (((Community) this.mCellList.get(paramInt)).mPrice > 0) {
+							str4 = String.valueOf(((Community) this.mCellList.get(paramInt)).mPrice);
+						} else {
+							str4 = this.mContext.getString(R.string.unavailable2);
+						}
+						StringBuffer localStringBuffer2 = ((StringBuffer) localObject2)
+								.append(str4);
+						StringBuffer localStringBuffer3 = ((StringBuffer) localObject2)
+								.append("<font>");
+						Spanned localSpanned1 = Html
+								.fromHtml(((StringBuffer) localObject2)
+										.toString());
+						((TextView) localObject1).setText(localSpanned1);
+					 }
+					 
 					int k = this.mFlag;
 					if (2 == k) {
 						TextView localTextView3 = (TextView) this.mOverlayView
@@ -364,7 +371,7 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 					RelativeLayout.LayoutParams localObject2 = (RelativeLayout.LayoutParams) ((OverlayView) localObject1)
 							.getLayoutParams();
 					if (flag) {
-						int i57 = localLayoutParams1.width;
+						/*int i57 = localLayoutParams1.width;
 						int i58 = localLayoutParams1.height;
 						RelativeLayout.LayoutParams localLayoutParams4 = new RelativeLayout.LayoutParams(
 								i57, i58);
@@ -378,7 +385,7 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 						RelativeLayout.LayoutParams localLayoutParams5 = new RelativeLayout.LayoutParams(
 								i61, i62);
 						localLayoutParams5.addRule(12);
-						localObject1.setLayoutParams(localLayoutParams5);
+						localObject1.setLayoutParams(localLayoutParams5);*/
 					} else {
 						int i12 = localLayoutParams1.width;
 						int i13 = localLayoutParams1.height;
@@ -434,7 +441,7 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 					((ImageView) this.mOverlayView
 							.findViewById(R.id.overlay_pic))
 							.setImageBitmap(localBitmap2);
-//				}
+				}
 			} else {
 				return super.onTap(paramInt);
 			}
