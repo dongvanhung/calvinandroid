@@ -61,11 +61,11 @@ public class OverlayView extends LinearLayout {
 		this.mArrowRight = localImageView7;
 		this.mArrowRight.setImageResource(R.drawable.right);
 		try {
-			int i = BitmapFactory.decodeResource(getResources(), R.drawable.left)
-					.getWidth();
+			int i = BitmapFactory.decodeResource(getResources(),
+					R.drawable.left).getWidth();
 			this.mSideLength = i;
-			int j = BitmapFactory.decodeResource(getResources(), R.drawable.arrow_up)
-					.getWidth();
+			int j = BitmapFactory.decodeResource(getResources(),
+					R.drawable.arrow_up).getWidth();
 			this.mArrowLength = j;
 			ImageView localImageView8 = this.mArrowLeft;
 			LinearLayout.LayoutParams localLayoutParams1 = new LinearLayout.LayoutParams(
@@ -87,59 +87,71 @@ public class OverlayView extends LinearLayout {
 			LinearLayout.LayoutParams localLayoutParams5 = new LinearLayout.LayoutParams(
 					-1, -1, 0.0F);
 			addView(localImageView12, localLayoutParams5);
-			return;
 		} catch (Exception localException) {
 			Log.e("error", localException.getCause().getMessage());
 		}
 	}
 
-	public void refreshView(int paramInt1, int paramInt2, int paramInt3,
-			boolean paramBoolean, int paramInt4, int paramInt5) {
-		int i = 0;
-		int j = 0;
-		if (paramBoolean) {
-			this.mArrowView.setImageResource(R.drawable.arrow_down);
+	public void refreshView(int i, int j, int k, boolean flag, int l, int i1) {
+		int l1;
+		int l2;
+		int i3;
+		int j3;
+		int k3;
+		int l3;
+		int i4;
+		int j4;
+		int k4;
+		int l4;
+		int i5;
+		int j5;
+		int k5;
+		ImageView imageview;
+		android.widget.LinearLayout.LayoutParams layoutparams;
+		ImageView imageview1;
+		android.widget.LinearLayout.LayoutParams layoutparams1;
+		if (flag) {
+			mArrowView.setImageResource(R.drawable.arrow_down);
 			setGravity(49);
-			if (paramInt3 >= paramInt1) {
-				i = this.mSideLength + paramInt1;
-				j = this.mArrowLength / 2;
-			} else {
-				int k = paramInt3;
-					if (k > paramInt2) {
-						int m = this.mSideLength;
-						int n = paramInt2 - m;
-						int i1 = this.mArrowLength / 2;
-						k = n - i1;
-					}
-					int i2 = k - paramInt1;
-					int i3 = this.mSideLength;
-					int i4 = i2 - i3;
-					int i5 = this.mArrowLength / 2;
-					int i6 = i4 - i5;
-					int i7 = paramInt2 - k;
-					int i8 = this.mSideLength;
-					int i9 = i7 - i8;
-					int i10 = this.mArrowLength / 2;
-					int i11 = i9 - i10;
-					int i12 = (int) UIUtils.dip2Px(this.mContext, 16.0F);
-					int i13 = i6 + i12;
-					k = i11 - i12;
-					if (i13 <= 0)
-						i13 = 0;
-					if (k <= 0)
-						k = 0;
-					ImageView localImageView1 = this.mLeftView;
-					LinearLayout.LayoutParams localLayoutParams1 = new LinearLayout.LayoutParams(
-							i13, -1, 0.0F);
-					localImageView1.setLayoutParams(localLayoutParams1);
-					ImageView localImageView2 = this.mRightView;
-					LinearLayout.LayoutParams localLayoutParams2 = new LinearLayout.LayoutParams(
-							k, -1, 0.0F);
-					localImageView2.setLayoutParams(localLayoutParams2);
-					//
-			}
-			this.mArrowView.setImageResource(R.drawable.arrow_up);
+		} else {
+			mArrowView.setImageResource(R.drawable.arrow_up);
 			setGravity(81);
 		}
+		if (k < i) {
+			int j1 = mSideLength + i;
+			int k1 = mArrowLength / 2;
+			l1 = j1 + k1;
+		} else {
+			l1 = k;
+		}
+		if (l1 > j) {
+			int i2 = mSideLength;
+			int j2 = j - i2;
+			int k2 = mArrowLength / 2;
+			l1 = j2 - k2;
+		}
+		l2 = l1 - i;
+		i3 = mSideLength;
+		j3 = l2 - i3;
+		k3 = mArrowLength / 2;
+		l3 = j3 - k3;
+		i4 = j - l1;
+		j4 = mSideLength;
+		k4 = i4 - j4;
+		l4 = mArrowLength / 2;
+		i5 = k4 - l4;
+		j5 = (int) UIUtils.dip2Px(mContext, 16F);
+		k5 = l3 + j5;
+		l1 = i5 - j5;
+		if (k5 <= 0)
+			k5 = 0;
+		if (l1 <= 0)
+			l1 = 0;
+		/*imageview = mLeftView;
+		layoutparams = new android.widget.LinearLayout.LayoutParams(k5, -1, 0F);
+		imageview.setLayoutParams(layoutparams);*/
+		/*imageview1 = mRightView;
+		layoutparams1 = new android.widget.LinearLayout.LayoutParams(l1, -1, 0F);
+		imageview1.setLayoutParams(layoutparams1);*/
 	}
 }

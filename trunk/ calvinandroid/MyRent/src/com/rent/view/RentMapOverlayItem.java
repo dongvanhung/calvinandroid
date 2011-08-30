@@ -18,6 +18,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -219,11 +220,11 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 		try {
 			if ((size() > paramInt)
 					&& (((Community) this.mCellList.get(paramInt)).mFlag == 0)) {
-				RentMapOverlayItem2 local2 = new RentMapOverlayItem2(paramInt);
+				/*RentMapOverlayItem2 local2 = new RentMapOverlayItem2(paramInt);
 				FutureTask<String> task = new FutureTask<String>(local2);
 				new Thread(task).start();
 
-				if (task.get().equals("success")) {
+				if (task.get().equals("success")) {*/
 
 					GroupImageManager localGroupImageManager1 = this.mGroupPicSDCardManager;
 					StringBuilder localStringBuilder1 = new StringBuilder();
@@ -236,90 +237,84 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 						String str2 = l2 + ".png";
 						Bitmap localBitmap1 = localGroupImageManager2
 								.getBitmap(str2);
-						((ImageView) this.mOverlayView.findViewById(R.id.overlay_pic))
+						((ImageView) this.mOverlayView
+								.findViewById(R.id.overlay_pic))
 								.setImageBitmap(localBitmap1);
+					}
+					this.mClickOnIndex = paramInt;
+					TextView localTextView1 = (TextView) this.mOverlayView
+							.findViewById(R.id.overlay_title);
+					String str3 = ((Community) this.mCellList.get(paramInt)).mName;
+					localTextView1.setText(str3);
+					int j = this.mFlag;
+					/*
+					 * if (2 != j) { TextView localObject1 = (TextView)
+					 * this.mOverlayView .findViewById(R.id.overlay_price);
+					 * StringBuffer localObject2 = new StringBuffer();
+					 * StringBuffer localStringBuffer1 = ((StringBuffer)
+					 * localObject2) .append("<font color=\"#65de53\">"); if
+					 * (((Community) this.mCellList.get(paramInt)).mPrice > 0){}
+					 * //TODO: String str4 =
+					 * this.mContext.getString(R.string.unavailable2);
+					 * StringBuffer localStringBuffer2 = ((StringBuffer)
+					 * localObject2) .append(str4); StringBuffer
+					 * localStringBuffer3 = ((StringBuffer) localObject2)
+					 * .append("<font>"); Spanned localSpanned1 = Html
+					 * .fromHtml(((StringBuffer) localObject2) .toString());
+					 * ((TextView) localObject1).setText(localSpanned1); }
+					 */
+					int k = this.mFlag;
+					if (2 == k) {
+						TextView localTextView3 = (TextView) this.mOverlayView
+								.findViewById(R.id.overlay_fit);
+						String str8 = ((Community) this.mCellList.get(paramInt)).mAddress;
+						localTextView3.setText(str8);
 					} else {
-						this.mClickOnIndex = paramInt;
-						TextView localTextView1 = (TextView) this.mOverlayView
-								.findViewById(R.id.overlay_title);
-						String str3 = ((Community) this.mCellList.get(paramInt)).mName;
-						localTextView1.setText(str3);
-						int j = this.mFlag;
-						if (2 != j) {
-							TextView localObject1 = (TextView) this.mOverlayView
-									.findViewById(R.id.overlay_price);
-							StringBuffer localObject2 = new StringBuffer();
-							StringBuffer localStringBuffer1 = ((StringBuffer) localObject2)
-									.append("<font color=\"#65de53\">");
-							if (((Community) this.mCellList.get(paramInt)).mPrice > 0){} //TODO:
-							String str4 = this.mContext.getString(R.string.unavailable2);
-							StringBuffer localStringBuffer2 = ((StringBuffer) localObject2)
-									.append(str4);
-							StringBuffer localStringBuffer3 = ((StringBuffer) localObject2)
-									.append("<font>");
-							Spanned localSpanned1 = Html
-									.fromHtml(((StringBuffer) localObject2)
-											.toString());
-							((TextView) localObject1).setText(localSpanned1);
-						}
-						int k = this.mFlag;
-						if (2 == k) {
-							TextView localTextView3 = (TextView) this.mOverlayView
-									.findViewById(R.id.overlay_fit);
-							String str8 = ((Community) this.mCellList
-									.get(paramInt)).mAddress;
-							localTextView3.setText(str8);
+						TextView localTextView2 = (TextView) this.mOverlayView
+								.findViewById(R.id.overlay_fit);
+						String str5 = this.mContext
+								.getString(R.string.have_some_cells_for_condition);
+						Object[] arrayOfObject1 = new Object[3];
+						arrayOfObject1[0] = "<font color=\"#f27a04\">";
+						Integer localInteger1 = Integer
+								.valueOf(((Community) this.mCellList
+										.get(paramInt)).mSourceCount);
+						arrayOfObject1[1] = localInteger1;
+						arrayOfObject1[2] = "</font>";
+						Spanned localSpanned2 = Html.fromHtml(String.format(
+								str5, arrayOfObject1));
+						localTextView2.setText(localSpanned2);
+					}
+					int m = (int) (UIUtils.dip2Px(this.mContext, 21.0F) * -1.0F);
+					localLayoutParams = (MapView.LayoutParams) this.mOverlayView
+							.getLayoutParams();
+					localLayoutParams.x = 0;
+					localLayoutParams.y = m;
+					int n = ((OverlayItem) this.mItemList.get(paramInt))
+							.getPoint().getLatitudeE6();
+					int i1 = ((OverlayItem) this.mItemList.get(paramInt))
+							.getPoint().getLongitudeE6();
+					GeoPoint localGeoPoint1 = new GeoPoint(n, i1);
+					localLayoutParams.point = localGeoPoint1;
+					Projection localProjection = this.mMapView.getProjection();
+					Point localPoint1 = new Point();
+					Point localPoint2 = localProjection.toPixels(
+							localGeoPoint1, localPoint1);
+					OverlayView localObject1 = (OverlayView) this.mOverlayView
+							.findViewById(R.id.overlay_view);
+					int i4 = (int) UIUtils.dip2Px(this.mContext, 250.0F);
+					int i = (int) UIUtils.dip2Px(this.mContext, 100.0F);
+					if (localPoint1.x >= 0) {
+						int i36 = localPoint1.x;
+						int i37 = this.mMapView.getWidth();
+						if (i36 > i37) {
+							int i38 = -i4 / 2;
+							int i39 = localPoint1.x;
+							int i40 = this.mMapView.getWidth();
+							int i41 = i39 - i40;
+							int i42 = i38 - i41;
+							this.mOffsetX = i42;
 						} else {
-							TextView localTextView2 = (TextView) this.mOverlayView
-									.findViewById(R.id.overlay_fit);
-							String str5 = this.mContext.getString(R.string.have_some_cells_for_condition);
-							Object[] arrayOfObject1 = new Object[3];
-							arrayOfObject1[0] = "<font color=\"#f27a04\">";
-							Integer localInteger1 = Integer
-									.valueOf(((Community) this.mCellList
-											.get(paramInt)).mSourceCount);
-							arrayOfObject1[1] = localInteger1;
-							arrayOfObject1[2] = "</font>";
-							Spanned localSpanned2 = Html.fromHtml(String.format(
-									str5, arrayOfObject1));
-							localTextView2.setText(localSpanned2);
-						}
-						int m = (int) (UIUtils.dip2Px(this.mContext, 21.0F) * -1.0F);
-						localLayoutParams = (MapView.LayoutParams) this.mOverlayView
-								.getLayoutParams();
-						localLayoutParams.x = 0;
-						localLayoutParams.y = m;
-						int n = ((OverlayItem) this.mItemList.get(paramInt))
-								.getPoint().getLatitudeE6();
-						int i1 = ((OverlayItem) this.mItemList.get(paramInt))
-								.getPoint().getLongitudeE6();
-						GeoPoint localGeoPoint1 = new GeoPoint(n, i1);
-						localLayoutParams.point = localGeoPoint1;
-						Projection localProjection = this.mMapView
-								.getProjection();
-						Point localPoint1 = new Point();
-						int i2 = ((OverlayItem) this.mItemList.get(paramInt))
-								.getPoint().getLatitudeE6();
-						int i3 = ((OverlayItem) this.mItemList.get(paramInt))
-								.getPoint().getLongitudeE6();
-						GeoPoint localGeoPoint2 = new GeoPoint(i2, i3);
-						Point localPoint2 = localProjection.toPixels(
-								localGeoPoint2, localPoint1);
-						OverlayView localObject1 = (OverlayView) this.mOverlayView
-								.findViewById(R.id.overlay_view);
-						int i4 = (int) UIUtils.dip2Px(this.mContext, 250.0F);
-						int i = (int) UIUtils.dip2Px(this.mContext, 100.0F);
-						if (localPoint1.x >= 0) {
-							int i36 = localPoint1.x;
-							int i37 = this.mMapView.getWidth();
-							if (i36 > i37) {
-								int i38 = -i4 / 2;
-								int i39 = localPoint1.x;
-								int i40 = this.mMapView.getWidth();
-								int i41 = i39 - i40;
-								int i42 = i38 - i41;
-								this.mOffsetX = i42;
-							}
 							int i43 = localPoint1.x;
 							int i44 = i4 / 2;
 							if (i43 - i44 < 0) {
@@ -327,60 +322,64 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 								int i46 = localPoint1.x;
 								int i47 = i45 - i46;
 								this.mOffsetX = i47;
+							} else {
+								int i48 = localPoint1.x;
+								int i49 = i4 / 2;
+								int i50 = i48 + i49;
+								int i51 = this.mMapView.getWidth();
+								if (i50 > i51) {
+									int i52 = this.mMapView.getWidth();
+									int i53 = localPoint1.x;
+									int i54 = i52 - i53;
+									int i55 = i4 / 2;
+									int i56 = i54 - i55;
+									this.mOffsetX = i56;
+								} else {
+									this.mOffsetX = 0;
+								}
 							}
-							int i48 = localPoint1.x;
-							int i49 = i4 / 2;
-							int i50 = i48 + i49;
-							int i51 = this.mMapView.getWidth();
-							if (i50 > i51) {
-								int i52 = this.mMapView.getWidth();
-								int i53 = localPoint1.x;
-								int i54 = i52 - i53;
-								int i55 = i4 / 2;
-								int i56 = i54 - i55;
-								this.mOffsetX = i56;
-							}
-							this.mOffsetX = 0;
 						}
+					} else {
 						int i5 = i4 / 2;
 						int i6 = localPoint1.x;
 						int i7 = i5 - i6;
 						this.mOffsetX = i7;
-						int i8 = localPoint1.y;
-						int i9 = i / 2;
-						if (i8 - i9 >= 0) {
-							this.mOffsetY = 0.0F;
-						}
+					}
+					int i8 = localPoint1.y;
+					int i9 = i / 2;
+					if (i8 - i9 >= 0) {
+						this.mOffsetY = 0.0F;
+					} else {
 						float f1 = UIUtils.dip2Px(this.mContext, 72.0F);
 						this.mOffsetY = f1;
-						if (this.mOffsetY != 0.0F) {
-							int i11 = 0;
-						}
-						int i10 = 1;
-						localView1 = this.mOverlayView.findViewById(R.id.content_view);
-						RelativeLayout.LayoutParams localLayoutParams1 = (RelativeLayout.LayoutParams) localView1
-								.getLayoutParams();
-						RelativeLayout.LayoutParams localObject2 = (RelativeLayout.LayoutParams) ((OverlayView) localObject1)
-								.getLayoutParams();
-						if (i10 == 0) {
-							int i57 = localLayoutParams1.width;
-							int i58 = localLayoutParams1.height;
-							RelativeLayout.LayoutParams localLayoutParams4 = new RelativeLayout.LayoutParams(
-									i57, i58);
-							localLayoutParams4.addRule(12);
-							localView1.setLayoutParams(localLayoutParams4);
-							int i59 = (int) UIUtils.dip2Px(this.mContext, 3.0F);
-							int i60 = (int) UIUtils
-									.dip2Px(this.mContext, 10.0F);
-							localView1.setPadding(i59, 0, 0, i60);
-							int i61 = ((RelativeLayout.LayoutParams) localObject2).width;
-							int i62 = ((RelativeLayout.LayoutParams) localObject2).height;
-							RelativeLayout.LayoutParams localLayoutParams5 = new RelativeLayout.LayoutParams(
-									i61, i62);
-							localLayoutParams5.addRule(12);
-							((OverlayView) localObject1)
-									.setLayoutParams(localLayoutParams5);
-						}
+					}
+					boolean flag = true;
+					if (this.mOffsetY != 0.0F) {
+						flag = false;
+					}
+					localView1 = this.mOverlayView
+							.findViewById(R.id.content_view);
+					RelativeLayout.LayoutParams localLayoutParams1 = (RelativeLayout.LayoutParams) localView1
+							.getLayoutParams();
+					RelativeLayout.LayoutParams localObject2 = (RelativeLayout.LayoutParams) ((OverlayView) localObject1)
+							.getLayoutParams();
+					if (flag) {
+						int i57 = localLayoutParams1.width;
+						int i58 = localLayoutParams1.height;
+						RelativeLayout.LayoutParams localLayoutParams4 = new RelativeLayout.LayoutParams(
+								i57, i58);
+						localLayoutParams4.addRule(12);
+						localView1.setLayoutParams(localLayoutParams4);
+						int i59 = (int) UIUtils.dip2Px(this.mContext, 3.0F);
+						int i60 = (int) UIUtils.dip2Px(this.mContext, 10.0F);
+						localView1.setPadding(i59, 0, 0, i60);
+						int i61 = ((RelativeLayout.LayoutParams) localObject2).width;
+						int i62 = ((RelativeLayout.LayoutParams) localObject2).height;
+						RelativeLayout.LayoutParams localLayoutParams5 = new RelativeLayout.LayoutParams(
+								i61, i62);
+						localLayoutParams5.addRule(12);
+						localObject1.setLayoutParams(localLayoutParams5);
+					} else {
 						int i12 = localLayoutParams1.width;
 						int i13 = localLayoutParams1.height;
 						RelativeLayout.LayoutParams localLayoutParams2 = new RelativeLayout.LayoutParams(
@@ -398,46 +397,50 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 						localLayoutParams3.addRule(10);
 						((OverlayView) localObject1)
 								.setLayoutParams(localLayoutParams3);
-						int i19 = localLayoutParams.x;
-						int i20 = this.mOffsetX;
-						int i21 = i19 + i20;
-						localLayoutParams.x = i21;
-						float f2 = localLayoutParams.y;
-						float f3 = this.mOffsetY;
-						int i22 = (int) (f2 + f3);
-						localLayoutParams.y = i22;
-						int i23 = localPoint1.x;
-						int i24 = i4 / 2;
-						int i25 = i23 - i24;
-						int i26 = this.mOffsetX;
-						int i27 = i25 + i26;
-						int i28 = localPoint1.x;
-						int i29 = i4 / 2;
-						int i30 = i28 + i29;
-						int i31 = this.mOffsetX;
-						int i32 = i30 + i31;
-						int i33 = localPoint1.x;
-						int i34 = localView1.getWidth();
-						int i35 = localView1.getHeight();
-						((OverlayView) localObject1).refreshView(i27, i32, i33,
-								true, i34, i35);
-						MapView localMapView = this.mMapView;
-						View localView2 = this.mOverlayView;
-						localMapView.updateViewLayout(localView2,
-								localLayoutParams);
-						((OverlayView) localObject1).setVisibility(0);
-						this.mOverlayView.setVisibility(0);
-						Bitmap localBitmap2 = BitmapFactory.decodeResource(
-								this.mContext.getResources(), R.drawable.defaut_cell_pic);
-						((ImageView) this.mOverlayView.findViewById(R.id.overlay_pic))
-								.setImageBitmap(localBitmap2);
 					}
-				}
-			}
-		}
+					int i19 = localLayoutParams.x;
+					int i20 = this.mOffsetX;
+					int i21 = i19 + i20;
+					localLayoutParams.x = i21;
+					float f2 = localLayoutParams.y;
+					float f3 = this.mOffsetY;
+					int i22 = (int) (f2 + f3);
+					localLayoutParams.y = i22;
+					int i23 = localPoint1.x;
+					int i24 = i4 / 2;
+					int i25 = i23 - i24;
+					int i26 = this.mOffsetX;
+					int i27 = i25 + i26;
+					int i28 = localPoint1.x;
+					int i29 = i4 / 2;
+					int i30 = i28 + i29;
+					int i31 = this.mOffsetX;
+					int i32 = i30 + i31;
+					int i33 = localPoint1.x;
+					int i34 = localView1.getWidth();
+					int i35 = localView1.getHeight();
+					localObject1.refreshView(i27, i32, i33,
+							true, i34, i35);
+					MapView localMapView = this.mMapView;
+					View localView2 = this.mOverlayView;
+					localMapView
+							.updateViewLayout(localView2, localLayoutParams);
+					localObject1.setVisibility(0);
+					this.mOverlayView.setVisibility(0);
 
-		catch (Exception localException) {
-			Object localObject1;
+					Bitmap localBitmap2 = BitmapFactory.decodeResource(
+							this.mContext.getResources(),
+							R.drawable.defaut_cell_pic);
+					((ImageView) this.mOverlayView
+							.findViewById(R.id.overlay_pic))
+							.setImageBitmap(localBitmap2);
+//				}
+			} else {
+				return super.onTap(paramInt);
+			}
+		} catch (Exception localException) {
+			Log.e("MapItem", localException.getCause().getMessage());
+			/*Object localObject1;
 			Object localObject2;
 			Point localPoint1;
 			int i4;
@@ -452,54 +455,60 @@ public class RentMapOverlayItem extends ItemizedOverlay<OverlayItem> {
 					.get(paramInt)).mPrice);
 			arrayOfObject2[0] = localInteger2;
 			String str7 = String.format(str6, arrayOfObject2);
-			/*StringBuffer localStringBuffer4 = ((StringBuffer) localObject2)
-					.append(str7);*/
+			
+			 * StringBuffer localStringBuffer4 = ((StringBuffer) localObject2)
+			 * .append(str7);
+			 */
+			return false;
 		}
-		return super.onTap(paramInt);
+		return true;
 	}
 
-	public boolean onTap(GeoPoint paramGeoPoint, MapView paramMapView)
-	  {
-	    this.mHasClickCellView = false;
-	    this.mOverlayView.setVisibility(8);
-	    OverlayView localOverlayView = (OverlayView)this.mOverlayView.findViewById(R.id.overlay_view);
-	    localOverlayView.setVisibility(8);
-	    localOverlayView.setOnClickListener(new View.OnClickListener() {
-	    	public void onClick(View paramView)
-	    	  {
-	    	    SharedPreferences.Editor localEditor = RentMapOverlayItem.this.mContext.getSharedPreferences("rent_setting", 0).edit();
-	    	    int i = RentMapOverlayItem.this.mMapView.getZoomLevel();
-	    	    boolean bool1 = localEditor.putInt("zoom_value", i).commit();
-	    	    RentMapOverlayItem.this.mOverlayView.setVisibility(8);
-//	    	    boolean bool2 = RentMapOverlayItem.access$302(this.this$0, 1);
-	    	    Context localContext = RentMapOverlayItem.this.mContext;
-	    	    Intent localIntent1 = new Intent(localContext, ResultActivity.class);
-	    	    Bundle localBundle = new Bundle();
-	    	    localBundle.putInt("searchformat", 0);
-	    	    ArrayList localArrayList1 = RentMapOverlayItem.this.mCellList;
-	    	    int j = RentMapOverlayItem.this.mClickOnIndex;
-	    	    String str1 = ((Community)localArrayList1.get(j)).mName;
-	    	    localBundle.putString("keyword", str1);
-	    	    long l = ((Community)localArrayList1.get(j)).mGroupId;
-	    	    localBundle.putLong("group_id", l);
-	    	    String str2 = ((Community)localArrayList1.get(j)).mCity;
-	    	    localBundle.putString("city", str2);
-	    	    int i1 = ((Community)localArrayList1.get(j)).mPrice;
-	    	    localBundle.putInt("price", i1);
-	    	    int i3 = ((Community)localArrayList1.get(j)).mSourceCount;
-	    	    localBundle.putInt("sourcecoount", i3);
-	    	    double d1 = ((Community)localArrayList1.get(j)).mLat;
-	    	    localBundle.putDouble("latitude", d1);
-	    	    double d2 = ((Community)localArrayList1.get(j)).mLon;
-	    	    localBundle.putDouble("longitude", d2);
-	    	    Intent localIntent2 = localIntent1.putExtras(localBundle);
-	    	    RentMapOverlayItem.this.mContext.startActivity(localIntent1);
-	    	  }
+	public boolean onTap(GeoPoint paramGeoPoint, MapView paramMapView) {
+		this.mHasClickCellView = false;
+		this.mOverlayView.setVisibility(8);
+		OverlayView localOverlayView = (OverlayView) this.mOverlayView
+				.findViewById(R.id.overlay_view);
+		localOverlayView.setVisibility(8);
+		localOverlayView.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View paramView) {
+				SharedPreferences.Editor localEditor = RentMapOverlayItem.this.mContext
+						.getSharedPreferences("rent_setting", 0).edit();
+				int i = RentMapOverlayItem.this.mMapView.getZoomLevel();
+				boolean bool1 = localEditor.putInt("zoom_value", i).commit();
+				RentMapOverlayItem.this.mOverlayView.setVisibility(8);
+				// boolean bool2 = RentMapOverlayItem.access$302(this.this$0,
+				// 1);
+				Context localContext = RentMapOverlayItem.this.mContext;
+				Intent localIntent1 = new Intent(localContext,
+						ResultActivity.class);
+				Bundle localBundle = new Bundle();
+				localBundle.putInt("searchformat", 0);
+				ArrayList localArrayList1 = RentMapOverlayItem.this.mCellList;
+				int j = RentMapOverlayItem.this.mClickOnIndex;
+				String str1 = ((Community) localArrayList1.get(j)).mName;
+				localBundle.putString("keyword", str1);
+				long l = ((Community) localArrayList1.get(j)).mGroupId;
+				localBundle.putLong("group_id", l);
+				String str2 = ((Community) localArrayList1.get(j)).mCity;
+				localBundle.putString("city", str2);
+				int i1 = ((Community) localArrayList1.get(j)).mPrice;
+				localBundle.putInt("price", i1);
+				int i3 = ((Community) localArrayList1.get(j)).mSourceCount;
+				localBundle.putInt("sourcecoount", i3);
+				double d1 = ((Community) localArrayList1.get(j)).mLat;
+				localBundle.putDouble("latitude", d1);
+				double d2 = ((Community) localArrayList1.get(j)).mLon;
+				localBundle.putDouble("longitude", d2);
+				Intent localIntent2 = localIntent1.putExtras(localBundle);
+				RentMapOverlayItem.this.mContext.startActivity(localIntent1);
+			}
 		});
-	    if (!this.mHasClickCellView);
-	    for (boolean bool = super.onTap(paramGeoPoint, paramMapView); ; bool = true)
-	      return bool;
-	  }
+		if (!this.mHasClickCellView)
+			;
+		for (boolean bool = super.onTap(paramGeoPoint, paramMapView);; bool = true)
+			return bool;
+	}
 
 	public void showPopup(int paramInt) {
 		initTapClick();
