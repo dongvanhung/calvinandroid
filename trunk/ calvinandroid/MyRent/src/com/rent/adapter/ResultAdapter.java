@@ -60,6 +60,8 @@ public class ResultAdapter extends BaseAdapter {
 			}
 			i += 1;
 		}
+		if(paramInt1 - j < 0)
+			return 0;
 		return paramInt1 - j;
 	}
 
@@ -108,33 +110,35 @@ public class ResultAdapter extends BaseAdapter {
 			if (this.mPrice == 0) {
 				String str2 = this.mContext.getString(R.string.unavailable2);
 				localObject2.setText(str2);
-			}
-			else {
-				TextView localTextView2 = (TextView) localView2
-						.findViewById(R.id.sourcecount);
-				this.mSourceNumberTextView = localTextView2;
-				if (this.init) {
-					showIsLoading(true);
-					this.init = false;
-				}
-				if ((this.mSourceNumberTextView.getText() == null)
-						|| (this.mSourceNumberTextView.getText().toString()
-								.length() == 0)) {
-					TextView localTextView3 = this.mSourceNumberTextView;
-					String str3 = this.mContext.getString(R.string.community_detail_sourcecount);
-					Object[] arrayOfObject1 = new Object[1];
-					Integer localInteger1 = Integer.valueOf(this.mSourceCount);
-					arrayOfObject1[0] = localInteger1;
-					String str4 = String.format(str3, arrayOfObject1);
-					localTextView3.setText(str4);
-				}
-				String str5 = this.mContext.getString(R.string.rent_average_price_mount);
+			} else {
+				String str5 = this.mContext
+						.getString(R.string.rent_average_price_mount);
 				Object[] arrayOfObject2 = new Object[1];
 				Integer localInteger2 = Integer.valueOf(this.mPrice);
 				arrayOfObject2[0] = localInteger2;
 				String str6 = String.format(str5, arrayOfObject2);
 				((TextView) localObject2).setText(str6);
 			}
+			TextView localTextView2 = (TextView) localView2
+					.findViewById(R.id.sourcecount);
+			this.mSourceNumberTextView = localTextView2;
+			if (this.init) {
+				showIsLoading(true);
+				this.init = false;
+			}
+			if ((this.mSourceNumberTextView.getText() == null)
+					|| (this.mSourceNumberTextView.getText().toString()
+							.length() == 0)) {
+				TextView localTextView3 = this.mSourceNumberTextView;
+				String str3 = this.mContext
+						.getString(R.string.community_detail_sourcecount);
+				Object[] arrayOfObject1 = new Object[1];
+				Integer localInteger1 = Integer.valueOf(this.mSourceCount);
+				arrayOfObject1[0] = localInteger1;
+				String str4 = String.format(str3, arrayOfObject1);
+				localTextView3.setText(str4);
+			}
+
 		}
 		if (paramInt == 1) {
 			showIsLoading(false);
@@ -145,94 +149,97 @@ public class ResultAdapter extends BaseAdapter {
 					break;
 				int k = this.mCategoryIndice[i];
 				if (paramInt == k) {
-					View localView3 = LayoutInflater.from(this.mContext).inflate(
-							R.layout.result_row_category, null);
+					View localView3 = LayoutInflater.from(this.mContext)
+							.inflate(R.layout.result_row_category, null);
 					TextView localObject2 = (TextView) localView3
 							.findViewById(R.id.category);
 					switch (i) {
 					default:
+						localObject2 = (TextView) localView3;
 					case 0:
-						String str7 = this.mContext.getString(R.string.housesource_category_0);
+						String str7 = this.mContext
+								.getString(R.string.housesource_category_0);
 						((TextView) localObject2).setText(str7);
 					case 1:
-						String str8 = this.mContext.getString(R.string.housesource_category_1);
+						String str8 = this.mContext
+								.getString(R.string.housesource_category_1);
 						((TextView) localObject2).setText(str8);
 					case 2:
-						String str9 = this.mContext.getString(R.string.housesource_category_2);
+						String str9 = this.mContext
+								.getString(R.string.housesource_category_2);
 						((TextView) localObject2).setText(str9);
 					}
 					i += 1;
 				}
-				localView1 = LayoutInflater.from(this.mContext).inflate(
-						R.layout.result_row, null);
-				Object localObject1 = localView1.findViewById(R.id.result_layout_view);
-				Object localObject2 = (TextView) localView1
-						.findViewById(R.id.result_load_more_text);
-				int[] arrayOfInt = this.mCategoryIndice;
-				int m = getVirtualViewItemIndex(paramInt, 1, arrayOfInt);
-				int n = this.mItemCount;
-				if (m < n) {
-					((View) localObject1).setVisibility(0);
-					((TextView) localObject2).setVisibility(8);
-					localObject2 = (TextView) localView1.findViewById(R.id.result_list_title);
-					String str10 = ((HouseSource) this.mHouseList.get(m)).mTitle;
-					((TextView) localObject2).setText(str10);
-					localObject1 = (TextView) localView1.findViewById(R.id.result_detail_left);
-					localStringBuffer1 = new StringBuffer();
-					if (((HouseSource) this.mHouseList.get(m)).mRentType == 0) {
-						String str11 = this.mContext.getString(R.string.rent_favourite_rent_type_lease_all);
-						StringBuffer localStringBuffer2 = localStringBuffer1
-								.append(str11);
-						StringBuffer localStringBuffer3 = localStringBuffer1
-								.append(":");
-						String str12 = ((HouseSource) this.mHouseList.get(m)).mRoom;
-						StringBuffer localStringBuffer4 = localStringBuffer1
-								.append(str12);
-						int i1 = ((HouseSource) this.mHouseList.get(m)).mArea;
-						StringBuffer localStringBuffer5 = localStringBuffer1
-								.append(i1);
-						StringBuilder localStringBuilder1 = new StringBuilder();
-						String str13 = localStringBuffer1.toString();
-						StringBuilder localStringBuilder2 = localStringBuilder1
-								.append(str13);
-						String str14 = this.mContext.getString(R.string.sq_meter);
-						String str15 = str14;
-						((TextView) localObject1).setText(str15);
-						TextView localTextView4 = (TextView) localView1
-								.findViewById(R.id.result_detail_right);
-						StringBuilder localStringBuilder3 = new StringBuilder();
-						int i2 = ((HouseSource) this.mHouseList.get(m)).mPrice;
-						String str16 = i2 + "";
-						localTextView4.setText(str16);
-						if ((((HouseSource) this.mHouseList.get(m)).mAgency != null)
-								&& (((HouseSource) this.mHouseList.get(m)).mAgency
-										.length() > 0)) {
-							TextView localTextView5 = (TextView) localView1
-									.findViewById(R.id.agency_status);
-							String str17 = ((HouseSource) this.mHouseList.get(m)).mAgency;
-							localTextView5.setText(str17);
-						}
-						localObject1 = (ImageView) localView1
-								.findViewById(R.id.result_pic);
-						if ((((HouseSource) this.mHouseList.get(m)).mImage != null)
-								&& (((HouseSource) this.mHouseList.get(m)).mImage
-										.length() != 0)) {
-						}
-						((TextView) localObject2).setWidth(400);
-						((ImageView) localObject1).setVisibility(8);
-					}
-				}
-				while (true) {
-					localObject2 = localView1;
-					String str18 = this.mContext.getString(R.string.rent_favourite_rent_type_lease_part);
-					StringBuffer localStringBuffer6 = localStringBuffer1
-							.append(str18);
-					((ImageView) localObject1).setVisibility(0);
-					new ResultAdapter1(this, m, (ImageView) localObject1).start();
-					((View) localObject1).setVisibility(8);
-					((TextView) localObject2).setVisibility(0);
-				}
 			}
+		}
+		localView1 = LayoutInflater.from(this.mContext).inflate(
+				R.layout.result_row, null);
+		View localObject1 = localView1.findViewById(R.id.result_layout_view);
+		Object localObject2 = (TextView) localView1
+				.findViewById(R.id.result_load_more_text);
+		int[] arrayOfInt = this.mCategoryIndice;
+		int m = getVirtualViewItemIndex(paramInt, 1, arrayOfInt);
+		int n = this.mItemCount;
+		m = paramInt;
+		if (m < n && n != 0) {
+			((View) localObject1).setVisibility(0);
+			((TextView) localObject2).setVisibility(8);
+			localObject2 = (TextView) localView1
+					.findViewById(R.id.result_list_title);
+			String str10 = ((HouseSource) this.mHouseList.get(m)).mTitle;
+			((TextView) localObject2).setText(str10);
+			TextView textView = (TextView) localView1
+					.findViewById(R.id.result_detail_left);
+			localStringBuffer1 = new StringBuffer();
+			if (((HouseSource) this.mHouseList.get(m)).mRentType == 0) {
+				String str11 = this.mContext
+						.getString(R.string.rent_favourite_rent_type_lease_all);
+				StringBuffer localStringBuffer2 = localStringBuffer1
+						.append(str11);
+			} else {
+				String str18 = this.mContext
+						.getString(R.string.rent_favourite_rent_type_lease_part);
+				StringBuffer localStringBuffer6 = localStringBuffer1
+						.append(str18);
+			}
+			StringBuffer localStringBuffer3 = localStringBuffer1.append(":");
+			String str12 = ((HouseSource) this.mHouseList.get(m)).mRoom;
+			StringBuffer localStringBuffer4 = localStringBuffer1.append(str12);
+			int i1 = ((HouseSource) this.mHouseList.get(m)).mArea;
+			StringBuffer localStringBuffer5 = localStringBuffer1.append(i1);
+			StringBuilder localStringBuilder1 = new StringBuilder();
+			String str13 = localStringBuffer1.toString();
+			StringBuilder localStringBuilder2 = localStringBuilder1
+					.append(str13);
+			String str14 = this.mContext.getString(R.string.sq_meter);
+			String str15 = str14;
+			textView.setText(str15);
+			TextView localTextView4 = (TextView) localView1
+					.findViewById(R.id.result_detail_right);
+			StringBuilder localStringBuilder3 = new StringBuilder();
+			int i2 = ((HouseSource) this.mHouseList.get(m)).mPrice;
+			String str16 = i2 + "";
+			localTextView4.setText(str16);
+			if ((((HouseSource) this.mHouseList.get(m)).mAgency != null)
+					&& (((HouseSource) this.mHouseList.get(m)).mAgency.length() > 0)) {
+				TextView localTextView5 = (TextView) localView1
+						.findViewById(R.id.agency_status);
+				String str17 = ((HouseSource) this.mHouseList.get(m)).mAgency;
+				localTextView5.setText(str17);
+			}
+			ImageView imageView = (ImageView) localView1.findViewById(R.id.result_pic);
+			if ((((HouseSource) this.mHouseList.get(m)).mImage != null)
+					&& (((HouseSource) this.mHouseList.get(m)).mImage.length() != 0)) {
+				((TextView) localObject2).setWidth(400);
+				imageView.setVisibility(8);
+			} else {
+				imageView.setVisibility(0);
+				new ResultAdapter1(this, m, imageView).start();
+			}
+		} else {
+			((View) localObject1).setVisibility(8);
+			((TextView) localObject2).setVisibility(0);
 		}
 		return localView1;
 	}
@@ -251,17 +258,21 @@ public class ResultAdapter extends BaseAdapter {
 		public void run() {
 			Looper.prepare();
 			try {
-				
-				 ArrayList localArrayList = ResultAdapter.this.mHouseList;
-				 byte[] arrayOfByte = Rent.downLoadImage(((HouseSource)localArrayList.get(m)).mImage); 
-				 int j = arrayOfByte.length;
-				 Bitmap localBitmap1 = BitmapFactory.decodeByteArray(arrayOfByte, 0, j); 
-				 int k = imageView.getWidth(); 
-				 int m = imageView.getHeight();
-				 Bitmap localBitmap2 = Bitmap.createScaledBitmap(localBitmap1, k, m, true); 
-				 ResultAdapter11 adapter11 = new ResultAdapter11(localBitmap2, imageView);
-				 ((ResultActivity)adapter.mContext).runOnUiThread(adapter11);
-				 
+
+				ArrayList localArrayList = ResultAdapter.this.mHouseList;
+				byte[] arrayOfByte = Rent
+						.downLoadImage(((HouseSource) localArrayList.get(m)).mImage);
+				int j = arrayOfByte.length;
+				Bitmap localBitmap1 = BitmapFactory.decodeByteArray(
+						arrayOfByte, 0, j);
+				int k = imageView.getWidth();
+				int m = imageView.getHeight();
+				Bitmap localBitmap2 = Bitmap.createScaledBitmap(localBitmap1,
+						k, m, true);
+				ResultAdapter11 adapter11 = new ResultAdapter11(localBitmap2,
+						imageView);
+				((ResultActivity) adapter.mContext).runOnUiThread(adapter11);
+
 			} catch (Exception localException) {
 				localException.printStackTrace();
 			} finally {
@@ -269,38 +280,30 @@ public class ResultAdapter extends BaseAdapter {
 			}
 		}
 	}
-	
-	final class ResultAdapter11 implements Runnable
-	{
+
+	final class ResultAdapter11 implements Runnable {
 		private Bitmap bm;
 		private ImageView imageView;
-		public ResultAdapter11(Bitmap bm,
-				ImageView imageView) {
+
+		public ResultAdapter11(Bitmap bm, ImageView imageView) {
 			this.bm = bm;
 			this.imageView = imageView;
 		}
-		
-	  public void run()
-	  {
-	    ImageView localImageView = imageView;
-	    Bitmap localBitmap = bm;
-	    localImageView.setImageBitmap(localBitmap);
-	  }
+
+		public void run() {
+			ImageView localImageView = imageView;
+			Bitmap localBitmap = bm;
+			localImageView.setImageBitmap(localBitmap);
+		}
 	}
 
 	public void setHouseList(ArrayList<HouseSource> paramArrayList) {
 		int i = paramArrayList.size();
 		this.mItemCount = i;
 		this.mHouseList.clear();
-		int j = 0;
-		while (true) {
-			int k = this.mItemCount;
-			if (j >= k)
-				break;
-			ArrayList localArrayList = this.mHouseList;
-			Object localObject = paramArrayList.get(j);
-			boolean bool = localArrayList.add(localObject);
-			j += 1;
+		for (int j2 = 0; j2 < i; j2++) {
+			Object localObject = paramArrayList.get(j2);
+			this.mHouseList.add((HouseSource)localObject);
 		}
 	}
 
@@ -340,7 +343,8 @@ public class ResultAdapter extends BaseAdapter {
 				localTextView1.setText(str1);
 			} else {
 				TextView localTextView2 = this.mSourceNumberTextView;
-				String str2 = this.mContext.getString(R.string.community_detail_sourcecount);
+				String str2 = this.mContext
+						.getString(R.string.community_detail_sourcecount);
 				Object[] arrayOfObject = new Object[1];
 				Integer localInteger = Integer.valueOf(this.mSourceCount);
 				arrayOfObject[0] = localInteger;
