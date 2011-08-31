@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +81,7 @@ public class ResultAdapter extends BaseAdapter {
 				k += 1;
 			i += 1;
 		}
-		return this.mItemCount + k;
+		return this.mItemCount;
 	}
 
 	public Object getItem(int paramInt) {
@@ -96,13 +97,14 @@ public class ResultAdapter extends BaseAdapter {
 	}
 
 	public View getView(int paramInt, View paramView, ViewGroup paramViewGroup) {
+		Log.e("resultInt", String.valueOf(paramInt));
 		View localView1 = null;
 		StringBuffer localStringBuffer1 = null;
+		View localView2 = LayoutInflater.from(this.mContext).inflate(
+				com.rent.R.layout.result_row_community, null);
+		TextView localTextView1 = (TextView) localView2
+				.findViewById(com.rent.R.id.name);
 		if (paramInt == 0) {
-			View localView2 = LayoutInflater.from(this.mContext).inflate(
-					com.rent.R.layout.result_row_community, null);
-			TextView localTextView1 = (TextView) localView2
-					.findViewById(com.rent.R.id.name);
 			String str1 = this.mName;
 			localTextView1.setText(str1);
 			TextView localObject2 = (TextView) localView2
@@ -123,7 +125,7 @@ public class ResultAdapter extends BaseAdapter {
 					.findViewById(R.id.sourcecount);
 			this.mSourceNumberTextView = localTextView2;
 			if (this.init) {
-				showIsLoading(true);
+//				showIsLoading(true);
 				this.init = false;
 			}
 			if ((this.mSourceNumberTextView.getText() == null)
@@ -138,40 +140,30 @@ public class ResultAdapter extends BaseAdapter {
 				String str4 = String.format(str3, arrayOfObject1);
 				localTextView3.setText(str4);
 			}
-
-		}
-		if (paramInt == 1) {
+			return localView2;
+		} 
+		int k = this.mCategoryIndice[0];
+		int k1 = this.mCategoryIndice[1];
+		if(paramInt == 1 || paramInt == k - 1 || paramInt == k1 - 1) {
 			showIsLoading(false);
-			int i = 0;
-			while (true) {
-				int j = this.mCategoryIndice.length;
-				if (i >= j)
-					break;
-				int k = this.mCategoryIndice[i];
-				if (paramInt == k) {
-					View localView3 = LayoutInflater.from(this.mContext)
-							.inflate(R.layout.result_row_category, null);
-					TextView localObject2 = (TextView) localView3
-							.findViewById(R.id.category);
-					switch (i) {
-					default:
-						localObject2 = (TextView) localView3;
-					case 0:
-						String str7 = this.mContext
-								.getString(R.string.housesource_category_0);
-						((TextView) localObject2).setText(str7);
-					case 1:
-						String str8 = this.mContext
-								.getString(R.string.housesource_category_1);
-						((TextView) localObject2).setText(str8);
-					case 2:
-						String str9 = this.mContext
-								.getString(R.string.housesource_category_2);
-						((TextView) localObject2).setText(str9);
-					}
-					i += 1;
-				}
+			View localView3 = LayoutInflater.from(this.mContext).inflate(
+					R.layout.result_row_category, null);
+			TextView localObject2 = (TextView) localView3
+					.findViewById(R.id.category);
+			if (paramInt == 1) {
+				String str7 = this.mContext
+						.getString(R.string.housesource_category_0);
+				((TextView) localObject2).setText(str7);
+			} else if (paramInt == k - 1) {
+				String str7 = this.mContext
+						.getString(R.string.housesource_category_1);
+				((TextView) localObject2).setText(str7);
+			} else {
+				String str7 = this.mContext
+						.getString(R.string.housesource_category_2);
+				((TextView) localObject2).setText(str7);
 			}
+			return localView3;
 		}
 		localView1 = LayoutInflater.from(this.mContext).inflate(
 				R.layout.result_row, null);
@@ -238,8 +230,8 @@ public class ResultAdapter extends BaseAdapter {
 				new ResultAdapter1(this, m, imageView).start();
 			}
 		} else {
-			((View) localObject1).setVisibility(8);
-			((TextView) localObject2).setVisibility(0);
+			/*((View) localObject1).setVisibility(8);
+			((TextView) localObject2).setVisibility(0);*/
 		}
 		return localView1;
 	}
