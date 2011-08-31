@@ -78,26 +78,20 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 
 	private void sortCategory() {
 		Arrays.fill(this.mCategoryIndice, -1);
-		if (this.mSort != 0)
-			;
 		int m;
 		int i4;
-		do {
 			Arrays.fill(this.mCategoryCount, 0);
 			long l1 = System.currentTimeMillis();
-			int j = 0;
 			int k = this.mHoustList.size();
-			if (j < k) {
-				HouseSource localHouseSource = (HouseSource) this.mHoustList
-						.get(j);
+			for (int i = 0; i < this.mHoustList.size(); i++) {
+				HouseSource localHouseSource = (HouseSource) this.mHoustList.get(i);
 				if ((localHouseSource.mPublishTime == null)
 						|| (localHouseSource.mPublishTime.trim().length() == 0)) {
 					int[] arrayOfInt1 = this.mCategoryCount;
 					int n = arrayOfInt1[2] + 1;
 					arrayOfInt1[2] = n;
 				}
-				while (true) {
-					j += 1;
+				else {
 					StringBuilder localStringBuilder = new StringBuilder();
 					String str = localHouseSource.mPublishTime;
 					long l2 = Long.valueOf(str + "000").longValue();
@@ -106,37 +100,20 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 						int[] arrayOfInt2 = this.mCategoryCount;
 						int i1 = arrayOfInt2[0] + 1;
 						arrayOfInt2[0] = i1;
-						continue;
-					}
-					if (l3 <= 604800000L) {
+					} else if (l3 <= 604800000L) {
 						int[] arrayOfInt3 = this.mCategoryCount;
 						int i2 = arrayOfInt3[1] + 1;
 						arrayOfInt3[1] = i2;
-						continue;
+					} else {
+						int[] arrayOfInt4 = this.mCategoryCount;
+						int i3 = arrayOfInt4[2] + 1;
+						arrayOfInt4[2] = i3;
 					}
-					int[] arrayOfInt4 = this.mCategoryCount;
-					int i3 = arrayOfInt4[2] + 1;
-					arrayOfInt4[2] = i3;
 				}
 			}
-			m = 0;
-			i4 = this.mCategoryIndice.length;
-		} while (m >= i4);
-		if (this.mCategoryCount[m] == 0)
-			this.mCategoryIndice[m] = -1;
-		while (true) {
-			m += 1;
-			int i = 0;
-			int i5 = 1;
-			while (i < m) {
-				if (this.mCategoryCount[i] > 0) {
-					int i6 = this.mCategoryCount[i] + 1;
-					i5 += i6;
-				}
-				i += 1;
+			for (int i = 0; i < mCategoryCount.length; i++) {
+				this.mCategoryIndice[i] = mCategoryCount[i];
 			}
-			this.mCategoryIndice[m] = i5;
-		}
 	}
 
 	protected void onCreate(Bundle paramBundle)
@@ -250,7 +227,7 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 	    localImageView2.setOnClickListener(new OnClickListener() {
 	    	 public void onClick(View paramView)
 	    	  {
-	    	    finish();
+	    	    ResultActivity.this.finish();
 	    	  }
 		});
 	    Button localButton1 = (Button)findViewById(R.id.result_sort);
@@ -330,10 +307,9 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 			ArrayList localArrayList1 = this.mSearchHandler.getHouseList();
 			this.mHoustList = localArrayList1;
 			int i = this.mHoustList.size();
-			int j = this.mLastSumItem;
-			k = i - j;
 			int m = this.mHoustList.size();
 			this.mLastSumItem = m;
+			k = i - this.mLastSumItem;
 			if ((k == 0) && (this.mOffset == 0)) {
 				String str1 = getString(R.string.info_no_result);
 				Toast.makeText(this, str1, 1).show();

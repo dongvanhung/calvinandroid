@@ -459,6 +459,7 @@ public class SearchInListActivity extends Activity implements
 			int i = this.mListSearchHandler.mTotalNumber;
 			this.mCommunityNumber = i;
 			int j = paramSearchHandler.mOffset;
+			this.mCommList = this.mListSearchHandler.getCommList(); 
 			int k = this.mListSearchHandler.getCommList().size();
 //			if (j == k) {
 				this.mSearchAdapter.setIsEnd(true);
