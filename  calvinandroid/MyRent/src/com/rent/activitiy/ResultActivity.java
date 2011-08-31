@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -16,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rent.HouseFilter;
-import com.rent.MobclickAgent;
 import com.rent.PreferenceUtils;
 import com.rent.R;
 import com.rent.SearchHandlerListener;
@@ -161,7 +163,7 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 	    ResultAdapter localResultAdapter2 = this.mResultAdapter;
 	    localListView2.setAdapter(localResultAdapter2);
 	    ListView localListView3 = this.mListView;
-	    /*localListView3.setOnItemClickListener(new OnItemClickListener(){
+	    localListView3.setOnItemClickListener(new OnItemClickListener(){
 	    	public void onItemClick(AdapterView<?> paramAdapterView, View paramView, int paramInt, long paramLong)
 	    	  {
 	    	    if (paramInt == 0)
@@ -178,11 +180,8 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 	    	      Intent localIntent1 = new Intent(ResultActivity.this, CommunityDetailActivity.class);
 	    	      Intent localIntent2 = localIntent1.putExtras(localBundle);
 	    	      startActivity(localIntent1);
-	    	    }
-	    	    while (true)
-	    	    {
-	    	      return;
-	    	      int k = 0;
+	    	    } else {
+	    	      /*int k = 0;
 	    	      while (true)
 	    	      {
 	    	        int m = mCategoryIndice.length;
@@ -195,7 +194,7 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 	    	      }
 	    	      int[] arrayOfInt = mCategoryIndice;
 	    	      k = ResultAdapter.getVirtualViewItemIndex(paramInt, 1, arrayOfInt);
-	    	      int i1 = ResultActivity.access$800(this.this$0).getSumCount();
+	    	      int i1 = ResultActivity.this.getSumCount();
 	    	      if (k >= i1)
 	    	        continue;
 	    	      HouseSource localHouseSource = (HouseSource)ResultActivity.access$800(this.this$0).getItem(k);
@@ -205,10 +204,10 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 	    	      Intent localIntent4 = localIntent3.putExtra("origin_id", l2);
 	    	      String str4 = ResultActivity.access$900(this.this$0);
 	    	      Intent localIntent5 = localIntent3.putExtra("address", str4);
-	    	      this.this$0.startActivity(localIntent3);
+	    	      this.this$0.startActivity(localIntent3);*/
 	    	    }
 	    	  }
-	    });*/
+	    });
 	    ListView localListView4 = this.mListView;
 	    /*localListView4.setOnScrollListener(new OnScrollListener(){
 	    	 public void onScroll(AbsListView paramAbsListView, int paramInt1, int paramInt2, int paramInt3)
@@ -264,7 +263,7 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 	    if (i == 0)
 	      loadHouseList();
 	    localObject = ManifestData.getString(this, "UMENG_CHANNEL");
-	    if ((NetworkUtils.isWifi(this)) && (((String)localObject).equalsIgnoreCase("umeng")))
+	    if ((NetworkUtils.isWifi(this)) && (((String)localObject).equalsIgnoreCase("umeng"))) //TODO:
 	    {
 	      RelativeLayout localRelativeLayout = (RelativeLayout)findViewById(R.id.result_list_layout);
 	      ResultActivity5 local5 = new ResultActivity5(this, localRelativeLayout);

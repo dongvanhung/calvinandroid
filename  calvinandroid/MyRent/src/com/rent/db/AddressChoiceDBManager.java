@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
 
+import com.rent.R;
 import com.rent.Rent;
 import com.rent.data.PCDZAddress;
 
@@ -32,7 +33,7 @@ public class AddressChoiceDBManager {
 	static {
 		StringBuilder localStringBuilder = new StringBuilder().append("/data");
 		String str = Environment.getDataDirectory().getAbsolutePath();
-		DB_PATH = str + "/" + "com.songshulin.android.rent" + "/databases";
+		DB_PATH = str + "/" + "com.rent" + "/databases";
 	}
 
 	public AddressChoiceDBManager(Context paramContext) {
@@ -228,17 +229,19 @@ public class AddressChoiceDBManager {
 			File newFile = new File(localObject1);
 			String str2 = (String) localObject1 + "/" + "pcdz";
 			File file = new File(str2);
+			boolean result1 = false;
 			if (!newFile.exists())
-				newFile.mkdirs();
+				result1 = newFile.mkdirs();
 			if ((!Rent.getOutDBSP(this.mContext)) && file.exists()) {
 				boolean bool2 = file.delete();
 				int j = Log.e("AddressChoiceDBManager.openDatabase", "delete");
 			}
 			if (!file.exists()) {
+				file.createNewFile();
 				Rent.setOutDBSP(this.mContext, true);
 				int k = Log.e("AddressChoiceDBManager.openDatabase", "mikfile");
 				localObject2 = this.mContext.getResources().openRawResource(
-						2131099648);
+						R.raw.pcdz);
 				String str3 = (String) localObject1 + "/" + "pcdz";
 				localObject3 = new FileOutputStream(str3);
 				byte[] newbyte = new byte[204800];

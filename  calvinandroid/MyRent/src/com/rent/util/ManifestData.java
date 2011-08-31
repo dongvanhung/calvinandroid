@@ -36,7 +36,7 @@ public class ManifestData {
 	    }
 	    catch (Exception e)
 	    {
-	    	e.printStackTrace();
+//	    	e.printStackTrace();
 	    	localObject1 = "";
 	    }
 	    return localObject1;
