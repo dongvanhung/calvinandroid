@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/community_bg" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/view_head" android:background="@drawable/shape" android:layout_width="fill_parent" android:layout_height="45.0dip">
+        <ImageView android:id="@id/back" android:background="@drawable/back_button" android:layout_marginLeft="8.0dip" android:src="@drawable/back_icon" android:scaleType="center" style="@style/title_label_leftbutton_linearlayout" />
+        <TextView android:textSize="22.0dip" android:textColor="#fff0f0f0" android:gravity="center" android:id="@id/community_name" android:layout_width="fill_parent" android:layout_height="45.0dip" android:text="@string/community_detail" android:shadowColor="#ff333333" android:shadowDy="-1.1" android:shadowRadius="0.2" android:layout_weight="1.0" />
+        <Button android:textColor="@color/white" android:id="@id/map_navigate" android:layout_marginRight="8.0dip" android:text="@string/map_navigate" style="@style/title_label_rightbutton_linearlayout" />
+    </LinearLayout>
+    <ImageView android:id="@id/chart_split_line" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/line_bg" />
+    <RelativeLayout android:background="@color/community_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <ScrollView android:id="@id/content_scrollview" android:background="@color/community_bg" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:id="@id/base_info" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                <LinearLayout android:orientation="vertical" android:id="@id/community_hidden" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <ImageView android:background="@color/darkgray" android:layout_width="fill_parent" android:layout_height="3.0dip" android:layout_marginLeft="8.0dip" android:layout_marginTop="5.0dip" android:layout_marginRight="8.0dip" android:layout_marginBottom="5.0dip" />
+                    <TextView android:textSize="17.0dip" android:textColor="@color/darkgray" android:gravity="right" android:id="@id/price_chart" android:paddingRight="9.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                    <LinearLayout android:id="@id/chart_container" android:background="@drawable/bg" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:layout_marginRight="8.0dip" android:layout_marginBottom="10.0dip">
+                        <WebView android:id="@id/chart" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <TabHost android:id="@id/tabhost" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                            <TabWidget android:orientation="horizontal" android:id="@android:id/tabs" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                            <FrameLayout android:id="@android:id/tabcontent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:layout_weight="0.0">
+                                <RelativeLayout android:layout_gravity="center" android:id="@id/pic_container" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                                    <ImageView android:layout_gravity="center" android:id="@id/pic_bg" android:paddingTop="6.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/albumbg" />
+                                    <ImageView android:id="@id/flat_landscape_preview" android:paddingLeft="16.0dip" android:paddingTop="18.0dip" android:paddingRight="16.0dip" android:paddingBottom="20.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/testbig" android:scaleType="fitXY" android:layout_alignLeft="@id/pic_bg" android:layout_alignTop="@id/pic_bg" android:layout_alignRight="@id/pic_bg" android:layout_alignBottom="@id/pic_bg" />
+                                    <ProgressBar android:gravity="center" android:id="@id/flat_landscape_progress_bar" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+                                </RelativeLayout>
+                            </FrameLayout>
+                        </LinearLayout>
+                    </TabHost>
+                    <LinearLayout android:orientation="vertical" android:id="@id/community_introduce" android:background="@drawable/similary_bg" android:paddingLeft="20.0dip" android:paddingTop="5.0dip" android:paddingRight="20.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip">
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:textSize="20.0dip" android:textColor="@color/black" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/community_introduce" android:layout_weight="1.0" />
+                            <ImageView android:layout_gravity="center_vertical" android:id="@id/community_introduce_add_icon" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:src="@drawable/add_icon" android:scaleType="centerInside" />
+                            <ImageView android:layout_gravity="center_vertical" android:id="@id/community_introduce_reduce_icon" android:padding="10.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:src="@drawable/reduce_icon" android:scaleType="centerInside" />
+                        </LinearLayout>
+                        <ImageView android:background="#ff999999" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginBottom="10.0dip" />
+                        <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/intro" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:id="@id/sourroundings_total_layout" android:background="@drawable/similary_bg" android:paddingLeft="20.0dip" android:paddingTop="5.0dip" android:paddingRight="20.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip">
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:textSize="20.0dip" android:textColor="@color/black" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/community_around_condition" android:layout_weight="1.0" />
+                            <ImageView android:layout_gravity="center_vertical" android:id="@id/around_condition_add_icon" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:src="@drawable/add_icon" android:scaleType="centerInside" />
+                            <ImageView android:layout_gravity="center_vertical" android:id="@id/around_condition_reduce_icon" android:padding="10.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:src="@drawable/reduce_icon" android:scaleType="centerInside" />
+                        </LinearLayout>
+                        <ImageView android:id="@id/around_condition_lines" android:background="#ff999999" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginBottom="10.0dip" />
+                        <include layout="@layout/community_detail_surroundings" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:id="@id/traffic_total_layout" android:background="@drawable/similary_bg" android:paddingLeft="20.0dip" android:paddingTop="5.0dip" android:paddingRight="20.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="8.0dip" android:layout_marginBottom="16.0dip">
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:textSize="20.0dip" android:textColor="@color/black" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/community_traffic_path" android:layout_weight="1.0" />
+                            <ImageView android:layout_gravity="center_vertical" android:id="@id/traffic_add_icon" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:src="@drawable/add_icon" android:scaleType="centerInside" />
+                            <ImageView android:layout_gravity="center_vertical" android:id="@id/traffic_reduce_icon" android:padding="10.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:src="@drawable/reduce_icon" android:scaleType="centerInside" />
+                        </LinearLayout>
+                        <ImageView android:id="@id/traffic_lines" android:background="#ff999999" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginBottom="10.0dip" />
+                        <include layout="@layout/community_detail_traffic" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <ProgressBar android:gravity="center" android:id="@id/progress_bar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" style="?android:progressBarStyleLarge" />
+    </RelativeLayout>
+</LinearLayout>

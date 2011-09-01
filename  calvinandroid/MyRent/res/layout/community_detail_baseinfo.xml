@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TableLayout android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TableRow>
+        <TextView android:textSize="22.0dip" android:textColor="#ff333333" android:id="@id/name" android:layout_width="300.0dip" android:layout_height="wrap_content" android:layout_span="2" android:singleLine="true" />
+    </TableRow>
+    <TableRow>
+        <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/price" android:layout_width="165.0dip" android:layout_height="wrap_content" android:singleLine="true" />
+        <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/build_time" android:layout_width="135.0dip" android:layout_height="wrap_content" android:singleLine="true" />
+    </TableRow>
+    <TableRow>
+        <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/source" android:layout_width="165.0dip" android:layout_height="wrap_content" android:singleLine="true" />
+        <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/decoration_info" android:layout_width="135.0dip" android:layout_height="wrap_content" android:singleLine="true" />
+    </TableRow>
+    <TableRow>
+        <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/floors" android:layout_width="165.0dip" android:layout_height="wrap_content" android:singleLine="true" />
+        <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/floor_area_ratio" android:layout_width="135.0dip" android:layout_height="wrap_content" android:singleLine="true" />
+    </TableRow>
+    <TableRow>
+        <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/property_company" android:layout_width="300.0dip" android:layout_height="wrap_content" android:layout_span="2" android:singleLine="true" />
+    </TableRow>
+</TableLayout>

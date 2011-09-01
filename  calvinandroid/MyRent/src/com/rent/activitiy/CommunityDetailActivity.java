@@ -25,8 +25,9 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.rent.MobclickAgent;
+import com.rent.R;
 import com.rent.Rent;
 import com.rent.UIUtils;
 import com.rent.data.CommunityDetail;
@@ -126,30 +127,43 @@ public class CommunityDetailActivity extends Activity {
 		}
 
 		public void run() {
-			/*
-			 * int i = 3; while (i > 0) try { byte[] arrayOfByte =
-			 * Rent.downLoadImage(this.val$url); int j =
-			 * CommunityDetailActivity.access$1400(this.this$0).getHeight(); int
-			 * k = CommunityDetailActivity.access$1400(this.this$0).getWidth();
-			 * if (this.val$whitTab == 1) { CommunityDetailActivity
-			 * localCommunityDetailActivity1 = this.this$0; Bitmap localBitmap1
-			 * = Rent.decodeBitmap(arrayOfByte, k, j); Bitmap localBitmap2 =
-			 * CommunityDetailActivity
-			 * .access$1502(localCommunityDetailActivity1, localBitmap1); }
-			 * while (true) { CommunityDetailActivity
-			 * localCommunityDetailActivity2 = this.this$0;
-			 * CommunityDetailActivity.6.1 local1 = new
-			 * CommunityDetailActivity.6.1(this);
-			 * localCommunityDetailActivity2.runOnUiThread(local1); i = 0;
-			 * break; if (this.val$whitTab != 0) continue;
-			 * CommunityDetailActivity localCommunityDetailActivity3 =
-			 * this.this$0; Bitmap localBitmap3 = Rent.decodeBitmap(arrayOfByte,
-			 * k, j); Bitmap localBitmap4 =
-			 * CommunityDetailActivity.access$1602(localCommunityDetailActivity3
-			 * , localBitmap3); } } catch (Exception localException) { i += -1;
-			 * localException.printStackTrace(); }
-			 */
+			
+			int i = 3;
+//		    while (i > 0)
+		      try
+		      {
+		        byte[] arrayOfByte = Rent.downLoadImage(paramS);
+		        int j = CommunityDetailActivity.this.mLandBitmap.getHeight();
+		        int k = CommunityDetailActivity.this.mLandBitmap.getWidth();
+		        if (paramInt == 1)
+		        {
+		          Bitmap localBitmap1 = Rent.decodeBitmap(arrayOfByte, k, j);
+//		          Bitmap localBitmap2 = CommunityDetailActivity.access$1502(localCommunityDetailActivity1, localBitmap1);
+		        }
+		        else
+		        {
+		          CommunityDetailActivity61 local1 = new CommunityDetailActivity61();
+		          CommunityDetailActivity.this.runOnUiThread(local1);
+		        }
+		      }
+		      catch (Exception localException)
+		      {
+		        localException.printStackTrace();
+		      }
+//		  }
+			 
 		}
+	}
+
+	final class CommunityDetailActivity61 implements Runnable
+	{
+		
+	public void run()
+	{
+	  /*CommunityDetailActivity localCommunityDetailActivity = this.this$1.this$0;
+	  int i = CommunityDetailActivity.access$1000(this.this$1.this$0);
+	  CommunityDetailActivity.access$1100(localCommunityDetailActivity, i);*/
+	}
 	}
 
 	private void fillIntro(String paramString) {
@@ -171,39 +185,39 @@ public class CommunityDetailActivity extends Activity {
 	}
 
 	private void initAlbum() {
-		TabHost localTabHost1 = (TabHost) findViewById(2131492912);
+		TabHost localTabHost1 = (TabHost) findViewById(R.id.tabhost);
 		this.mTab = localTabHost1;
 		LocalActivityManager localLocalActivityManager = new LocalActivityManager(
 				this, true);
 		this.mTab.setup(localLocalActivityManager);
 		RelativeLayout localRelativeLayout1 = (RelativeLayout) LayoutInflater
-				.from(this).inflate(2130903094, null);
+				.from(this).inflate(R.layout.minitab_left, null);
 		TextView localTextView1 = (TextView) localRelativeLayout1
-				.findViewById(2131493108);
-		String str1 = getString(2131361817);
+				.findViewById(R.id.minitab_label);
+		String str1 = getString(R.string.community_landscape);
 		localTextView1.setText(str1);
 		RelativeLayout localRelativeLayout2 = (RelativeLayout) LayoutInflater
-				.from(this).inflate(2130903095, null);
+				.from(this).inflate(R.layout.minitab_right, null);
 		TextView localTextView2 = (TextView) localRelativeLayout2
-				.findViewById(2131493108);
-		String str2 = getString(2131361818);
+				.findViewById(R.id.minitab_label);
+		String str2 = getString(R.string.community_flat_type);
 		localTextView2.setText(str2);
 		TabHost localTabHost2 = this.mTab;
 		TabHost localTabHost3 = this.mTab;
-		String str3 = getString(2131361817);
+		String str3 = getString(R.string.community_landscape);
 		TabHost.TabSpec localTabSpec1 = localTabHost3.newTabSpec(str3)
-				.setIndicator(localRelativeLayout1).setContent(2131492913);
+				.setIndicator(localRelativeLayout1).setContent(R.id.pic_container);
 		localTabHost2.addTab(localTabSpec1);
 		TabHost localTabHost4 = this.mTab;
 		TabHost localTabHost5 = this.mTab;
-		String str4 = getString(2131361818);
+		String str4 = getString(R.string.community_flat_type);
 		TabHost.TabSpec localTabSpec2 = localTabHost5.newTabSpec(str4)
-				.setIndicator(localRelativeLayout2).setContent(2131492913);
+				.setIndicator(localRelativeLayout2).setContent(R.id.pic_container);
 		localTabHost4.addTab(localTabSpec2);
 		Bitmap localBitmap1 = ((BitmapDrawable) getResources().getDrawable(
-				2130837692)).getBitmap();
+				R.drawable.testbig)).getBitmap();
 		this.mSampleBitmap = localBitmap1;
-		ImageView localImageView1 = (ImageView) findViewById(2131492915);
+		ImageView localImageView1 = (ImageView) findViewById(R.id.flat_landscape_preview);
 		this.mTabImageView = localImageView1;
 		ImageView localImageView2 = this.mTabImageView;
 		Bitmap localBitmap2 = this.mSampleBitmap;
@@ -241,16 +255,16 @@ public class CommunityDetailActivity extends Activity {
 	}
 
 	private void initBaseView() {
-		View localView = LayoutInflater.from(this).inflate(2130903048, null);
+		View localView = LayoutInflater.from(this).inflate(R.layout.community_detail_baseinfo, null);
 		StringBuffer localStringBuffer1 = new StringBuffer();
-		TextView localTextView1 = (TextView) localView.findViewById(2131492930);
+		TextView localTextView1 = (TextView) localView.findViewById(R.id.name);
 		String str1 = this.mDetail.name;
 		localTextView1.setText(str1);
-		TextView localTextView2 = (TextView) localView.findViewById(2131492933);
+		TextView localTextView2 = (TextView) localView.findViewById(R.id.source);
 		int m = localStringBuffer1.length();
 		StringBuffer localStringBuffer2 = localStringBuffer1.delete(0, m);
 		StringBuffer localStringBuffer3 = localStringBuffer1.append("<font>");
-		String str2 = getString(2131361953);
+		String str2 = getString(R.string.house_source);
 		StringBuffer localStringBuffer4 = localStringBuffer1.append(str2);
 		StringBuffer localStringBuffer5 = localStringBuffer1.append(" ");
 		StringBuffer localStringBuffer6 = localStringBuffer1.append("</font>");
@@ -259,26 +273,26 @@ public class CommunityDetailActivity extends Activity {
 		int n = this.mSourceCount;
 		StringBuffer localStringBuffer8 = localStringBuffer1.append(n);
 		StringBuffer localStringBuffer9 = localStringBuffer1.append("</font>");
-		String str3 = getString(2131361954);
+		String str3 = getString(R.string.house_source_flat);
 		StringBuffer localStringBuffer10 = localStringBuffer1.append(str3);
 		Spanned localSpanned1 = Html.fromHtml(localStringBuffer1.toString());
 		localTextView2.setText(localSpanned1);
-		TextView localTextView3 = (TextView) localView.findViewById(2131492931);
+		TextView localTextView3 = (TextView) localView.findViewById(R.id.price);
 		int i2 = localStringBuffer1.length();
 		StringBuffer localStringBuffer11 = localStringBuffer1.delete(0, i2);
-		String str4 = getString(2131361949);
+		String str4 = getString(R.string.rent_average_phrase);
 		StringBuffer localStringBuffer12 = localStringBuffer1.append(str4);
 		StringBuffer localStringBuffer13 = localStringBuffer1.append(" ");
 		int i = 0;
 		if (this.mPrice == 0) {
-			String str5 = getString(2131361824);
+			String str5 = getString(R.string.unavailable);
 			StringBuffer localStringBuffer14 = localStringBuffer1.append(str5);
 			String str6 = localStringBuffer1.toString();
 			localTextView3.setText(str6);
-			localTextView3 = (TextView) localView.findViewById(2131492932);
+			localTextView3 = (TextView) localView.findViewById(R.id.build_time);
 			int i3 = localStringBuffer1.length();
 			StringBuffer localStringBuffer15 = localStringBuffer1.delete(0, i3);
-			String str7 = getString(2131361955);
+			String str7 = getString(R.string.build_time);
 			StringBuffer localStringBuffer16 = localStringBuffer1.append(str7);
 			StringBuffer localStringBuffer17 = localStringBuffer1.append(" ");
 			if (this.mDetail.finish_time == null){}
@@ -286,10 +300,10 @@ public class CommunityDetailActivity extends Activity {
 			StringBuffer localStringBuffer18 = localStringBuffer1.append(str8);
 			String str9 = localStringBuffer1.toString();
 			localTextView3.setText(str9);
-			localTextView3 = (TextView) localView.findViewById(2131492934);
+			localTextView3 = (TextView) localView.findViewById(R.id.decoration_info);
 			int i4 = localStringBuffer1.length();
 			StringBuffer localStringBuffer19 = localStringBuffer1.delete(0, i4);
-			String str10 = getString(2131361956);
+			String str10 = getString(R.string.decoration_info);
 			StringBuffer localStringBuffer20 = localStringBuffer1.append(str10);
 			StringBuffer localStringBuffer21 = localStringBuffer1.append(" ");
 			if (this.mDetail.decoration_info == null){}
@@ -297,10 +311,10 @@ public class CommunityDetailActivity extends Activity {
 			StringBuffer localStringBuffer22 = localStringBuffer1.append(str11);
 			String str12 = localStringBuffer1.toString();
 			localTextView3.setText(str12);
-			localTextView3 = (TextView) localView.findViewById(2131492935);
+			localTextView3 = (TextView) localView.findViewById(R.id.floors);
 			int i5 = localStringBuffer1.length();
 			StringBuffer localStringBuffer23 = localStringBuffer1.delete(0, i5);
-			String str13 = getString(2131361961);
+			String str13 = getString(R.string.property_type);
 			StringBuffer localStringBuffer24 = localStringBuffer1.append(str13);
 			StringBuffer localStringBuffer25 = localStringBuffer1.append(" ");
 			if (this.mDetail.property_type == null){}
@@ -308,10 +322,10 @@ public class CommunityDetailActivity extends Activity {
 			StringBuffer localStringBuffer26 = localStringBuffer1.append(str14);
 			String str15 = localStringBuffer1.toString();
 			localTextView3.setText(str15);
-			localTextView3 = (TextView) localView.findViewById(2131492936);
+			localTextView3 = (TextView) localView.findViewById(R.id.floor_area_ratio);
 			int i6 = localStringBuffer1.length();
 			StringBuffer localStringBuffer27 = localStringBuffer1.delete(0, i6);
-			String str16 = getString(2131361964);
+			String str16 = getString(R.string.floor_area_ratio);
 			StringBuffer localStringBuffer28 = localStringBuffer1.append(str16);
 			StringBuffer localStringBuffer29 = localStringBuffer1.append(" ");
 			if (this.mDetail.floor_area_ratio == null){}
@@ -319,10 +333,10 @@ public class CommunityDetailActivity extends Activity {
 			StringBuffer localStringBuffer30 = localStringBuffer1.append(str17);
 			String str18 = localStringBuffer1.toString();
 			localTextView3.setText(str18);
-			localTextView3 = (TextView) localView.findViewById(2131492937);
+			localTextView3 = (TextView) localView.findViewById(R.id.property_company);
 			int i7 = localStringBuffer1.length();
 			StringBuffer localStringBuffer31 = localStringBuffer1.delete(0, i7);
-			String str19 = getString(2131361959);
+			String str19 = getString(R.string.developer);
 			StringBuffer localStringBuffer32 = localStringBuffer1.append(str19);
 			StringBuffer localStringBuffer33 = localStringBuffer1.append(" ");
 			if (this.mDetail.developer == null){}
@@ -331,116 +345,115 @@ public class CommunityDetailActivity extends Activity {
 			String str21 = localStringBuffer1.toString();
 			localTextView3.setText(str21);
 			this.mLinearLayout.addView(localView);
+			
 			if ((this.mDetail.intro != null)
 					&& (this.mDetail.intro.trim().length() != 0)){}
 			this.introExpandable = false;
 			TextView localTextView4 = this.mIntroTextView;
-			String str22 = getString(2131361982);
+			String str22 = getString(R.string.community_detail_intro_unavailable);
 			localTextView4.setText(str22);
 			this.mCommunityButAdd.setVisibility(8);
 			this.mCommunityButReduce.setVisibility(8);
-			label817: localTextView3 = (TextView) findViewById(2131492945);
+			label817: localTextView3 = (TextView) findViewById(R.id.community_detail_primarySchool_text);
 			String str23 = this.mDetail.primarySchool;
 			localTextView3.setText(str23);
 			if ((this.mDetail.primarySchool != null)
 					&& (this.mDetail.primarySchool.trim().length() != 0)){}
 			i = 0 + 1;
 			localTextView3.setVisibility(8);
-			((TextView) findViewById(2131492944)).setVisibility(8);
-		}
-		while (true) {
-			localTextView3 = (TextView) findViewById(2131492947);
+			((TextView) findViewById(R.id.community_detail_primarySchool_label)).setVisibility(8);
+		} else {
+			localTextView3 = (TextView) findViewById(R.id.community_detail_kindergarten_text);
 			String str24 = this.mDetail.kindergarten;
 			localTextView3.setText(str24);
 			if ((this.mDetail.kindergarten == null)
 					|| (this.mDetail.kindergarten.trim().length() == 0)) {
 				i += 1;
 				localTextView3.setVisibility(8);
-				((TextView) findViewById(2131492946)).setVisibility(8);
+				((TextView) findViewById(R.id.community_detail_kindergarten_label)).setVisibility(8);
 			}
-			localTextView3 = (TextView) findViewById(2131492949);
+			localTextView3 = (TextView) findViewById(R.id.community_detail_postOffice_text);
 			String str25 = this.mDetail.postOffice;
 			localTextView3.setText(str25);
 			if ((this.mDetail.postOffice == null)
 					|| (this.mDetail.postOffice.trim().length() == 0)) {
 				i += 1;
 				localTextView3.setVisibility(8);
-				((TextView) findViewById(2131492948)).setVisibility(8);
+				((TextView) findViewById(R.id.community_detail_postOffice_label)).setVisibility(8);
 			}
-			localTextView3 = (TextView) findViewById(2131492951);
+			localTextView3 = (TextView) findViewById(R.id.community_detail_bank_text);
 			String str26 = this.mDetail.bank;
 			localTextView3.setText(str26);
 			if ((this.mDetail.bank == null)
 					|| (this.mDetail.bank.trim().length() == 0)) {
 				i += 1;
 				localTextView3.setVisibility(8);
-				((TextView) findViewById(2131492950)).setVisibility(8);
+				((TextView) findViewById(R.id.community_detail_bank_label)).setVisibility(8);
 			}
-			localTextView3 = (TextView) findViewById(2131492953);
+			localTextView3 = (TextView) findViewById(R.id.community_detail_medicalStation_text);
 			String str27 = this.mDetail.medicalStation;
 			localTextView3.setText(str27);
 			if ((this.mDetail.medicalStation == null)
 					|| (this.mDetail.medicalStation.trim().length() == 0)) {
 				i += 1;
 				localTextView3.setVisibility(8);
-				((TextView) findViewById(2131492952)).setVisibility(8);
+				((TextView) findViewById(R.id.community_detail_medicalStation_label)).setVisibility(8);
 			}
-			localTextView3 = (TextView) findViewById(2131492955);
+			localTextView3 = (TextView) findViewById(R.id.community_detail_school_text);
 			String str28 = this.mDetail.school;
 			localTextView3.setText(str28);
 			if ((this.mDetail.school == null)
 					|| (this.mDetail.school.trim().length() == 0)) {
 				i += 1;
 				localTextView3.setVisibility(8);
-				((TextView) findViewById(2131492954)).setVisibility(8);
+				((TextView) findViewById(R.id.community_detail_school_label)).setVisibility(8);
 			}
-			localTextView3 = (TextView) findViewById(2131492957);
+			localTextView3 = (TextView) findViewById(R.id.community_detail_businessDistrict_text);
 			String str29 = this.mDetail.businessDistrict;
 			localTextView3.setText(str29);
 			if ((this.mDetail.businessDistrict == null)
 					|| (this.mDetail.businessDistrict.trim().length() == 0)) {
 				i += 1;
 				localTextView3.setVisibility(8);
-				((TextView) findViewById(2131492956)).setVisibility(8);
+				((TextView) findViewById(R.id.community_detail_businessDistrict_label)).setVisibility(8);
 			}
-			localTextView3 = (TextView) findViewById(2131492959);
+			localTextView3 = (TextView) findViewById(R.id.community_detail_hospital_text);
 			String str30 = this.mDetail.hospital;
 			localTextView3.setText(str30);
 			if ((this.mDetail.hospital == null)
 					|| (this.mDetail.hospital.trim().length() == 0)) {
 				i += 1;
 				localTextView3.setVisibility(8);
-				((TextView) findViewById(2131492958)).setVisibility(8);
+				((TextView) findViewById(R.id.community_detail_hospital_label)).setVisibility(8);
 			}
 			if (i == 8) {
 				this.sourroundingsVisible = false;
-				((LinearLayout) findViewById(2131492921)).setVisibility(8);
+				((LinearLayout) findViewById(R.id.sourroundings_total_layout)).setVisibility(8);
 			}
-			localTextView3 = (TextView) findViewById(2131492962);
+			localTextView3 = (TextView) findViewById(R.id.community_detail_bus_text);
 			String str31 = this.mDetail.bus;
 			localTextView3.setText(str31);
 			if ((this.mDetail.bus == null)
 					|| (this.mDetail.bus.trim().length() == 0)) {
 				i = 0 + 1;
 				localTextView3.setVisibility(8);
-				((TextView) findViewById(2131492961)).setVisibility(8);
-			}
-			while (true) {
-				localTextView3 = (TextView) findViewById(2131492964);
+				((TextView) findViewById(R.id.community_detail_bus_label)).setVisibility(8);
+			} else {
+				localTextView3 = (TextView) findViewById(R.id.community_detail_subway_text);
 				String str32 = this.mDetail.subway;
 				localTextView3.setText(str32);
 				if ((this.mDetail.subway == null)
 						|| (this.mDetail.subway.trim().length() == 0)) {
 					i += 1;
 					localTextView3.setVisibility(8);
-					((TextView) findViewById(2131492963)).setVisibility(8);
+					((TextView) findViewById(R.id.community_detail_subway_label)).setVisibility(8);
 				}
 				if (i == 2) {
 					this.trafficVisible = false;
-					((LinearLayout) findViewById(2131492925)).setVisibility(8);
+					((LinearLayout) findViewById(R.id.traffic_total_layout)).setVisibility(8);
 				}
-				localTextView3 = (TextView) findViewById(2131492909);
-				String str33 = getString(2131361968);
+				localTextView3 = (TextView) findViewById(R.id.price_chart);
+				String str33 = getString(R.string.price_chart_trim);
 				localTextView3.setText(str33);
 				Display localDisplay = getWindowManager().getDefaultDisplay();
 				StringBuilder localStringBuilder1 = new StringBuilder()
@@ -452,13 +465,13 @@ public class CommunityDetailActivity extends Activity {
 				int i9 = UIUtils.px2dip(this, f);
 				int k = (int) UIUtils.dip2Px(this, 130.0F);
 				int i10 = localDisplay.getWidth() - 60;
-				WebView localWebView = (WebView) findViewById(2131492911);
+				WebView localWebView = (WebView) findViewById(R.id.chart);
 				localWebView.setInitialScale(100);
 				int i1;
 				if ((this.mDetail.priceChaturl == null)
 						|| (this.mDetail.housePrice == 0)) {
-					((ImageView) findViewById(2131492905)).setVisibility(8);
-					LinearLayout localLinearLayout = (LinearLayout) findViewById(2131492910);
+					((ImageView) findViewById(R.id.chart_split_line)).setVisibility(8);
+					LinearLayout localLinearLayout = (LinearLayout) findViewById(R.id.chart_container);
 					localWebView.setVisibility(8);
 					localTextView3.setVisibility(8);
 					localLinearLayout.setVisibility(8);
@@ -469,29 +482,29 @@ public class CommunityDetailActivity extends Activity {
 					if ((this.hasLandscape) || (this.hasFlat_type)){}
 					this.mTab.setVisibility(8);
 					this.mTabImageView.setVisibility(8);
-					((ScrollView) findViewById(2131492906)).setVisibility(0);
+					((ScrollView) findViewById(R.id.content_scrollview)).setVisibility(0);
 				} else {
 					StringBuffer kS = new StringBuffer("");
 					StringBuffer localStringBuffer35 = kS
 							.append("<font color=\"#469405\">");
 					int i11 = this.mPrice;
 					StringBuffer localStringBuffer36 = kS.append(i11);
-					String str35 = getString(2131361822);
+					String str35 = getString(R.string.yuan);
 					StringBuffer localStringBuffer37 = kS.append(str35);
 					StringBuffer localStringBuffer38 = kS.append("</font>");
-					String str36 = getString(2131361950);
+					String str36 = getString(R.string.rent_average_unit);
 					StringBuffer localStringBuffer39 = kS.append(str36);
 					Spanned localSpanned2 = Html.fromHtml(kS.toString());
 					localTextView3.setText(localSpanned2);
-					String str37 = getString(2131361830);
+					String str37 = getString(R.string.unknown);
 					StringBuffer localStringBuffer40 = kS.append(str37);
-					String str38 = getString(2131361830);
+					String str38 = getString(R.string.unknown);
 					StringBuffer localStringBuffer41 = kS.append(str38);
-					String str39 = getString(2131361830);
+					String str39 = getString(R.string.unknown);
 					StringBuffer localStringBuffer42 = kS.append(str39);
-					String str40 = getString(2131361830);
+					String str40 = getString(R.string.unknown);
 					StringBuffer localStringBuffer43 = kS.append(str40);
-					String str41 = getString(2131361830);
+					String str41 = getString(R.string.unknown);
 					StringBuffer localStringBuffer44 = kS.append(str41);
 					String str42 = this.mDetail.intro;
 					fillIntro(str42);
@@ -516,11 +529,11 @@ public class CommunityDetailActivity extends Activity {
 							.toArray(arrayOfString4);
 					if (this.hasLandscape) {
 						String str45 = this.landscapes[0];
-						downBmp(str45, 0);
+//						downBmp(str45, 0);
 					}
 					if (this.hasFlat_type) {
 						String str46 = this.flatTypes[0];
-						downBmp(str46, 1);
+//						downBmp(str46, 1);
 					}
 					TabHost localTabHost = this.mTab;
 					localTabHost
@@ -595,30 +608,33 @@ public class CommunityDetailActivity extends Activity {
 				}
 			}
 		}
+		this.setIntroLayoutVisible(false);
+		this.setTrafficLayoutVisible(false);
+		this.setArroundLayoutVisible(false);
 	}
 
 	private void initControlView() {
-		ImageView localImageView1 = (ImageView) findViewById(2131492918);
+		ImageView localImageView1 = (ImageView) findViewById(R.id.community_introduce_add_icon);
 		this.mCommunityButAdd = localImageView1;
-		ImageView localImageView2 = (ImageView) findViewById(2131492919);
+		ImageView localImageView2 = (ImageView) findViewById(R.id.community_introduce_reduce_icon);
 		this.mCommunityButReduce = localImageView2;
-		TextView localTextView = (TextView) findViewById(2131492920);
+		TextView localTextView = (TextView) findViewById(R.id.intro);
 		this.mIntroTextView = localTextView;
-		TableLayout localTableLayout = (TableLayout) findViewById(2131492943);
+		TableLayout localTableLayout = (TableLayout) findViewById(R.id.community_arround_condition);
 		this.mRoundLayout = localTableLayout;
-		ImageView localImageView3 = (ImageView) findViewById(2131492922);
+		ImageView localImageView3 = (ImageView) findViewById(R.id.around_condition_add_icon);
 		this.mRoundButAdd = localImageView3;
-		ImageView localImageView4 = (ImageView) findViewById(2131492923);
+		ImageView localImageView4 = (ImageView) findViewById(R.id.around_condition_reduce_icon);
 		this.mRoundButReduce = localImageView4;
-		ImageView localImageView5 = (ImageView) findViewById(2131492924);
+		ImageView localImageView5 = (ImageView) findViewById(R.id.around_condition_lines);
 		this.mRoundLine = localImageView5;
-		LinearLayout localLinearLayout = (LinearLayout) findViewById(2131492960);
+		LinearLayout localLinearLayout = (LinearLayout) findViewById(R.id.traffic_layout);
 		this.mTrafficLayout = localLinearLayout;
-		ImageView localImageView6 = (ImageView) findViewById(2131492926);
+		ImageView localImageView6 = (ImageView) findViewById(R.id.traffic_add_icon);
 		this.mTrafficButAdd = localImageView6;
-		ImageView localImageView7 = (ImageView) findViewById(2131492927);
+		ImageView localImageView7 = (ImageView) findViewById(R.id.traffic_reduce_icon);
 		this.mTrafficButReduce = localImageView7;
-		ImageView localImageView8 = (ImageView) findViewById(2131492928);
+		ImageView localImageView8 = (ImageView) findViewById(R.id.traffic_lines);
 		this.mTrafficLine = localImageView8;
 		initIntroControlLayout();
 		initAroundControlLayout();
@@ -704,9 +720,9 @@ public class CommunityDetailActivity extends Activity {
 		this.mGroupId = l;
 		String str3 = localBundle.getString("image");
 		this.mImage = str3;
-		ProgressBar localProgressBar = (ProgressBar) findViewById(2131492929);
+		ProgressBar localProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 		this.mProgressbar = localProgressBar;
-		ImageView localImageView1 = (ImageView) findViewById(2131492876);
+		ImageView localImageView1 = (ImageView) findViewById(R.id.back);
 		this.mBack = localImageView1;
 		ImageView localImageView2 = this.mBack;
 		localImageView2.setOnClickListener(new OnClickListener() {
@@ -714,9 +730,9 @@ public class CommunityDetailActivity extends Activity {
 				finish();
 			}
 		});
-		LinearLayout localLinearLayout = (LinearLayout) findViewById(2131492907);
+		LinearLayout localLinearLayout = (LinearLayout) findViewById(R.id.base_info);
 		this.mLinearLayout = localLinearLayout;
-		Button localButton1 = (Button) findViewById(2131492904);
+		Button localButton1 = (Button) findViewById(R.id.map_navigate);
 		this.mMapNav = localButton1;
 		if (!Rent.isAvailableGoogleMap())
 			this.mMapNav.setEnabled(false);
@@ -760,6 +776,7 @@ public class CommunityDetailActivity extends Activity {
 				local3);
 		String str4 = this.mCity;
 		String str5 = this.mName;
+		str4 = "上海";
 		new CommunityDetailThread(localCommunityDetailHandler, str4, str5)
 				.start();
 	}
@@ -767,16 +784,17 @@ public class CommunityDetailActivity extends Activity {
 	final class CommunityDetailActivity3 implements CommunityDetailListener {
 		public void handleCommunityDetail(boolean paramBoolean,
 				CommunityDetail paramCommunityDetail) {
-			/*
-			 * if (true == paramBoolean) { CommunityDetail localCommunityDetail
-			 * = CommunityDetailActivity.access$702(this.this$0,
-			 * paramCommunityDetail);
-			 * CommunityDetailActivity.access$800(this.this$0); } while (true) {
-			 * CommunityDetailActivity.access$900(this.this$0).setVisibility(8);
-			 * return; CommunityDetailActivity localCommunityDetailActivity =
-			 * this.this$0; String str = this.this$0.getString(2131361948);
-			 * Toast.makeText(localCommunityDetailActivity, str, 1).show(); }
-			 */
+			
+			if (true == paramBoolean)
+		    {
+				CommunityDetailActivity.this.mDetail = paramCommunityDetail;
+				CommunityDetailActivity.this.initBaseView();
+				CommunityDetailActivity.this.mProgressbar.setVisibility(8);
+		    } else
+		    {
+		      String str = CommunityDetailActivity.this.getString(R.string.load_failed);
+		      Toast.makeText(CommunityDetailActivity.this, str, 1).show();
+		    }
 		}
 	}
 
@@ -837,7 +855,7 @@ public class CommunityDetailActivity extends Activity {
 		super.onCreate(paramBundle);
 //		MobclickAgent.onError(this);
 		boolean bool = requestWindowFeature(1);
-		setContentView(2130903047);
+		setContentView(R.layout.community_detail_activity);
 		initControlView();
 		initView();
 //		MobclickAgent.onEvent(this, "viewcommunitydetail");

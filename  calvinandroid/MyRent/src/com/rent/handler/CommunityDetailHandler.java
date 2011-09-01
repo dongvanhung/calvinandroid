@@ -39,8 +39,7 @@ public class CommunityDetailHandler extends Handler {
 	final class CommunityDetailHandler1 implements InnerListener {
 		public void innerListener(boolean paramBoolean,
 				CommunityDetail paramCommunityDetail) {
-			// CommunityDetailHandler.access$000(this.this$0).handleCommunityDetail(paramBoolean,
-			// paramCommunityDetail);
+			CommunityDetailHandler.this.mListener.handleCommunityDetail(paramBoolean, paramCommunityDetail);
 		}
 	}
 
@@ -272,12 +271,12 @@ public class CommunityDetailHandler extends Handler {
 					}
 				}
 				this.mHandler.setCommunityDetail(localCommunityDetail);
-				Message localMessage1;
-				Bundle localBundle1;
-				boolean bool3;
-				return;
+				Message localMessage2 = new Message();
+				Bundle localBundle2 = new Bundle();
+				localBundle2.putBoolean("data", true);
+				localMessage2.setData(localBundle2);
+				boolean bool4 = this.mHandler.sendMessage(localMessage2);
 			} catch (JSONException localJSONException) {
-				while (true) {
 					String str34 = localJSONException.toString();
 					Rent.MyLog("CommunityDetailhanler.run()", str34);
 					localJSONException.printStackTrace();
@@ -286,13 +285,8 @@ public class CommunityDetailHandler extends Handler {
 					localBundle2.putBoolean("data", false);
 					localMessage2.setData(localBundle2);
 					boolean bool4 = this.mHandler.sendMessage(localMessage2);
-				}
 			} finally {
-				Message localMessage3 = new Message();
-				Bundle localBundle3 = new Bundle();
-				localBundle3.putBoolean("data", false);
-				localMessage3.setData(localBundle3);
-				boolean bool5 = this.mHandler.sendMessage(localMessage3);
+				
 			}
 		}
 	}

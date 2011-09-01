@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TableLayout android:id="@id/community_arround_condition" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:shrinkColumns="1">
+        <TableRow>
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_primarySchool_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:text="@string/community_detail_primarySchool" />
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_primarySchool_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow>
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_kindergarten_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:text="@string/community_detail_kindergarten" />
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_kindergarten_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow>
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_postOffice_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:text="@string/community_detail_postOffice" />
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_postOffice_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </TableRow>
+        <View android:layout_height="5.0dip" />
+        <TableRow>
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_bank_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:text="@string/community_detail_bank" />
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_bank_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow>
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_medicalStation_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:text="@string/community_detail_medicalStation" />
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_medicalStation_text" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow>
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_school_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:text="@string/community_detail_school" />
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_school_text" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </TableRow>
+        <View android:layout_height="5.0dip" />
+        <TableRow>
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_businessDistrict_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:text="@string/community_detail_businessDistrict" />
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_businessDistrict_text" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </TableRow>
+        <TableRow>
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_hospital_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:text="@string/community_detail_hospital" />
+            <TextView android:textSize="15.0dip" android:textColor="#ff333333" android:id="@id/community_detail_hospital_text" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

@@ -47,7 +47,8 @@ public abstract class AbstractThread extends Thread {
 				DefaultHttpClient localDefaultHttpClient = new DefaultHttpClient(
 						localBasicHttpParams);
 				Context localContext = Rent.getAppContext();
-				String str1 = Rent.getVersionName(Rent.getAppContext());
+//				String str1 = Rent.getVersionName(Rent.getAppContext());
+				String str1 = "1.0";
 				DefaultCookieStore localDefaultCookieStore = DefaultCookieStore
 						.getSingleStore(localContext, str1, "rent");
 				localDefaultHttpClient.setCookieStore(localDefaultCookieStore);
