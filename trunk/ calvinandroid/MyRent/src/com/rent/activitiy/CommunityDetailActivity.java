@@ -127,43 +127,41 @@ public class CommunityDetailActivity extends Activity {
 		}
 
 		public void run() {
-			
+
 			int i = 3;
-//		    while (i > 0)
-		      try
-		      {
-		        byte[] arrayOfByte = Rent.downLoadImage(paramS);
-		        int j = CommunityDetailActivity.this.mLandBitmap.getHeight();
-		        int k = CommunityDetailActivity.this.mLandBitmap.getWidth();
-		        if (paramInt == 1)
-		        {
-		          Bitmap localBitmap1 = Rent.decodeBitmap(arrayOfByte, k, j);
-//		          Bitmap localBitmap2 = CommunityDetailActivity.access$1502(localCommunityDetailActivity1, localBitmap1);
-		        }
-		        else
-		        {
-		          CommunityDetailActivity61 local1 = new CommunityDetailActivity61();
-		          CommunityDetailActivity.this.runOnUiThread(local1);
-		        }
-		      }
-		      catch (Exception localException)
-		      {
-		        localException.printStackTrace();
-		      }
-//		  }
-			 
+			// while (i > 0)
+			try {
+				byte[] arrayOfByte = Rent.downLoadImage(paramS);
+				int j = CommunityDetailActivity.this.mLandBitmap.getHeight();
+				int k = CommunityDetailActivity.this.mLandBitmap.getWidth();
+				if (paramInt == 1) {
+					Bitmap localBitmap1 = Rent.decodeBitmap(arrayOfByte, k, j);
+					// Bitmap localBitmap2 =
+					// CommunityDetailActivity.access$1502(localCommunityDetailActivity1,
+					// localBitmap1);
+				} else {
+					CommunityDetailActivity61 local1 = new CommunityDetailActivity61();
+					CommunityDetailActivity.this.runOnUiThread(local1);
+				}
+			} catch (Exception localException) {
+				localException.printStackTrace();
+			}
+			// }
+
 		}
 	}
 
-	final class CommunityDetailActivity61 implements Runnable
-	{
-		
-	public void run()
-	{
-	  /*CommunityDetailActivity localCommunityDetailActivity = this.this$1.this$0;
-	  int i = CommunityDetailActivity.access$1000(this.this$1.this$0);
-	  CommunityDetailActivity.access$1100(localCommunityDetailActivity, i);*/
-	}
+	final class CommunityDetailActivity61 implements Runnable {
+
+		public void run() {
+			/*
+			 * CommunityDetailActivity localCommunityDetailActivity =
+			 * this.this$1.this$0; int i =
+			 * CommunityDetailActivity.access$1000(this.this$1.this$0);
+			 * CommunityDetailActivity.access$1100(localCommunityDetailActivity,
+			 * i);
+			 */
+		}
 	}
 
 	private void fillIntro(String paramString) {
@@ -206,13 +204,15 @@ public class CommunityDetailActivity extends Activity {
 		TabHost localTabHost3 = this.mTab;
 		String str3 = getString(R.string.community_landscape);
 		TabHost.TabSpec localTabSpec1 = localTabHost3.newTabSpec(str3)
-				.setIndicator(localRelativeLayout1).setContent(R.id.pic_container);
+				.setIndicator(localRelativeLayout1)
+				.setContent(R.id.pic_container);
 		localTabHost2.addTab(localTabSpec1);
 		TabHost localTabHost4 = this.mTab;
 		TabHost localTabHost5 = this.mTab;
 		String str4 = getString(R.string.community_flat_type);
 		TabHost.TabSpec localTabSpec2 = localTabHost5.newTabSpec(str4)
-				.setIndicator(localRelativeLayout2).setContent(R.id.pic_container);
+				.setIndicator(localRelativeLayout2)
+				.setContent(R.id.pic_container);
 		localTabHost4.addTab(localTabSpec2);
 		Bitmap localBitmap1 = ((BitmapDrawable) getResources().getDrawable(
 				R.drawable.testbig)).getBitmap();
@@ -235,32 +235,26 @@ public class CommunityDetailActivity extends Activity {
 		ImageView localImageView1 = this.mRoundButAdd;
 		localImageView1.setOnClickListener(new OnClickListener() {
 			public void onClick(View paramView) {
-				/*
-				 * CommunityDetailActivity.access$2000(this.this$0, 1);
-				 * CommunityDetailActivity localCommunityDetailActivity =
-				 * this.this$0; int i = CommunityDetailActivity.access$2100();
-				 * CommunityDetailActivity
-				 * .access$1900(localCommunityDetailActivity, i);
-				 * MobclickAgent.onEvent(this.this$0, "community_meta",
-				 * "sourroundings");
-				 */
+				CommunityDetailActivity.this.setArroundLayoutVisible(true);
 			}
 		});
 		ImageView localImageView2 = this.mRoundButReduce;
 		localImageView2.setOnClickListener(new OnClickListener() {
 			public void onClick(View paramView) {
-				// CommunityDetailActivity.access$2000(this.this$0, 0);
+				 CommunityDetailActivity.this.setArroundLayoutVisible(false);
 			}
 		});
 	}
 
 	private void initBaseView() {
-		View localView = LayoutInflater.from(this).inflate(R.layout.community_detail_baseinfo, null);
+		View localView = LayoutInflater.from(this).inflate(
+				R.layout.community_detail_baseinfo, null);
 		StringBuffer localStringBuffer1 = new StringBuffer();
 		TextView localTextView1 = (TextView) localView.findViewById(R.id.name);
 		String str1 = this.mDetail.name;
 		localTextView1.setText(str1);
-		TextView localTextView2 = (TextView) localView.findViewById(R.id.source);
+		TextView localTextView2 = (TextView) localView
+				.findViewById(R.id.source);
 		int m = localStringBuffer1.length();
 		StringBuffer localStringBuffer2 = localStringBuffer1.delete(0, m);
 		StringBuffer localStringBuffer3 = localStringBuffer1.append("<font>");
@@ -289,328 +283,349 @@ public class CommunityDetailActivity extends Activity {
 			StringBuffer localStringBuffer14 = localStringBuffer1.append(str5);
 			String str6 = localStringBuffer1.toString();
 			localTextView3.setText(str6);
-			localTextView3 = (TextView) localView.findViewById(R.id.build_time);
-			int i3 = localStringBuffer1.length();
-			StringBuffer localStringBuffer15 = localStringBuffer1.delete(0, i3);
-			String str7 = getString(R.string.build_time);
-			StringBuffer localStringBuffer16 = localStringBuffer1.append(str7);
-			StringBuffer localStringBuffer17 = localStringBuffer1.append(" ");
-			if (this.mDetail.finish_time == null){}
+		} else {
+			StringBuffer kS = new StringBuffer("");
+			StringBuffer localStringBuffer35 = kS
+					.append("<font color=\"#469405\">");
+			int i11 = this.mPrice;
+			StringBuffer localStringBuffer36 = kS.append(i11);
+			String str35 = getString(R.string.yuan);
+			StringBuffer localStringBuffer37 = kS.append(str35);
+			StringBuffer localStringBuffer38 = kS.append("</font>");
+			String str36 = getString(R.string.rent_average_unit);
+			StringBuffer localStringBuffer39 = kS.append(str36);
+			Spanned localSpanned2 = Html.fromHtml(kS.toString());
+			localTextView3.setText(localSpanned2);
+		}
+		localTextView3 = (TextView) localView.findViewById(R.id.build_time);
+		int i3 = localStringBuffer1.length();
+		StringBuffer localStringBuffer15 = localStringBuffer1.delete(0, i3);
+		String str7 = getString(R.string.build_time);
+		StringBuffer localStringBuffer16 = localStringBuffer1.append(str7);
+		StringBuffer localStringBuffer17 = localStringBuffer1.append(" ");
+		if (this.mDetail.finish_time == null) {
+			String s36 = getString(0x7f0a0026);
+			StringBuffer stringbuffer38 = localStringBuffer1.append(s36);
+		} else {
 			String str8 = this.mDetail.finish_time;
 			StringBuffer localStringBuffer18 = localStringBuffer1.append(str8);
-			String str9 = localStringBuffer1.toString();
-			localTextView3.setText(str9);
-			localTextView3 = (TextView) localView.findViewById(R.id.decoration_info);
-			int i4 = localStringBuffer1.length();
-			StringBuffer localStringBuffer19 = localStringBuffer1.delete(0, i4);
-			String str10 = getString(R.string.decoration_info);
-			StringBuffer localStringBuffer20 = localStringBuffer1.append(str10);
-			StringBuffer localStringBuffer21 = localStringBuffer1.append(" ");
-			if (this.mDetail.decoration_info == null){}
+		}
+		String str9 = localStringBuffer1.toString();
+		localTextView3.setText(str9);
+		localTextView3 = (TextView) localView
+				.findViewById(R.id.decoration_info);
+		int i4 = localStringBuffer1.length();
+		StringBuffer localStringBuffer19 = localStringBuffer1.delete(0, i4);
+		String str10 = getString(R.string.decoration_info);
+		StringBuffer localStringBuffer20 = localStringBuffer1.append(str10);
+		StringBuffer localStringBuffer21 = localStringBuffer1.append(" ");
+		if (this.mDetail.decoration_info == null) {
+			String s37 = getString(R.string.unknown);
+			StringBuffer stringbuffer39 = localStringBuffer1.append(s37);
+		} else {
 			String str11 = this.mDetail.decoration_info;
 			StringBuffer localStringBuffer22 = localStringBuffer1.append(str11);
-			String str12 = localStringBuffer1.toString();
-			localTextView3.setText(str12);
-			localTextView3 = (TextView) localView.findViewById(R.id.floors);
-			int i5 = localStringBuffer1.length();
-			StringBuffer localStringBuffer23 = localStringBuffer1.delete(0, i5);
-			String str13 = getString(R.string.property_type);
-			StringBuffer localStringBuffer24 = localStringBuffer1.append(str13);
-			StringBuffer localStringBuffer25 = localStringBuffer1.append(" ");
-			if (this.mDetail.property_type == null){}
+		}
+		String str12 = localStringBuffer1.toString();
+		localTextView3.setText(str12);
+		localTextView3 = (TextView) localView.findViewById(R.id.floors);
+		int i5 = localStringBuffer1.length();
+		StringBuffer localStringBuffer23 = localStringBuffer1.delete(0, i5);
+		String str13 = getString(R.string.property_type);
+		StringBuffer localStringBuffer24 = localStringBuffer1.append(str13);
+		StringBuffer localStringBuffer25 = localStringBuffer1.append(" ");
+		if (this.mDetail.property_type == null) {
+			String s38 = getString(0x7f0a0026);
+			StringBuffer stringbuffer40 = localStringBuffer1.append(s38);
+		} else {
 			String str14 = this.mDetail.property_type;
 			StringBuffer localStringBuffer26 = localStringBuffer1.append(str14);
-			String str15 = localStringBuffer1.toString();
-			localTextView3.setText(str15);
-			localTextView3 = (TextView) localView.findViewById(R.id.floor_area_ratio);
-			int i6 = localStringBuffer1.length();
-			StringBuffer localStringBuffer27 = localStringBuffer1.delete(0, i6);
-			String str16 = getString(R.string.floor_area_ratio);
-			StringBuffer localStringBuffer28 = localStringBuffer1.append(str16);
-			StringBuffer localStringBuffer29 = localStringBuffer1.append(" ");
-			if (this.mDetail.floor_area_ratio == null){}
+		}
+		String str15 = localStringBuffer1.toString();
+		localTextView3.setText(str15);
+		localTextView3 = (TextView) localView
+				.findViewById(R.id.floor_area_ratio);
+		int i6 = localStringBuffer1.length();
+		StringBuffer localStringBuffer27 = localStringBuffer1.delete(0, i6);
+		String str16 = getString(R.string.floor_area_ratio);
+		StringBuffer localStringBuffer28 = localStringBuffer1.append(str16);
+		StringBuffer localStringBuffer29 = localStringBuffer1.append(" ");
+
+		if (this.mDetail.floor_area_ratio == null) {
+			String s39 = getString(0x7f0a0026);
+			StringBuffer stringbuffer41 = localStringBuffer1.append(s39);
+		} else {
 			String str17 = this.mDetail.floor_area_ratio;
 			StringBuffer localStringBuffer30 = localStringBuffer1.append(str17);
-			String str18 = localStringBuffer1.toString();
-			localTextView3.setText(str18);
-			localTextView3 = (TextView) localView.findViewById(R.id.property_company);
-			int i7 = localStringBuffer1.length();
-			StringBuffer localStringBuffer31 = localStringBuffer1.delete(0, i7);
-			String str19 = getString(R.string.developer);
-			StringBuffer localStringBuffer32 = localStringBuffer1.append(str19);
-			StringBuffer localStringBuffer33 = localStringBuffer1.append(" ");
-			if (this.mDetail.developer == null){}
+		}
+		String str18 = localStringBuffer1.toString();
+		localTextView3.setText(str18);
+		localTextView3 = (TextView) localView
+				.findViewById(R.id.property_company);
+		int i7 = localStringBuffer1.length();
+		StringBuffer localStringBuffer31 = localStringBuffer1.delete(0, i7);
+		String str19 = getString(R.string.developer);
+		StringBuffer localStringBuffer32 = localStringBuffer1.append(str19);
+		StringBuffer localStringBuffer33 = localStringBuffer1.append(" ");
+		if (this.mDetail.developer == null) {
+			String s40 = getString(0x7f0a0026);
+			StringBuffer stringbuffer42 = localStringBuffer1.append(s40);
+		} else {
 			String str20 = this.mDetail.developer;
 			StringBuffer localStringBuffer34 = localStringBuffer1.append(str20);
-			String str21 = localStringBuffer1.toString();
-			localTextView3.setText(str21);
-			this.mLinearLayout.addView(localView);
-			
-			if ((this.mDetail.intro != null)
-					&& (this.mDetail.intro.trim().length() != 0)){}
+		}
+		String str21 = localStringBuffer1.toString();
+		localTextView3.setText(str21);
+		if ((this.mDetail.intro != null)
+				&& (this.mDetail.intro.trim().length() != 0)) {
+			String str42 = this.mDetail.intro;
+			fillIntro(str42);
+		} else {
 			this.introExpandable = false;
 			TextView localTextView4 = this.mIntroTextView;
 			String str22 = getString(R.string.community_detail_intro_unavailable);
 			localTextView4.setText(str22);
 			this.mCommunityButAdd.setVisibility(8);
 			this.mCommunityButReduce.setVisibility(8);
-			label817: localTextView3 = (TextView) findViewById(R.id.community_detail_primarySchool_text);
-			String str23 = this.mDetail.primarySchool;
-			localTextView3.setText(str23);
-			if ((this.mDetail.primarySchool != null)
-					&& (this.mDetail.primarySchool.trim().length() != 0)){}
+		}
+
+		localTextView3 = (TextView) findViewById(R.id.community_detail_primarySchool_text);
+		String str23 = this.mDetail.primarySchool;
+		localTextView3.setText(str23);
+		if ((this.mDetail.primarySchool != null)
+				&& (this.mDetail.primarySchool.trim().length() != 0)) {
+			i = 0;
+		} else {
 			i = 0 + 1;
 			localTextView3.setVisibility(8);
-			((TextView) findViewById(R.id.community_detail_primarySchool_label)).setVisibility(8);
-		} else {
-			localTextView3 = (TextView) findViewById(R.id.community_detail_kindergarten_text);
-			String str24 = this.mDetail.kindergarten;
-			localTextView3.setText(str24);
-			if ((this.mDetail.kindergarten == null)
-					|| (this.mDetail.kindergarten.trim().length() == 0)) {
-				i += 1;
-				localTextView3.setVisibility(8);
-				((TextView) findViewById(R.id.community_detail_kindergarten_label)).setVisibility(8);
-			}
-			localTextView3 = (TextView) findViewById(R.id.community_detail_postOffice_text);
-			String str25 = this.mDetail.postOffice;
-			localTextView3.setText(str25);
-			if ((this.mDetail.postOffice == null)
-					|| (this.mDetail.postOffice.trim().length() == 0)) {
-				i += 1;
-				localTextView3.setVisibility(8);
-				((TextView) findViewById(R.id.community_detail_postOffice_label)).setVisibility(8);
-			}
-			localTextView3 = (TextView) findViewById(R.id.community_detail_bank_text);
-			String str26 = this.mDetail.bank;
-			localTextView3.setText(str26);
-			if ((this.mDetail.bank == null)
-					|| (this.mDetail.bank.trim().length() == 0)) {
-				i += 1;
-				localTextView3.setVisibility(8);
-				((TextView) findViewById(R.id.community_detail_bank_label)).setVisibility(8);
-			}
-			localTextView3 = (TextView) findViewById(R.id.community_detail_medicalStation_text);
-			String str27 = this.mDetail.medicalStation;
-			localTextView3.setText(str27);
-			if ((this.mDetail.medicalStation == null)
-					|| (this.mDetail.medicalStation.trim().length() == 0)) {
-				i += 1;
-				localTextView3.setVisibility(8);
-				((TextView) findViewById(R.id.community_detail_medicalStation_label)).setVisibility(8);
-			}
-			localTextView3 = (TextView) findViewById(R.id.community_detail_school_text);
-			String str28 = this.mDetail.school;
-			localTextView3.setText(str28);
-			if ((this.mDetail.school == null)
-					|| (this.mDetail.school.trim().length() == 0)) {
-				i += 1;
-				localTextView3.setVisibility(8);
-				((TextView) findViewById(R.id.community_detail_school_label)).setVisibility(8);
-			}
-			localTextView3 = (TextView) findViewById(R.id.community_detail_businessDistrict_text);
-			String str29 = this.mDetail.businessDistrict;
-			localTextView3.setText(str29);
-			if ((this.mDetail.businessDistrict == null)
-					|| (this.mDetail.businessDistrict.trim().length() == 0)) {
-				i += 1;
-				localTextView3.setVisibility(8);
-				((TextView) findViewById(R.id.community_detail_businessDistrict_label)).setVisibility(8);
-			}
-			localTextView3 = (TextView) findViewById(R.id.community_detail_hospital_text);
-			String str30 = this.mDetail.hospital;
-			localTextView3.setText(str30);
-			if ((this.mDetail.hospital == null)
-					|| (this.mDetail.hospital.trim().length() == 0)) {
-				i += 1;
-				localTextView3.setVisibility(8);
-				((TextView) findViewById(R.id.community_detail_hospital_label)).setVisibility(8);
-			}
-			if (i == 8) {
-				this.sourroundingsVisible = false;
-				((LinearLayout) findViewById(R.id.sourroundings_total_layout)).setVisibility(8);
-			}
-			localTextView3 = (TextView) findViewById(R.id.community_detail_bus_text);
-			String str31 = this.mDetail.bus;
-			localTextView3.setText(str31);
-			if ((this.mDetail.bus == null)
-					|| (this.mDetail.bus.trim().length() == 0)) {
-				i = 0 + 1;
-				localTextView3.setVisibility(8);
-				((TextView) findViewById(R.id.community_detail_bus_label)).setVisibility(8);
-			} else {
-				localTextView3 = (TextView) findViewById(R.id.community_detail_subway_text);
-				String str32 = this.mDetail.subway;
-				localTextView3.setText(str32);
-				if ((this.mDetail.subway == null)
-						|| (this.mDetail.subway.trim().length() == 0)) {
-					i += 1;
-					localTextView3.setVisibility(8);
-					((TextView) findViewById(R.id.community_detail_subway_label)).setVisibility(8);
-				}
-				if (i == 2) {
-					this.trafficVisible = false;
-					((LinearLayout) findViewById(R.id.traffic_total_layout)).setVisibility(8);
-				}
-				localTextView3 = (TextView) findViewById(R.id.price_chart);
-				String str33 = getString(R.string.price_chart_trim);
-				localTextView3.setText(str33);
-				Display localDisplay = getWindowManager().getDefaultDisplay();
-				StringBuilder localStringBuilder1 = new StringBuilder()
-						.append("width=");
-				int i8 = localDisplay.getWidth();
-				String str34 = String.valueOf(i8);
-				Rent.MyLog("", str34);
-				float f = localDisplay.getWidth() - 60;
-				int i9 = UIUtils.px2dip(this, f);
-				int k = (int) UIUtils.dip2Px(this, 130.0F);
-				int i10 = localDisplay.getWidth() - 60;
-				WebView localWebView = (WebView) findViewById(R.id.chart);
-				localWebView.setInitialScale(100);
-				int i1;
-				if ((this.mDetail.priceChaturl == null)
-						|| (this.mDetail.housePrice == 0)) {
-					((ImageView) findViewById(R.id.chart_split_line)).setVisibility(8);
-					LinearLayout localLinearLayout = (LinearLayout) findViewById(R.id.chart_container);
-					localWebView.setVisibility(8);
-					localTextView3.setVisibility(8);
-					localLinearLayout.setVisibility(8);
-					if (this.mDetail.picShijing.size() == 0){}
-					this.hasLandscape = true;
-					if (this.mDetail.picHuxing.size() == 0){}
-					this.hasFlat_type = true;
-					if ((this.hasLandscape) || (this.hasFlat_type)){}
-					this.mTab.setVisibility(8);
-					this.mTabImageView.setVisibility(8);
-					((ScrollView) findViewById(R.id.content_scrollview)).setVisibility(0);
-				} else {
-					StringBuffer kS = new StringBuffer("");
-					StringBuffer localStringBuffer35 = kS
-							.append("<font color=\"#469405\">");
-					int i11 = this.mPrice;
-					StringBuffer localStringBuffer36 = kS.append(i11);
-					String str35 = getString(R.string.yuan);
-					StringBuffer localStringBuffer37 = kS.append(str35);
-					StringBuffer localStringBuffer38 = kS.append("</font>");
-					String str36 = getString(R.string.rent_average_unit);
-					StringBuffer localStringBuffer39 = kS.append(str36);
-					Spanned localSpanned2 = Html.fromHtml(kS.toString());
-					localTextView3.setText(localSpanned2);
-					String str37 = getString(R.string.unknown);
-					StringBuffer localStringBuffer40 = kS.append(str37);
-					String str38 = getString(R.string.unknown);
-					StringBuffer localStringBuffer41 = kS.append(str38);
-					String str39 = getString(R.string.unknown);
-					StringBuffer localStringBuffer42 = kS.append(str39);
-					String str40 = getString(R.string.unknown);
-					StringBuffer localStringBuffer43 = kS.append(str40);
-					String str41 = getString(R.string.unknown);
-					StringBuffer localStringBuffer44 = kS.append(str41);
-					String str42 = this.mDetail.intro;
-					fillIntro(str42);
-					StringBuilder localStringBuilder2 = new StringBuilder();
-					String str43 = this.mDetail.priceChaturl;
-					String str44 = str43 + "&chs=" + i10 + "x" + k;
-					localWebView.loadUrl(str44);
-					i1 = 0;
-					String[] arrayOfString1 = new String[this.mDetail.picShijing
-							.size()];
-					this.landscapes = arrayOfString1;
-					ArrayList localArrayList1 = this.mDetail.picShijing;
-					String[] arrayOfString2 = this.landscapes;
-					Object[] arrayOfObject1 = localArrayList1
-							.toArray(arrayOfString2);
-					String[] arrayOfString3 = new String[this.mDetail.picHuxing
-							.size()];
-					this.flatTypes = arrayOfString3;
-					ArrayList localArrayList2 = this.mDetail.picHuxing;
-					String[] arrayOfString4 = this.flatTypes;
-					Object[] arrayOfObject2 = localArrayList2
-							.toArray(arrayOfString4);
-					if (this.hasLandscape) {
-						String str45 = this.landscapes[0];
-//						downBmp(str45, 0);
-					}
-					if (this.hasFlat_type) {
-						String str46 = this.flatTypes[0];
-//						downBmp(str46, 1);
-					}
-					TabHost localTabHost = this.mTab;
-					localTabHost
-							.setOnTabChangedListener(new OnTabChangeListener() {
-								public void onTabChanged(String paramString) {
-									/*
-									 * String str =
-									 * this.this$0.getString(2131361817); if
-									 * (paramString.equalsIgnoreCase(str)); for
-									 * (int i = 0; ; i = 1) { int j =
-									 * CommunityDetailActivity
-									 * .access$1002(this.this$0, i);
-									 * CommunityDetailActivity
-									 * .access$1100(this.this$0, i); return; }
-									 */
-								}
-							});
-					ImageView localImageView = this.mTabImageView;
-					localImageView.setOnClickListener(new OnClickListener() {
-						public void onClick(View paramView) {
-							/*
-							 * int i = 1; if
-							 * ((CommunityDetailActivity.access$1000
-							 * (this.this$0) == i) &&
-							 * ((CommunityDetailActivity.access$1200
-							 * (this.this$0) == null) ||
-							 * (CommunityDetailActivity
-							 * .access$1200(this.this$0).length <= 0)))
-							 * Toast.makeText(this.this$0, 2131361863,
-							 * 1).show(); while (true) { return; if
-							 * ((CommunityDetailActivity
-							 * .access$1000(this.this$0) != 0) ||
-							 * ((CommunityDetailActivity
-							 * .access$1300(this.this$0) != null) &&
-							 * (CommunityDetailActivity
-							 * .access$1300(this.this$0).length > 0))) break;
-							 * Toast.makeText(this.this$0, 2131361864,
-							 * 1).show(); } CommunityDetailActivity
-							 * localCommunityDetailActivity = this.this$0;
-							 * Intent localIntent1 = new
-							 * Intent(localCommunityDetailActivity,
-							 * CommunityGalleryActivity.class); Bundle
-							 * localBundle = new Bundle(); Object localObject1;
-							 * Object localObject2; if
-							 * (CommunityDetailActivity.access$1000(this.this$0)
-							 * == 1) { String[] arrayOfString1 =
-							 * CommunityDetailActivity.access$1200(this.this$0);
-							 * String str1 = "flattype"; localObject1 =
-							 * arrayOfString1; localObject2 = str1; } while
-							 * (true) { localBundle.putStringArray(
-							 * "bundle_community_detail_image", localObject1);
-							 * StringBuilder localStringBuilder = new
-							 * StringBuilder(); long l =
-							 * CommunityDetailActivity.access$600(this.this$0);
-							 * String str2 = l + "";
-							 * localBundle.putString("bundle_community_id",
-							 * str2);
-							 * localBundle.putString("bundle_community_type",
-							 * (String)localObject2); Intent localIntent2 =
-							 * localIntent1.putExtras(localBundle);
-							 * this.this$0.startActivity(localIntent1); break;
-							 * if
-							 * (CommunityDetailActivity.access$1000(this.this$0)
-							 * == 0) { String[] arrayOfString2 =
-							 * CommunityDetailActivity.access$1300(this.this$0);
-							 * String str3 = "landspace"; localObject1 =
-							 * arrayOfString2; localObject2 = str3; continue; }
-							 * localObject2 = null; localObject1 = null; }
-							 */
-						}
-					});
-				}
-			}
+			((TextView) findViewById(R.id.community_detail_primarySchool_label))
+					.setVisibility(8);
 		}
-		this.setIntroLayoutVisible(false);
-		this.setTrafficLayoutVisible(false);
-		this.setArroundLayoutVisible(false);
+		localTextView3 = (TextView) findViewById(R.id.community_detail_kindergarten_text);
+		String str24 = this.mDetail.kindergarten;
+		localTextView3.setText(str24);
+		if ((this.mDetail.kindergarten == null)
+				|| (this.mDetail.kindergarten.trim().length() == 0)) {
+			i += 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_kindergarten_label))
+					.setVisibility(8);
+		}
+		localTextView3 = (TextView) findViewById(R.id.community_detail_postOffice_text);
+		String str25 = this.mDetail.postOffice;
+		localTextView3.setText(str25);
+		if ((this.mDetail.postOffice == null)
+				|| (this.mDetail.postOffice.trim().length() == 0)) {
+			i += 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_postOffice_label))
+					.setVisibility(8);
+		}
+		localTextView3 = (TextView) findViewById(R.id.community_detail_bank_text);
+		String str26 = this.mDetail.bank;
+		localTextView3.setText(str26);
+		if ((this.mDetail.bank == null)
+				|| (this.mDetail.bank.trim().length() == 0)) {
+			i += 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_bank_label))
+					.setVisibility(8);
+		}
+		localTextView3 = (TextView) findViewById(R.id.community_detail_medicalStation_text);
+		String str27 = this.mDetail.medicalStation;
+		localTextView3.setText(str27);
+		if ((this.mDetail.medicalStation == null)
+				|| (this.mDetail.medicalStation.trim().length() == 0)) {
+			i += 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_medicalStation_label))
+					.setVisibility(8);
+		}
+		localTextView3 = (TextView) findViewById(R.id.community_detail_school_text);
+		String str28 = this.mDetail.school;
+		localTextView3.setText(str28);
+		if ((this.mDetail.school == null)
+				|| (this.mDetail.school.trim().length() == 0)) {
+			i += 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_school_label))
+					.setVisibility(8);
+		}
+		localTextView3 = (TextView) findViewById(R.id.community_detail_businessDistrict_text);
+		String str29 = this.mDetail.businessDistrict;
+		localTextView3.setText(str29);
+		if ((this.mDetail.businessDistrict == null)
+				|| (this.mDetail.businessDistrict.trim().length() == 0)) {
+			i += 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_businessDistrict_label))
+					.setVisibility(8);
+		}
+		localTextView3 = (TextView) findViewById(R.id.community_detail_hospital_text);
+		String str30 = this.mDetail.hospital;
+		localTextView3.setText(str30);
+		if ((this.mDetail.hospital == null)
+				|| (this.mDetail.hospital.trim().length() == 0)) {
+			i += 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_hospital_label))
+					.setVisibility(8);
+		}
+		if (i == 8) {
+			this.sourroundingsVisible = false;
+			((LinearLayout) findViewById(R.id.sourroundings_total_layout))
+					.setVisibility(8);
+		}
+		localTextView3 = (TextView) findViewById(R.id.community_detail_bus_text);
+		String str31 = this.mDetail.bus;
+		localTextView3.setText(str31);
+		if ((this.mDetail.bus == null)
+				|| (this.mDetail.bus.trim().length() == 0)) {
+			i = 0 + 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_bus_label))
+					.setVisibility(8);
+		} else {
+			i = 0;
+		}
+		localTextView3 = (TextView) findViewById(R.id.community_detail_subway_text);
+		String str32 = this.mDetail.subway;
+		localTextView3.setText(str32);
+		if ((this.mDetail.subway == null)
+				|| (this.mDetail.subway.trim().length() == 0)) {
+			i += 1;
+			localTextView3.setVisibility(8);
+			((TextView) findViewById(R.id.community_detail_subway_label))
+					.setVisibility(8);
+		}
+		if (i == 2) {
+			this.trafficVisible = false;
+			((LinearLayout) findViewById(R.id.traffic_total_layout))
+					.setVisibility(8);
+		}
+		localTextView3 = (TextView) findViewById(R.id.price_chart);
+		String str33 = getString(R.string.price_chart_trim);
+		localTextView3.setText(str33);
+		Display localDisplay = getWindowManager().getDefaultDisplay();
+		StringBuilder localStringBuilder1 = new StringBuilder()
+				.append("width=");
+		int i8 = localDisplay.getWidth();
+		String str34 = String.valueOf(i8);
+		Rent.MyLog("", str34);
+		float f = localDisplay.getWidth() - 60;
+		int i9 = UIUtils.px2dip(this, f);
+		int k = (int) UIUtils.dip2Px(this, 130.0F);
+		int i10 = localDisplay.getWidth() - 60;
+		WebView localWebView = (WebView) findViewById(R.id.chart);
+		localWebView.setInitialScale(100);
+		if ((this.mDetail.priceChaturl == null)
+				|| (this.mDetail.housePrice == 0)) {
+			((ImageView) findViewById(R.id.chart_split_line)).setVisibility(8);
+			LinearLayout localLinearLayout = (LinearLayout) findViewById(R.id.chart_container);
+			localWebView.setVisibility(8);
+			localTextView3.setVisibility(8);
+			localLinearLayout.setVisibility(8);
+		} else {
+			StringBuilder localStringBuilder2 = new StringBuilder();
+			String str43 = this.mDetail.priceChaturl;
+			String str44 = str43 + "&chs=" + i10 + "x" + k;
+			localWebView.loadUrl(str44);
+		}
+
+		boolean flag;
+		if (mDetail.picShijing.size() != 0)
+			flag = true;
+		else
+			flag = false;
+		hasLandscape = flag;
+		if (mDetail.picHuxing.size() != 0)
+			flag = true;
+		else
+			flag = false;
+		hasFlat_type = flag;
+
+		if (!hasLandscape && !hasFlat_type) {
+			mTab.setVisibility(8);
+			mTabImageView.setVisibility(8);
+		} else {
+			String[] arrayOfString1 = new String[this.mDetail.picShijing.size()];
+			this.landscapes = arrayOfString1;
+			ArrayList localArrayList1 = this.mDetail.picShijing;
+			String[] arrayOfString2 = this.landscapes;
+			Object[] arrayOfObject1 = localArrayList1.toArray(arrayOfString2);
+			String[] arrayOfString3 = new String[this.mDetail.picHuxing.size()];
+			this.flatTypes = arrayOfString3;
+			ArrayList localArrayList2 = this.mDetail.picHuxing;
+			String[] arrayOfString4 = this.flatTypes;
+			Object[] arrayOfObject2 = localArrayList2.toArray(arrayOfString4);
+			if (this.hasLandscape) {
+				String str45 = this.landscapes[0];
+				// downBmp(str45, 0);
+			}
+			if (this.hasFlat_type) {
+				String str46 = this.flatTypes[0];
+				// downBmp(str46, 1);
+			}
+			TabHost localTabHost = this.mTab;
+			localTabHost.setOnTabChangedListener(new OnTabChangeListener() {
+				public void onTabChanged(String paramString) {
+					/*
+					 * String str = this.this$0.getString(2131361817); if
+					 * (paramString.equalsIgnoreCase(str)); for (int i = 0; ; i
+					 * = 1) { int j = CommunityDetailActivity
+					 * .access$1002(this.this$0, i); CommunityDetailActivity
+					 * .access$1100(this.this$0, i); return; }
+					 */
+				}
+			});
+			ImageView localImageView = this.mTabImageView;
+			localImageView.setOnClickListener(new OnClickListener() {
+				public void onClick(View paramView) {
+					/*
+					 * int i = 1; if ((CommunityDetailActivity.access$1000
+					 * (this.this$0) == i) &&
+					 * ((CommunityDetailActivity.access$1200 (this.this$0) ==
+					 * null) || (CommunityDetailActivity
+					 * .access$1200(this.this$0).length <= 0)))
+					 * Toast.makeText(this.this$0, 2131361863, 1).show(); while
+					 * (true) { return; if ((CommunityDetailActivity
+					 * .access$1000(this.this$0) != 0) ||
+					 * ((CommunityDetailActivity .access$1300(this.this$0) !=
+					 * null) && (CommunityDetailActivity
+					 * .access$1300(this.this$0).length > 0))) break;
+					 * Toast.makeText(this.this$0, 2131361864, 1).show(); }
+					 * CommunityDetailActivity localCommunityDetailActivity =
+					 * this.this$0; Intent localIntent1 = new
+					 * Intent(localCommunityDetailActivity,
+					 * CommunityGalleryActivity.class); Bundle localBundle = new
+					 * Bundle(); Object localObject1; Object localObject2; if
+					 * (CommunityDetailActivity.access$1000(this.this$0) == 1) {
+					 * String[] arrayOfString1 =
+					 * CommunityDetailActivity.access$1200(this.this$0); String
+					 * str1 = "flattype"; localObject1 = arrayOfString1;
+					 * localObject2 = str1; } while (true) {
+					 * localBundle.putStringArray(
+					 * "bundle_community_detail_image", localObject1);
+					 * StringBuilder localStringBuilder = new StringBuilder();
+					 * long l = CommunityDetailActivity.access$600(this.this$0);
+					 * String str2 = l + "";
+					 * localBundle.putString("bundle_community_id", str2);
+					 * localBundle.putString("bundle_community_type",
+					 * (String)localObject2); Intent localIntent2 =
+					 * localIntent1.putExtras(localBundle);
+					 * this.this$0.startActivity(localIntent1); break; if
+					 * (CommunityDetailActivity.access$1000(this.this$0) == 0) {
+					 * String[] arrayOfString2 =
+					 * CommunityDetailActivity.access$1300(this.this$0); String
+					 * str3 = "landspace"; localObject1 = arrayOfString2;
+					 * localObject2 = str3; continue; } localObject2 = null;
+					 * localObject1 = null; }
+					 */
+				}
+			});
+		}
+		((ScrollView) findViewById(R.id.content_scrollview)).setVisibility(0);
+		this.mLinearLayout.addView(localView);
 	}
 
 	private void initControlView() {
@@ -645,21 +660,13 @@ public class CommunityDetailActivity extends Activity {
 		ImageView localImageView1 = this.mCommunityButAdd;
 		localImageView1.setOnClickListener(new OnClickListener() {
 			public void onClick(View paramView) {
-				/*
-				 * CommunityDetailActivity.access$1700(this.this$0, 1);
-				 * CommunityDetailActivity localCommunityDetailActivity =
-				 * this.this$0; int i = CommunityDetailActivity.access$1800();
-				 * CommunityDetailActivity
-				 * .access$1900(localCommunityDetailActivity, i);
-				 * MobclickAgent.onEvent(this.this$0, "community_meta",
-				 * "intro");
-				 */
+				CommunityDetailActivity.this.setIntroLayoutVisible(true);
 			}
 		});
 		ImageView localImageView2 = this.mCommunityButReduce;
 		localImageView2.setOnClickListener(new OnClickListener() {
 			public void onClick(View paramView) {
-				// CommunityDetailActivity.access$1700(this.this$0, 0);
+				 CommunityDetailActivity.this.setIntroLayoutVisible(false);
 			}
 		});
 	}
@@ -683,21 +690,13 @@ public class CommunityDetailActivity extends Activity {
 		ImageView localImageView1 = this.mTrafficButAdd;
 		localImageView1.setOnClickListener(new OnClickListener() {
 			public void onClick(View paramView) {
-				/*
-				 * CommunityDetailActivity.access$2200(this.this$0, 1);
-				 * CommunityDetailActivity localCommunityDetailActivity =
-				 * this.this$0; int i = CommunityDetailActivity.access$2300();
-				 * CommunityDetailActivity
-				 * .access$1900(localCommunityDetailActivity, i);
-				 * MobclickAgent.onEvent(this.this$0, "community_meta",
-				 * "traffic");
-				 */
+				CommunityDetailActivity.this.setTrafficLayoutVisible(true);
 			}
 		});
 		ImageView localImageView2 = this.mTrafficButReduce;
 		localImageView2.setOnClickListener(new OnClickListener() {
 			public void onClick(View paramView) {
-				// CommunityDetailActivity.access$2200(this.this$0, 0);
+				 CommunityDetailActivity.this.setTrafficLayoutVisible(false);
 			}
 		});
 	}
@@ -776,7 +775,6 @@ public class CommunityDetailActivity extends Activity {
 				local3);
 		String str4 = this.mCity;
 		String str5 = this.mName;
-		str4 = "上海";
 		new CommunityDetailThread(localCommunityDetailHandler, str4, str5)
 				.start();
 	}
@@ -784,17 +782,16 @@ public class CommunityDetailActivity extends Activity {
 	final class CommunityDetailActivity3 implements CommunityDetailListener {
 		public void handleCommunityDetail(boolean paramBoolean,
 				CommunityDetail paramCommunityDetail) {
-			
-			if (true == paramBoolean)
-		    {
+
+			if (true == paramBoolean) {
 				CommunityDetailActivity.this.mDetail = paramCommunityDetail;
 				CommunityDetailActivity.this.initBaseView();
 				CommunityDetailActivity.this.mProgressbar.setVisibility(8);
-		    } else
-		    {
-		      String str = CommunityDetailActivity.this.getString(R.string.load_failed);
-		      Toast.makeText(CommunityDetailActivity.this, str, 1).show();
-		    }
+			} else {
+				String str = CommunityDetailActivity.this
+						.getString(R.string.load_failed);
+				Toast.makeText(CommunityDetailActivity.this, str, 1).show();
+			}
 		}
 	}
 
@@ -853,12 +850,12 @@ public class CommunityDetailActivity extends Activity {
 
 	protected void onCreate(Bundle paramBundle) {
 		super.onCreate(paramBundle);
-//		MobclickAgent.onError(this);
+		// MobclickAgent.onError(this);
 		boolean bool = requestWindowFeature(1);
 		setContentView(R.layout.community_detail_activity);
-		initControlView();
+		 initControlView();
 		initView();
-//		MobclickAgent.onEvent(this, "viewcommunitydetail");
+		// MobclickAgent.onEvent(this, "viewcommunitydetail");
 	}
 
 	public boolean onKeyDown(int paramInt, KeyEvent paramKeyEvent) {
@@ -869,12 +866,12 @@ public class CommunityDetailActivity extends Activity {
 
 	public void onPause() {
 		super.onPause();
-//		MobclickAgent.onPause(this);
+		// MobclickAgent.onPause(this);
 	}
 
 	public void onResume() {
 		super.onResume();
-//		MobclickAgent.onResume(this);
+		// MobclickAgent.onResume(this);
 	}
 
 }
