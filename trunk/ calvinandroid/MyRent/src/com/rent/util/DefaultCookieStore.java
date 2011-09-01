@@ -30,7 +30,8 @@ public class DefaultCookieStore implements CookieStore{
 	    if (singleStore == null)
 	    {
 	      singleStore = new DefaultCookieStore();
-	      String str1 = ((TelephonyManager)paramContext.getSystemService("phone")).getDeviceId();
+//	      String str1 = ((TelephonyManager)paramContext.getSystemService("phone")).getDeviceId();
+	      String str1 = "Test";
 	      BasicClientCookie localBasicClientCookie1 = new BasicClientCookie("uuid", str1);
 	      localBasicClientCookie1.setVersion(0);
 	      localBasicClientCookie1.setDomain(".99fang.com");
@@ -58,7 +59,8 @@ public class DefaultCookieStore implements CookieStore{
 	      localBasicClientCookie5.setDomain(".99fang.com");
 	      localBasicClientCookie5.setPath("/");
 	      singleStore.addCookie(localBasicClientCookie5);
-	      String str4 = ManifestData.getString(paramContext, "UMENG_CHANNEL");
+	      /*String str4 = ManifestData.getString(paramContext, "UMENG_CHANNEL");*/
+	      String str4 = "";
 	      String str5 = "channel";
 	      if (StringUtils.isEmpty(str4))
 	        str4 = "default";
