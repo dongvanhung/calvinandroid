@@ -32,37 +32,28 @@ public class UIUtils {
 		Toast.makeText(paramContext, paramString, 0).show();
 	}
 
-	/*public static boolean isNetworkAvailable(Activity paramActivity)
+	public static boolean isNetworkAvailable(Activity paramActivity)
 	  {
-	    paramActivity = (ConnectivityManager)paramActivity.getApplicationContext().getSystemService("connectivity");
+		ConnectivityManager cm = (ConnectivityManager)paramActivity.getApplicationContext().getSystemService("connectivity");
 	    int i;
 	    if (paramActivity == null)
-	      i = 0;
-	    while (true)
-	    {
-	      return i;
-	      NetworkInfo[] arrayOfNetworkInfo = paramActivity.getAllNetworkInfo();
+	      return false;
+	    else {
+	      NetworkInfo[] arrayOfNetworkInfo = cm.getAllNetworkInfo();
 	      if (arrayOfNetworkInfo != null)
 	      {
-	        int k = 0;
-	        while (true)
-	        {
-	          int m = arrayOfNetworkInfo.length;
-	          if (k >= m)
-	            break label72;
-	          NetworkInfo.State localState1 = arrayOfNetworkInfo[k].getState();
-	          NetworkInfo.State localState2 = NetworkInfo.State.CONNECTED;
-	          if (localState1 == localState2)
-	          {
-	            j = 1;
-	            break;
-	          }
-	          k += 1;
-	        }
+	       for (int j = 0; j < arrayOfNetworkInfo.length; j++) {
+	    	   NetworkInfo.State localState1 = arrayOfNetworkInfo[j].getState();
+		          NetworkInfo.State localState2 = NetworkInfo.State.CONNECTED;
+		          if (localState1 == localState2)
+		          {
+		        	  return true;
+		          }
+	       }
 	      }
-	      label72: int j = 0;
 	    }
-	  }*/
+	    return false;
+	  }
 
 	public static int px2dip(Context paramContext, float paramFloat) {
 		float f = paramContext.getResources().getDisplayMetrics().density;
