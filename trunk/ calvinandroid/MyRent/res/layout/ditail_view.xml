@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <GridView android:id="@id/dial_gv" android:background="@color/white" android:padding="0.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="0.0dip" android:horizontalSpacing="3.0dip" android:verticalSpacing="3.0dip" android:numColumns="3" android:layout_alignParentBottom="true" />
+    <EditText android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="42.0dip" android:textColor="@android:color/black" android:gravity="center" android:id="@id/inputnumberfieldtext" android:background="@android:color/white" android:padding="5.0dip" android:longClickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:singleLine="true" android:editable="false" android:layout_above="@id/dial_gv" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/image_ll" android:background="@drawable/barbg" android:layout_width="fill_parent" android:layout_height="45.0dip" android:layout_weight="0.0" android:layout_above="@id/inputnumberfieldtext">
+        <TextView android:textSize="20.0dip" android:textColor="@color/white" android:id="@id/contact_people" android:paddingLeft="20.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/phone_number_pic" android:background="@color/white" android:layout_width="wrap_content" android:layout_height="41.0dip" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:adjustViewBounds="true" android:maxHeight="41.0dip" android:minHeight="41.0dip" android:layout_weight="1.0" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/finish_ll" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/image_ll" android:layout_alignParentTop="true" />
+</RelativeLayout>

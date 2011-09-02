@@ -143,7 +143,6 @@ public class DetailDataHandler extends ThreadHandler {
 	      }
 	      boolean bool = this.mDetailDataList.add(dd);
 	      this.mListener.statusChanged(true);
-	      return;
 	    }
 	    catch (Exception localException)
 	    {

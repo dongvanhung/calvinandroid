@@ -4,12 +4,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +29,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.rent.DetailImageManager;
+import com.rent.R;
 import com.rent.Rent;
 import com.rent.UIUtils;
 import com.rent.data.DetailData;
@@ -70,47 +75,48 @@ implements HandlerListener {
 	    public void handleMessage(Message paramMessage)
 	    {
 	      super.handleMessage(paramMessage);
-	      Object localObject;
-	      /*try
-	      {
+	      Iterator localObject;
 	        ArrayList localArrayList1 = paramMessage.getData().getStringArrayList("pic_name");
-	        SourceDetailActivity localSourceDetailActivity = this.this$0;
 	        ArrayList localArrayList2 = new ArrayList();
-	        ArrayList localArrayList3 = SourceDetailActivity.access$702(localSourceDetailActivity, localArrayList2);
+//	        ArrayList localArrayList3 = SourceDetailActivity.access$702(localSourceDetailActivity, localArrayList2);
 	        localObject = localArrayList1.iterator();
-	        while (((Iterator)localObject).hasNext())
+	        while (localObject.hasNext())
 	        {
-	          String str = (String)((Iterator)localObject).next();
+	          String str = (String)(localObject).next();
 	          byte[] arrayOfByte1 = paramMessage.getData().getByteArray(str);
-	          boolean bool = SourceDetailActivity.access$700(this.this$0).add(arrayOfByte1);
+	          boolean bool = SourceDetailActivity.this.mPhoneImageByteList.add(arrayOfByte1);
 	        }
-	      }
-	      catch (Exception localException1)
-	      {
-	      }
-	      while (true)
-	      {
-	        return;
-	        byte[] arrayOfByte2 = (byte[])SourceDetailActivity.access$700(this.this$0).get(0);
-	        SourceDetailActivity.access$800(this.this$0).setText("");
-	        SourceDetailActivity.access$800(this.this$0).setVisibility(8);
-	        localObject = (ImageView)this.this$0.findViewById(2131493186);
+	        
+	        byte[] arrayOfByte2 = (byte[])SourceDetailActivity.this.mPhoneImageByteList.get(0);
+	        SourceDetailActivity.this.mRourcePhoneNum.setText("");
+	        SourceDetailActivity.this.mReturnMapIV.setVisibility(8);
+	        ImageView localObject1 = (ImageView)SourceDetailActivity.this.findViewById(R.id.source_phone_num_imageview);
+	        
+	        
 	        try
 	        {
 	          int i = arrayOfByte2.length;
 	          Bitmap localBitmap = BitmapFactory.decodeByteArray(arrayOfByte2, 0, i);
 	          BitmapDrawable localBitmapDrawable = new BitmapDrawable(localBitmap);
-	          ((ImageView)localObject).setImageDrawable(localBitmapDrawable);
-	          ((ImageView)localObject).setVisibility(0);
-	          label189: ImageView localImageView = SourceDetailActivity.access$1000(this.this$0);
-	          SourceDetailActivity.5.1 local1 = new SourceDetailActivity.5.1(this, arrayOfByte2);
-	          localImageView.setOnClickListener(local1);
+	          localObject1.setImageDrawable(localBitmapDrawable);
+	          localObject1.setVisibility(0);
+	          
+	          ImageView localImageView = SourceDetailActivity.this.mCallPicImage;
+	          localImageView.setOnClickListener(new View.OnClickListener() {
+	        	  public void onClick(View paramView)
+	        	  {
+	        	    /*Intent localIntent1 = new Intent(SourceDetailActivity.this, DialActivity.class);
+	        	    byte[] arrayOfByte = this.val$imageByte;
+	        	    Intent localIntent2 = localIntent1.putExtra("contact_path", arrayOfByte);
+	        	    long l = SourceDetailActivity.access$000(this.this$1.this$0);
+	        	    Intent localIntent3 = localIntent1.putExtra("id", l);
+	        	    this.this$1.this$0.startActivityForResult(localIntent1, 2);*/
+	        	  }
+			});
 	        }
 	        catch (Exception localException2)
 	        {
-	          break label189;
 	        }
-	      }*/
 	    }
 	  }
 	  
@@ -140,7 +146,7 @@ implements HandlerListener {
 	    long l1 = localIntent.getLongExtra("origin_id", 0L);
 	    this.mOriginId = l1;
 	    if (this.mOriginId == 0L)
-	      UIUtils.displayToast(this, 2131362002);
+	      UIUtils.displayToast(this, R.string.source_detail_start_error);
 	    else {
 	      if (this.mOriginId > 0L)
 	      {
@@ -155,7 +161,7 @@ implements HandlerListener {
 	          showRentDetail(localDetailData2);
 	        } else if (!UIUtils.isNetworkAvailable(this))
 	        {
-	          UIUtils.displayToast(this, 2131361836);
+	          UIUtils.displayToast(this, R.string.unvaliable_network);
 	        } else {
 	        	long l3 = this.mOriginId;
 	        	downloadRentDetail(l3);
@@ -180,7 +186,7 @@ implements HandlerListener {
 
 	  private void downThumbnailAndShow()
 	  {
-	    ProgressBar localProgressBar = (ProgressBar)findViewById(2131493166);
+	    ProgressBar localProgressBar = (ProgressBar)findViewById(R.id.images_progress_bar);
 	    localProgressBar.setVisibility(0);
 	    String str = this.mDetailData.getmThumbnail();
 	    new SourceDetailActivity3(str, localProgressBar).start();
@@ -201,7 +207,7 @@ implements HandlerListener {
 	        byte[] arrayOfByte = Rent.downLoadImage(str);
 	        int i = arrayOfByte.length;
 	        Bitmap localBitmap = BitmapFactory.decodeByteArray(arrayOfByte, 0, i);
-	        SourceDetailActivity31 local1 = new SourceDetailActivity31(localBitmap);
+	        SourceDetailActivity31 local1 = new SourceDetailActivity31(localBitmap,localProgressBar);
 	        SourceDetailActivity.this.runOnUiThread(local1);
 	      }
 	      catch (Exception localException)
@@ -214,20 +220,40 @@ implements HandlerListener {
 	  final class SourceDetailActivity31 implements Runnable
 	{
 		  private Bitmap localBitmap;
-		  public SourceDetailActivity31(Bitmap localBitmap) {
+		  private ProgressBar localProgressBar;
+		  public SourceDetailActivity31(Bitmap localBitmap, ProgressBar localProgressBar) {
 			  this.localBitmap = localBitmap;
+			  this.localProgressBar = localProgressBar;
 		  }
 	  public void run()
 	  {
-	    /*SourceDetailActivity localSourceDetailActivity = this.this$1.this$0;
-	    SourceDetailActivity.3.1.1 local1 = new SourceDetailActivity.3.1.1(this);
-	    localSourceDetailActivity.runOnUiThread(local1);
-	    DetailImageManager localDetailImageManager = SourceDetailActivity.access$600(this.this$1.this$0);
-	    Bitmap localBitmap = this.val$thumbBmp;
+	    SourceDetailActivity311 local1 = new SourceDetailActivity311(localBitmap, localProgressBar);
+	    SourceDetailActivity.this.runOnUiThread(local1);
+	    DetailImageManager localDetailImageManager = SourceDetailActivity.this.mSDCardManager;
 	    StringBuilder localStringBuilder = new StringBuilder();
-	    long l = SourceDetailActivity.access$000(this.this$1.this$0);
+	    long l = SourceDetailActivity.this.mOriginId;
 	    String str = l + "";
-	    boolean bool = localDetailImageManager.saveThumbnailBitmap(localBitmap, "thumbnail.png", str);*/
+	    boolean bool = localDetailImageManager.saveThumbnailBitmap(localBitmap, "thumbnail.png", str);
+	  }
+	}
+	  
+	  final class SourceDetailActivity311 implements Runnable
+	{
+		  private Bitmap localBitmap;
+		  private ProgressBar localProgressBar;
+		  public SourceDetailActivity311(Bitmap localBitmap, ProgressBar localProgressBar) {
+			  this.localBitmap = localBitmap;
+			  this.localProgressBar = localProgressBar;
+		  }
+	  public void run()
+	  {
+	    ImageView localImageView = SourceDetailActivity.this.mDetailImagesView;
+	    localImageView.setImageBitmap(localBitmap);
+	    SourceDetailActivity.this.mDetailImagesView.setVisibility(0);
+	    localProgressBar.setVisibility(8);
+	    /*int i = SourceDetailActivity.access$300(this.this$2.this$1.this$0).getmImages().length;
+	    SourceDetailActivity.access$400(localSourceDetailActivity, i);
+	    SourceDetailActivity.access$500(this.this$2.this$1.this$0);*/
 	  }
 	}
 	  
@@ -241,64 +267,126 @@ implements HandlerListener {
 
 	  private void fillPhoneNumber(DetailData paramDetailData)
 	  {
-	    TextView localTextView = (TextView)findViewById(2131493185);
-	    this.mRourcePhoneNum = localTextView;
-	    ImageView localImageView1 = (ImageView)findViewById(2131493187);
-	    this.mCallPicImage = localImageView1;
-	    Object localObject;
-	    String str7;
-	    if ((paramDetailData.mMasterNumber != null) && (paramDetailData.mMasterNumber.length() > 0) && (paramDetailData.mExtNumber != null) && (paramDetailData.mExtNumber.length() > 0))
-	    {
-	      StringBuilder localStringBuilder1 = new StringBuilder();
-	      String str1 = paramDetailData.mMasterNumber;
-	      StringBuilder localStringBuilder2 = localStringBuilder1.append(str1).append("-");
-	      String str2 = paramDetailData.mExtNumber;
-	      String str3 = str2;
-	      StringBuilder localStringBuilder3 = new StringBuilder();
-	      String str4 = paramDetailData.mMasterNumber;
-	      StringBuilder localStringBuilder4 = localStringBuilder3.append(str4).append(",");
-	      String str5 = paramDetailData.mExtNumber;
-	      String str6 = str5 + "#";
-	      localObject = str3;
-	      str7 = str6;
-	      str7 = Uri.encode(str7);
-	      if ((localObject == null) || (((String)localObject).length() <= 0)) {
-	    	  str7 = paramDetailData.getmContactPath();
-		      if (UIUtils.isNetworkAvailable(this))
-		      {
-		        this.mRourcePhoneNum.setText(2131362003);
-		        downPhoneNumPicture(str7);
-		      } else 
-		    	  UIUtils.displayToast(this, 2131361836);
-	      }
-	      this.mRourcePhoneNum.setText((CharSequence)localObject);
-	      ImageView localImageView2 = this.mCallPicImage;
-	      localImageView2.setOnClickListener(new View.OnClickListener() {
-	    	  public void onClick(View paramView)
-	    	  {
-	    	   /* if (this.val$dd.getmCalledTimes() > 0)
-	    	    {
-	    	      SourceDetailActivity localSourceDetailActivity1 = this.this$0;
-	    	      AlertDialog.Builder localBuilder1 = new AlertDialog.Builder(localSourceDetailActivity1).setTitle(2131361821).setMessage(2131361819);
-	    	      SourceDetailActivity.2.1 local1 = new SourceDetailActivity.2.1(this);
-	    	      AlertDialog localAlertDialog1 = localBuilder1.setPositiveButton(2131361826, local1).setNegativeButton(2131361827, null).show();
-	    	    }
-	    	    while (true)
-	    	    {
-	    	      return;
-	    	      SourceDetailActivity localSourceDetailActivity2 = this.this$0;
-	    	      AlertDialog.Builder localBuilder2 = new AlertDialog.Builder(localSourceDetailActivity2).setTitle(2131361821).setMessage(2131361820);
-	    	      SourceDetailActivity.2.2 local2 = new SourceDetailActivity.2.2(this);
-	    	      AlertDialog localAlertDialog2 = localBuilder2.setPositiveButton(2131361826, local2).setNegativeButton(2131361827, null).show();
-	    	    }*/
-	    	  }
-		});
-	    } else {
-	      str7 = paramDetailData.getmPhone();
-	      localObject = str7;
-//	      label243: MobclickAgent.onEvent(this, "dialnumber", "picture");
-	      
-	    }
+		TextView localTextView = (TextView) findViewById(R.id.source_recent_phone_num);
+		this.mRourcePhoneNum = localTextView;
+		ImageView localImageView1 = (ImageView) findViewById(R.id.source_detail_contact_phone_number);
+		this.mCallPicImage = localImageView1;
+		Object localObject;
+		String str7;
+		if ((paramDetailData.mMasterNumber != null)
+				&& (paramDetailData.mMasterNumber.length() > 0)
+				&& (paramDetailData.mExtNumber != null)
+				&& (paramDetailData.mExtNumber.length() > 0)) {
+			StringBuilder localStringBuilder1 = new StringBuilder();
+			String str1 = paramDetailData.mMasterNumber;
+			StringBuilder localStringBuilder2 = localStringBuilder1
+					.append(str1).append("-");
+			String str2 = paramDetailData.mExtNumber;
+			String str3 = str2;
+			StringBuilder localStringBuilder3 = new StringBuilder();
+			String str4 = paramDetailData.mMasterNumber;
+			StringBuilder localStringBuilder4 = localStringBuilder3
+					.append(str4).append(",");
+			String str5 = paramDetailData.mExtNumber;
+			String str6 = str5 + "#";
+			localObject = str3;
+			str7 = str6;
+		} else {
+			str7 = paramDetailData.getmPhone();
+			localObject = str7;
+		}
+		str7 = Uri.encode(str7);
+		if ((localObject == null) || (((String) localObject).length() <= 0)) {
+			str7 = paramDetailData.getmContactPath();
+			if (UIUtils.isNetworkAvailable(this)) {
+				this.mRourcePhoneNum
+						.setText(R.string.source_detail_contact_path);
+				downPhoneNumPicture(str7);
+			} else
+				UIUtils.displayToast(this, R.string.unvaliable_network);
+		} else {
+			this.mRourcePhoneNum.setText((CharSequence) localObject);
+			ImageView localImageView2 = this.mCallPicImage;
+			localImageView2.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View paramView) {
+					if (SourceDetailActivity.this.mDetailData.getmCalledTimes() > 0) {
+						AlertDialog.Builder localBuilder1 = new AlertDialog.Builder(
+								SourceDetailActivity.this).setTitle(
+								R.string.detail_dial_again).setMessage(
+								R.string.detail_dialed);
+						AlertDialog localAlertDialog1 = localBuilder1
+								.setPositiveButton(R.string.confirm,
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface paramDialogInterface,
+													int paramInt) {
+												// MobclickAgent.onEvent(this.this$1.this$0,
+												// "dialnumber", "number");
+												StringBuilder localStringBuilder = new StringBuilder()
+														.append("tel:");
+												String str = SourceDetailActivity.this.mRourcePhoneNum
+														.getText().toString();
+												Uri localUri = Uri.parse(str);
+												Intent localIntent = new Intent(
+														"android.intent.action.CALL",
+														localUri);
+												startActivity(localIntent);
+												/*
+												 * SourceDetailActivity
+												 * localSourceDetailActivity =
+												 * this.this$1.this$0; long l =
+												 * SourceDetailActivity
+												 * .access$000
+												 * (this.this$1.this$0);
+												 * SourceDetailActivity
+												 * .access$100
+												 * (localSourceDetailActivity,
+												 * l);
+												 */
+											}
+										})
+								.setNegativeButton(R.string.cancel, null)
+								.show();
+					} else {
+						AlertDialog.Builder localBuilder2 = new AlertDialog.Builder(
+								SourceDetailActivity.this).setTitle(
+								R.string.detail_dial_again).setMessage(
+								R.string.detail_dial_warning);
+						AlertDialog localAlertDialog2 = localBuilder2
+								.setPositiveButton(R.string.confirm,
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface paramDialogInterface,
+													int paramInt) {
+												StringBuilder localStringBuilder = new StringBuilder()
+														.append("tel:");
+												String str = SourceDetailActivity.this.mRourcePhoneNum
+														.getText().toString();
+												Uri localUri = Uri.parse(str);
+												Intent localIntent = new Intent(
+														"android.intent.action.CALL",
+														localUri);
+												startActivity(localIntent);
+												/*
+												 * SourceDetailActivity
+												 * localSourceDetailActivity =
+												 * this.this$1.this$0; long l =
+												 * SourceDetailActivity
+												 * .access$000
+												 * (this.this$1.this$0);
+												 * SourceDetailActivity
+												 * .access$100
+												 * (localSourceDetailActivity,
+												 * l);
+												 */
+											}
+										})
+								.setNegativeButton(R.string.cancel, null)
+								.show();
+					}
+				}
+			});
+		}
 	  }
 
 	  private void mChangeFavouriteStatusIVListener()
@@ -365,7 +453,7 @@ implements HandlerListener {
 	        boolean bool = localDetailDBManager.insertDetailData(localDetailData);
 	      }
 	      localDetailDBManager.closeDb();
-	      label40: return;
+	      return;
 	    }
 	    catch (Exception localException)
 	    {
@@ -381,9 +469,9 @@ implements HandlerListener {
 	    try {
 		    if ((j == 4) || (j == 1))
 		    {
-		      this.mChangeFavouriteStatusIV.setImageResource(2130837614);
+		      this.mChangeFavouriteStatusIV.setImageResource(R.drawable.favorite_icon);
 		    } else {
-		        this.mChangeFavouriteStatusIV.setImageResource(2130837698);
+		        this.mChangeFavouriteStatusIV.setImageResource(R.drawable.unfavorite_icon);
 		    }
 	    }
 	    finally
@@ -395,34 +483,34 @@ implements HandlerListener {
 
 	  private void showHasPicContent(DetailData paramDetailData)
 	  {
-	    ImageView localImageView = (ImageView)findViewById(2131493164);
+	    ImageView localImageView = (ImageView)findViewById(R.id.house_picture);
 	    this.mDetailImagesView = localImageView;
-	    Object localObject = (TextView)findViewById(2131493167);
+	    Object localObject = (TextView)findViewById(R.id.source_detail_price);
 	    int i = paramDetailData.getmPrice();
 	    if (i != 0)
 	    {
-	      String str2 = getResources().getString(2131361992);
+	      String str2 = getResources().getString(R.string.source_detail_money_unit);
 	      Object[] arrayOfObject1 = new Object[1];
 	      String str3 = "<font color=\"#aa651b\"><b>" + i + "</b></font>" + "";
 	      arrayOfObject1[0] = str3;
 	      Spanned localSpanned1 = Html.fromHtml(String.format(str2, arrayOfObject1));
 	      ((TextView)localObject).setText(localSpanned1);
 	    }
-	    localObject = (TextView)findViewById(2131493168);
+	    localObject = (TextView)findViewById(R.id.source_detail_room_number);
 	    String str1 = paramDetailData.getmRoom();
 	    if (str1 != null)
 	    {
-	      String str4 = getResources().getString(2131361993);
+	      String str4 = getResources().getString(R.string.source_detail_room_num_unit);
 	      Object[] arrayOfObject2 = new Object[1];
 	      arrayOfObject2[0] = str1;
 	      String str5 = String.format(str4, arrayOfObject2);
 	      ((TextView)localObject).setText(str5);
 	    }
-	    localObject = (TextView)findViewById(2131493169);
+	    localObject = (TextView)findViewById(R.id.source_detail_room_area);
 	    int j = paramDetailData.getmArea();
 	    if (j != 0)
 	    {
-	      String str6 = getResources().getString(2131361994);
+	      String str6 = getResources().getString(R.string.source_detail_rent_area_unit);
 	      Object[] arrayOfObject3 = new Object[1];
 	      String str7 = j + "";
 	      arrayOfObject3[0] = str7;
@@ -430,12 +518,12 @@ implements HandlerListener {
 	      Spanned localSpanned2 = Html.fromHtml(str8 + "m<sup><small>2</small></sup>");
 	      ((TextView)localObject).setText(localSpanned2);
 	    }
-	    localObject = (TextView)findViewById(2131493170);
+	    localObject = (TextView)findViewById(R.id.source_detail_rent_type);
 	    j = paramDetailData.getmRentType();
-	    String str9 = getResources().getString(2131361995);
+	    String str9 = getResources().getString(R.string.source_detail_rent_type_unit);
 	    if (j == 0)
 	    {
-	      String str10 = getResources().getString(2131361936);
+	      String str10 = getResources().getString(R.string.rent_favourite_rent_type_lease_all);
 	      Object[] arrayOfObject4 = new Object[1];
 	      arrayOfObject4[0] = str10;
 	      String str11 = String.format(str9, arrayOfObject4);
@@ -443,9 +531,9 @@ implements HandlerListener {
 	    }
 	    else
 	    {
-	      TextView localTextView = (TextView)findViewById(2131493171);
+	      TextView localTextView = (TextView)findViewById(R.id.source_detail_source_property);
 	      String str12 = paramDetailData.getmAgencyStatus();
-	      String str13 = getResources().getString(2131361996);
+	      String str13 = getResources().getString(R.string.source_detail_source_property_unit);
 	      Object[] arrayOfObject5 = new Object[1];
 	      arrayOfObject5[0] = str12;
 	      String str14 = String.format(str13, arrayOfObject5);
@@ -462,7 +550,7 @@ implements HandlerListener {
 	        else
 	        {
 	          if (1 != j) {
-	          String str16 = getResources().getString(2131361937);
+	          String str16 = getResources().getString(R.string.rent_favourite_rent_type_lease_part);
 	          Object[] arrayOfObject6 = new Object[1];
 	          arrayOfObject6[0] = str16;
 	          String str17 = String.format(str9, arrayOfObject6);
@@ -470,7 +558,7 @@ implements HandlerListener {
 	          } else {
 //	          break;
 	          Bitmap localBitmap = (Bitmap)((List)localObject).get(j);
-	          ProgressBar localProgressBar = (ProgressBar)findViewById(2131493166);
+	          ProgressBar localProgressBar = (ProgressBar)findViewById(R.id.images_progress_bar);
 	          this.mDetailImagesView.setImageBitmap(localBitmap);
 	          localProgressBar.setVisibility(8);
 	          this.mDetailImagesView.setVisibility(0);
@@ -490,32 +578,32 @@ implements HandlerListener {
 
 	  private void showNoPicContent(DetailData paramDetailData)
 	  {
-	    TextView localTextView1 = (TextView)findViewById(2131493173);
+	    TextView localTextView1 = (TextView)findViewById(R.id.source_detail_price_no_pic);
 	    int i = paramDetailData.getmPrice();
 	    if (i != 0)
 	    {
-	      String str2 = getResources().getString(2131361992);
+	      String str2 = getResources().getString(R.string.source_detail_money_unit);
 	      Object[] arrayOfObject1 = new Object[1];
 	      String str3 = "<font color=\"#aa651b\"><b>" + i + "</b></font>" + "";
 	      arrayOfObject1[0] = str3;
 	      Spanned localSpanned1 = Html.fromHtml(String.format(str2, arrayOfObject1));
 	      localTextView1.setText(localSpanned1);
 	    }
-	    localTextView1 = (TextView)findViewById(2131493174);
+	    localTextView1 = (TextView)findViewById(R.id.source_detail_room_number_no_pic);
 	    String str1 = paramDetailData.getmRoom();
 	    if (str1 != null)
 	    {
-	      String str4 = getResources().getString(2131361993);
+	      String str4 = getResources().getString(R.string.source_detail_room_num_unit);
 	      Object[] arrayOfObject2 = new Object[1];
 	      arrayOfObject2[0] = str1;
 	      String str5 = String.format(str4, arrayOfObject2);
 	      localTextView1.setText(str5);
 	    }
-	    localTextView1 = (TextView)findViewById(2131493175);
+	    localTextView1 = (TextView)findViewById(R.id.source_detail_room_area_no_pic);
 	    int j = paramDetailData.getmArea();
 	    if (j != 0)
 	    {
-	      String str6 = getResources().getString(2131361994);
+	      String str6 = getResources().getString(R.string.source_detail_rent_area_unit);
 	      Object[] arrayOfObject3 = new Object[1];
 	      String str7 = j + "";
 	      arrayOfObject3[0] = str7;
@@ -523,20 +611,20 @@ implements HandlerListener {
 	      Spanned localSpanned2 = Html.fromHtml(str8 + "m<sup><small>2</small></sup>");
 	      localTextView1.setText(localSpanned2);
 	    }
-	    localTextView1 = (TextView)findViewById(2131493176);
+	    localTextView1 = (TextView)findViewById(R.id.source_detail_rent_type_no_pic);
 	    j = paramDetailData.getmRentType();
-	    String str9 = getResources().getString(2131361995);
+	    String str9 = getResources().getString(R.string.source_detail_rent_type_unit);
 	    if (j == 0)
 	    {
-	      String str10 = getResources().getString(2131361936);
+	      String str10 = getResources().getString(R.string.rent_favourite_rent_type_lease_all);
 	      Object[] arrayOfObject4 = new Object[1];
 	      arrayOfObject4[0] = str10;
 	      String str11 = String.format(str9, arrayOfObject4);
 	      localTextView1.setText(str11);
 	      
-	      TextView localTextView2 = (TextView)findViewById(2131493177);
+	      TextView localTextView2 = (TextView)findViewById(R.id.source_detail_source_property_no_pic);
 	      String str12 = paramDetailData.getmAgencyStatus();
-	      String str13 = getResources().getString(2131361996);
+	      String str13 = getResources().getString(R.string.source_detail_source_property_unit);
 	      Object[] arrayOfObject5 = new Object[1];
 	      arrayOfObject5[0] = str12;
 	      String str14 = String.format(str13, arrayOfObject5);
@@ -545,7 +633,7 @@ implements HandlerListener {
 	    else
 	    {
 	      if (1 != j) {
-	      String str15 = getResources().getString(2131361937);
+	      String str15 = getResources().getString(R.string.rent_favourite_rent_type_lease_part);
 	      Object[] arrayOfObject6 = new Object[1];
 	      arrayOfObject6[0] = str15;
 	      String str16 = String.format(str9, arrayOfObject6);
@@ -556,7 +644,7 @@ implements HandlerListener {
 
 	  private void showPopPromptImage(int paramInt)
 	  {
-	    LinearLayout localLinearLayout = (LinearLayout)findViewById(2131493165);
+	    LinearLayout localLinearLayout = (LinearLayout)findViewById(R.id.image_pop_prompt);
 	    this.mPopLayout = localLinearLayout;
 	    int i = 0;
 	    while (i < paramInt)
@@ -564,7 +652,7 @@ implements HandlerListener {
 	      ImageView localImageView = new ImageView(this);
 	      ViewGroup.LayoutParams localLayoutParams = new ViewGroup.LayoutParams(-1, -1);
 	      localImageView.setLayoutParams(localLayoutParams);
-	      localImageView.setImageResource(2130837697);
+	      localImageView.setImageResource(R.drawable.unbullet_blue);
 	      localImageView.setPadding(5, 0, 5, 0);
 	      this.mPopLayout.addView(localImageView);
 	      i += 1;
@@ -573,17 +661,17 @@ implements HandlerListener {
 
 	  private void showRentDetail(DetailData paramDetailData)
 	  {
-	    ProgressBar localProgressBar = (ProgressBar)findViewById(2131493182);
+	    ProgressBar localProgressBar = (ProgressBar)findViewById(R.id.content_pb);
 	    this.mContentScrollViewProgressBar = localProgressBar;
 	    this.mContentScrollViewProgressBar.setVisibility(0);
-	    ScrollView localScrollView = (ScrollView)findViewById(2131492906);
+	    ScrollView localScrollView = (ScrollView)findViewById(R.id.content_scrollview);
 	    this.mContentScrollView = localScrollView;
 	    this.mContentScrollView.setVisibility(8);
-	    ImageView localImageView1 = (ImageView)findViewById(2131493159);
+	    ImageView localImageView1 = (ImageView)findViewById(R.id.favourite_status);
 	    this.mChangeFavouriteStatusIV = localImageView1;
 	    boolean bool = setFavouritePic();
 	    mChangeFavouriteStatusIVListener();
-	    ImageView localImageView2 = (ImageView)findViewById(2131493157);
+	    ImageView localImageView2 = (ImageView)findViewById(R.id.detail_goto_back_imageview);
 	    this.mBackImageView = localImageView2;
 	    ImageView localImageView3 = this.mBackImageView;
 	    localImageView3.setOnClickListener(new View.OnClickListener() {
@@ -592,33 +680,36 @@ implements HandlerListener {
 	    	    finish();
 	    	  }
 		});
-	    ImageView localImageView4 = (ImageView)findViewById(2131493179);
+	    ImageView localImageView4 = (ImageView)findViewById(R.id.return_to_map);
 	    this.mReturnMapIV = localImageView4;
 	    returnMapButtonListener();
-	    TextView localTextView1 = (TextView)findViewById(2131493160);
+	    TextView localTextView1 = (TextView)findViewById(R.id.source_detail_article_title);
 	    String str1 = paramDetailData.getmTitle();
 	    if (str1 != null)
 	      localTextView1.setText(str1);
-	    localTextView1 = (TextView)findViewById(2131493178);
+	    localTextView1 = (TextView)findViewById(R.id.source_detail_address);
 	    str1 = paramDetailData.getmAddress();
 	    if (str1 != null)
 	    {
-	      String str2 = getResources().getString(2131361997);
+	      String str2 = getResources().getString(R.string.source_detail_address_unit);
 	      Object[] arrayOfObject1 = new Object[1];
 	      arrayOfObject1[0] = str1;
 	      String str3 = String.format(str2, arrayOfObject1);
 	      localTextView1.setText(str3);
 	    }
-	    localTextView1 = (TextView)findViewById(2131493180);
+	    localTextView1 = (TextView)findViewById(R.id.source_detail_text_content);
 	    str1 = paramDetailData.getmAbstract();
 	    if ((str1 != null) && (str1.length() > 0))
 	    {
 	      localTextView1.setText(str1);
-	      localTextView1 = (TextView)findViewById(2131493161);
+	    } else {
+	    	localTextView1.setText(R.string.abstract_not_available);
+	    }
+	      localTextView1 = (TextView)findViewById(R.id.source_detail_publish_time);
 	      str1 = paramDetailData.getmPublishTime();
 	      if (str1 != null)
 	      {
-	        String str4 = getResources().getString(2131361998);
+	        String str4 = getResources().getString(R.string.source_detail_publish_time);
 	        long l = Long.valueOf(str1 + "000").longValue();
 	        Date localDate = new Date(l);
 	        String str5 = new SimpleDateFormat("MM/dd HH:mm").format(localDate);
@@ -627,42 +718,37 @@ implements HandlerListener {
 	        String str6 = String.format(str4, arrayOfObject2);
 	        localTextView1.setText(str6);
 	      }
-	      localTextView1 = (TextView)findViewById(2131493162);
+	      localTextView1 = (TextView)findViewById(R.id.source_detail_from_site);
 	      str1 = paramDetailData.getmFromSite();
 	      if (str1 != null)
 	      {
-	        String str7 = getResources().getString(2131361999);
+	        String str7 = getResources().getString(R.string.source_detail_from_site);
 	        Object[] arrayOfObject3 = new Object[1];
 	        arrayOfObject3[0] = str1;
 	        String str8 = String.format(str7, arrayOfObject3);
 	        localTextView1.setText(str8);
 	      }
-	      TextView localTextView2 = (TextView)findViewById(2131493181);
+	      TextView localTextView2 = (TextView)findViewById(R.id.source_recent_called_number_of_times);
 	      int i = paramDetailData.getmCalledTimes();
-	      String str9 = getResources().getString(2131362000);
+	      String str9 = getResources().getString(R.string.source_detail_custom_called_num);
 	      Object[] arrayOfObject4 = new Object[1];
 	      String str10 = i + "";
 	      arrayOfObject4[0] = str10;
 	      String str11 = String.format(str9, arrayOfObject4);
 	      localTextView2.setText(str11);
-	      TextView localTextView3 = (TextView)findViewById(2131493184);
+	      TextView localTextView3 = (TextView)findViewById(R.id.source_recent_contact);
 	      String str12 = paramDetailData.getmContactPerson();
 	      localTextView3.setText(str12);
 	      fillPhoneNumber(paramDetailData);
 	      if ((paramDetailData.getmImages() == null) || (paramDetailData.getmImages().length <= 0) || (paramDetailData.getmImages()[0].length() <= 0))
-	      {((LinearLayout)findViewById(2131493172)).setVisibility(0);
-	      showNoPicContent(paramDetailData);
+	      	{((LinearLayout)findViewById(R.id.contain_pic_content_no_pic)).setVisibility(0);
+	      	showNoPicContent(paramDetailData);
 	      } else {
-	      ((LinearLayout)findViewById(2131493163)).setVisibility(0);
-	      showHasPicContent(paramDetailData);
+	    	  ((LinearLayout)findViewById(R.id.contain_pic_content)).setVisibility(0);
+	    	  showHasPicContent(paramDetailData);
 	      }
 	      this.mContentScrollViewProgressBar.setVisibility(8);
 	      this.mContentScrollView.setVisibility(0);
-	    }
-	    else 
-	    {
-	      localTextView1.setText(2131362004);
-	    }
 	  }
 
 	  protected void onActivityResult(int paramInt1, int paramInt2, Intent paramIntent)
@@ -682,7 +768,7 @@ implements HandlerListener {
 	    super.onCreate(paramBundle);
 //	    MobclickAgent.onError(this);
 	    boolean bool = requestWindowFeature(1);
-	    setContentView(2130903112);
+	    setContentView(R.layout.source_detail);
 	    DetailImageManager localDetailImageManager = new DetailImageManager();
 	    this.mSDCardManager = localDetailImageManager;
 	    dealOriginId();
@@ -703,26 +789,26 @@ implements HandlerListener {
 
 	  public void statusChanged(boolean paramBoolean)
 	  {
-	    if (true == paramBoolean);
-	    while (true)
-	    {
+	    if (true == paramBoolean) {
 	      try
 	      {
 	        DetailData localDetailData1 = (DetailData)this.mDetailDataHandler.getDetailDataList().get(0);
 	        this.mDetailData = localDetailData1;
-	        if ((this.mDetailData.getmAddress() != null) && (this.mDetailData.getmAddress().trim().length() != 0)){}
-	        DetailData localDetailData2 = this.mDetailData;
-	        String str = this.mCommunityAddress;
-	        localDetailData2.setmAddress(str);
+	        if ((this.mDetailData.getmAddress() == null) || (this.mDetailData.getmAddress().trim().length() == 0)) {
+		        String str = this.mCommunityAddress;
+		        this.mDetailData.setmAddress(str);
+	        }
 	        DetailData localDetailData3 = this.mDetailData;
 	        showRentDetail(localDetailData3);
 	      }
 	      catch (Exception localException)
 	      {
 	        localException.printStackTrace();
-	        continue;
+	        UIUtils.displayLongTimeToast(this, R.string.download_error);
 	      }
-	      UIUtils.displayLongTimeToast(this, 2131361891);
+	    }
+	    else {
+	    	UIUtils.displayLongTimeToast(this, R.string.download_error);
 	    }
 	  }
 }
