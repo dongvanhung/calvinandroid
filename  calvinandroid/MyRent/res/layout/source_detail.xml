@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_gravity="center" android:id="@id/view_head" android:background="@drawable/shape" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="45.0dip" android:layout_weight="0.0">
+        <ImageView android:id="@id/detail_goto_back_imageview" android:background="@drawable/back_button" android:src="@drawable/back_icon" android:scaleType="center" android:layout_alignParentLeft="true" style="@style/title_label_left_imageview" />
+        <TextView android:textSize="22.0dip" android:textColor="#fff0f0f0" android:gravity="center" android:id="@id/detail_title" android:layout_width="fill_parent" android:layout_height="45.0dip" android:text="@string/source_detail_title" android:shadowColor="#ff333333" android:shadowDy="-1.1" android:shadowRadius="0.2" />
+        <ImageView android:id="@id/favourite_status" android:background="@drawable/black_button" android:paddingBottom="7.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/unfavorite_icon" android:scaleType="center" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <ImageView android:id="@id/line" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/line_bg" android:layout_below="@id/titlebar" />
+    <RelativeLayout android:background="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <ScrollView android:id="@id/content_scrollview" android:background="@color/white" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:background="@drawable/title_bg" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="20.0sp" android:textColor="@color/black" android:gravity="left" android:id="@id/source_detail_article_title" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                    <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="15.0dip" android:textColor="@color/detail_publishtime" android:id="@id/source_detail_publish_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" />
+                        <TextView android:textSize="15.0dip" android:textColor="@color/detail_publishtime" android:id="@id/source_detail_from_site" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:id="@id/contain_pic_content" android:paddingTop="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <RelativeLayout android:layout_gravity="center" android:paddingLeft="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <ImageView android:id="@id/house_picture" android:layout_width="150.0dip" android:layout_height="100.0dip" android:src="@drawable/testbig" android:scaleType="fitXY" />
+                        <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@id/image_pop_prompt" android:layout_width="150.0dip" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_below="@id/house_picture" />
+                        <ProgressBar android:gravity="center" android:id="@id/images_progress_bar" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" style="?android:progressBarStyleLarge" />
+                    </RelativeLayout>
+                    <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="价格:" android:layout_weight="1.0" />
+                        <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_room_number" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="户型：" android:layout_weight="1.0" />
+                        <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_room_area" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="面积：" android:layout_weight="1.0" />
+                        <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_rent_type" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="租赁方式：" android:layout_weight="1.0" />
+                        <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_source_property" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="房源属性：" android:layout_weight="1.0" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/contain_pic_content_no_pic" android:paddingLeft="10.0dip" android:paddingTop="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:stretchColumns="*">
+                        <TableRow>
+                            <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_price_no_pic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="价格：" android:layout_alignParentLeft="true" />
+                            <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_room_number_no_pic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="户型：" android:layout_toRightOf="@id/source_detail_price_no_pic" android:layout_alignParentRight="true" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_room_area_no_pic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="面积：" />
+                            <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_rent_type_no_pic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="租赁方式：" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_source_property_no_pic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="房源属性：" />
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+                    <ImageView android:background="#ffb96b2c" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_address" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" />
+                    <ImageView android:layout_gravity="center_vertical" android:id="@id/return_to_map" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/location_icon" android:layout_weight="1.0" />
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:paddingLeft="10.0dip" android:paddingTop="10.0dip" android:paddingRight="10.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:orientation="horizontal" android:background="@drawable/txtbg" android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_detail_text_content" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:orientation="horizontal" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <TextView android:textSize="15.0dip" android:textColor="@color/black" android:id="@id/source_recent_called_number_of_times" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <ProgressBar android:gravity="center" android:id="@id/content_pb" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" style="?android:progressBarStyleLarge" />
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/view_bottom" android:background="@drawable/barbg" android:layout_width="fill_parent" android:layout_height="45.0dip" android:layout_weight="0.0">
+        <TextView android:textSize="20.0dip" android:textColor="@color/white" android:layout_gravity="center" android:id="@id/source_recent_contact" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
+        <TextView android:textSize="20.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/source_recent_phone_num" android:layout_width="wrap_content" android:layout_height="45.0dip" android:singleLine="true" android:layout_weight="1.0" />
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/source_phone_num_imageview" android:background="@color/white" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="41.0dip" android:adjustViewBounds="true" android:maxHeight="41.0dip" android:minHeight="41.0dip" android:layout_weight="1.0" />
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/source_detail_contact_phone_number" android:layout_width="wrap_content" android:layout_height="45.0dip" android:src="@drawable/detail_call_button" android:adjustViewBounds="true" />
+    </LinearLayout>
+</LinearLayout>

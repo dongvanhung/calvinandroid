@@ -181,30 +181,14 @@ public class ResultActivity extends Activity implements SearchHandlerListener {
 	    	      Intent localIntent2 = localIntent1.putExtras(localBundle);
 	    	      startActivity(localIntent1);
 	    	    } else {
-	    	      /*int k = 0;
-	    	      while (true)
-	    	      {
-	    	        int m = mCategoryIndice.length;
-	    	        if (k >= m)
-	    	          break label245;
-	    	        int n = mCategoryIndice[k];
-	    	        if (paramInt == n)
-	    	          break;
-	    	        k += 1;
-	    	      }
-	    	      int[] arrayOfInt = mCategoryIndice;
-	    	      k = ResultAdapter.getVirtualViewItemIndex(paramInt, 1, arrayOfInt);
-	    	      int i1 = ResultActivity.this.getSumCount();
-	    	      if (k >= i1)
-	    	        continue;
-	    	      HouseSource localHouseSource = (HouseSource)ResultActivity.access$800(this.this$0).getItem(k);
-	    	      ResultActivity localResultActivity2 = this.this$0;
-	    	      Intent localIntent3 = new Intent(localResultActivity2, SourceDetailActivity.class);
+	    	      int k = ResultAdapter.getVirtualViewItemIndex(paramInt, 1, ResultActivity.this.mCategoryIndice);
+	    	      HouseSource localHouseSource = (HouseSource)ResultActivity.this.mResultAdapter.getItem(k);
+	    	      Intent localIntent3 = new Intent(ResultActivity.this, SourceDetailActivity.class);
 	    	      long l2 = localHouseSource.mOriginId;
 	    	      Intent localIntent4 = localIntent3.putExtra("origin_id", l2);
-	    	      String str4 = ResultActivity.access$900(this.this$0);
+	    	      String str4 = ResultActivity.this.mAddress;
 	    	      Intent localIntent5 = localIntent3.putExtra("address", str4);
-	    	      this.this$0.startActivity(localIntent3);*/
+	    	      startActivity(localIntent3);
 	    	    }
 	    	  }
 	    });
