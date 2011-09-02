@@ -31,7 +31,7 @@ public class FilterActivity extends Activity{
 	  private RadioGroup mAgencyRadioGroup;
 	  private SeekBar mCellSeekBar;
 	  private TextView mCellTextView;
-	  private Context mContext;
+	  private Context mContext = this;
 	  private int[] mCurCitySeekBarPriceArray;
 	  private int mCurHightPirce;
 	  private int mCurLowPrice;
@@ -541,8 +541,8 @@ public class FilterActivity extends Activity{
 	    localImageView2.setOnClickListener(new OnClickListener() {
 	    	public void onClick(View paramView)
 	    	  {
-	    	  /*  PreferenceUtils.setRefreshStatus(this.this$0, 2);
-	    	    finish();*/
+//	    	    PreferenceUtils.setRefreshStatus(this.this$0, 2);
+	    	    finish();
 	    	  }
 		});
 	    Button localButton1 = (Button)findViewById(R.id.price_custom_but);
