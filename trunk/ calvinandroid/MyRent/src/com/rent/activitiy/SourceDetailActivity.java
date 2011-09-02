@@ -362,7 +362,7 @@ implements HandlerListener {
 														.append("tel:");
 												String str = SourceDetailActivity.this.mRourcePhoneNum
 														.getText().toString();
-												Uri localUri = Uri.parse(str);
+												Uri localUri = Uri.parse(localStringBuilder.append(str).toString());
 												Intent localIntent = new Intent(
 														"android.intent.action.CALL",
 														localUri);
