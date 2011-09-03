@@ -27,6 +27,7 @@ import com.rent.R;
 import com.rent.data.AutoCompleteItemData;
 import com.rent.handler.AutoCompleteQueryHandler;
 import com.rent.listener.AutoCompleteQueryListener;
+import com.rent.thread.AutoCompleteQueryThread;
 
 public class SelectActivity extends Activity implements AutoCompleteQueryListener {
 
@@ -121,8 +122,7 @@ public class SelectActivity extends Activity implements AutoCompleteQueryListene
 	    localImageView2.setOnClickListener(new OnClickListener() {
 	    	public void onClick(View paramView)
 	    	  {
-	    	    /*if ((SelectActivity.access$200(this.this$0) != null) && (SelectActivity.access$200(this.this$0).getText().length() > 0))
-	    	      SelectActivity.access$200(this.this$0).setText("");*/
+	    	      SelectActivity.this.mEditText.setText("");
 	    	  }
 		});
 	    Button localButton2 = this.mOkButton;
@@ -146,8 +146,7 @@ public class SelectActivity extends Activity implements AutoCompleteQueryListene
 	    localImageView4.setOnClickListener(new OnClickListener() {
 	    	public void onClick(View paramView)
 	    	  {
-	    	   /* PreferenceUtils.setRefreshStatus(this.this$0, 2);
-	    	    this.this$0.finish();*/
+	    	    finish();
 	    	  }
 		});
 	    LinearLayout localLinearLayout2 = (LinearLayout)findViewById(R.id.city_choice_ll);
@@ -202,11 +201,10 @@ public class SelectActivity extends Activity implements AutoCompleteQueryListene
 	    if ((paramCharSequence == null) || (paramCharSequence.toString().length() == 0)) {
 	   
 	    } else {
-/*	      SelectActivity localSelectActivity = this.this$0;
-	      AutoCompleteQueryHandler localAutoCompleteQueryHandler = SelectActivity.access$000(this.this$0);
+	      AutoCompleteQueryHandler localAutoCompleteQueryHandler = SelectActivity.this.mQueryHandler;
 	      String str = paramCharSequence.toString();
-	      new AutoCompleteQueryThread(localSelectActivity, localAutoCompleteQueryHandler, str).start();
-*/	    }
+	      new AutoCompleteQueryThread(SelectActivity.this, localAutoCompleteQueryHandler, str).start();
+	    }
 	  }
 	}
 
@@ -268,8 +266,9 @@ public class SelectActivity extends Activity implements AutoCompleteQueryListene
 		        String str1 = localAutoCompleteItemData.suggestion;
 		        StringBuilder localStringBuilder2 = localStringBuilder1.append(str1).append("(");
 		        int k = localAutoCompleteItemData.number;
-		        String str2 = k + ")";
-		        arrayOfString[i] = str2;
+		        localStringBuilder2.append(k + ")");
+		        arrayOfString[i] = localStringBuilder2.toString();
+		        i++;
 	        }
 	      }
 	      
