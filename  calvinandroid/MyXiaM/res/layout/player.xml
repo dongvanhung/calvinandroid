@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout android:orientation="vertical" android:background="@drawable/player_bg" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xiami.view.AlbumCover android:layout_gravity="top" android:id="@id/cover" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/cover_default" android:scaleType="fitStart" />
+    <LinearLayout android:layout_gravity="top" android:background="#ff666666" android:layout_width="fill_parent" android:layout_height="1.0px" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.xiami.view.LyricView android:id="@id/lyric" android:background="#aa000000" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="-10.0dip" android:layout_above="@id/ctrls_panel" />
+        <LinearLayout android:layout_gravity="bottom" android:orientation="vertical" android:id="@id/ctrls_panel" android:background="@drawable/play_ctrl_bg" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+            <LinearLayout android:paddingTop="20.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ViewSwitcher android:id="@id/radio_mode" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                    <ImageView android:id="@id/btnMode" android:src="@drawable/player_mode" style="@style/playerIcons" />
+                    <ImageView android:id="@id/btnRadio" android:src="@drawable/player_rpickr" style="@style/playerIcons" />
+                </ViewSwitcher>
+                <ImageView android:id="@id/btnFav" android:src="@drawable/player_fav" style="@style/playerIcons" />
+                <ImageView android:id="@id/btnUnfav" android:src="@drawable/player_unfav" style="@style/playerIcons" />
+                <ImageView android:id="@id/btnLyric" android:src="@drawable/player_lyric" style="@style/playerIcons" />
+                <ImageView android:id="@id/btnMore" android:src="@drawable/player_more" style="@style/playerIcons" />
+            </LinearLayout>
+            <RelativeLayout android:layout_gravity="bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="3.0dip">
+                <TextView android:textSize="11.0sp" android:textColor="#ffffffff" android:id="@id/txtPlay" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="14.0dip" android:text="00:00" android:singleLine="true" android:layout_alignParentLeft="true" />
+                <TextView android:textSize="11.0sp" android:textColor="#ffffffff" android:id="@id/txtDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="14.0dip" android:text="00:00" android:singleLine="true" android:layout_alignParentRight="true" />
+                <SeekBar android:id="@id/song_seek" android:focusable="false" android:layout_width="fill_parent" android:layout_height="10.0dip" android:layout_marginLeft="50.0dip" android:layout_marginRight="50.0dip" android:progressDrawable="@drawable/seekbar_style" android:thumb="@null" android:thumbOffset="5.0dip" android:layout_centerInParent="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

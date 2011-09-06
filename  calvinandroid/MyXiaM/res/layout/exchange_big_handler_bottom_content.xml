@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:id="@id/exchange_panelHeight" android:background="#ffececec" android:layout_width="fill_parent" android:layout_height="-2.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="-2.0dip" android:layout_above="@id/exchange_bottom">
+        <include layout="@layout/exchange_component_foucused_app" />
+    </RelativeLayout>
+    <include layout="@layout/exchange_component_back_bottom" />
+</RelativeLayout>

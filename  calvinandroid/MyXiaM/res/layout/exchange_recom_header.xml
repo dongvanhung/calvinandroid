@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:id="@id/exchange_recom" android:background="#ffececec" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/exchange_recoright" android:scaleType="fitXY" android:layout_alignParentTop="true" />
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/exchange_recoleft" />
+    <TextView android:textSize="11.0dip" android:textColor="#ff777777" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="By友盟Umeng" android:layout_alignParentRight="true" />
+</RelativeLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:id="@id/exchange_panelHeight" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="-2.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListView android:id="@id/exchange_list" android:layout_width="fill_parent" android:layout_height="440.0dip" android:layout_marginBottom="10.0dip" android:cacheColorHint="#00000000" android:divider="#00000000" android:dividerHeight="5.0dip" />
+    <include layout="@layout/exchange_component_back_bottom" />
+</RelativeLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="top" android:orientation="vertical" android:id="@id/search_bar" android:layout_width="fill_parent" android:layout_height="45.0dip" android:layout_weight="0.0">
+        <TextView android:gravity="center_vertical" android:id="@id/title_bar" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="本地音乐" style="@style/TitleBarText" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="45.0dip">
+            <TextView android:id="@id/tab_offline" android:text="下载歌曲" style="@style/typedBtnText" />
+            <TextView android:id="@id/tab_local" android:layout_marginRight="-1.0dip" android:text="本地歌曲" style="@style/typedBtnText" />
+        </LinearLayout>
+        <ViewSwitcher android:id="@id/content_switcher" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <TextView android:textSize="40.0sp" android:textStyle="bold" android:textColor="#60606060" android:layout_gravity="bottom|center" android:id="@id/left_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="200.0dip" android:text="剩余50/50" />
+                <ListView android:layout_gravity="top" android:id="@id/offline_list" android:paddingLeft="0.0dip" android:focusable="false" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="wrap_content" android:scrollingCache="false" android:dividerHeight="0.0dip" />
+            </FrameLayout>
+            <ListView android:layout_gravity="top" android:id="@id/local_list" android:paddingLeft="0.0dip" android:focusable="false" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="wrap_content" android:scrollingCache="false" android:dividerHeight="0.0dip" />
+        </ViewSwitcher>
+    </LinearLayout>
+</FrameLayout>
