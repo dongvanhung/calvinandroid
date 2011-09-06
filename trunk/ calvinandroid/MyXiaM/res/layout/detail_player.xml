@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <SlidingDrawer android:orientation="vertical" android:id="@id/player_drawer" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/nav_bar" android:handle="@id/drawer" android:content="@id/player_panel">
+        <FrameLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/drawer" android:background="@drawable/handle_open_bg" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:id="@id/drawer_title" android:text="正在播放..." style="@style/HandleBarText" />
+            <ImageView android:layout_gravity="right|center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:src="@drawable/handle_icon" />
+        </FrameLayout>
+        <RelativeLayout android:orientation="vertical" android:id="@id/player_panel" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/ctrls">
+                <include android:id="@id/player" layout="@layout/player" />
+            </LinearLayout>
+            <LinearLayout android:background="@drawable/shadow_up" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/ctrls" />
+            <include android:id="@id/ctrls" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" layout="@layout/play_back_ctrls" />
+        </RelativeLayout>
+    </SlidingDrawer>
+</LinearLayout>

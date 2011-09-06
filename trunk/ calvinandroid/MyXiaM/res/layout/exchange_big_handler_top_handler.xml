@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:id="@id/exchange_display" android:layout_width="fill_parent" android:layout_height="55.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/exchange_banner_bg" android:layout_width="fill_parent" android:layout_height="67.0dip" android:src="@drawable/exchange_ban_top" android:scaleType="fitXY" android:layout_below="@id/exchange_top_ban"
+      xmlns:android="http://schemas.android.com/apk/res/android" />
+    <ImageView android:id="@id/exchange_appIcon0" android:background="@drawable/exchange_zhanwei" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="5.0dip" android:layout_centerVertical="true" />
+    <ViewFlipper android:id="@id/exchange_flipper" android:layout_width="260.0dip" android:layout_height="35.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.0dip" android:layout_toRightOf="@id/exchange_appIcon0" android:layout_centerInParent="true" android:layout_centerVertical="true" />
+</RelativeLayout>

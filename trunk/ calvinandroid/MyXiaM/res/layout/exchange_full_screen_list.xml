@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:id="@id/exchange_rootId" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="-1.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/exchange_message" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="45.0dip">
+        <TableLayout android:background="@drawable/top_bar" android:layout_width="wrap_content" android:layout_height="45.0dip" android:stretchColumns="1" android:shrinkColumns="1">
+            <TableRow android:gravity="center_vertical" android:paddingTop="5.0dip" android:paddingBottom="5.0dip">
+                <ImageView android:id="@id/exchange_notice_img" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="6.0dip" />
+                <TextView android:gravity="center" android:id="@id/exchange_notice_txt" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/TitleBarText" />
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/exchange_shadow" android:background="@drawable/shadow_down" android:layout_width="fill_parent" android:layout_height="6.0dip" android:layout_below="@id/exchange_message" />
+    <ListView android:id="@id/exchange_list" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="3.0dip" android:cacheColorHint="#00000000" android:divider="#00000000" android:dividerHeight="5.0dip" android:layout_above="@id/exchange_footer" android:layout_below="@id/exchange_shadow" />
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/exchange_footer" android:layout_width="fill_parent" android:layout_height="45.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="5.0dip" android:layout_marginBottom="5.0dip" android:layout_alignParentBottom="true">
+        <Button android:textColor="#ff666666" android:gravity="center" android:id="@id/exchange_back" android:layout_height="35.0dip" android:text="返回" android:layout_weight="1.0" style="@style/exchange_grad_but" />
+    </LinearLayout>
+</RelativeLayout>

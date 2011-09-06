@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:id="@id/scroller" android:background="@drawable/popup" android:scrollbars="none" android:fadingEdgeLength="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip">
+        <LinearLayout android:id="@id/tracks" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <LinearLayout android:id="@id/pop_row_album" style="@style/popItem">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/pop_up_info" />
+                <TextView android:textSize="15.0sp" android:textColor="#ff000000" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="专辑" />
+            </LinearLayout>
+            <LinearLayout android:id="@id/pop_row_artist" style="@style/popItem">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/pop_up_artist" />
+                <TextView android:textSize="15.0sp" android:textColor="#ff000000" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="艺人" />
+            </LinearLayout>
+            <LinearLayout android:id="@id/pop_row_offline" style="@style/popItem">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/pop_up_offline" />
+                <TextView android:textSize="15.0sp" android:textColor="#ff000000" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="下载" />
+            </LinearLayout>
+            <LinearLayout android:id="@id/pop_row_share" style="@style/popItem">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/pop_up_share" />
+                <TextView android:textSize="15.0sp" android:textColor="#ff000000" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="分享" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout android:gravity="center_vertical" android:background="@android:drawable/list_selector_background" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/list_bg" />
+    <TextView android:layout_gravity="left|center" android:text="精选集" style="@style/IndexSectionTitle" />
+    <TextView android:layout_gravity="right|center" android:text=">>" style="@style/IndexSectionMore" />
+</FrameLayout>

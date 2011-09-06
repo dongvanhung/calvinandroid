@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout android:gravity="center_vertical" android:layout_gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/list_bg" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="67.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:gravity="left|center" android:layout_gravity="left|center" android:id="@id/list_icon" android:paddingLeft="0.0dip" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="56.0dip" android:layout_height="56.0dip" android:layout_marginLeft="10.0dip" />
+    <TextView android:textSize="18.0sp" android:textColor="#ffffffff" android:ellipsize="marquee" android:gravity="center_vertical" android:layout_gravity="left|center" android:id="@id/list_text" android:layout_width="200.0dip" android:layout_height="fill_parent" android:layout_marginLeft="70.0dip" android:maxLines="1" android:singleLine="true" android:marqueeRepeatLimit="marquee_forever" />
+    <ImageView android:layout_gravity="right|center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/li_go" />
+</FrameLayout>
