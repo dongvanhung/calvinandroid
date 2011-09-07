@@ -612,7 +612,7 @@ implements SlidingDrawer.OnDrawerOpenListener, SlidingDrawer.OnDrawerCloseListen
 	      Song localSong = mMusic.getPlayingSong();
 	      if (localSong == null)
 	      {
-//	        NotificationsUtil.ToastShort(XPlayer.access$7(XPlayer.ViewHolder.access$4(this.this$1)), "褰撳墠娌℃湁姝屾洸姝ｅ湪鎾斁!");
+//	        NotificationsUtil.ToastShort(XPlayer.access$7(XPlayer.ViewHolder.access$4(this.this$1)), "è¤°æ’³å¢ å¨Œâ„ƒæ¹�å§�å±¾æ´¸å§�ï½…æ¹ªéŽ¾î…Ÿæ–�!");
 	    	  localQuickAction.dismiss();
 	      }
 	      else
@@ -657,7 +657,7 @@ implements SlidingDrawer.OnDrawerOpenListener, SlidingDrawer.OnDrawerCloseListen
 	        Song localSong = mMusic.getPlayingSong();
 	        if (localSong == null)
 	        {
-//	          NotificationsUtil.ToastShort(XPlayer.access$7(XPlayer.ViewHolder.access$4(this.this$1)), "褰撳墠娌℃湁姝屾洸姝ｅ湪鎾斁!");
+//	          NotificationsUtil.ToastShort(XPlayer.access$7(XPlayer.ViewHolder.access$4(this.this$1)), "è¤°æ’³å¢ å¨Œâ„ƒæ¹�å§�å±¾æ´¸å§�ï½…æ¹ªéŽ¾î…Ÿæ–�!");
 	        localQuickAction.dismiss();
 	        } else {
 	        /*Intent localIntent1 = new Intent(XPlayer.this, ArtistDetailActivity.class);

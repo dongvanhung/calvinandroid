@@ -25,86 +25,74 @@ public class SearchResultItem implements WithImage {
 	  {
 	    int i = paramJSONArray.length();
 	    ArrayList localArrayList = new ArrayList();
-	    int[] arrayOfInt = paramSEARCH_TYPE;
 	    int j = paramSEARCH_TYPE.ordinal();
-	    switch (arrayOfInt[j])
+	    switch (j + 1)
 	    {
 	    default:
 	    case 1:
+	    	for (int j2 = 0; j2 < paramJSONArray.length(); j2++) {
+	    		JSONObject localJSONObject1 = paramJSONArray.getJSONObject(j2);
+		        SearchResultItem localSearchResultItem1 = new SearchResultItem();
+		        String str1 = localJSONObject1.getString("name");
+		        localSearchResultItem1.name1 = str1;
+		        int m = localJSONObject1.getInt("id");
+		        localSearchResultItem1.id1 = m;
+		        String str2 = localJSONObject1.getString("artist_name");
+		        localSearchResultItem1.name2 = str2;
+		        int n = localJSONObject1.getInt("artist_id");
+		        localSearchResultItem1.id2 = n;
+		        String str3 = localJSONObject1.getString("logo");
+		        localSearchResultItem1.imageUrl = str3;
+		        boolean bool1 = localArrayList.add(localSearchResultItem1);
+			}
+	    	break;
 	    case 2:
+	    	for (int j2 = 0; j2 < paramJSONArray.length(); j2++) {
+		    	JSONObject localJSONObject2 = paramJSONArray.getJSONObject(j2);
+		        SearchResultItem localSearchResultItem2 = new SearchResultItem();
+		        String str4 = localJSONObject2.getString("name");
+		        localSearchResultItem2.name1 = str4;
+		        int i1 = localJSONObject2.getInt("id");
+		        localSearchResultItem2.id1 = i1;
+		        String str5 = localJSONObject2.getString("logo");
+		        localSearchResultItem2.imageUrl = str5;
+		        boolean bool2 = localArrayList.add(localSearchResultItem2);
+	    	}
+	    	break;
 	    case 4:
+	    	for (int j2 = 0; j2 < paramJSONArray.length(); j2++) {
+	    		JSONObject localJSONObject3 = paramJSONArray.getJSONObject(j2);
+		        SearchResultItem localSearchResultItem3 = new SearchResultItem();
+		        String str6 = localJSONObject3.getString("name");
+		        localSearchResultItem3.name1 = str6;
+		        int i2 = localJSONObject3.getInt("id");
+		        localSearchResultItem3.id1 = i2;
+		        String str7 = localJSONObject3.getString("artist_name");
+		        localSearchResultItem3.name2 = str7;
+		        int i3 = localJSONObject3.getInt("artist_id");
+		        localSearchResultItem3.id2 = i3;
+		        String str8 = localJSONObject3.getString("logo");
+		        localSearchResultItem3.imageUrl = str8;
+		        String str9 = localJSONObject3.getString("location");
+		        localSearchResultItem3.extr = str9;
+		        boolean bool3 = localArrayList.add(localSearchResultItem3);
+			}
+	    	break;
 	    case 3:
+	    	for (int j2 = 0; j2 < paramJSONArray.length(); j2++) {
+	    		JSONObject localJSONObject4 = paramJSONArray.getJSONObject(j2);
+		        SearchResultItem localSearchResultItem4 = new SearchResultItem();
+		        String str10 = localJSONObject4.getString("name");
+		        localSearchResultItem4.name1 = str10;
+		        int i4 = localJSONObject4.getInt("id");
+		        localSearchResultItem4.id1 = i4;
+		        String str11 = localJSONObject4.getString("logo");
+		        localSearchResultItem4.imageUrl = str11;
+		        boolean bool4 = localArrayList.add(localSearchResultItem4);
+			}
+	    	break;
 	    }
-	    while (true)
-	    {
-	      return localArrayList;
-	      int k = 0;
-	      while (k < i)
-	      {
-	        JSONObject localJSONObject1 = paramJSONArray.getJSONObject(k);
-	        SearchResultItem localSearchResultItem1 = new SearchResultItem();
-	        String str1 = localJSONObject1.getString("name");
-	        localSearchResultItem1.name1 = str1;
-	        int m = localJSONObject1.getInt("id");
-	        localSearchResultItem1.id1 = m;
-	        String str2 = localJSONObject1.getString("artist_name");
-	        localSearchResultItem1.name2 = str2;
-	        int n = localJSONObject1.getInt("artist_id");
-	        localSearchResultItem1.id2 = n;
-	        String str3 = localJSONObject1.getString("logo");
-	        localSearchResultItem1.imageUrl = str3;
-	        boolean bool1 = localArrayList.add(localSearchResultItem1);
-	        k += 1;
-	      }
-	      k = 0;
-	      while (k < i)
-	      {
-	        JSONObject localJSONObject2 = paramJSONArray.getJSONObject(k);
-	        SearchResultItem localSearchResultItem2 = new SearchResultItem();
-	        String str4 = localJSONObject2.getString("name");
-	        localSearchResultItem2.name1 = str4;
-	        int i1 = localJSONObject2.getInt("id");
-	        localSearchResultItem2.id1 = i1;
-	        String str5 = localJSONObject2.getString("logo");
-	        localSearchResultItem2.imageUrl = str5;
-	        boolean bool2 = localArrayList.add(localSearchResultItem2);
-	        k += 1;
-	      }
-	      k = 0;
-	      while (k < i)
-	      {
-	        JSONObject localJSONObject3 = paramJSONArray.getJSONObject(k);
-	        SearchResultItem localSearchResultItem3 = new SearchResultItem();
-	        String str6 = localJSONObject3.getString("name");
-	        localSearchResultItem3.name1 = str6;
-	        int i2 = localJSONObject3.getInt("id");
-	        localSearchResultItem3.id1 = i2;
-	        String str7 = localJSONObject3.getString("artist_name");
-	        localSearchResultItem3.name2 = str7;
-	        int i3 = localJSONObject3.getInt("artist_id");
-	        localSearchResultItem3.id2 = i3;
-	        String str8 = localJSONObject3.getString("logo");
-	        localSearchResultItem3.imageUrl = str8;
-	        String str9 = localJSONObject3.getString("location");
-	        localSearchResultItem3.extr = str9;
-	        boolean bool3 = localArrayList.add(localSearchResultItem3);
-	        k += 1;
-	      }
-	      k = 0;
-	      while (k < i)
-	      {
-	        JSONObject localJSONObject4 = paramJSONArray.getJSONObject(k);
-	        SearchResultItem localSearchResultItem4 = new SearchResultItem();
-	        String str10 = localJSONObject4.getString("name");
-	        localSearchResultItem4.name1 = str10;
-	        int i4 = localJSONObject4.getInt("id");
-	        localSearchResultItem4.id1 = i4;
-	        String str11 = localJSONObject4.getString("logo");
-	        localSearchResultItem4.imageUrl = str11;
-	        boolean bool4 = localArrayList.add(localSearchResultItem4);
-	        k += 1;
-	      }
-	    }
+	    return localArrayList;
 	  }
 
 	  public String getExtr()
@@ -230,63 +218,55 @@ public class SearchResultItem implements WithImage {
 	  public static enum SEARCH_TYPE
 	  {
 		  ALBUM,
-		  ARTIST,
-		  COLLECT,
-		  SONG;
-	  }
-
+	    	ARTIST,
+	    	COLLECT,
+	    	SONG;
+		  
 	    public String getName()
 	    {
-	      int[] arrayOfInt = $SWITCH_TABLE$com$xiami$lib$data$SearchResultItem$SEARCH_TYPE();
 	      int i = ordinal();
-	      String str;
-	      switch (arrayOfInt[i])
+	      String str = null;
+	      switch (i + 1)
 	      {
 	      default:
-	        str = null;
 	      case 1:
+	    	  str = "albums";
+	    	  break;
 	      case 2:
+	    	  str = "artists";
+	    	  break;
 	      case 4:
+	    	  str = "songs";
+	    	  break;
 	      case 3:
+	    	  str = "collects";
+	    	  break;
 	      }
-	      while (true)
-	      {
-	        return str;
-	        str = "albums";
-	        continue;
-	        str = "artists";
-	        continue;
-	        str = "songs";
-	        continue;
-	        str = "collects";
-	      }
+	      return str;
 	    }
 
 	    public String getTitle()
 	    {
-	      int[] arrayOfInt = $SWITCH_TABLE$com$xiami$lib$data$SearchResultItem$SEARCH_TYPE();
 	      int i = ordinal();
 	      String str;
-	      switch (arrayOfInt[i])
+	      switch (i + 1)
 	      {
 	      default:
 	        str = null;
 	      case 1:
+	    	  str = "专辑";
+	    	  break;
 	      case 2:
+	    	  str = "歌手";
+	    	  break;
 	      case 4:
+	    	  str = "歌曲";
+	    	  break;
 	      case 3:
+	    	  str = "收集";
+	    	  break;
 	      }
-	      while (true)
-	      {
-	        return str;
-	        str = "涓撹緫";
-	        continue;
-	        str = "鑹轰汉";
-	        continue;
-	        str = "姝屾洸";
-	        continue;
-	        str = "绮鹃�闆�;
-	      }
+	      return str;
 	    }
 	  }
 }

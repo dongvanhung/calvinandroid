@@ -25,6 +25,7 @@ import com.xiami.lib.data.Artist;
 import com.xiami.lib.data.Collect;
 import com.xiami.lib.data.Radio;
 import com.xiami.lib.data.RadioCategory;
+import com.xiami.lib.data.SearchResultItem;
 import com.xiami.lib.util.URL;
 
 public class API {
@@ -444,7 +445,7 @@ public class API {
 	      JSONArray localJSONArray = Web.getJSONObject(URL.parseUrl("http://www.xiami.com/app/android/lib-artists?uid={uid}&page={page}", localHashMap)).getJSONArray("artists");
 	      localVector = new Vector();
 	      for (int j = 0; j < localJSONArray.length(); j++) {
-	    	  JSONObject localJSONObject = localJSONArray.getJSONObject(i);
+	    	  JSONObject localJSONObject = localJSONArray.getJSONObject(j);
 	          Artist localArtist = new Artist();
 	          int m = localJSONObject.getInt("artist_id");
 	          localArtist.setId(m);
@@ -727,21 +728,15 @@ public class API {
 	    JSONObject localJSONObject = Web.getCachedJSONObject(str1, localContext);
 	    HashMap localHashMap2 = new HashMap();
 	    SearchResultItem.SEARCH_TYPE[] arrayOfSEARCH_TYPE = SearchResultItem.SEARCH_TYPE.values();
-	    int i = arrayOfSEARCH_TYPE.length;
-	    int j = 0;
-	    if (j >= i)
+	    for (int i = 0; i < arrayOfSEARCH_TYPE.length; i++) {
+	    	SearchResultItem.SEARCH_TYPE localSEARCH_TYPE = arrayOfSEARCH_TYPE[i];
+	 	    String str2 = localSEARCH_TYPE.getName();
+	 	    if (!localJSONObject.isNull(str2)) {
+		 	   List<SearchResultItem> localObject2 = SearchResultItem.makeList(localJSONObject.getJSONArray(str2), localSEARCH_TYPE);
+		 	   localHashMap2.put(localSEARCH_TYPE, localObject2);
+	 	    }
+		}
 	      return localHashMap2;
-	    SearchResultItem.SEARCH_TYPE localSEARCH_TYPE = arrayOfSEARCH_TYPE[j];
-	    String str2 = localSEARCH_TYPE.getName();
-	    if (localJSONObject.isNull(str2));
-	    String str3;
-	    for (Object localObject2 = null; ; localObject2 = SearchResultItem.makeList(localJSONObject.getJSONArray(str3), localSEARCH_TYPE))
-	    {
-	      Object localObject3 = localHashMap2.put(localSEARCH_TYPE, localObject2);
-	      j += 1;
-	      break;
-	      str3 = localSEARCH_TYPE.getName();
-	    }
 	  }
 
 	  public List<SearchResultItem> searchByType(String paramString, SearchResultItem.SEARCH_TYPE paramSEARCH_TYPE)
@@ -795,10 +790,8 @@ public class API {
 	  {
 	    try
 	    {
-	      if (!this.app.checkNetwork());
-	      for (i = 0; ; i = 1)
-	      {
-	        return i;
+	      if (!this.app.checkNetwork())
+	    	  return false;
 	        HashMap localHashMap = new HashMap();
 	        String str1 = String.valueOf(paramInt1);
 	        Object localObject1 = localHashMap.put("id", str1);
@@ -809,18 +802,13 @@ public class API {
 	        String str5 = this.app.getMember().getPassword();
 	        String str6 = Web.getJSONObject(str3, str4, str5).getString("status");
 	        boolean bool = "ok".equalsIgnoreCase(str6);
-	        if (!bool)
-	          break;
-	      }
+	        return bool;
 	    }
 	    catch (Exception localException)
 	    {
-	      while (true)
-	      {
 	        localException.printStackTrace();
-	        int i = 0;
-	      }
 	    }
+	    return false;
 	  }
 
 	  enum Favtype

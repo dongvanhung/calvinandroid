@@ -30,7 +30,7 @@ public class QuickAction extends CustomPopupWindow {
 	    View localView2 = this.root;
 	    setContentView(localView2);
 	  }
-	  /*
+	  
 	  public void setAction(int paramInt, View.OnClickListener paramOnClickListener)
 	  {
 	    this.root.findViewById(paramInt).setOnClickListener(paramOnClickListener);
@@ -67,16 +67,16 @@ public class QuickAction extends CustomPopupWindow {
 	    int i14 = localRect.top;
 	    int i15 = localRect.bottom;
 	    int i16 = i7 - i15;
-	    if (i14 > i16)
+	    if (i14 > i16) {
 	      int i17 = 1;
-	    while (true)
-	    {
 	      this.window.setAnimationStyle(2131361832);
 	      PopupWindow localPopupWindow = this.window;
 	      View localView2 = this.anchor;
 	      localPopupWindow.showAtLocation(localView2, 0, i12, i13);
-	      return;
+	    }
+	    else
+	    {
 	      int i18 = 0;
 	    }
-	  }*/
+	  }
 }

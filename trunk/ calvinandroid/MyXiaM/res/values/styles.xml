@@ -173,11 +173,11 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    <style name="DialogTheme" parent="@android:style/Theme.Dialog.Alert">
+<!--     <style name="DialogTheme" parent="@android:style/Theme.Dialog.Alert">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
-    </style>
+    </style> -->
     <style name="XiamiDialogTitleBG">
         <item name="android:textSize">20.0sp</item>
         <item name="android:textColor">#ffffffff</item>
@@ -186,12 +186,12 @@
     <style name="XiamiDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowTitleStyle">@style/XiamiDialogTitleBG</item>
     </style>
-    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog.Alert">
+<!--     <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog.Alert">
         <item name="android:windowTitleStyle">@style/XiamiDialogTitleBG</item>
         <item name="android:textSize">14.0sp</item>
         <item name="android:typeface">monospace</item>
         <item name="android:textColor">#ff000000</item>
-    </style>
+    </style> -->
     <style name="Widget.ProgressBar" parent="@android:style/Widget.ProgressBar">
         <item name="android:maxWidth">32.0dip</item>
         <item name="android:maxHeight">32.0dip</item>
@@ -225,12 +225,12 @@
     <style name="Dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
     </style>
-    <style name="WindowTitleBackground" parent="@android:style/WindowTitleBackground">
+    <!-- <style name="WindowTitleBackground" parent="@android:style/WindowTitleBackground">
         <item name="android:background">@drawable/context_menu_header_bg</item>
-    </style>
-    <style name="shareDialog" parent="@android:style/Theme.Dialog">
+    </style> -->
+    <!-- <style name="shareDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
-    </style>
+    </style> -->
     <style name="Animations" />
     <style name="Animations.PopDownMenu" parent="@style/Animations" />
     <style name="Animations.PopDownMenu.Center" parent="@style/Animations.PopDownMenu">
