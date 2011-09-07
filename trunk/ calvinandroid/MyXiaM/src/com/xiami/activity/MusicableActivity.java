@@ -1,6 +1,7 @@
 package com.xiami.activity;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -14,6 +15,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.preference.PreferenceManager;
@@ -25,6 +27,11 @@ import com.xiami.Musicable;
 import com.xiami.Song;
 import com.xiami.XPlayer;
 import com.xiami.XiamiApp;
+import com.xiami.exception.URLArgNotFoundException;
+import com.xiami.lib.data.Album;
+import com.xiami.lib.data.Collect;
+import com.xiami.lib.data.Radio;
+import com.xiami.service.IMusicPlayService;
 import com.xiami.service.MusicPlayService;
 import com.xiami.util.API;
 import com.xiami.util.NotificationsUtil;
@@ -33,21 +40,95 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 
 	static final int PAUSE = 1;
 	  static final int PLAY_RADIO = 2;
-//	  static final int PLAY_SONG;
+	  static final int PLAY_SONG = 0;
 	  private API api;
 	  private ServiceConnection mConnection;
 	  private Handler mHandler;
-//	  private IMusicPlayService mIMusicPlayService;
+	  private IMusicPlayService mIMusicPlayService;
 	  private XPlayer player;
 
 	  public MusicableActivity()
 	  {
-	    /*MusicableActivity.1 local1 = new MusicableActivity.1(this);
+		  MusicableActivity1 local1 = new MusicableActivity1();
 	    this.mConnection = local1;
-	    MusicableActivity.2 local2 = new MusicableActivity.2(this);
+	    MusicableActivity2 local2 = new MusicableActivity2();
 	    this.mHandler = local2;
-	    this.player = null;*/
+	    this.player = null;
 	  }
+	  
+	  class MusicableActivity2 extends Handler
+	  {
+	    public void handleMessage(Message paramMessage)
+	    {
+	      /*int i = paramMessage.what;
+	      if (i == 1)
+	        if (MusicableActivity.access$1(this.this$0) == null);
+	        else
+	      {
+	        try
+	        {
+	          MusicableActivity.access$1(this.this$0).pause();
+	          removeMessages(i);
+	          return;
+	        }
+	        catch (RemoteException localRemoteException1)
+	        {
+	          localRemoteException1.printStackTrace();
+	          continue;
+	        }
+	        if (i == 0)
+	          try
+	          {
+	            Bundle localBundle1 = paramMessage.getData();
+	            ArrayList localArrayList1 = localBundle1.getParcelableArrayList("songs");
+	            IMusicPlayService localIMusicPlayService = MusicableActivity.access$1(this.this$0);
+	            int j = localBundle1.getInt("track");
+	            localIMusicPlayService.play(localArrayList1, j);
+	            if (MusicableActivity.access$2(this.this$0) != null)
+	              MusicableActivity.access$2(this.this$0).open();
+	            removeMessages(i);
+	          }
+	          catch (RemoteException localRemoteException2)
+	          {
+	            while (true)
+	              localRemoteException2.printStackTrace();
+	          }
+	        if (i != 2)
+	          continue;
+	        try
+	        {
+	          Bundle localBundle2 = paramMessage.getData();
+	          ArrayList localArrayList2 = localBundle2.getParcelableArrayList("songs");
+	          String str = localBundle2.getString("name");
+	          MusicableActivity.access$1(this.this$0).playRadio(localArrayList2, str);
+	          if (MusicableActivity.access$2(this.this$0) != null)
+	            MusicableActivity.access$2(this.this$0).open();
+	          removeMessages(i);
+	        }
+	        catch (RemoteException localRemoteException3)
+	        {
+	          while (true)
+	            localRemoteException3.printStackTrace();
+	        }
+	      }*/
+	    }
+	  }
+	  
+	  class MusicableActivity1 implements ServiceConnection
+	{
+	  public void onServiceConnected(ComponentName paramComponentName, IBinder paramIBinder)
+	  {
+//	    MusicableActivity localMusicableActivity = this.this$0;
+	    IMusicPlayService localIMusicPlayService = IMusicPlayService.Stub.asInterface(paramIBinder);
+//	    MusicableActivity.access$0(localMusicableActivity, localIMusicPlayService);
+//	    this.this$0.onServiceConnected();
+	  }
+
+	  public void onServiceDisconnected(ComponentName paramComponentName)
+	  {
+//	    MusicableActivity.access$0(this.this$0, null);
+	  }
+	}
 
 	  private void pause()
 	  {
@@ -58,64 +139,54 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 
 	  public void deleteAllDownloadSong()
 	  {
-	    /*if (this.mIMusicPlayService != null);
+	    if (this.mIMusicPlayService != null);
 	    try
 	    {
 	      this.mIMusicPlayService.deleteAllDownloadSong();
-	      return;
 	    }
 	    catch (RemoteException localRemoteException)
 	    {
-	      while (true)
 	        localRemoteException.printStackTrace();
-	    }*/
+	    }
 	  }
 
 	  public void deleteDownloadSong(Song paramSong)
 	  {
-	    /*if (this.mIMusicPlayService != null);
+	    if (this.mIMusicPlayService != null);
 	    try
 	    {
 	      this.mIMusicPlayService.deleteDownloadSong(paramSong);
-	      return;
 	    }
 	    catch (RemoteException localRemoteException)
 	    {
-	      while (true)
 	        localRemoteException.printStackTrace();
-	    }*/
+	    }
 	  }
-/*
+
 	  public void download(Song paramSong)
 	  {
+		  int i = 0;
 	    if (this.mIMusicPlayService != null);
 	    try
 	    {
 	      i = this.mIMusicPlayService.downloadSong(paramSong);
 	      if (i == 0)
 	        NotificationsUtil.ToastShort(this, "Test");
-	      while (true)
+	      else
 	      {
-	        return;
-	        if (i != 1)
-	          break;
+	        if (i != 1){}
 	        NotificationsUtil.ToastShort(this, "Test");
 	      }
 	    }
 	    catch (RemoteException localRemoteException)
 	    {
-	      while (true)
-	      {
-	        int i;
 	        localRemoteException.printStackTrace();
-	        continue;
 	        if (i == 2)
 	        {
 	          NotificationsUtil.ToastShort(this, "Test");
-	          continue;
+	        } else {
+	        	NotificationsUtil.ToastShort(this, "TEst");
 	        }
-	        NotificationsUtil.ToastShort(this, "TEst");
-	      }
 	    }
 	  }
 
@@ -126,233 +197,204 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    {
 	      int i = this.mIMusicPlayService.downloadSongs(paramList);
 	      if (i == 0)
-	        NotificationsUtil.ToastShort(this, "鎴愬姛鍔犲叆鍒颁笅杞藉垪琛�);
-	      while (true)
+	        NotificationsUtil.ToastShort(this, "Test");
+	      else
 	      {
-	        return;
-	        if (i != 2)
-	          break;
-	        NotificationsUtil.ToastShort(this, "涓嬭浇瀹归噺鍓╀綑涓嶈冻,涓嶈兘涓嬭浇鏁翠釜鍒楄〃");
+	        if (i != 2){}
+	        NotificationsUtil.ToastShort(this, "Test");
 	      }
 	    }
 	    catch (RemoteException localRemoteException)
 	    {
-	      while (true)
-	      {
 	        localRemoteException.printStackTrace();
-	        continue;
-	        NotificationsUtil.ToastShort(this, "鏈煡閿欒锛屼笅杞藉け璐�);
-	      }
+	        NotificationsUtil.ToastShort(this, "Test");
 	    }
 	  }
 
 	  public int getDownloadingIndex()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        int i = this.mIMusicPlayService.getDownloadingIndex();
-	        j = i;
-	        return j;
+	        return i;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      int j = -1;
 	    }
+	    return -1;
 	  }
 
 	  public int getDownloadingProgress()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        int i = this.mIMusicPlayService.getDownloadingProgress();
-	        j = i;
-	        return j;
+	        return i;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      int j = -1;
 	    }
+	    return -1;
 	  }
 
 	  public int getLoadedProgress()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        int i = this.mIMusicPlayService.getLoadedProgress();
-	        j = i;
-	        return j;
+	        return i;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      int j = 0;
 	    }
+	    return 0;
 	  }
 
 	  public int getMode()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        int i = this.mIMusicPlayService.getMode();
-	        j = i;
-	        return j;
+	        return i;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      int j = 0;
 	    }
+	    return 0;
 	  }
 
 	  public List<Song> getOfflineSongs()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        List localList1 = this.mIMusicPlayService.getOfflineSongs();
-	        localList2 = localList1;
-	        return localList2;
+	        return localList1;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      List localList2 = null;
 	    }
+	    return null;
 	  }
 
 	  public Song getPlayingSong()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        Song localSong1 = this.mIMusicPlayService.getPlayingSong();
-	        localSong2 = localSong1;
-	        return localSong2;
+	        return localSong1;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      Song localSong2 = null;
 	    }
+	    return null;
 	  }
 
 	  public String getRadioName()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        String str1 = this.mIMusicPlayService.getRadioName();
-	        str2 = str1;
-	        return str2;
+	        return str1;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      String str2 = null;
 	    }
+	    return "";
 	  }
 
 	  public int getTimePlay()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        int i = this.mIMusicPlayService.getTimePlay();
-	        j = i;
-	        return j;
+	        return i;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      int j = 0;
 	    }
+	    return 0;
 	  }
 
 	  public int getTimeTotal()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        int i = this.mIMusicPlayService.getTimeTotal();
-	        j = i;
-	        return j;
+	        return i;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      int j = 0;
 	    }
+	    return 0;
 	  }
 
 	  public boolean isPlay()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
-	    {
+	    if (this.mIMusicPlayService != null) {
 	      try
 	      {
 	        boolean bool1 = this.mIMusicPlayService.isPlay();
-	        bool2 = bool1;
-	        return bool2;
+	        return bool1;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      boolean bool2 = false;
 	    }
+	    return false;
 	  }
 
 	  public boolean isRadio()
 	  {
-	    if (this.mIMusicPlayService != null);
-	    while (true)
+	    if (this.mIMusicPlayService != null)
 	    {
 	      try
 	      {
 	        boolean bool1 = this.mIMusicPlayService.isRadio();
-	        bool2 = bool1;
-	        return bool2;
+	        return bool1;
 	      }
 	      catch (RemoteException localRemoteException)
 	      {
 	        localRemoteException.printStackTrace();
 	      }
-	      boolean bool2 = false;
 	    }
+	    return false;
 	  }
 
 	  public boolean onBackKey()
@@ -375,7 +417,6 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	  {
 	    if (this.mIMusicPlayService != null)
 	    {
-	      int i = Log.d("unbindservice from activity");
 	      ServiceConnection localServiceConnection = this.mConnection;
 	      unbindService(localServiceConnection);
 	    }
@@ -413,7 +454,6 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 
 	  protected void onStop()
 	  {
-	    int i = Log.d("musicable::onstop");
 	    if (this.player != null)
 	      this.player.release();
 	    super.onStop();
@@ -428,10 +468,9 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	  {
 	    if ((paramList != null) && (paramList.size() > 0))
 	      if (this.mIMusicPlayService == null)
-	        NotificationsUtil.ToastShort(this, "鎾斁鍣ㄩ敊璇紝璇风◢鍊欓噸璇�);
-	    while (true)
+	        NotificationsUtil.ToastShort(this, "Test");
+	      else
 	    {
-	      return;
 	      Bundle localBundle = new Bundle();
 	      ArrayList localArrayList = (ArrayList)paramList;
 	      localBundle.putParcelableArrayList("songs", localArrayList);
@@ -439,8 +478,7 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	      Message localMessage = this.mHandler.obtainMessage(0);
 	      localMessage.setData(localBundle);
 	      boolean bool = this.mHandler.sendMessage(localMessage);
-	      continue;
-	      NotificationsUtil.ToastShort(this, "娌℃湁姝屾洸鍙互鎾斁锛岃閲嶈瘯");
+	      NotificationsUtil.ToastShort(this, "Test");
 	    }
 	  }
 
@@ -453,7 +491,7 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	      LoadSongListTask localLoadSongListTask = new LoadSongListTask(paramInt, localSONGTYPES);
 	      Void[] arrayOfVoid = new Void[0];
 	      AsyncTask localAsyncTask = localLoadSongListTask.execute(arrayOfVoid);
-	      NotificationsUtil.ToastShort(this, "鍔犺浇姝屾洸涓�..");
+	      NotificationsUtil.ToastShort(this, "Test..");
 	    }
 	  }
 
@@ -465,7 +503,7 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	      LoadArtistRadioSongTask localLoadArtistRadioSongTask = new LoadArtistRadioSongTask(paramInt, paramString);
 	      Void[] arrayOfVoid = new Void[0];
 	      AsyncTask localAsyncTask = localLoadArtistRadioSongTask.execute(arrayOfVoid);
-	      NotificationsUtil.ToastShort(this, "鍔犺浇姝屾洸涓�..");
+	      NotificationsUtil.ToastShort(this, "Test..");
 	    }
 	  }
 
@@ -478,7 +516,7 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	      LoadSongListTask localLoadSongListTask = new LoadSongListTask(paramInt, localSONGTYPES);
 	      Void[] arrayOfVoid = new Void[0];
 	      AsyncTask localAsyncTask = localLoadSongListTask.execute(arrayOfVoid);
-	      NotificationsUtil.ToastShort(this, "鍔犺浇姝屾洸涓�..");
+	      NotificationsUtil.ToastShort(this, "Test..");
 	    }
 	  }
 
@@ -487,10 +525,10 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    if (this.mIMusicPlayService != null)
 	    {
 	      pause();
-	      LoadMyRadioTask localLoadMyRadioTask = new LoadMyRadioTask(null);
+	      LoadMyRadioTask localLoadMyRadioTask = new LoadMyRadioTask();
 	      Void[] arrayOfVoid = new Void[0];
 	      AsyncTask localAsyncTask = localLoadMyRadioTask.execute(arrayOfVoid);
-	      NotificationsUtil.ToastShort(this, "鍔犺浇姝屾洸涓�..");
+	      NotificationsUtil.ToastShort(this, "Test..");
 	    }
 	  }
 
@@ -511,7 +549,6 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 
 	  public void playPause()
 	  {
-	    int i = Log.d("musicableactivity:playpause");
 	    if (this.mIMusicPlayService != null);
 	    try
 	    {
@@ -550,11 +587,10 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    if (this.mIMusicPlayService != null)
 	    {
 	      pause();
-	      MobclickAgent.onEvent(this, "song play", "radio");
 	      LoadRadioSongTask localLoadRadioSongTask = new LoadRadioSongTask(paramInt, paramString, paramOnLoadListener);
 	      Void[] arrayOfVoid = new Void[0];
 	      AsyncTask localAsyncTask = localLoadRadioSongTask.execute(arrayOfVoid);
-	      NotificationsUtil.ToastShort(this, "鍔犺浇姝屾洸涓�..");
+	      NotificationsUtil.ToastShort(this, "Test..");
 	    }
 	  }
 
@@ -562,10 +598,9 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	  {
 	    if ((paramList != null) && (paramList.size() > 0))
 	      if (this.mIMusicPlayService == null)
-	        NotificationsUtil.ToastShort(this, "鎾斁鍣ㄩ敊璇紝璇风◢鍊欓噸璇�);
-	    while (true)
+	        NotificationsUtil.ToastShort(this, "Test");
+	      else
 	    {
-	      return;
 	      Bundle localBundle = new Bundle();
 	      ArrayList localArrayList = (ArrayList)paramList;
 	      localBundle.putParcelableArrayList("songs", localArrayList);
@@ -573,8 +608,7 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	      Message localMessage = this.mHandler.obtainMessage(2);
 	      localMessage.setData(localBundle);
 	      boolean bool = this.mHandler.sendMessage(localMessage);
-	      continue;
-	      NotificationsUtil.ToastShort(this, "娌℃湁姝屾洸鍙互鎾斁锛岃閲嶈瘯");
+	      NotificationsUtil.ToastShort(this, "Test");
 	    }
 	  }
 
@@ -583,10 +617,10 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    if (this.mIMusicPlayService != null)
 	    {
 	      pause();
-	      LoadRndSongsTask localLoadRndSongsTask = new LoadRndSongsTask(null);
+	      LoadRndSongsTask localLoadRndSongsTask = new LoadRndSongsTask();
 	      Void[] arrayOfVoid = new Void[0];
 	      AsyncTask localAsyncTask = localLoadRndSongsTask.execute(arrayOfVoid);
-	      NotificationsUtil.ToastShort(this, "鍔犺浇姝屾洸涓�..");
+	      NotificationsUtil.ToastShort(this, "Test..");
 	    }
 	  }
 
@@ -618,24 +652,22 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	  public void shufflePlay(List<Song> paramList)
 	  {
 	    if ((paramList == null) || (paramList.size() < 1))
-	      NotificationsUtil.ToastShort(this, "娌℃湁姝屾洸鍙互鎾斁锛岃閲嶈瘯");
-	    while (true)
+	      NotificationsUtil.ToastShort(this, "Test");
+	    else
 	    {
-	      return;
-	      if (this.mIMusicPlayService == null)
-	        continue;
-	      try
-	      {
-	        this.mIMusicPlayService.setMode(1);
-	        Random localRandom = new Random();
-	        int i = paramList.size();
-	        int j = localRandom.nextInt(i);
-	        play(paramList, j);
-	      }
-	      catch (RemoteException localRemoteException)
-	      {
-	        while (true)
-	          localRemoteException.printStackTrace();
+	      if (this.mIMusicPlayService != null) {
+		      try
+		      {
+		        this.mIMusicPlayService.setMode(1);
+		        Random localRandom = new Random();
+		        int i = paramList.size();
+		        int j = localRandom.nextInt(i);
+		        play(paramList, j);
+		      }
+		      catch (RemoteException localRemoteException)
+		      {
+		          localRemoteException.printStackTrace();
+		      }
 	      }
 	    }
 	  }
@@ -674,38 +706,31 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    public LoadArtistRadioSongTask(int paramString, String arg3)
 	    {
 	      this.id = paramString;
-	      Object localObject;
-	      this.name = localObject;
+	      this.name = arg3;
 	    }
 
 	    protected List<Song> doInBackground(Void[] paramArrayOfVoid)
 	    {
+	    	 List localList1 = null;
 	      try
 	      {
 	        API localAPI = MusicableActivity.this.api;
 	        int i = this.id;
-	        List localList1 = localAPI.getArtistRadioSongs(i);
-	        localList2 = localList1;
-	        return localList2;
+	        localList1 = localAPI.getArtistRadioSongs(i);
 	      }
 	      catch (UnsupportedEncodingException localUnsupportedEncodingException)
 	      {
-	        while (true)
-	        {
 	          localUnsupportedEncodingException.printStackTrace();
-	          List localList2 = null;
-	        }
 	      }
 	      catch (URLArgNotFoundException localURLArgNotFoundException)
 	      {
-	        while (true)
 	          localURLArgNotFoundException.printStackTrace();
 	      }
 	      catch (JSONException localJSONException)
 	      {
-	        while (true)
 	          localJSONException.printStackTrace();
 	      }
+	      return localList1;
 	    }
 
 	    protected void onPostExecute(List<Song> paramList)
@@ -716,10 +741,9 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	        String str = this.name;
 	        localMusicableActivity.playRadio(paramList, str);
 	      }
-	      while (true)
+	      else
 	      {
-	        return;
-	        NotificationsUtil.ToastShort(MusicableActivity.this, "鍔犺浇鐢靛彴鏁版嵁澶辫触!");
+	        NotificationsUtil.ToastShort(MusicableActivity.this, "Test!");
 	      }
 	    }
 	  }
@@ -739,10 +763,9 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    {
 	      if (paramList != null)
 	        MusicableActivity.this.play(paramList, 0);
-	      while (true)
+	      else
 	      {
-	        return;
-	        NotificationsUtil.ToastShort(MusicableActivity.this, "鍔犺浇姝屾洸澶辫触!");
+	        NotificationsUtil.ToastShort(MusicableActivity.this, "Test");
 	      }
 	    }
 	  }
@@ -757,8 +780,7 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    {
 	      this.id = paramString;
 	      this.name = paramOnLoadListener;
-	      Object localObject;
-	      this.listener = localObject;
+	      this.listener = arg4;
 	    }
 
 	    protected List<Song> doInBackground(Void[] paramArrayOfVoid)
@@ -781,10 +803,9 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	        if (this.listener != null)
 	          this.listener.onLoad();
 	      }
-	      while (true)
+	      else
 	      {
-	        return;
-	        NotificationsUtil.ToastShort(MusicableActivity.this, "鍔犺浇鐢靛彴鏁版嵁澶辫触!");
+	        NotificationsUtil.ToastShort(MusicableActivity.this, "Test!");
 	      }
 	    }
 	  }
@@ -803,10 +824,9 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    protected void onPostExecute(List<Song> paramList)
 	    {
 	      if ((paramList == null) || (paramList.size() < 1))
-	        NotificationsUtil.ToastShort(MusicableActivity.this, "鍔犺浇姝屾洸澶辫触!");
-	      while (true)
+	        NotificationsUtil.ToastShort(MusicableActivity.this, "Test");
+	      else
 	      {
-	        return;
 	        MusicableActivity.this.play(paramList, 0);
 	      }
 	    }
@@ -820,85 +840,69 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    public LoadSongListTask(int paramSONGTYPES, MusicableActivity.SONGTYPES arg3)
 	    {
 	      this.id = paramSONGTYPES;
-	      Object localObject;
-	      this.type = localObject;
+	      this.type = arg3;
 	    }
 
 	    protected List<Song> doInBackground(Void[] paramArrayOfVoid)
 	    {
+	    	 List localObject = new ArrayList();
 	      try
 	      {
-	        int[] arrayOfInt = $SWITCH_TABLE$com$xiami$activity$MusicableActivity$SONGTYPES();
 	        int i = this.type.ordinal();
-	        Object localObject;
-	        switch (arrayOfInt[i])
+	        switch (i + 1)
 	        {
 	        default:
 	          localObject = null;
+	          break;
 	        case 3:
+	        	API localAPI1 = MusicableActivity.this.api;
+		          int j = this.id;
+		          Radio localRadio = localAPI1.getRadio(j);
+		          if (localRadio != null) {
+		        	  localObject = localRadio.getSongs();
+		          }
+		          break;
 	        case 2:
+	        	API localAPI2 = MusicableActivity.this.api;
+		          int k = this.id;
+		          Collect localCollect = localAPI2.getCollect(k);
+		          if (localCollect != null) {
+		        	  localObject = localCollect.getSongs();
+		          }
+		          break;
 	        case 1:
-	        }
-	        while (true)
-	        {
-	          return localObject;
-	          API localAPI1 = MusicableActivity.this.api;
-	          int j = this.id;
-	          Radio localRadio = localAPI1.getRadio(j);
-	          if (localRadio == null)
-	          {
-	            localObject = null;
-	            continue;
-	          }
-	          localObject = localRadio.getSongs();
-	          continue;
-	          API localAPI2 = MusicableActivity.this.api;
-	          int k = this.id;
-	          Collect localCollect = localAPI2.getCollect(k);
-	          if (localCollect == null)
-	          {
-	            localObject = null;
-	            continue;
-	          }
-	          localObject = localCollect.getSongs();
-	          continue;
-	          API localAPI3 = MusicableActivity.this.api;
-	          int m = this.id;
-	          Album localAlbum = localAPI3.getAlbum(m);
-	          if (localAlbum == null)
-	          {
-	            localObject = null;
-	            continue;
-	          }
-	          List localList = localAlbum.getSongs();
-	          localObject = localList;
+	        	 API localAPI3 = MusicableActivity.this.api;
+		          int m = this.id;
+		          Album localAlbum = localAPI3.getAlbum(m);
+		          if (localAlbum != null) {
+		        	  List localList = localAlbum.getSongs();
+		        	  localObject = localList;
+		          }
+		          break;
 	        }
 	      }
 	      catch (JSONException localJSONException)
 	      {
-	        while (true)
 	          localJSONException.printStackTrace();
 	      }
 	      catch (UnsupportedEncodingException localUnsupportedEncodingException)
 	      {
-	        while (true)
 	          localUnsupportedEncodingException.printStackTrace();
 	      }
 	      catch (URLArgNotFoundException localURLArgNotFoundException)
 	      {
-	        while (true)
 	          localURLArgNotFoundException.printStackTrace();
 	      }
+	      return localObject;
 	    }
 
 	    protected void onPostExecute(List<Song> paramList)
 	    {
 	      if (paramList != null)
 	        MusicableActivity.this.play(paramList, 0);
-	      while (true)
+	      else
 	      {
-	        return;
-	        NotificationsUtil.ToastShort(MusicableActivity.this, "鍔犺浇姝屾洸澶辫触!");
+	        NotificationsUtil.ToastShort(MusicableActivity.this, "Test");
 	      }
 	    }
 	  }
@@ -908,18 +912,10 @@ public abstract class MusicableActivity extends Activity implements Musicable {
 	    public abstract void onLoad();
 	  }
 
-	  enum SONGTYPES
+	  static enum SONGTYPES
 	  {
-	    static
-	    {
-	      SONGTYPES[] arrayOfSONGTYPES = new SONGTYPES[3];
-	      SONGTYPES localSONGTYPES1 = ALBUM;
-	      arrayOfSONGTYPES[0] = localSONGTYPES1;
-	      SONGTYPES localSONGTYPES2 = COLLECT;
-	      arrayOfSONGTYPES[1] = localSONGTYPES2;
-	      SONGTYPES localSONGTYPES3 = RADIO;
-	      arrayOfSONGTYPES[2] = localSONGTYPES3;
-	      ENUM$VALUES = arrayOfSONGTYPES;
-	    }
-	  }*/
+		  ALBUM,
+		  COLLECT,
+		  RADIO;
+	  }
 }
