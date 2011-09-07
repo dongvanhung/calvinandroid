@@ -720,18 +720,14 @@
     <public type="style" name="popItem" id="0x7f0a0010" />
     <public type="style" name="navItem" id="0x7f0a0011" />
     <public type="style" name="NavBarText" id="0x7f0a0012" />
-    <public type="style" name="DialogTheme" id="0x7f0a0013" />
     <public type="style" name="XiamiDialogTitleBG" id="0x7f0a0014" />
     <public type="style" name="XiamiDialog" id="0x7f0a0015" />
-    <public type="style" name="AlertDialogCustom" id="0x7f0a0016" />
     <public type="style" name="Widget.ProgressBar" id="0x7f0a0017" />
     <public type="style" name="Widget.ProgressBar.Small" id="0x7f0a0018" />
     <public type="style" name="Widget.ProgressBar.Large" id="0x7f0a0019" />
     <public type="style" name="DialogText" id="0x7f0a001a" />
     <public type="style" name="DialogText.Title" id="0x7f0a001b" />
     <public type="style" name="Dialog" id="0x7f0a001c" />
-    <public type="style" name="WindowTitleBackground" id="0x7f0a001d" />
-    <public type="style" name="shareDialog" id="0x7f0a001e" />
     <public type="style" name="Animations" id="0x7f0a001f" />
     <public type="style" name="Animations.PopDownMenu" id="0x7f0a0020" />
     <public type="style" name="Animations.PopDownMenu.Center" id="0x7f0a0021" />
@@ -739,10 +735,6 @@
     <public type="style" name="Animations.PopDownMenu.Right" id="0x7f0a0023" />
     <public type="style" name="Animations.PopDownMenu.Reflect" id="0x7f0a0024" />
     <public type="style" name="Animations.PopUpMenu" id="0x7f0a0025" />
-    <public type="style" name="Animations.PopUpMenu.Center" id="0x7f0a0026" />
-    <public type="style" name="Animations.PopUpMenu.Left" id="0x7f0a0027" />
-    <public type="style" name="Animations.PopUpMenu.Right" id="0x7f0a0028" />
-    <public type="style" name="Animations.PopUpMenu.Reflect" id="0x7f0a0029" />
     <public type="menu" name="context_collect_list" id="0x7f0b0000" />
     <public type="menu" name="context_song_list" id="0x7f0b0001" />
     <public type="menu" name="option_menu" id="0x7f0b0002" />
