@@ -232,86 +232,84 @@ public class LyricView extends TextView {
 	    	  String str3 = "";
 	        while ((str3 = localBufferedReader.readLine()) != null)
 	        {
-	            localBufferedReader.close();
-	            List localList3 = this.list;
-	            LyricView1 local11 = new LyricView1();
-	            LyricView localLyricView3 = this;
-//	            local12.<init>(localLyricView3);
-	            Collections.sort(localList3, local11);
-	            if (this.list.size() != 0)
-	              break label298;
-	            List localList4 = this.list;
-	            String str4 = this.song.getName();
-	            LyricView localLyricView4 = this;
-	            Sentence localSentence3 = new Sentence(str4, 0L, 2147483647L);
-	            boolean bool3 = localList4.add(localSentence3);
-	            break;
+	        	String str5 = str3.trim();
+		          LyricView localLyricView5 = this;
+		          String str6 = str5;
+		          localLyricView5.parseLine(str6);
 	          }
-	          String str5 = str3.trim();
-	          LyricView localLyricView5 = this;
-	          String str6 = str5;
-	          localLyricView5.parseLine(str6);
+	        localBufferedReader.close();
+	        
+            List localList3 = this.list;
+            LyricView1 local11 = new LyricView1();
+            LyricView localLyricView3 = this;
+//            local12.<init>(localLyricView3);
+            Collections.sort(localList3, local11);
+            if (this.list.size() != 0) {
+            	Sentence localSentence4 = (Sentence)this.list.get(0);
+    	        List localList5 = this.list;
+    	        String str7 = this.song.getName();
+    	        long l1 = localSentence4.getFromTime();
+    	        LyricView localLyricView6 = this;
+    	        Sentence localSentence5 = new Sentence(str7, 0L, l1);
+    	        localList5.add(0, localSentence5);
+    	       /* int k = this.list.size();
+    	        int m = 0;
+    	        while (true)
+    	        {
+    	          int n = m;
+    	          int i1 = k;
+    	          if (n >= i1)
+    	          {
+    	            if (this.list.size() != 1)
+    	              break label540;
+    	            Sentence localSentence6 = (Sentence)this.list.get(0);
+    	            long l2 = 2147483647L;
+    	            localSentence6.setToTime(l2);
+    	            break;
+    	          }
+    	          Sentence localSentence7 = null;
+    	          int i2 = m + 1;
+    	          int i3 = k;
+    	          if (i2 < i3)
+    	          {
+    	            List localList6 = this.list;
+    	            int i4 = m + 1;
+    	            localSentence7 = (Sentence)localList6.get(i4);
+    	          }
+    	          Sentence localSentence8 = (Sentence)this.list.get(m);
+    	          if (localSentence7 != null)
+    	          {
+    	            long l3 = localSentence7.getFromTime() - 1L;
+    	            Sentence localSentence9 = localSentence8;
+    	            long l4 = l3;
+    	            localSentence9.setToTime(l4);
+    	          }
+    	          m += 1;
+    	        }
+    	        label540: List localList7 = this.list;
+    	        int i5 = this.list.size() - 1;
+    	        ((Sentence)localList7.get(i5)).setToTime(2147483647L);*/
+            }
+            List localList4 = this.list;
+            String str4 = this.song.getName();
+            LyricView localLyricView4 = this;
+            Sentence localSentence3 = new Sentence(str4, 0L, 2147483647L);
+            boolean bool3 = localList4.add(localSentence3);
 	      }
 	      catch (IOException l4)
 	      {
-	        while (true)
-	          localIOException.printStackTrace();
-	        label298: Sentence localSentence4 = (Sentence)this.list.get(0);
-	        List localList5 = this.list;
-	        String str7 = this.song.getName();
-	        long l1 = localSentence4.getFromTime();
-	        LyricView localLyricView6 = this;
-	        Sentence localSentence5 = new Sentence(str7, 0L, l1);
-	        localList5.add(0, localSentence5);
-	        int k = this.list.size();
-	        int m = 0;
-	        while (true)
-	        {
-	          int n = m;
-	          int i1 = k;
-	          if (n >= i1)
-	          {
-	            if (this.list.size() != 1)
-	              break label540;
-	            Sentence localSentence6 = (Sentence)this.list.get(0);
-	            long l2 = 2147483647L;
-	            localSentence6.setToTime(l2);
-	            break;
-	          }
-	          Sentence localSentence7 = null;
-	          int i2 = m + 1;
-	          int i3 = k;
-	          if (i2 < i3)
-	          {
-	            List localList6 = this.list;
-	            int i4 = m + 1;
-	            localSentence7 = (Sentence)localList6.get(i4);
-	          }
-	          Sentence localSentence8 = (Sentence)this.list.get(m);
-	          if (localSentence7 != null)
-	          {
-	            long l3 = localSentence7.getFromTime() - 1L;
-	            Sentence localSentence9 = localSentence8;
-	            long l4 = l3;
-	            localSentence9.setToTime(l4);
-	          }
-	          m += 1;
-	        }
-	        label540: List localList7 = this.list;
-	        int i5 = this.list.size() - 1;
-	        ((Sentence)localList7.get(i5)).setToTime(2147483647L);
 	      }
 	    }
 	  }
 
 	  public void getLyric(Song paramSong)
 	  {
-	    int i = Log.d("going to get lyric");
 	    this.list.clear();
-	    if (paramSong == null);
-	    while (true)
+	    if (paramSong == null) {
+	    	
+	    }
+	    else
 	    {
-	      return;
 	      this.song = paramSong;
 	      float f = this.mY / 2;
 	      this.startY = f;
@@ -321,8 +319,6 @@ public class LyricView extends TextView {
 	        AsyncTask.Status localStatus2 = AsyncTask.Status.RUNNING;
 	        if (localStatus1.equals(localStatus2))
 	        {
-	          int j = Log.d("task running");
-	          continue;
 	        }
 	      }
 	      List localList1 = this.list;
@@ -332,7 +328,7 @@ public class LyricView extends TextView {
 	      boolean bool1 = localList1.add(localSentence1);
 	      List localList2 = this.list;
 	      LyricView localLyricView2 = this;
-	      Sentence localSentence2 = new Sentence("å§�ï½…æ¹ªéŽ¼æ»…å‚¨å§�å²ƒç˜�...", -2147483648L, 2147483647L);
+	      Sentence localSentence2 = new Sentence("Test...", -2147483648L, 2147483647L);
 	      boolean bool2 = localList2.add(localSentence2);
 	      LoadLyricTask localLoadLyricTask1 = new LoadLyricTask();
 	      this.task = localLoadLyricTask1;
@@ -345,7 +341,7 @@ public class LyricView extends TextView {
 	  protected void onDraw(Canvas paramCanvas)
 	  {
 	    super.onDraw(paramCanvas);
-	    int i = this.index;
+	    /*int i = this.index;
 	    Paint localPaint1 = this.mPaint;
 	    Paint localPaint2 = this.mCurrPaint;
 	    float f1 = this.mX / 2;
@@ -432,7 +428,7 @@ public class LyricView extends TextView {
 	      label365: paramCanvas.drawText(str2, f1, f2, localPaint1);
 	      float f11 = this.margin;
 	      f2 += f11;
-	    }
+	    }*/
 	  }
 
 	  protected void onSizeChanged(int paramInt1, int paramInt2, int paramInt3, int paramInt4)
@@ -444,72 +440,78 @@ public class LyricView extends TextView {
 	    this.startY = f;
 	  }
 
-	  protected String[] splitText(String paramString)
+	  protected String[] splitText(String s)
 	  {
-	    int i = (int)(this.mX * 0.9D);
-	    Paint localPaint = this.mCurrPaint;
-	    ArrayList localArrayList = new ArrayList();
-	    int j = paramString.length();
-	    int k = 0;
-	    while (true)
-	    {
-	      if (k >= j);
-	      int m;
-	      do
-	      {
-	        String[] arrayOfString = new String[localArrayList.size()];
-	        return (String[])localArrayList.toArray(arrayOfString);
-	        float f = i;
-	        String str1 = paramString;
-	        m = localPaint.breakText(str1, k, j, 1, f, null);
-	      }
-	      while (m == 0);
-	      int n = k + m;
-	      String str2 = paramString.substring(k, n);
-	      boolean bool = localArrayList.add(str2);
-	      k += m;
-	    }
+		int i;
+		Paint paint;
+		ArrayList arraylist = new ArrayList();
+		int j;
+		int k;
+		i = (int) ((double) mX * 0.90000000000000002D);
+		paint = mCurrPaint;
+		arraylist = new ArrayList();
+		j = s.length();
+		for (k = 0; k < j; k++) {
+			int l;
+			float f = i;
+			String s1 = s;
+			l = paint.breakText(s1, k, j, true, f, null);
+			if (l == 0) {
+				String as[] = new String[arraylist.size()];
+				return (String[]) arraylist.toArray(as);
+			} else {
+				String s2 = s.substring(k, k + 1);
+				boolean flag = arraylist.add(s2);
+			}
+		}
+		String as[] = new String[arraylist.size()];
+		return (String[]) arraylist.toArray(as);
 	  }
 
 	  public void update(long paramLong)
 	  {
-	    int i = 0;
-	    int j = this.list.size();
-	    if (i >= j)
-	    {
-	      if (-1 <= -1)
-	        break label191;
-	      if (this.index != -1)
-	      {
-	        int k = this.needMove + 6;
-	        this.needMove = k;
-	        float f1 = this.startY;
-	        float f2 = this.mY / 2;
-	        float f3 = f1 - f2;
-	        float f4 = -1;
-	        float f5 = this.margin;
-	        float f6 = f4 * f5;
-	        if (Math.abs(f3 + f6) > 100.0F)
+		  /*int i = 0;
+	        do
 	        {
-	          this.needMove = 0;
-	          float f7 = this.mY / 2;
-	          float f8 = -1;
-	          float f9 = this.margin;
-	          float f10 = f8 * f9;
-	          float f11 = f7 - f10;
-	          this.startY = f11;
-	        }
-	      }
-	    }
-	    label191: for (this.index = -1; ; this.index = -1)
-	    {
-	      invalidate();
-	      return;
-	      if (((Sentence)this.list.get(i)).isInTime(paramLong))
-	        int m = i;
-	      i += 1;
-	      break;
-	    }
+	            int j = list.size();
+	            if(i >= j)
+	            {
+	                int i1;
+	                if(-1 > -1)
+	                {
+	                    if(index != -1)
+	                    {
+	                        int k = needMove + 6;
+	                        needMove = k;
+	                        float f = startY;
+	                        float f1 = mY / 2;
+	                        float f2 = f - f1;
+	                        float f3 = -1;
+	                        float f4 = margin;
+	                        float f5 = f3 * f4;
+	                        if(Math.abs(f2 + f5) > 100F)
+	                        {
+	                            needMove = 0;
+	                            float f6 = mY / 2;
+	                            float f7 = -1;
+	                            float f8 = margin;
+	                            float f9 = f7 * f8;
+	                            float f10 = f6 - f9;
+	                            startY = f10;
+	                        }
+	                    }
+	                    index = -1;
+	                } else
+	                {
+	                    index = -1;
+	                }
+	                invalidate();
+	                return;
+	            }
+	            if(((Sentence)list.get(i)).isInTime(l))
+	                i1 = i;
+	            i++;
+	        } while(true);*/
 	  }
 
 	  public class LoadLyricTask extends AsyncTask<Void, Void, String>
@@ -535,7 +537,6 @@ public class LyricView extends TextView {
 
 	    protected void onPostExecute(String paramString)
 	    {
-	      int i = Log.d("onPostExecute");
 	      LyricView.this.setLyric(paramString);
 	    }
 	  }
@@ -562,9 +563,8 @@ public class LyricView extends TextView {
 	      String[] arrayOfString = LyricView.this.splitText(paramLong1);
 	      this.splits = arrayOfString;
 	      this.content = paramLong1;
-	      this.fromTime = ???;
-	      Object localObject;
-	      this.toTime = localObject;
+	      this.fromTime = arg3;
+	      this.toTime = arg5;
 	    }
 
 	    public String getContent()
@@ -611,10 +611,12 @@ public class LyricView extends TextView {
 	      if (paramLong >= l1)
 	      {
 	        long l2 = this.toTime;
-	        if (paramLong > l2);
+	        if (paramLong > l2) {
+	        	return false;
+	        }
 	      }
-	      for (int i = 1; ; i = 0)
-	        return i;
+	      return true;
+	      
 	    }
 
 	    public void setFromTime(long paramLong)
